@@ -15,15 +15,22 @@
 
   // URL → state
   const sp = new URLSearchParams(location.search);
-  for (const t of (sp.get("f") || "").split(",").filter(Boolean)) state.f.add(t);
+  for (const t of (sp.get("f") || "").split(",").filter(Boolean))
+    state.f.add(t);
   state.q = (sp.get("q") || "").toLowerCase();
 
   const cards = new Map();
-  for (const el of grid.querySelectorAll(".card")) cards.set(el.dataset.slug, el);
+  for (const el of grid.querySelectorAll(".card"))
+    cards.set(el.dataset.slug, el);
 
-  const boxFor = (id) => document.querySelector(`input[data-filter="${CSS.escape(id)}"]`);
+  const boxFor = (id) =>
+    document.querySelector(`input[data-filter="${CSS.escape(id)}"]`);
   const matches = (item, skipFacet) => {
-    if (!item.name.toLowerCase().includes(state.q) && !item.desc.toLowerCase().includes(state.q)) return false;
+    if (
+      !item.name.toLowerCase().includes(state.q) &&
+      !item.desc.toLowerCase().includes(state.q)
+    )
+      return false;
     for (const t of state.f) {
       if (skipFacet && tagFacet.get(t) === skipFacet) continue;
       if (!item.tags.includes(t)) return false;
@@ -44,11 +51,16 @@
       const el = document.querySelector(`[data-count="${CSS.escape(t.id)}"]`);
       if (el) el.textContent = String(n);
       const box = boxFor(t.id);
-      box?.closest("label")?.classList.toggle("off", n === 0 && !state.f.has(t.id));
+      box
+        ?.closest("label")
+        ?.classList.toggle("off", n === 0 && !state.f.has(t.id));
     }
     document.getElementById("dir-count").textContent = String(visible);
-    document.getElementById("dir-empty").style.display = visible ? "none" : "block";
-    document.getElementById("dir-clear").style.display = state.f.size || state.q ? "inline-block" : "none";
+    document.getElementById("dir-empty").style.display = visible
+      ? "none"
+      : "block";
+    document.getElementById("dir-clear").style.display =
+      state.f.size || state.q ? "inline-block" : "none";
     for (const t of state.f) {
       const b = boxFor(t);
       if (b) b.checked = true;
@@ -80,7 +92,8 @@
   document.getElementById("dir-clear")?.addEventListener("click", () => {
     state.f.clear();
     state.q = "";
-    for (const b of document.querySelectorAll("input[data-filter]")) b.checked = false;
+    for (const b of document.querySelectorAll("input[data-filter]"))
+      b.checked = false;
     const s = document.getElementById("dir-search");
     if (s) s.value = "";
     apply(true);
