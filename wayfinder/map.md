@@ -35,11 +35,17 @@ created: 2026-09-11
 - [数据模型定稿](tickets/03-data-model.md)：`data/` 三目录一实体一 JSON，文件名 = slug = 主键（发布后不可变）；JSON Schema 2020-12 + 构建期门禁校验（FK/唯一性/悬空标签/双语，错误阻断 CI）；四分面与两条分类原则不变；迁移由 Obsidian 表 slugify 派生 slug、冻结整数 id 映射表
 - [技术栈与部署选型](tickets/01-tech-stack.md)：Astro（纯静态）+ Cloudflare Pages + CF Web Analytics + @astrojs/sitemap，域名 DNS 同家；Netlify 积分制（≈20 次部署/月用尽即停）出局，额度均经 2026-09 官方页取证
 - [自动截图管线选型](tickets/02-screenshot-pipeline.md)：本地 Playwright + sharp 转 WebP + 图入 git 仓库，脚本双入口（全量/单条）；云 API 与 R2 仅作量级触发后的备选
+- [视觉原型](tickets/04-visual-prototype.md)：**B 侧栏过滤**骨架 + **图文卡**；浅色极简、无彩色 accent；原型存档于 `prototype/gallery` 分支
+- [站名与域名](tickets/05-name-domain.md)：**uicurio**（UI + curio 珍品柜）；uicurio.com / .dev 均可注册（RDAP 实时核验），购买待主人付款
+- [自动入库管线设计](tickets/06-ingestion-pipeline.md)：会话驱动——丢链接→AI 全程代办→主人点头才 commit；升级路径留了 GitHub Issue 触发
+- [种子数据迁移](tickets/07-seed-migration.md)：20/6/31 全部入库含中文描述，门禁 0 错 0 警；20/20 封面就位（724KB）
+- [SEO 着陆页策略](tickets/08-seo-landing-pages.md)：五类页全生成双语（tag ≥2 / 组合 ≥3 门槛）；hreflang 自指 + x-default→en；Alternatives 互链模块
 
 ## Not yet specified
 
-- **品牌资产**：logo / favicon / OG 分享图——等站名定稿
-- **移动端体验细则**——随视觉原型一并 react
+- **品牌资产**：logo / favicon 定稿设计、每条目 OG 分享图——favicon 已有临时版（SVG 字标），等品牌打磨
+- **移动端深度打磨**：B 骨架已带基础响应式（<1024px 侧栏堆叠），细化体验随上线后反馈迭代
+- **上线后运营**：Search Console 接入、Analytics 观察、标题模板 CTR 微调——等部署完成开票
 
 ## Out of scope
 

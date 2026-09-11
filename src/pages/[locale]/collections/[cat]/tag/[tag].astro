@@ -1,0 +1,42 @@
+---
+import Base from "../../../../../layouts/Base.astro";
+import Card from "../../../../../components/Card.astro";
+import { ui, LOCALES } from "../../../../../i18n";
+import { items, itemsWithTag, categories, TAG_MIN, COMBO_MIN } from "../../../../../lib/data";
+
+export function getStaticPaths() {
+  return LOCALES.flatMap((locale) =>
+    categories.flatMap((c: any) => {
+      const catTagIds = [...new Set(items.filter((i: any) => i.category === c.slug).flatMap((i: any) => i.tags))];
+      return catTagIds
+        .filter((id) => itemsWithTag(id).length >= COMBO_MIN)
+        .map((id) => ({ params: { locale, cat: c.slug, tag: id.split(":")[1] }, props: { cat: c, tagId: id } }));
+    })
+  );
+}
+const { locale } = Astro.params;
+const cat = Astro.props.cat as any;
+const tagId = Astro.props.tagId as string;
+const tag = (await import("../../../../../lib/data")).tagById.get(tagId);
+const t = ui[locale as keyof typeof ui];
+const list = itemsWithTag(tagId).filter((i: any) => i.category === cat.slug);
+const title = locale === "zh" ? `${tag.name.zh} × ${cat.name.zh} · ${list.length} 个库 — uicurio` : `${tag.name.en} ${cat.name.en.toLowerCase()} – ${list.length} libraries · uicurio`;
+const description = locale === "zh" ? `频道「${cat.name.zh}」中带「${tag.name.zh}」标签的 ${list.length} 个严选库。` : `${list.length} curated ${cat.name.en.toLowerCase()} tagged “${tag.name.en}”.`;
+---
+<Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${list[0]?.screenshot}`}>
+  <main class="wrap">
+    <nav class="crumbs">
+      <a href={`/${locale}/`}>uicurio</a> › <a href={`/${locale}/collections/${cat.slug}/`}>{cat.name[locale]}</a> › {tag.name[locale]}
+    </nav>
+    <h1>{tag.name[locale]}</h1>
+    <p class="sub">{description}</p>
+    <div class="grid">{list.map((i: any) => <Card item={i} locale={locale} />)}</div>
+    <p class="footer">{t.curatedBy}</p>
+  </main>
+</Base>
+
+<style>
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 24px 80px; }
+  h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .sub { color: var(--text-2); margin-bottom: 24px; }
+</style>

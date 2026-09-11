@@ -1,0 +1,21 @@
+---
+// 根路径语言跳转 stub（票 08：语言中立选择页 = x-default 指自身）
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>uicurio — hand-picked UI libraries</title>
+  <link rel="alternate" hreflang="en" href="https://uicurio.com/en/" />
+  <link rel="alternate" hreflang="zh" href="https://uicurio.com/zh/" />
+  <link rel="alternate" hreflang="x-default" href="https://uicurio.com/" />
+  <script is:inline>
+    location.replace(navigator.language && navigator.language.toLowerCase().startsWith("zh") ? "/zh/" : "/en/");
+  </script>
+  <noscript><meta http-equiv="refresh" content="0; url=/en/" /></noscript>
+</head>
+<body>
+  <p style="padding:40px;font-family:system-ui"><a href="/en/">English</a> · <a href="/zh/">中文</a></p>
+</body>
+</html>

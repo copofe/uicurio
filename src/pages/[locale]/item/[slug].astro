@@ -1,0 +1,57 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Card from "../../../components/Card.astro";
+import { ui, LOCALES } from "../../../i18n";
+import { items, tagById, categories, alternatives } from "../../../lib/data";
+
+export function getStaticPaths() {
+  return LOCALES.flatMap((locale) => items.map((item: any) => ({ params: { locale, slug: item.slug }, props: { item } })));
+}
+const { locale } = Astro.params;
+const item = Astro.props.item as any;
+const t = ui[locale as keyof typeof ui];
+const cat = categories.find((c: any) => c.slug === item.category);
+const alts = alternatives(item);
+const title = `${item.name.en} — ${item.description.en.slice(0, 60)}… · uicurio`;
+const description = item.description[locale] ?? item.description.en;
+---
+<Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${item.screenshot}`}>
+  <main class="detail-in">
+    <nav class="crumbs">
+      <a href={`/${locale}/`}>uicurio</a> › <a href={`/${locale}/collections/${cat.slug}/`}>{cat.name[locale]}</a> › {item.name[locale]}
+    </nav>
+    <div class="cover"><img src={`/assets/shots/${item.screenshot}`} alt={item.name.en} width="1600" height="1000" /></div>
+    <h1>{item.name[locale]}</h1>
+    <p class="d">{description}</p>
+    <div class="btns">
+      <a class="btn pri" href={item.url} target="_blank" rel="noopener">{t.visitSite} ↗</a>
+      {item.repo && <a class="btn ghost" href={item.repo} target="_blank" rel="noopener">{t.source}</a>}
+    </div>
+    <div class="chips">
+      {item.tags.map((id: string) => {
+        const tag = tagById.get(id);
+        const n = items.filter((x: any) => x.tags.includes(id)).length;
+        return tag ? <a class="pill" href={`/${locale}/tags/${tag.slug}/`}>{tag.name[locale]} · {n}</a> : <span class="pill">{id}</span>;
+      })}
+    </div>
+    <p style="font-size:13px;color:var(--text-2)">{t.added} {item.added}</p>
+    {alts.length >= 2 && (
+      <section style="margin-top:40px">
+        <h3 style="font-size:13px;color:var(--text-2);font-weight:400;margin-bottom:10px">{t.alternatives}</h3>
+        <div class="grid">{alts.slice(0, 4).map((x: any) => <Card item={x} locale={locale} />)}</div>
+      </section>
+    )}
+    <p class="footer">{t.curatedBy}</p>
+  </main>
+</Base>
+
+<style>
+  .detail-in { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+  .cover { aspect-ratio: 16 / 10; border-radius: var(--radius-card); overflow: hidden; border: 1px solid var(--border); background: var(--surface-2); }
+  .cover img { width: 100%; height: 100%; object-fit: cover; }
+  h1 { font-size: 32px; font-weight: 600; letter-spacing: -0.02em; margin: 18px 0 6px; }
+  .d { color: var(--text-2); font-size: 15px; }
+  .btns { display: flex; gap: 8px; margin: 18px 0; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 22px; }
+  .chips a:hover { background: var(--ink); color: #fff; }
+</style>

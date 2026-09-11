@@ -1,0 +1,35 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Card from "../../../components/Card.astro";
+import { ui, LOCALES } from "../../../i18n";
+import { items, tags, tagById, itemsWithTag, TAG_MIN } from "../../../lib/data";
+
+export function getStaticPaths() {
+  return LOCALES.flatMap((locale) =>
+    tags
+      .filter((t: any) => itemsWithTag(t.id).length >= TAG_MIN)
+      .map((t: any) => ({ params: { locale, slug: t.slug }, props: { tag: t } }))
+  );
+}
+const { locale, slug } = Astro.params;
+const tag = Astro.props.tag as any;
+const t = ui[locale as keyof typeof ui];
+const list = itemsWithTag(tag.id);
+const title = locale === "zh" ? `${tag.name.zh} · 精选 ${list.length} 个库 — uicurio` : `${tag.name.en} – ${list.length} curated libraries · uicurio`;
+const description = locale === "zh" ? `手工严选的 ${list.length} 个${tag.name.zh}相关的 UI 库。` : `${list.length} hand-picked UI libraries for ${tag.name.en}.`;
+---
+<Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${list[0]?.screenshot}`}>
+  <main class="wrap">
+    <nav class="crumbs"><a href={`/${locale}/`}>uicurio</a> › {tag.name[locale]}</nav>
+    <h1>{tag.name[locale]}</h1>
+    <p class="sub">{description}</p>
+    <div class="grid">{list.map((i: any) => <Card item={i} locale={locale} />)}</div>
+    <p class="footer">{t.curatedBy}</p>
+  </main>
+</Base>
+
+<style>
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 24px 80px; }
+  h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .sub { color: var(--text-2); margin-bottom: 24px; }
+</style>

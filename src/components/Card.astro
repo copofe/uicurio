@@ -1,0 +1,17 @@
+---
+// 图文卡（04 号原型定稿）：封面 + 标题/首标签 + 两行描述；整卡进详情，↗ 独立外链
+import { tagById } from "../lib/data";
+interface Props { item: any; locale: string; }
+const { item, locale } = Astro.props;
+const firstTag = tagById.get(item.tags[0]);
+---
+<div class="card" data-slug={item.slug} data-tags={item.tags.join(" ")} data-text={`${item.name.en} ${item.name.zh} ${item.description.en} ${item.description.zh}`.toLowerCase()}>
+  <a href={`/${locale}/item/${item.slug}/`} aria-label={item.name.en}>
+    <div class="cover"><img src={`/assets/shots/${item.screenshot}`} alt={item.name.en} loading="lazy" decoding="async" width="1600" height="1000" /></div>
+  </a>
+  <a class="jump" href={item.url} target="_blank" rel="noopener" aria-label={`Visit ${item.name.en}`}>↗</a>
+  <div class="meta">
+    <div class="t"><a href={`/${locale}/item/${item.slug}/`}>{item.name.en}</a>{firstTag && <span>{firstTag.name[locale]}</span>}</div>
+    <div class="d">{item.description[locale] ?? item.description.en}</div>
+  </div>
+</div>
