@@ -2,9 +2,9 @@
 id: 01-tech-stack
 title: 技术栈与部署选型
 label: wayfinder:research
-status: open
+status: resolved
 blocked_by: []
-assignee: researcher
+assignee: main
 ---
 
 ## Question
@@ -18,3 +18,10 @@ assignee: researcher
 硬偏好：零服务端运行时；单人维护、稳妥省心优先；SEO 是命脉。
 
 产出：定稿一组合 + 每项理由 + 被否清单（一项一句话）。
+
+## Resolution
+
+- **定稿**：Astro（纯静态输出）+ Cloudflare Pages 托管 + Cloudflare Web Analytics 统计 + @astrojs/sitemap；域名与 DNS 同家 Cloudflare。
+- **一句话理由**：双语路由 / 构建期数据校验 / 交互岛在 Astro 全是一等公民；CF 免费档 500 构建月 + 20k 文件对「录一条推一次」绰绰有余，且托管 / R2 / 统计 / 域名一家管齐（Netlify 积分制下 ≈20 次部署/月且用尽即停站，硬伤出局）。
+- **执行备注**：勿装任何 SSR adapter；额度数字均经 2026-09-11 官方页取证。
+- **详见**：`wayfinder/findings/01-tech-stack.md`（原 researcher 通道工具故障，经站点主人批准由主管主会话代跑）

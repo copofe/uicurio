@@ -18,6 +18,7 @@ created: 2026-09-11
 - **视觉**：浅色极简画廊（深色画廊已落选；细节由「视觉原型」票据定稿）
 - **历史**：2026-09-11 用户令旧 uicurio 文档全部作废删除、从零思考——本图与旧文档无传承关系，禁止引用旧档
 - **tracker**：本地 markdown（`wayfinder/` 目录）；票据身份 = 文件名；blocking 走 frontmatter `blocked_by`；claim = 填 `assignee`
+- **⚠ researcher 通道注意事项**（2026-09-11 事故）：子代理批量启动时工具注册不稳定（5 次中 4 次缺 web 工具，仅 read/write/contact_supervisor），且 supervisor 回执通道偶发投递失败；派研究子代理前先要求其第一步自检工具并向主管上报缺件，勿凭内部知识定稿；web 抓取需 `~/.pi/agent/web-search.json` 配 `ssrf.allowRanges: ["198.18.0.0/15"]`（本机为 fake-IP TUN 代理环境，已配）
 - **技能**：票据按类型调用 grilling / prototype / research
 
 ### 开图前决议（2026-09-11，开图 grill 定案）
@@ -32,13 +33,12 @@ created: 2026-09-11
 ## Decisions so far
 
 - [数据模型定稿](tickets/03-data-model.md)：`data/` 三目录一实体一 JSON，文件名 = slug = 主键（发布后不可变）；JSON Schema 2020-12 + 构建期门禁校验（FK/唯一性/悬空标签/双语，错误阻断 CI）；四分面与两条分类原则不变；迁移由 Obsidian 表 slugify 派生 slug、冻结整数 id 映射表
+- [技术栈与部署选型](tickets/01-tech-stack.md)：Astro（纯静态）+ Cloudflare Pages + CF Web Analytics + @astrojs/sitemap，域名 DNS 同家；Netlify 积分制（≈20 次部署/月用尽即停）出局，额度均经 2026-09 官方页取证
+- [自动截图管线选型](tickets/02-screenshot-pipeline.md)：本地 Playwright + sharp 转 WebP + 图入 git 仓库，脚本双入口（全量/单条）；云 API 与 R2 仅作量级触发后的备选
 
 ## Not yet specified
 
-- **施工与上线序列**：骨架 → 种子迁移 → 部署配置 → 域名接入 → 发布检查单——等技术栈与数据模型研究落定后毕业成票据
-- **SEO 着陆页策略**：tag 页 / 频道 × tag 组合页 / 条目互链图的取舍——等数据模型定稿后能开准
 - **品牌资产**：logo / favicon / OG 分享图——等站名定稿
-- **统计与反馈**：托管方自带 vs 第三方；出站点击追踪——等部署选型定稿
 - **移动端体验细则**——随视觉原型一并 react
 
 ## Out of scope
