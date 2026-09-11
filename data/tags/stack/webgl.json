@@ -1,0 +1,9 @@
+{
+  "id": "stack:webgl",
+  "facet": "stack",
+  "slug": "webgl",
+  "name": {
+    "en": "WebGL",
+    "zh": "WebGL"
+  }
+}

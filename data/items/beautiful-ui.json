@@ -1,0 +1,20 @@
+{
+  "slug": "beautiful-ui",
+  "name": {
+    "en": "Beautiful UI",
+    "zh": "Beautiful UI"
+  },
+  "description": {
+    "en": "Curated components and patterns for AI-native interfaces.",
+    "zh": "面向 AI 原生界面的精选组件与模式库。"
+  },
+  "url": "https://www.beautifului.dev/",
+  "category": "collections",
+  "tags": [
+    "scenario:ai-native"
+  ],
+  "screenshot": "beautiful-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

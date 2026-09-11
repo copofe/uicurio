@@ -1,0 +1,24 @@
+{
+  "slug": "diffs",
+  "name": {
+    "en": "Diffs",
+    "zh": "Diffs"
+  },
+  "aliases": [
+    "@pierre/diffs"
+  ],
+  "description": {
+    "en": "Render code snippets and file diffs — unified/split views, merge conflicts, inline editing and annotations — built on Shiki.",
+    "zh": "基于 Shiki 的代码片段与文件 diff 渲染：统一/分栏视图、合并冲突、行内编辑与批注。"
+  },
+  "url": "https://diffs.com/",
+  "repo": "https://github.com/pierrecomputer/pierre/tree/main/packages/diffs",
+  "category": "files-code",
+  "tags": [
+    "function:diff"
+  ],
+  "screenshot": "diffs.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

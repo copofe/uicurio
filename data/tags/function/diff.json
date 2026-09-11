@@ -1,0 +1,9 @@
+{
+  "id": "function:diff",
+  "facet": "function",
+  "slug": "diff",
+  "name": {
+    "en": "diff",
+    "zh": "差异对比"
+  }
+}

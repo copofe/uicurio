@@ -1,0 +1,26 @@
+{
+  "slug": "beui",
+  "name": {
+    "en": "beUI",
+    "zh": "beUI"
+  },
+  "description": {
+    "en": "Free, open-source animated components for React and Next.js built with Motion and Tailwind CSS; copy the source or install via the shadcn CLI.",
+    "zh": "免费开源的 React / Next.js 动效组件库，Motion + Tailwind CSS 构建；可复制源码或用 shadcn CLI 安装。"
+  },
+  "url": "https://beui.dev",
+  "repo": "https://github.com/starc007/ui-components",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:nextjs",
+    "stack:tailwind",
+    "stack:shadcn",
+    "stack:motion"
+  ],
+  "screenshot": "beui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

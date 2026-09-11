@@ -1,0 +1,26 @@
+{
+  "slug": "dialkit",
+  "name": {
+    "en": "DialKit",
+    "zh": "DialKit"
+  },
+  "description": {
+    "en": "Live dial controls for React, Solid, Svelte, Vue and vanilla JS; tune motion, layout, color and animation timing in place.",
+    "zh": "可实时调校的旋钮控件：支持 React、Solid、Svelte、Vue 与原生 JS，直接在界面里调运动、布局、色彩与动画时序。"
+  },
+  "url": "https://www.dialkit.dev",
+  "repo": "https://github.com/joshpuckett/dialkit",
+  "category": "input-controls",
+  "tags": [
+    "function:dial",
+    "stack:react",
+    "stack:solid",
+    "stack:svelte",
+    "stack:vue",
+    "stack:vanilla-js"
+  ],
+  "screenshot": "dialkit.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

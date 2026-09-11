@@ -1,0 +1,22 @@
+{
+  "slug": "orbs",
+  "name": {
+    "en": "Orbs",
+    "zh": "Orbs"
+  },
+  "description": {
+    "en": "Animated thinking-orb loading indicator for processing and AI states.",
+    "zh": "「思考星球」动画加载指示器，为处理中 / AI 状态而生。"
+  },
+  "url": "https://libraries.dev/orbs",
+  "repo": "https://github.com/Jakubantalik/thinking-orbs",
+  "category": "loading-feedback",
+  "tags": [
+    "function:loading-indicator",
+    "function:animation"
+  ],
+  "screenshot": "orbs.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

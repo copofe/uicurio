@@ -1,0 +1,13 @@
+{
+  "slug": "input-controls",
+  "parent": null,
+  "name": {
+    "en": "Input Controls",
+    "zh": "输入控件"
+  },
+  "description": {
+    "en": "Widgets that take input: pickers, dials, card fields.",
+    "zh": "接输入的部件：取色器、旋钮、卡号输入。"
+  },
+  "order": 2
+}

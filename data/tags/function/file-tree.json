@@ -1,0 +1,9 @@
+{
+  "id": "function:file-tree",
+  "facet": "function",
+  "slug": "file-tree",
+  "name": {
+    "en": "file tree",
+    "zh": "文件树"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "slug": "collections",
+  "parent": null,
+  "name": {
+    "en": "Collections",
+    "zh": "合集与套件"
+  },
+  "description": {
+    "en": "Full libraries and copy-paste component collections — whole toolkits rather than single widgets.",
+    "zh": "整套库与复制即用组件集——是全套工具箱，不是单个小部件。"
+  },
+  "order": 1
+}

@@ -1,0 +1,9 @@
+{
+  "id": "scenario:realtime",
+  "facet": "scenario",
+  "slug": "realtime",
+  "name": {
+    "en": "realtime",
+    "zh": "实时"
+  }
+}

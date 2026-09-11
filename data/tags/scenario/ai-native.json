@@ -1,0 +1,9 @@
+{
+  "id": "scenario:ai-native",
+  "facet": "scenario",
+  "slug": "ai-native",
+  "name": {
+    "en": "ai-native",
+    "zh": "AI 原生"
+  }
+}

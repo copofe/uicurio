@@ -1,0 +1,23 @@
+{
+  "slug": "spell-ui",
+  "name": {
+    "en": "Spell UI",
+    "zh": "Spell UI"
+  },
+  "description": {
+    "en": "Refined, copy-paste React and Tailwind CSS components for design engineers — a large collection of high-quality components.",
+    "zh": "为设计工程师打造的 React + Tailwind CSS 组件集：精雕细琢、复制即用，量大质优。"
+  },
+  "url": "https://spell.sh/",
+  "repo": "https://github.com/xxtomm/spell-ui",
+  "category": "collections",
+  "tags": [
+    "style:design-engineer",
+    "stack:react",
+    "stack:tailwind"
+  ],
+  "screenshot": "spell-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

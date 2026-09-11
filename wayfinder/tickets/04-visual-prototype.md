@@ -4,7 +4,7 @@ title: 视觉原型
 label: wayfinder:prototype
 status: open
 blocked_by: []
-assignee:
+assignee: main
 ---
 
 ## Question

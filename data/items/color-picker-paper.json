@@ -1,0 +1,23 @@
+{
+  "slug": "color-picker-paper",
+  "name": {
+    "en": "Color Picker (Paper)",
+    "zh": "Color Picker (Paper)"
+  },
+  "aliases": [
+    "Paper color picker"
+  ],
+  "description": {
+    "en": "Recreation of the Paper app's color picker; parses hex/RGB/HSL/HSB/display-p3/OKLCH and tolerates partial or malformed input.",
+    "zh": "Paper 应用取色器的复刻：解析 hex/RGB/HSL/HSB/display-p3/OKLCH，容错不完整或非法输入。"
+  },
+  "url": "https://invisibledetails.com/playground/color-picker",
+  "category": "input-controls",
+  "tags": [
+    "function:color-picker"
+  ],
+  "screenshot": "color-picker-paper.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

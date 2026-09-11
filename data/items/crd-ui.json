@@ -1,0 +1,25 @@
+{
+  "slug": "crd-ui",
+  "name": {
+    "en": "crd-ui",
+    "zh": "crd-ui"
+  },
+  "description": {
+    "en": "Dependency-free interactive credit/debit card components — brand detection, input masking, 3D flip; React, Vue, Svelte and vanilla JS.",
+    "zh": "零依赖交互银行卡输入组件：卡组织识别、输入掩码、3D 翻转；支持 React、Vue、Svelte 与原生 JS。"
+  },
+  "url": "https://crd-ui.juanda.co/",
+  "repo": "https://github.com/JuandaGarcia/crd-ui",
+  "category": "input-controls",
+  "tags": [
+    "function:card-input",
+    "stack:react",
+    "stack:vue",
+    "stack:svelte",
+    "stack:vanilla-js"
+  ],
+  "screenshot": "crd-ui.webp",
+  "featured": true,
+  "status": "published",
+  "added": "2026-09-11"
+}

@@ -1,0 +1,22 @@
+{
+  "slug": "pdfcn",
+  "name": {
+    "en": "pdfcn",
+    "zh": "pdfcn"
+  },
+  "description": {
+    "en": "Beautifully designed, accessible and customizable PDF components built on Takumi and Forme; works with shadcn/ui.",
+    "zh": "基于 Takumi 与 Forme 构建的 PDF 组件集：美观、可访问、可定制，兼容 shadcn/ui。"
+  },
+  "url": "https://www.pdfcn.dev",
+  "repo": "https://github.com/shadcn-labs/pdfcn",
+  "category": "files-code",
+  "tags": [
+    "function:pdf",
+    "stack:shadcn"
+  ],
+  "screenshot": "pdfcn.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

@@ -1,0 +1,13 @@
+{
+  "slug": "files-code",
+  "parent": null,
+  "name": {
+    "en": "Files & Code",
+    "zh": "文件与代码"
+  },
+  "description": {
+    "en": "Rendering and working with code, files and diffs.",
+    "zh": "代码、文件与 diff 的渲染和处理。"
+  },
+  "order": 3
+}

@@ -1,0 +1,9 @@
+{
+  "id": "function:loading-indicator",
+  "facet": "function",
+  "slug": "loading-indicator",
+  "name": {
+    "en": "loading indicator",
+    "zh": "加载指示"
+  }
+}

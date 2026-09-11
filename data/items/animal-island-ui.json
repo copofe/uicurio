@@ -1,0 +1,23 @@
+{
+  "slug": "animal-island-ui",
+  "name": {
+    "en": "Animal Island UI",
+    "zh": "Animal Island UI"
+  },
+  "description": {
+    "en": "Lightweight React + TypeScript component library (33 components) with an original cozy island-style design; WAI-ARIA APG accessible.",
+    "zh": "轻量 React + TypeScript 组件库（33 个组件），原创温馨海岛风设计，遵循 WAI-ARIA APG 无障碍标准。"
+  },
+  "url": "https://guokaigdg.github.io/animal-island-ui",
+  "repo": "https://github.com/guokaigdg/animal-island-ui",
+  "category": "collections",
+  "tags": [
+    "style:cozy",
+    "stack:react",
+    "stack:typescript"
+  ],
+  "screenshot": "animal-island-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

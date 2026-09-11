@@ -1,0 +1,22 @@
+{
+  "slug": "bencho",
+  "name": {
+    "en": "Bencho",
+    "zh": "Bencho"
+  },
+  "description": {
+    "en": "Live component bench of interactive UI blocks — every block is live and adjustable; tune, bench, share, take; React + Motion.",
+    "zh": "活体组件试验台：每个 block 都是可调的活物——调一调、试一试、分享、带走；React + Motion。"
+  },
+  "url": "https://bencho.dev",
+  "category": "collections",
+  "tags": [
+    "style:design-engineer",
+    "stack:react",
+    "stack:motion"
+  ],
+  "screenshot": "bencho.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

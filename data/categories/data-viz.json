@@ -1,0 +1,13 @@
+{
+  "slug": "data-viz",
+  "parent": null,
+  "name": {
+    "en": "Data Viz",
+    "zh": "数据可视化"
+  },
+  "description": {
+    "en": "Charts and live data visualization.",
+    "zh": "图表与实时数据可视化。"
+  },
+  "order": 5
+}

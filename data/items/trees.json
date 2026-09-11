@@ -1,0 +1,24 @@
+{
+  "slug": "trees",
+  "name": {
+    "en": "Trees",
+    "zh": "Trees"
+  },
+  "aliases": [
+    "@pierre/trees"
+  ],
+  "description": {
+    "en": "File-tree rendering with virtualization, Git status, drag-and-drop, search, context menus and built-in icon sets.",
+    "zh": "虚拟化文件树渲染：Git 状态、拖拽、搜索、右键菜单，内置图标集。"
+  },
+  "url": "https://trees.software/",
+  "repo": "https://github.com/pierrecomputer/pierre/tree/main/packages/trees",
+  "category": "files-code",
+  "tags": [
+    "function:file-tree"
+  ],
+  "screenshot": "trees.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

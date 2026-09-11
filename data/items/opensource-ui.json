@@ -1,0 +1,24 @@
+{
+  "slug": "opensource-ui",
+  "name": {
+    "en": "Opensource UI",
+    "zh": "Opensource UI"
+  },
+  "description": {
+    "en": "Free, MIT-licensed copy-paste components for React and Next.js — 150+ production-ready components with live previews, built with TypeScript and Tailwind CSS v4.",
+    "zh": "MIT 协议的 React / Next.js 复制即用组件集：150+ 生产级组件、带实时预览，TypeScript + Tailwind CSS v4。"
+  },
+  "url": "https://opensourceui.in",
+  "repo": "https://github.com/bidyut10/opensourceui",
+  "category": "collections",
+  "tags": [
+    "stack:react",
+    "stack:typescript",
+    "stack:nextjs",
+    "stack:tailwind"
+  ],
+  "screenshot": "opensource-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

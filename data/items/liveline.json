@@ -1,0 +1,25 @@
+{
+  "slug": "liveline",
+  "name": {
+    "en": "Liveline",
+    "zh": "Liveline"
+  },
+  "description": {
+    "en": "Real-time animated line chart for React; canvas-rendered at 60fps for streaming data with line, multi-series and OHLC modes plus crosshair scrubbing; zero CSS imports.",
+    "zh": "React 实时动画折线图：canvas 60fps 渲染流式数据，支持单线、多序列与 OHLC 模式及十字线刷选；零 CSS 引入。"
+  },
+  "url": "https://benji.org/liveline",
+  "repo": "https://github.com/benjitaylor/liveline",
+  "category": "data-viz",
+  "tags": [
+    "function:chart",
+    "function:animation",
+    "stack:react",
+    "stack:canvas",
+    "scenario:realtime"
+  ],
+  "screenshot": "liveline.webp",
+  "featured": true,
+  "status": "published",
+  "added": "2026-09-11"
+}

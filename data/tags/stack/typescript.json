@@ -1,0 +1,9 @@
+{
+  "id": "stack:typescript",
+  "facet": "stack",
+  "slug": "typescript",
+  "name": {
+    "en": "TypeScript",
+    "zh": "TypeScript"
+  }
+}

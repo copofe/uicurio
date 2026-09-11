@@ -1,0 +1,9 @@
+{
+  "id": "stack:zero-dependency",
+  "facet": "stack",
+  "slug": "zero-dependency",
+  "name": {
+    "en": "zero-dependency",
+    "zh": "零依赖"
+  }
+}

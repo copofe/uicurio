@@ -1,0 +1,15 @@
+{
+  "name": "uicurio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "migrate": "node scripts/migrate-obsidian.mjs",
+    "validate": "node scripts/validate-data.mjs",
+    "shots": "node scripts/shots.mjs",
+    "shots:one": "node scripts/shots.mjs --"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0",
+    "sharp": "^0.35.4"
+  }
+}

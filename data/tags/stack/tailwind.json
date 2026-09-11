@@ -1,0 +1,9 @@
+{
+  "id": "stack:tailwind",
+  "facet": "stack",
+  "slug": "tailwind",
+  "name": {
+    "en": "Tailwind CSS",
+    "zh": "Tailwind CSS"
+  }
+}

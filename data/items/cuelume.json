@@ -1,0 +1,23 @@
+{
+  "slug": "cuelume",
+  "name": {
+    "en": "Cuelume",
+    "zh": "Cuelume"
+  },
+  "description": {
+    "en": "Tiny dependency-free library of carefully designed interaction sounds, synthesized live with Web Audio.",
+    "zh": "小而美的交互音效库：零依赖，Web Audio 实时合成。"
+  },
+  "url": "https://cuelume-site.pages.dev",
+  "repo": "https://github.com/Danilaa1/cuelume",
+  "category": "loading-feedback",
+  "tags": [
+    "function:sound-effects",
+    "stack:web-audio",
+    "stack:zero-dependency"
+  ],
+  "screenshot": "cuelume.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

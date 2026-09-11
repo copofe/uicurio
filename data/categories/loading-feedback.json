@@ -1,0 +1,13 @@
+{
+  "slug": "loading-feedback",
+  "parent": null,
+  "name": {
+    "en": "Loading & Feedback",
+    "zh": "加载与反馈"
+  },
+  "description": {
+    "en": "Loaders, indicators and interaction feedback moments.",
+    "zh": "加载动画、进度指示与交互反馈。"
+  },
+  "order": 4
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "calligraph",
+  "name": {
+    "en": "Calligraph",
+    "zh": "Calligraph"
+  },
+  "description": {
+    "en": "Fluid text transitions powered by Motion; shared characters slide to new positions while entering and exiting characters fade; custom spring transitions; React 18+.",
+    "zh": "基于 Motion 的流畅文字转场：共有字符滑入新位置，进出字符淡入淡出；支持自定义弹簧动画；React 18+。"
+  },
+  "url": "https://calligraph.raphaelsalaja.com",
+  "repo": "https://github.com/raphaelsalaja/calligraph",
+  "category": "text-typography",
+  "tags": [
+    "style:design-engineer",
+    "stack:react",
+    "stack:motion",
+    "function:text-animation"
+  ],
+  "screenshot": "calligraph.webp",
+  "featured": true,
+  "status": "published",
+  "added": "2026-09-11"
+}

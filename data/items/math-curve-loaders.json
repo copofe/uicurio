@@ -1,0 +1,22 @@
+{
+  "slug": "math-curve-loaders",
+  "name": {
+    "en": "Math Curve Loaders",
+    "zh": "Math Curve Loaders"
+  },
+  "description": {
+    "en": "Gallery of mathematical loading animations; formula-driven curve motion with live controls, code export and HTML download.",
+    "zh": "数学公式加载动画画廊：公式驱动的曲线运动，可实时调参、导出代码与 HTML。"
+  },
+  "url": "https://paidax01.github.io/math-curve-loaders",
+  "repo": "https://github.com/Paidax01/math-curve-loaders",
+  "category": "loading-feedback",
+  "tags": [
+    "function:loading-indicator",
+    "function:animation"
+  ],
+  "screenshot": "math-curve-loaders.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

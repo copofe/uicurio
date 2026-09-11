@@ -1,0 +1,23 @@
+{
+  "slug": "threeui",
+  "name": {
+    "en": "ThreeUI",
+    "zh": "ThreeUI"
+  },
+  "description": {
+    "en": "Interactive Three.js components, templates and shaders with polished motion, Canvas/WebGL effects and copy-ready source.",
+    "zh": "可交互的 Three.js 组件、模板与着色器合集：动效精致、Canvas/WebGL 特效，源码即取即用。"
+  },
+  "url": "https://threeui.com/ui-elements",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "function:3d",
+    "stack:threejs",
+    "stack:webgl"
+  ],
+  "screenshot": "threeui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

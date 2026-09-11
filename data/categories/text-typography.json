@@ -1,0 +1,13 @@
+{
+  "slug": "text-typography",
+  "parent": null,
+  "name": {
+    "en": "Text & Typography",
+    "zh": "文本与排版"
+  },
+  "description": {
+    "en": "Text and typography motion and rendering.",
+    "zh": "文本与排版的动效和渲染。"
+  },
+  "order": 6
+}

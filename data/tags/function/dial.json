@@ -1,0 +1,9 @@
+{
+  "id": "function:dial",
+  "facet": "function",
+  "slug": "dial",
+  "name": {
+    "en": "dial",
+    "zh": "旋钮"
+  }
+}

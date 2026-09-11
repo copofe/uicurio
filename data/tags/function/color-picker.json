@@ -1,0 +1,9 @@
+{
+  "id": "function:color-picker",
+  "facet": "function",
+  "slug": "color-picker",
+  "name": {
+    "en": "color picker",
+    "zh": "取色器"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "function:card-input",
+  "facet": "function",
+  "slug": "card-input",
+  "name": {
+    "en": "card input",
+    "zh": "卡号输入"
+  }
+}

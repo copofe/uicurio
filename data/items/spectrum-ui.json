@@ -1,0 +1,28 @@
+{
+  "slug": "spectrum-ui",
+  "name": {
+    "en": "Spectrum UI",
+    "zh": "Spectrum UI"
+  },
+  "description": {
+    "en": "Open-source, animation-ready React components and blocks for SaaS and AI apps, blending Aceternity UI, Magic UI and shadcn/ui; Next.js + Tailwind CSS + Motion.",
+    "zh": "为 SaaS 与 AI 应用打造的开源动效组件与区块集：融汇 Aceternity UI、Magic UI 与 shadcn/ui 之长；Next.js + Tailwind CSS + Motion。"
+  },
+  "url": "https://ui.spectrumhq.in",
+  "repo": "https://github.com/arihantcodes/spectrum-ui",
+  "category": "collections",
+  "tags": [
+    "scenario:ai-native",
+    "function:animation",
+    "stack:react",
+    "stack:typescript",
+    "stack:nextjs",
+    "stack:tailwind",
+    "stack:shadcn",
+    "stack:motion"
+  ],
+  "screenshot": "spectrum-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-11"
+}

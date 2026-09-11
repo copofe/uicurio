@@ -1,0 +1,9 @@
+{
+  "id": "stack:vanilla-js",
+  "facet": "stack",
+  "slug": "vanilla-js",
+  "name": {
+    "en": "vanilla JS",
+    "zh": "原生 JS"
+  }
+}
