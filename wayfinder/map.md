@@ -31,7 +31,7 @@ created: 2026-09-11
 
 ## Decisions so far
 
-_（尚无已关票据；开图前决议见 Notes）_
+- [数据模型定稿](tickets/03-data-model.md)：`data/` 三目录一实体一 JSON，文件名 = slug = 主键（发布后不可变）；JSON Schema 2020-12 + 构建期门禁校验（FK/唯一性/悬空标签/双语，错误阻断 CI）；四分面与两条分类原则不变；迁移由 Obsidian 表 slugify 派生 slug、冻结整数 id 映射表
 
 ## Not yet specified
 
