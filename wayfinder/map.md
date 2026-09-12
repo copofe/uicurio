@@ -36,7 +36,7 @@ created: 2026-09-11
 - [技术栈与部署选型](tickets/01-tech-stack.md)：Astro（纯静态）+ Cloudflare Pages + CF Web Analytics + @astrojs/sitemap，域名 DNS 同家；Netlify 积分制（≈20 次部署/月用尽即停）出局，额度均经 2026-09 官方页取证
 - [自动截图管线选型](tickets/02-screenshot-pipeline.md)：本地 Playwright + sharp 转 WebP + 图入 git 仓库，脚本双入口（全量/单条）；云 API 与 R2 仅作量级触发后的备选
 - [视觉原型](tickets/04-visual-prototype.md)：**B 侧栏过滤**骨架 + **图文卡**；浅色极简、无彩色 accent；原型存档于 `prototype/gallery` 分支
-- [站名与域名](tickets/05-name-domain.md)：**uicurio**（UI + curio 珍品柜）；uicurio.com / .dev 均可注册（RDAP 实时核验），购买待主人付款
+- [站名与域名](tickets/05-name-domain.md)：站名 **uicurio**，部署域 **uicurio.shinji.me**（主人主域的子域，$0，主域已托管 CF DNS）——顶域不买，日后可 301 迁移
 - [自动入库管线设计](tickets/06-ingestion-pipeline.md)：会话驱动——丢链接→AI 全程代办→主人点头才 commit；升级路径留了 GitHub Issue 触发
 - [种子数据迁移](tickets/07-seed-migration.md)：20/6/31 全部入库含中文描述，门禁 0 错 0 警；20/20 封面就位（724KB）
 - [SEO 着陆页策略](tickets/08-seo-landing-pages.md)：五类页全生成双语（tag ≥2 / 组合 ≥3 门槛）；hreflang 自指 + x-default→en；Alternatives 互链模块
