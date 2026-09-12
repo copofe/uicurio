@@ -8,7 +8,7 @@ const name = item.name[locale] ?? item.name.en;
 const desc = item.description[locale] ?? item.description.en;
 const text = `${item.name.en} ${item.name.zh} ${item.description.en} ${item.description.zh}`.toLowerCase();
 ---
-<article class="card" data-slug={item.slug} data-tags={item.tags.join(" ")} data-text={text} style={`--stagger:${index % 9}`}>
+<article class="card" data-slug={item.slug} style={`--stagger:${index % 9}`}>
   <div class="media-wrap">
     <a class="card-link enter" href={`/${locale}/item/${item.slug}/`} aria-label={`${name} · 详情`}>
       <div class="card-media">

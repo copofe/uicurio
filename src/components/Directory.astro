@@ -1,18 +1,11 @@
 ---
-// v2 画廊主列：工具行(筛选/搜索/排序/计数) + 已选摘要条 + 网格 + 空态 + 页脚 + 岛载荷
+// 画廊主列：工具行（搜索/排序/计数）+ 卡片网格（SSR 全量渲染，岛做节点复用）+ 空态
 import { ui } from "../i18n";
 import { buildPayload } from "../lib/payload";
+import { items as allItems } from "../lib/data";
 import CardV2 from "./CardV2.astro";
-interface Props {
-  locale: string;
-  items: any[];
-  total: number;
-  catSlug: string | null;
-  categories: any[];
-  tags: any[];
-  allCount?: number;
-}
-const { locale, items, total, catSlug, categories, tags } = Astro.props;
+interface Props { locale: string; items: any[]; catSlug: string | null; }
+const { locale, items, catSlug } = Astro.props;
 const t = ui[locale as keyof typeof ui];
 const sorted = [...items].sort((a: any, b: any) => (a.added < b.added ? 1 : a.added > b.added ? -1 : 0));
 const payload = buildPayload(locale as any, "gallery", catSlug);
@@ -34,9 +27,8 @@ const payload = buildPayload(locale as any, "gallery", catSlug);
       <button type="button" data-sort="new" aria-pressed="true">{t.sortNew}</button>
       <button type="button" data-sort="old" aria-pressed="false">{t.sortOld}</button>
     </div>
-    <p class="resultcount" id="resultcount" aria-live="polite" title={t.resultsSuffix}><strong>{sorted.length}</strong> / {total}</p>
+    <p class="resultcount" id="resultcount" aria-live="polite" title={t.resultsSuffix}><strong>{sorted.length}</strong> / {allItems.length}</p>
   </div>
-
 
   <section class="grid" id="dir-grid" aria-label="grid">
     {sorted.map((i: any, idx: number) => <CardV2 item={i} locale={locale} index={idx} />)}
@@ -49,4 +41,4 @@ const payload = buildPayload(locale as any, "gallery", catSlug);
   </div>
 </main>
 <script type="application/json" id="dir-data" set:html={JSON.stringify(payload)} />
-<script src="/island.js" defer></script>
+<script>import "../scripts/island.js";</script>

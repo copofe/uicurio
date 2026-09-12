@@ -5,4 +5,5 @@ interface Props { locale: string; page: "gallery" | "info"; channel?: string | n
 const { locale, page, channel = null } = Astro.props;
 const payload = buildPayload(locale as any, page, channel);
 ---
-<script type="application/json" id="dir-data" set:html={JSON.stringify(payload)} />
+<script type="application/json" id="dir-data" set:html={JSON.stringify(payload)}></script>
+<script>import "../scripts/island.js";</script>

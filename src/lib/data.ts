@@ -50,3 +50,9 @@ export function alternatives(item: any) {
 }
 
 export const tagCount = (tagId: string) => itemsWithTag(tagId).length;
+
+/** 频道计数索引：建一次，三处调用点（两页 + 岛）共用 */
+export const categoriesWithCount = categories.map((c: any) => ({
+  ...c,
+  count: itemsInCategory(c.slug).length,
+}));

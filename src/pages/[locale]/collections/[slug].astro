@@ -1,10 +1,8 @@
 ---
 // 频道页 = 该频道画廊（path 即频道，SEO 文档页；分面/搜索/排序在频道内交互）
-import Base from "../../../layouts/Base.astro";
-import Sidebar from "../../../components/Sidebar.astro";
-import Directory from "../../../components/Directory.astro";
+import GalleryShell from "../../../components/GalleryShell.astro";
 import { ui, LOCALES } from "../../../i18n";
-import { categories, items, tags } from "../../../lib/data";
+import { categories, items } from "../../../lib/data";
 
 export function getStaticPaths() {
   return LOCALES.flatMap((locale) =>
@@ -13,15 +11,8 @@ export function getStaticPaths() {
 }
 const { locale, slug } = Astro.params;
 const cat = Astro.props.cat as any;
-const t = ui[locale as keyof typeof ui];
 const list = items.filter((i: any) => i.category === slug);
-const catsWithCount = categories.map((c: any) => ({ ...c, count: items.filter((i: any) => i.category === c.slug).length }));
 const title = locale === "zh" ? `${cat.name.zh} — 精选 UI 库 · uicurio` : `${cat.name.en} — curated UI libraries · uicurio`;
 const description = cat.description[locale] ?? cat.description.en;
 ---
-<Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${list[0]?.screenshot}`}>
-  <div class="shell">
-    <Sidebar locale={locale} currentCat={slug} showFacets={true} channelItems={list} tags={tags} total={items.length} categories={catsWithCount} />
-    <Directory locale={locale} items={list} total={items.length} catSlug={slug} categories={catsWithCount} tags={tags} />
-  </div>
-</Base>
+<GalleryShell locale={locale} currentCat={slug} title={title} description={description} ogImage={`/assets/shots/${list[0]?.screenshot}`} items={list} />

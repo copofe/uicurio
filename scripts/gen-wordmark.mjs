@@ -2,7 +2,7 @@
 // 产出的 path 数据内联进 Sidebar.astro / Base.astro / public/island.js（用完即冻结）
 import { createRequire } from "node:module";
 const fontkit = createRequire(import.meta.url)("fontkit");
-import { writeFileSync } from "node:fs";
+import { writeFileSync, readFileSync } from "node:fs";
 
 const font = fontkit.openSync("fonts-tmp/dattebayo.ttf");
 
@@ -48,5 +48,17 @@ const viewBox = `${(x0 - PAD).toFixed(1)} ${(y0 - PAD).toFixed(1)} ${(x1 - x0 + 
 const svg = `<svg class="wordmark play" viewBox="${viewBox}" fill="currentColor" aria-hidden="true">${body}</svg>`;
 
 writeFileSync("fonts-tmp/wordmark.svg", svg);
+
+// --write：把新字标直写三个落点（侧栏 / 顶栏 / 岛克隆源），消除手动粘贴环节
+if (process.argv.includes("--write")) {
+  for (const p of ["src/components/Sidebar.astro", "src/layouts/Base.astro"]) {
+    const src = readFileSync(p, "utf8");
+    const i = src.indexOf('<svg class="wordmark');
+    if (i === -1) throw new Error(p + " 字标块未找到");
+    const j = src.indexOf("</svg>", i) + "</svg>".length;
+    writeFileSync(p, src.slice(0, i) + svg + src.slice(j));
+    console.log("written:", p);
+  }
+}
 console.log("viewBox:", viewBox);
 console.log("--- wordmark.svg 已写出 ---");

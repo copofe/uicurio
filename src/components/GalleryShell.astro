@@ -1,0 +1,24 @@
+---
+// 画廊壳：Base + 侧栏（三段式）+ 主列（Directory）。首页与频道页共用，差异全在 props。
+import Base from "../layouts/Base.astro";
+import Sidebar from "./Sidebar.astro";
+import Directory from "./Directory.astro";
+import { items } from "../lib/data";
+import { ui } from "../i18n";
+interface Props {
+  locale: string;
+  currentCat: string | null;
+  title: string;
+  description: string;
+  ogImage?: string;
+  items: any[];
+}
+const { locale, currentCat, title, description, ogImage, items } = Astro.props;
+const t = ui[locale as keyof typeof ui];
+---
+<Base locale={locale as any} title={title} description={description} ogImage={ogImage}>
+  <div class="shell">
+    <Sidebar locale={locale} currentCat={currentCat} showFacets={true} channelItems={items} />
+    <Directory locale={locale} items={items} catSlug={currentCat} />
+  </div>
+</Base>
