@@ -1176,11 +1176,5 @@ button.chip[aria-disabled="true"]:hover {
   animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;
  }
- .wordmark path {
-  animation: none !important;
-  stroke-dasharray: none !important;
-  stroke-dashoffset: 0 !important;
-  fill-opacity: 1 !important;
-  stroke-opacity: 0 !important;
- }
+
 }

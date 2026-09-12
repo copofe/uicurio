@@ -14,7 +14,10 @@ const PAD = 3;
 const run = font.layout(TEXT);
 const s = SIZE / font.unitsPerEm;
 let body = "";
-let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity; // 最终坐标（y 向下）
+let x0 = Infinity,
+  y0 = Infinity,
+  x1 = -Infinity,
+  y1 = -Infinity; // 最终坐标（y 向下）
 let cumX = 0; // 累计位移：positions[].xOffset 只是微调，前进量在 xAdvance
 
 run.glyphs.forEach((glyph, i) => {
@@ -26,7 +29,11 @@ run.glyphs.forEach((glyph, i) => {
   if (p.includes("NaN")) throw new Error(`glyph ${i} path has NaN`);
   // 墨迹边界：字形局部坐标(y 向上) → 最终坐标(x 右移, y 翻转向下)
   const bb = glyph.bbox;
-  if ([bb.minX, bb.minY, bb.maxX, bb.maxY].some((v) => v === undefined || Number.isNaN(v)))
+  if (
+    [bb.minX, bb.minY, bb.maxX, bb.maxY].some(
+      (v) => v === undefined || Number.isNaN(v),
+    )
+  )
     throw new Error(`glyph ${i} bbox bad: ${JSON.stringify(bb)}`);
   x0 = Math.min(x0, placeX + bb.minX * s);
   x1 = Math.max(x1, placeX + bb.maxX * s);
