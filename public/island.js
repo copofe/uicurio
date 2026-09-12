@@ -715,62 +715,6 @@
     }
   }
 
-  function activeBarSync() {
-    const bar = $("#activebar");
-    if (!bar) return;
-    bar.replaceChildren();
-    let chips = 0;
-    if (state.q) {
-      bar.appendChild(
-        fchipEl(S.fchipQ, `“${state.q}”`, () => {
-          state.q = "";
-          const input = $(".searchbox input");
-          if (input) input.value = "";
-          $(".searchbox").classList.remove("has-value");
-          refresh();
-        }),
-      );
-      chips++;
-    }
-    for (const f in state.sel) {
-      for (const t of state.sel[f]) {
-        const facet = f;
-        const tag = t;
-        const fname =
-          (U.facets.find((x) => x.key === facet) || {}).name || facet;
-        bar.appendChild(
-          fchipEl(fname, tagName(tag), () => {
-            state.sel[facet].delete(tag);
-            refresh();
-          }),
-        );
-        chips++;
-      }
-    }
-    if (chips) {
-      const wipe = el("button", "wipe", S.clearAll || "Clear all");
-      wipe.type = "button";
-      wipe.addEventListener("click", clearAll);
-      bar.appendChild(wipe);
-      bar.hidden = false;
-    } else {
-      bar.hidden = true;
-    }
-
-    function fchipEl(grp, val, onRemove) {
-      const c = el("span", "fchip");
-      c.appendChild(el("span", "grp", grp));
-      c.appendChild(el("span", null, val));
-      const b = el("button");
-      b.type = "button";
-      b.setAttribute("aria-label", `Remove ${val}`);
-      b.appendChild(icon("x", 11));
-      b.addEventListener("click", onRemove);
-      c.appendChild(b);
-      return c;
-    }
-  }
-
   function gridSync(list) {
     const grid = $("#dir-grid");
     const empty = $("#dir-empty");
@@ -829,7 +773,6 @@
   function refresh() {
     const list = activeList();
     chipSync();
-    activeBarSync();
     gridSync(list);
     drawerCountSync(list);
     writeURL();

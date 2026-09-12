@@ -37,7 +37,6 @@ const payload = buildPayload(locale as any, "gallery", catSlug);
     <p class="resultcount" id="resultcount" aria-live="polite" title={t.resultsSuffix}><strong>{sorted.length}</strong> / {total}</p>
   </div>
 
-  <div class="activebar" id="activebar" hidden></div>
 
   <section class="grid" id="dir-grid" aria-label="grid">
     {sorted.map((i: any, idx: number) => <CardV2 item={i} locale={locale} index={idx} />)}
