@@ -34,7 +34,7 @@ const payload = buildPayload(locale as any, "gallery", catSlug);
       <button type="button" data-sort="new" aria-pressed="true">{t.sortNew}</button>
       <button type="button" data-sort="old" aria-pressed="false">{t.sortOld}</button>
     </div>
-    <p class="resultcount" id="resultcount" aria-live="polite" title={t.resultsSuffix}>{sorted.length}</p>
+    <p class="resultcount" id="resultcount" aria-live="polite" title={t.resultsSuffix}><strong>{sorted.length}</strong> / {total}</p>
   </div>
 
   <div class="activebar" id="activebar" hidden></div>

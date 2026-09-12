@@ -779,6 +779,7 @@
     if (count) {
       count.replaceChildren();
       count.appendChild(el("strong", null, String(list.length)));
+      count.appendChild(document.createTextNode(` / ${U.items.length}`));
     }
     if (!list.length) {
       grid.hidden = true;
