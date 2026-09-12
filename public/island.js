@@ -21,8 +21,10 @@
     if (typeof path === "string" && path.startsWith("/")) location.assign(path);
   };
   const itemURL = (slug) => `/${LOCALE}/item/${encodeURIComponent(slug)}/`;
-  const catURL = (slug) => `/${LOCALE}/collections/${encodeURIComponent(slug)}/`;
-  const tagPageURL = (tagId) => `/${LOCALE}/tags/${encodeURIComponent(tagId.split(":")[1])}/`;
+  const catURL = (slug) =>
+    `/${LOCALE}/collections/${encodeURIComponent(slug)}/`;
+  const tagPageURL = (tagId) =>
+    `/${LOCALE}/tags/${encodeURIComponent(tagId.split(":")[1])}/`;
 
   /* ── 基础工具 ── */
   const el = (tag, cls, text) => {
@@ -37,7 +39,8 @@
       x: '<path d="M6 6l12 12M18 6L6 18"/>',
       aur: '<path d="M7 17 17 7M8 7h9v9"/>',
       enter: '<path d="M20 4v7a4 4 0 0 1-4 4H4"/><path d="m9 10-5 5 5 5"/>',
-      layers: '<path d="m12 2 10 6.5L12 15 2 8.5 12 2Z"/><path d="m2 13.5 10 6.5 10-6.5"/>',
+      layers:
+        '<path d="m12 2 10 6.5L12 15 2 8.5 12 2Z"/><path d="m2 13.5 10 6.5 10-6.5"/>',
       tag: '<path d="M12 2H4a2 2 0 0 0-2 2v8l9.3 9.3a1.7 1.7 0 0 0 2.4 0l7.6-7.6a1.7 1.7 0 0 0 0-2.4L12 2Z"/><circle cx="7.5" cy="7.5" r="1"/>',
     };
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -53,7 +56,10 @@
     for (const chunk of P[name].split("/>")) {
       if (!chunk) continue;
       const m = chunk.trim().match(/^<([a-z]+)/);
-      const child = document.createElementNS("http://www.w3.org/2000/svg", m ? m[1] : "path");
+      const child = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        m ? m[1] : "path",
+      );
       for (const a of chunk.trim().match(/([a-z-]+)="([^"]*)"/g) || []) {
         const kv = a.match(/([a-z-]+)="([^"]*)"/);
         child.setAttribute(kv[1], kv[2]);
@@ -77,7 +83,8 @@
       out.appendChild(el("mark", null, text.slice(hit, hit + q.length)));
       i = hit + q.length;
     }
-    if (i < text.length) out.appendChild(document.createTextNode(text.slice(i)));
+    if (i < text.length)
+      out.appendChild(document.createTextNode(text.slice(i)));
     return out;
   };
   const debounce = (fn, ms) => {
@@ -137,7 +144,12 @@
 
   /* ── 状态 ── */
   const state = {
-    sel: { function: new Set(), stack: new Set(), style: new Set(), scenario: new Set() },
+    sel: {
+      function: new Set(),
+      stack: new Set(),
+      style: new Set(),
+      scenario: new Set(),
+    },
     q: "",
     sort: "new",
   };
@@ -147,7 +159,8 @@
   function matches(item, skipFacet) {
     if (U.channel && item.cat !== U.channel) return false;
     if (state.q) {
-      const hay = `${item.name} ${item.desc} ${item.tags.map(tagName).join(" ")}`.toLowerCase();
+      const hay =
+        `${item.name} ${item.desc} ${item.tags.map(tagName).join(" ")}`.toLowerCase();
       if (!hay.includes(state.q.toLowerCase())) return false;
     }
     for (const f in state.sel) {
@@ -158,7 +171,8 @@
   }
   function facetCount(tag) {
     let n = 0;
-    for (const it of U.items) if (it.tags.includes(tag) && matches(it, tagFacet(tag))) n++;
+    for (const it of U.items)
+      if (it.tags.includes(tag) && matches(it, tagFacet(tag))) n++;
     return n;
   }
   function activeList() {
@@ -176,7 +190,8 @@
     for (const pair of (p.get("f") || "").split("+")) {
       if (!pair) continue;
       const kv = pair.split(".");
-      if (kv.length === 2 && U.tags[kv[1]] && U.tags[kv[1]].facet === kv[0]) state.sel[kv[0]].add(kv[1]);
+      if (kv.length === 2 && U.tags[kv[1]] && U.tags[kv[1]].facet === kv[0])
+        state.sel[kv[0]].add(kv[1]);
     }
     state.q = p.get("q") || "";
     if (p.get("sort") === "old") state.sort = "old";
@@ -184,7 +199,8 @@
   function writeURL() {
     const p = new URLSearchParams();
     const fs = [];
-    for (const f in state.sel) for (const t of state.sel[f]) fs.push(`${f}.${t}`);
+    for (const f in state.sel)
+      for (const t of state.sel[f]) fs.push(`${f}.${t}`);
     if (fs.length) p.set("f", fs.join("+"));
     if (state.q) p.set("q", state.q);
     if (state.sort === "old") p.set("sort", "old");
@@ -216,7 +232,8 @@
       const n = U.items.filter((i) => i.cat === c.slug).length;
       const a = el("a", "navrow");
       a.href = catURL(c.slug);
-      if (U.channel && c.slug === U.channel) a.setAttribute("aria-current", "page");
+      if (U.channel && c.slug === U.channel)
+        a.setAttribute("aria-current", "page");
       const dot = el("i", "dot");
       dot.setAttribute("aria-hidden", "true");
       a.appendChild(dot);
@@ -247,7 +264,10 @@
     const b = el("button", "chip");
     b.type = "button";
     b.dataset.tag = tag;
-    b.setAttribute("aria-pressed", state.sel[meta.facet].has(tag) ? "true" : "false");
+    b.setAttribute(
+      "aria-pressed",
+      state.sel[meta.facet].has(tag) ? "true" : "false",
+    );
     b.appendChild(el("span", "t", meta.name));
     b.appendChild(el("span", "n", "0"));
     b.addEventListener("click", () => {
@@ -268,7 +288,8 @@
     const burger = $(".topbar .menu-btn");
     if (burger) burger.addEventListener("click", openDrawer);
     const searchBtn = $(".topbar .search-btn");
-    if (searchBtn) searchBtn.addEventListener("click", () => openPalette(searchBtn));
+    if (searchBtn)
+      searchBtn.addEventListener("click", () => openPalette(searchBtn));
   }
 
   function buildScrimAndPanels() {
@@ -291,7 +312,10 @@
     const path = location.pathname.startsWith(`/${LOCALE}/`)
       ? location.pathname.replace(`/${LOCALE}/`, `/${other}/`)
       : `/${other}/`;
-    for (const [code, label] of [["en", "EN"], ["zh", "中文"]]) {
+    for (const [code, label] of [
+      ["en", "EN"],
+      ["zh", "中文"],
+    ]) {
       const a = el("a", null, label);
       a.href = (code === LOCALE ? location.pathname : path) + location.search;
       if (code === LOCALE) a.setAttribute("aria-current", "page");
@@ -355,7 +379,11 @@
     if (scrim) {
       scrim.classList.remove("open");
       setTimeout(() => {
-        if (!drawer.classList.contains("open") && !(palette && palette.classList.contains("open"))) scrim.hidden = true;
+        if (
+          !drawer.classList.contains("open") &&
+          !(palette && palette.classList.contains("open"))
+        )
+          scrim.hidden = true;
       }, 240);
     }
   }
@@ -402,7 +430,11 @@
     palette.appendChild(pList);
 
     const foot = el("div", "palette-foot");
-    for (const pair of [["↑↓", "选择"], [null, "enter", "打开"], ["esc", "关闭"]]) {
+    for (const pair of [
+      ["↑↓", "选择"],
+      [null, "enter", "打开"],
+      ["esc", "关闭"],
+    ]) {
       const s = el("span");
       if (pair[0]) s.appendChild(el("kbd", null, pair[0]));
       else s.appendChild(icon("enter", 12));
@@ -449,17 +481,39 @@
     const rows = [];
     const ql = (q || "").toLowerCase();
     const items = U.items
-      .filter((it) => !ql || `${it.name} ${it.desc} ${it.tags.map(tagName).join(" ")}`.toLowerCase().includes(ql))
+      .filter(
+        (it) =>
+          !ql ||
+          `${it.name} ${it.desc} ${it.tags.map(tagName).join(" ")}`
+            .toLowerCase()
+            .includes(ql),
+      )
       .slice(0, 6);
     if (items.length) {
       const g = { label: S.pgItems || "Items", rows: [] };
-      for (const it of items) g.rows.push({ kind: "item", slug: it.slug, name: it.name, meta: catName(it.cat), cover: it.shot, q: ql });
+      for (const it of items)
+        g.rows.push({
+          kind: "item",
+          slug: it.slug,
+          name: it.name,
+          meta: catName(it.cat),
+          cover: it.shot,
+          q: ql,
+        });
       rows.push(g);
     }
-    const chans = U.categories.filter((c) => !ql || c.name.toLowerCase().includes(ql));
+    const chans = U.categories.filter(
+      (c) => !ql || c.name.toLowerCase().includes(ql),
+    );
     if (chans.length) {
       const g2 = { label: S.pgChannels || "Channels", rows: [] };
-      for (const c of chans) g2.rows.push({ kind: "channel", slug: c.slug, name: c.name, meta: String(U.items.filter((i) => i.cat === c.slug).length) });
+      for (const c of chans)
+        g2.rows.push({
+          kind: "channel",
+          slug: c.slug,
+          name: c.name,
+          meta: String(U.items.filter((i) => i.cat === c.slug).length),
+        });
       rows.push(g2);
     }
     const tags = Object.keys(U.tags)
@@ -468,8 +522,15 @@
     if (tags.length) {
       const g3 = { label: S.pgTags || "Filters", rows: [] };
       for (const t of tags) {
-        const on = state.sel[tagFacet(t)] ? state.sel[tagFacet(t)].has(t) : false;
-        g3.rows.push({ kind: "tag", tag: t, name: U.tags[t].name, meta: on ? S.pSelected : S.pAdd });
+        const on = state.sel[tagFacet(t)]
+          ? state.sel[tagFacet(t)].has(t)
+          : false;
+        g3.rows.push({
+          kind: "tag",
+          tag: t,
+          name: U.tags[t].name,
+          meta: on ? S.pSelected : S.pAdd,
+        });
       }
       rows.push(g3);
     }
@@ -520,7 +581,10 @@
         count++;
       }
     }
-    if (!count) pList.appendChild(el("div", "palette-empty", S.paletteEmpty || "No matches."));
+    if (!count)
+      pList.appendChild(
+        el("div", "palette-empty", S.paletteEmpty || "No matches."),
+      );
     pIndex = 0;
     paintP();
   }
@@ -536,7 +600,11 @@
       pInput.setAttribute("aria-activedescendant", act.id);
       const top = act.offsetTop;
       if (top < pList.scrollTop + 8) pList.scrollTop = top - 8;
-      else if (top + act.offsetHeight > pList.scrollTop + pList.clientHeight - 8) pList.scrollTop = top + act.offsetHeight - pList.clientHeight + 8;
+      else if (
+        top + act.offsetHeight >
+        pList.scrollTop + pList.clientHeight - 8
+      )
+        pList.scrollTop = top + act.offsetHeight - pList.clientHeight + 8;
     }
   }
 
@@ -560,7 +628,11 @@
         closeAll();
       } else {
         const n = U.items.filter((i) => i.tags.includes(r.tag)).length;
-        go(n >= 2 ? tagPageURL(r.tag) : itemURL(U.items.find((i) => i.tags.includes(r.tag)).slug));
+        go(
+          n >= 2
+            ? tagPageURL(r.tag)
+            : itemURL(U.items.find((i) => i.tags.includes(r.tag)).slug),
+        );
       }
     }
   }
@@ -576,7 +648,11 @@
       }
       if (e.key === "/" && !open) {
         const t = e.target;
-        const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable);
+        const typing =
+          t &&
+          (t.tagName === "INPUT" ||
+            t.tagName === "TEXTAREA" ||
+            t.isContentEditable);
         if (!typing) {
           e.preventDefault();
           openPalette();
@@ -611,24 +687,29 @@
     bar.replaceChildren();
     let chips = 0;
     if (state.q) {
-      bar.appendChild(fchipEl(S.fchipQ, `“${state.q}”`, () => {
-        state.q = "";
-        const input = $(".searchbox input");
-        if (input) input.value = "";
-        $(".searchbox").classList.remove("has-value");
-        refresh();
-      }));
+      bar.appendChild(
+        fchipEl(S.fchipQ, `“${state.q}”`, () => {
+          state.q = "";
+          const input = $(".searchbox input");
+          if (input) input.value = "";
+          $(".searchbox").classList.remove("has-value");
+          refresh();
+        }),
+      );
       chips++;
     }
     for (const f in state.sel) {
       for (const t of state.sel[f]) {
         const facet = f;
         const tag = t;
-        const fname = (U.facets.find((x) => x.key === facet) || {}).name || facet;
-        bar.appendChild(fchipEl(fname, tagName(tag), () => {
-          state.sel[facet].delete(tag);
-          refresh();
-        }));
+        const fname =
+          (U.facets.find((x) => x.key === facet) || {}).name || facet;
+        bar.appendChild(
+          fchipEl(fname, tagName(tag), () => {
+            state.sel[facet].delete(tag);
+            refresh();
+          }),
+        );
         chips++;
       }
     }
@@ -663,7 +744,9 @@
     if (count) {
       count.replaceChildren();
       count.appendChild(el("strong", null, String(list.length)));
-      count.appendChild(document.createTextNode(` / ${U.items.length} ${S.resultsSuffix}`));
+      count.appendChild(
+        document.createTextNode(` / ${U.items.length} ${S.resultsSuffix}`),
+      );
     }
     if (!list.length) {
       grid.hidden = true;
@@ -674,7 +757,8 @@
     grid.hidden = false;
 
     const before = new Map();
-    for (const c of $$(".card", grid)) before.set(c.dataset.slug, c.getBoundingClientRect().top);
+    for (const c of $$(".card", grid))
+      before.set(c.dataset.slug, c.getBoundingClientRect().top);
 
     grid.replaceChildren();
     list.forEach((it, i) => grid.appendChild(cardEl(it, Math.min(i, 8))));
@@ -726,11 +810,14 @@
         input.value = state.q;
         $(".searchbox").classList.add("has-value");
       }
-      input.addEventListener("input", debounce(() => {
-        state.q = input.value.trim();
-        $(".searchbox").classList.toggle("has-value", !!input.value);
-        refresh();
-      }, 120));
+      input.addEventListener(
+        "input",
+        debounce(() => {
+          state.q = input.value.trim();
+          $(".searchbox").classList.toggle("has-value", !!input.value);
+          refresh();
+        }, 120),
+      );
       const clear = $(".searchbox .clear");
       if (clear)
         clear.addEventListener("click", () => {
@@ -742,7 +829,10 @@
         });
     }
     for (const b of $$(".sortseg button")) {
-      b.setAttribute("aria-pressed", b.dataset.sort === state.sort ? "true" : "false");
+      b.setAttribute(
+        "aria-pressed",
+        b.dataset.sort === state.sort ? "true" : "false",
+      );
       b.addEventListener("click", () => {
         if (state.sort === b.dataset.sort) return;
         state.sort = b.dataset.sort;
@@ -751,7 +841,11 @@
         } catch {
           /* 私密模式 */
         }
-        for (const x of $$(".sortseg button")) x.setAttribute("aria-pressed", x.dataset.sort === state.sort ? "true" : "false");
+        for (const x of $$(".sortseg button"))
+          x.setAttribute(
+            "aria-pressed",
+            x.dataset.sort === state.sort ? "true" : "false",
+          );
         refresh();
       });
     }
@@ -765,9 +859,9 @@
 
   /* ── 启动 ── */
   // 侧栏静态 chips（服务端渲染）绑定开关；零计数的置灰拦截
-  for (const b of $$('.sidebar .chip[data-tag]')) {
-    b.addEventListener('click', () => {
-      if (b.getAttribute('aria-disabled') === 'true') return;
+  for (const b of $$(".sidebar .chip[data-tag]")) {
+    b.addEventListener("click", () => {
+      if (b.getAttribute("aria-disabled") === "true") return;
       toggleTag(b.dataset.tag);
     });
   }

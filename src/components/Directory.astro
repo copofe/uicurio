@@ -48,11 +48,6 @@ const payload = buildPayload(locale as any, "gallery", catSlug);
     <p>{t.emptyText}</p>
     <button class="btn btn-ghost" id="dir-empty-clear" type="button">{t.emptyClear}</button>
   </div>
-
-  <footer class="foot">
-    <span>{t.foot}</span>
-    <span>uicurio.shinji.me</span>
-  </footer>
 </main>
 <script type="application/json" id="dir-data" set:html={JSON.stringify(payload)} />
 <script src="/island.js" defer></script>

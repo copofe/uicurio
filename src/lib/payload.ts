@@ -2,9 +2,13 @@
 import { items, categories, tags } from "./data";
 import { ui, type Locale } from "../i18n";
 
-export function buildPayload(locale: Locale, page: "gallery" | "info", channel: string | null) {
+export function buildPayload(
+  locale: Locale,
+  page: "gallery" | "info",
+  channel: string | null,
+) {
   const t = ui[locale];
-  const L = (o: any) => (o?.[locale] ?? o?.en ?? "");
+  const L = (o: any) => o?.[locale] ?? o?.en ?? "";
   return {
     locale,
     page,
@@ -16,7 +20,9 @@ export function buildPayload(locale: Locale, page: "gallery" | "info", channel: 
       { key: "style", name: t.style },
       { key: "scenario", name: t.scenario },
     ],
-    tags: Object.fromEntries(tags.map((x: any) => [x.id, { facet: x.facet, name: L(x.name) }])),
+    tags: Object.fromEntries(
+      tags.map((x: any) => [x.id, { facet: x.facet, name: L(x.name) }]),
+    ),
     items: items.map((i: any) => ({
       slug: i.slug,
       name: L(i.name),

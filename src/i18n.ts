@@ -2,7 +2,8 @@
 export const ui = {
   en: {
     tagline: "Only what I've vetted by hand.",
-    homeIntro: "Every piece tried by hand, none filler. New gems added as I find them.",
+    homeIntro:
+      "Every piece tried by hand, none filler. New gems added as I find them.",
     channels: "Channels",
     all: "All",
     searchPh: "Search names, descriptions or tags…",
