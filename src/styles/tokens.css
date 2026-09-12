@@ -27,6 +27,25 @@
   Inter, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui,
   sans-serif;
  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+ color-scheme: light;
+}
+
+/* 黑墙挂画：dark 主题只换 token，组件零改动 */
+[data-theme="dark"] {
+ color-scheme: dark;
+ --bg: #0f0f11;
+ --surface: #0f0f11;
+ --surface-2: #1b1b1f;
+ --surface-3: #26262b;
+ --border: #2a2a30;
+ --text-1: #f0f0f2;
+ --text-2: #a0a0a8;
+ --text-2-on-gray: color-mix(in srgb, var(--text-2) 82%, var(--text-1));
+ --ink: #e8e8ea;
+ --ink-strong: #ffffff;
+ --on-ink: #101012;
+ --shadow-lift: 0 10px 28px color-mix(in srgb, #000 45%, transparent);
+ --shadow-pop: 0 24px 64px color-mix(in srgb, #000 60%, transparent);
 }
 
 /* ── 2. 基础 ───────────────────────────────────────────────── */
@@ -599,53 +618,71 @@ button.chip[aria-disabled="true"]:hover {
  color: var(--text-2);
 }
 
-/* ── 8. 语言切换（自有件，样式对齐 v2）────────────────────── */
-.lang {
- position: fixed;
- top: 14px;
- right: 16px;
- z-index: 70;
- display: flex;
- gap: 6px;
- font-size: 13px;
+/* ── 8. 手写站名 + 侧栏底部（语言/主题）+ 主题 ─────────────── */
+@font-face {
+ font-family: "Caveat";
+ src: url("/fonts/caveat-600-latin.woff2") format("woff2");
+ font-weight: 600;
+ font-style: normal;
+ font-display: swap;
 }
-.lang a {
+.brand-word {
+ font-family: "Caveat", var(--font-sans);
+ font-size: 25px;
+ font-weight: 600;
+ letter-spacing: 0;
+ line-height: 1;
+}
+.topbar .brand-word {
+ font-size: 22px;
+}
+.side-foot {
+ margin-top: auto;
+ padding-top: 18px;
+ border-top: 1px solid var(--border);
+ display: flex;
+ align-items: center;
+ gap: 8px;
+}
+.langs {
+ display: flex;
+ gap: 4px;
+}
+.langs a {
  color: var(--text-2);
- padding: 4px 12px;
+ font-size: 12px;
+ padding: 2px 9px;
  border-radius: 9999px;
  background: var(--surface-2);
  transition:
   background var(--dur-fast) ease,
   color var(--dur-fast) ease;
 }
-.lang a:hover {
+.langs a:hover {
  color: var(--text-1);
  background: var(--surface-3);
 }
-.lang a[aria-current] {
+.langs a[aria-current] {
  background: var(--ink);
  color: var(--on-ink);
 }
-@media (max-width: 1023px) {
- .lang {
-  display: none;
- }
+.side-foot .iconbtn {
+ margin-left: auto;
+ width: 32px;
+ height: 32px;
 }
-.drawer .langrow {
- display: flex;
- gap: 6px;
- padding: 6px 0 2px;
+.side-foot .iconbtn svg {
+ width: 15px;
+ height: 15px;
 }
-.drawer .langrow a {
- color: var(--text-2);
- font-size: 12.5px;
- padding: 3px 10px;
- border-radius: 9999px;
- background: var(--surface-2);
+.iconbtn .i-moon {
+ display: none;
 }
-.drawer .langrow a[aria-current] {
- background: var(--ink);
- color: var(--on-ink);
+[data-theme="dark"] .iconbtn .i-sun {
+ display: none;
+}
+[data-theme="dark"] .iconbtn .i-moon {
+ display: block;
 }
 
 /* ── 9. 命令面板 ───────────────────────────────────────────── */

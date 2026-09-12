@@ -1,0 +1,8 @@
+---
+// 岛载荷注入：让渐进增强脚本在全站可用（命令面板/抽屉/主题/语言）
+import { buildPayload } from "../lib/payload";
+interface Props { locale: string; page: "gallery" | "info"; channel?: string | null; }
+const { locale, page, channel = null } = Astro.props;
+const payload = buildPayload(locale as any, page, channel);
+---
+<script type="application/json" id="dir-data" set:html={JSON.stringify(payload)} />

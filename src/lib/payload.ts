@@ -53,6 +53,7 @@ export function buildPayload(
       paletteEmpty: t.paletteEmpty,
       pAdd: t.pAdd,
       pSelected: t.pSelected,
+      themeLabel: t.theme,
     },
   };
 }

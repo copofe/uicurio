@@ -2,6 +2,7 @@
 // 标签着陆页（≥2 条才生成，票 08 门槛）：面包屑 + 标题 + 静态网格（零 JS 的 SEO 页）
 import Base from "../../../layouts/Base.astro";
 import Sidebar from "../../../components/Sidebar.astro";
+import Payload from "../../../components/Payload.astro";
 import CardV2 from "../../../components/CardV2.astro";
 import { ui, LOCALES } from "../../../i18n";
 import { items, tags, itemsWithTag, TAG_MIN } from "../../../lib/data";
@@ -34,4 +35,5 @@ const description = locale === "zh" ? `手工严选的 ${list.length} 个${tag.n
       <div class="grid">{list.map((i: any, idx: number) => <CardV2 item={i} locale={locale} index={idx} />)}</div>
     </main>
   </div>
+  <Payload locale={locale} page="info" />
 </Base>

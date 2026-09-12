@@ -42,6 +42,8 @@
       layers:
         '<path d="m12 2 10 6.5L12 15 2 8.5 12 2Z"/><path d="m2 13.5 10 6.5 10-6.5"/>',
       tag: '<path d="M12 2H4a2 2 0 0 0-2 2v8l9.3 9.3a1.7 1.7 0 0 0 2.4 0l7.6-7.6a1.7 1.7 0 0 0 0-2.4L12 2Z"/><circle cx="7.5" cy="7.5" r="1"/>',
+      sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+      moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/>',
     };
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("viewBox", "0 0 24 24");
@@ -94,6 +96,15 @@
       t = setTimeout(() => fn.apply(this, a), ms);
     };
   };
+
+  function applyTheme(t) {
+    document.documentElement.dataset.theme = t;
+    try {
+      localStorage.setItem("uicurio.theme", t);
+    } catch {
+      /* 私密模式 */
+    }
+  }
 
   /* ── 卡片 ── */
   function cardEl(item, stagger) {
@@ -210,6 +221,14 @@
     } catch {
       /* file:// 容错 */
     }
+    // 语言链接跟随最新过滤态
+    for (const a of $$("[data-lang]")) {
+      const code = a.dataset.lang;
+      const path = location.pathname.startsWith(`/${LOCALE}/`)
+        ? location.pathname.replace(`/${LOCALE}/`, `/${code}/`)
+        : `/${code}/`;
+      a.href = path + (qs ? `?${qs}` : "");
+    }
   }
 
   /* ── 抽屉 / 遮罩（含语言行）── */
@@ -306,22 +325,26 @@
 
     const head = el("div", "drawer-head");
     head.appendChild(el("span", "brand-word", "uicurio"));
-    const langrow = el("div", "langrow");
-    langrow.setAttribute("aria-label", "Language");
-    const other = LOCALE === "zh" ? "en" : "zh";
-    const path = location.pathname.startsWith(`/${LOCALE}/`)
-      ? location.pathname.replace(`/${LOCALE}/`, `/${other}/`)
-      : `/${other}/`;
-    for (const [code, label] of [
-      ["en", "EN"],
-      ["zh", "中文"],
-    ]) {
+    const langs = el("div", "langs");
+    langs.setAttribute("aria-label", "Language");
+    for (const [code, label] of [["en", "EN"], ["zh", "中文"]]) {
       const a = el("a", null, label);
-      a.href = (code === LOCALE ? location.pathname : path) + location.search;
+      a.dataset.lang = code;
       if (code === LOCALE) a.setAttribute("aria-current", "page");
-      langrow.appendChild(a);
+      langs.appendChild(a);
     }
-    head.appendChild(langrow);
+    head.appendChild(langs);
+    const themeBtn = el("button", "iconbtn");
+    themeBtn.type = "button";
+    themeBtn.setAttribute("data-theme-toggle", "");
+    themeBtn.setAttribute("aria-label", S.themeLabel || "Theme");
+    const sun = icon("sun", 15);
+    sun.classList.add("i-sun");
+    const moon = icon("moon", 15);
+    moon.classList.add("i-moon");
+    themeBtn.appendChild(sun);
+    themeBtn.appendChild(moon);
+    head.appendChild(themeBtn);
     const close = el("button", "iconbtn");
     close.type = "button";
     close.setAttribute("aria-label", "Close");
@@ -875,6 +898,16 @@
   buildScrimAndPanels();
   buildTopbar();
   bindPaletteKeys();
+  // 主题切换 + 语言链接重写（侧栏底部与抽屉头共用 data-* 钩子）
+  for (const b of $$("[data-theme-toggle]"))
+    b.addEventListener("click", () => applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
+  for (const a of $$("[data-lang]")) {
+    const code = a.dataset.lang;
+    const path = location.pathname.startsWith(`/${LOCALE}/`)
+      ? location.pathname.replace(`/${LOCALE}/`, `/${code}/`)
+      : `/${code}/`;
+    a.href = path + location.search;
+  }
   buildToolbar();
   if (PAGE === "gallery") refresh();
 })();

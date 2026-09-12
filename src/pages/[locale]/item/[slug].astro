@@ -2,6 +2,7 @@
 // 条目详情（v2 item 形态）：面包屑 + 封面 + 标题/描述/CTA/元信息/标签 + 同柜推荐 + 前后翻页
 import Base from "../../../layouts/Base.astro";
 import Sidebar from "../../../components/Sidebar.astro";
+import Payload from "../../../components/Payload.astro";
 import CardV2 from "../../../components/CardV2.astro";
 import { ui, LOCALES } from "../../../i18n";
 import { items, categories, tagById } from "../../../lib/data";
@@ -100,4 +101,5 @@ const title = `${name} · uicurio`;
       <footer class="foot"><span>{t.foot}</span><span>uicurio.shinji.me</span></footer>
     </main>
   </div>
+  <Payload locale={locale} page="info" channel={item.category} />
 </Base>

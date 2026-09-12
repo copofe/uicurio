@@ -38,6 +38,7 @@ export const ui = {
     paletteEmpty: "No matches — try another phrasing.",
     pAdd: "Add",
     pSelected: "Selected · enter to remove",
+    theme: "Theme",
   },
   zh: {
     tagline: "只收自己筛过一遍的东西。",
@@ -76,6 +77,7 @@ export const ui = {
     paletteEmpty: "没有匹配的结果——换个说法试试。",
     pAdd: "添加",
     pSelected: "已选 · 回车移除",
+    theme: "主题",
   },
 } as const;
 export type Locale = keyof typeof ui;
