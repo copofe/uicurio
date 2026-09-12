@@ -650,27 +650,26 @@ button.chip[aria-disabled="true"]:hover {
  align-items: center;
  gap: 8px;
 }
-.langs {
- display: flex;
- gap: 4px;
-}
-.langs a {
- color: var(--text-2);
+.langsel {
+ font-family: var(--font-sans);
  font-size: 12px;
- padding: 2px 9px;
- border-radius: 9999px;
+ color: var(--text-2);
  background: var(--surface-2);
+ border: 0;
+ border-radius: 8px;
+ padding: 3px 6px;
+ cursor: pointer;
  transition:
   background var(--dur-fast) ease,
   color var(--dur-fast) ease;
 }
-.langs a:hover {
+.langsel:hover {
  color: var(--text-1);
  background: var(--surface-3);
 }
-.langs a[aria-current] {
- background: var(--ink);
- color: var(--on-ink);
+.langsel:focus-visible {
+ outline: 2px solid var(--ink);
+ outline-offset: 2px;
 }
 .side-foot .iconbtn {
  margin-left: auto;

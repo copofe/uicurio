@@ -221,14 +221,6 @@
     } catch {
       /* file:// 容错 */
     }
-    // 语言链接跟随最新过滤态
-    for (const a of $$("[data-lang]")) {
-      const code = a.dataset.lang;
-      const path = location.pathname.startsWith(`/${LOCALE}/`)
-        ? location.pathname.replace(`/${LOCALE}/`, `/${code}/`)
-        : `/${code}/`;
-      a.href = path + (qs ? `?${qs}` : "");
-    }
   }
 
   /* ── 抽屉 / 遮罩（含语言行）── */
@@ -334,18 +326,19 @@
       ).documentElement,
     );
     head.appendChild(brandLink);
-    const langs = el("div", "langs");
-    langs.setAttribute("aria-label", "Language");
+    const langSel = el("select", "langsel");
+    langSel.setAttribute("aria-label", "Language");
+    langSel.dataset.langSelect = "";
     for (const [code, label] of [
-      ["en", "EN"],
+      ["en", "English"],
       ["zh", "中文"],
     ]) {
-      const a = el("a", null, label);
-      a.dataset.lang = code;
-      if (code === LOCALE) a.setAttribute("aria-current", "page");
-      langs.appendChild(a);
+      const opt = el("option", null, label);
+      opt.value = code;
+      if (code === LOCALE) opt.selected = true;
+      langSel.appendChild(opt);
     }
-    head.appendChild(langs);
+    head.appendChild(langSel);
     const themeBtn = el("button", "iconbtn");
     themeBtn.type = "button";
     themeBtn.setAttribute("data-theme-toggle", "");
@@ -915,12 +908,15 @@
         document.documentElement.dataset.theme === "dark" ? "light" : "dark",
       ),
     );
-  for (const a of $$("[data-lang]")) {
-    const code = a.dataset.lang;
-    const path = location.pathname.startsWith(`/${LOCALE}/`)
-      ? location.pathname.replace(`/${LOCALE}/`, `/${code}/`)
-      : `/${code}/`;
-    a.href = path + location.search;
+  for (const sel of $$("[data-lang-select]")) {
+    sel.value = LOCALE;
+    sel.addEventListener("change", () => {
+      const code = sel.value;
+      const path = location.pathname.startsWith(`/${LOCALE}/`)
+        ? location.pathname.replace(`/${LOCALE}/`, `/${code}/`)
+        : `/${code}/`;
+      location.assign(path + location.search);
+    });
   }
   buildToolbar();
   if (PAGE === "gallery") refresh();
