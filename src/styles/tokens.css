@@ -156,8 +156,7 @@ kbd {
   wordmark-draw 0.6s var(--ease) forwards,
   wordmark-ink 0.5s var(--ease) forwards;
  animation-delay:
-  calc(120ms + var(--i, 0) * 95ms),
-  calc(520ms + var(--i, 0) * 95ms);
+  calc(120ms + var(--i, 0) * 95ms), calc(520ms + var(--i, 0) * 95ms);
 }
 @keyframes wordmark-draw {
  to {
