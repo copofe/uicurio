@@ -138,6 +138,31 @@ kbd {
 .drawer .wordmark {
  height: 24px;
 }
+
+/* 签名式绘制：长划沿路径移动（技法源自 antfu animated-svg-logo）
+ * pathLength=1 归一化 → dasharray/dashoffset 只用 0~1；
+ * --i 逐笔延迟，u→i→c→u→r→i→o 顺序书写；.play 由首屏与主题切换触发 */
+.wordmark path {
+ stroke-dasharray: 1;
+ stroke-dashoffset: 1;
+}
+.wordmark.play path {
+ animation: wordmark-draw 0.65s var(--ease) forwards;
+ animation-delay: calc(150ms + var(--i, 0) * 110ms);
+}
+@keyframes wordmark-draw {
+ 0% {
+  opacity: 0;
+  stroke-dashoffset: 1;
+ }
+ 12% {
+  opacity: 1;
+ }
+ 100% {
+  opacity: 1;
+  stroke-dashoffset: 0;
+ }
+}
 .brand-sub {
  display: block;
  margin-top: 2px;
@@ -1144,5 +1169,10 @@ button.chip[aria-disabled="true"]:hover {
   animation-duration: 0.01ms !important;
   animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;
+ }
+ .wordmark path {
+  animation: none !important;
+  stroke-dasharray: none !important;
+  stroke-dashoffset: 0 !important;
  }
 }
