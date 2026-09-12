@@ -112,9 +112,9 @@ for (const c of categories)
   if (!usedCats.has(c.slug))
     warnings.push(`category with zero items: ${c.slug}`);
 for (const f of itemFiles)
-  if (!existsSync(`assets/shots/${f.replace(".json", ".webp")}`))
+  if (!existsSync(`public/assets/shots/${f.replace(".json", ".webp")}`))
     warnings.push(
-      `screenshot missing: assets/shots/${f.replace(".json", ".webp")}`,
+      `screenshot missing: public/assets/shots/${f.replace(".json", ".webp")}`,
     );
 
 for (const e of errors) console.error(`✗ ${e}`);

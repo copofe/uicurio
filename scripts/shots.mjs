@@ -14,14 +14,14 @@ const readJson = (p) => {
 
 const args = process.argv.slice(2);
 const only = args[0] && args[0] !== "--" ? args[0] : (args[1] ?? null);
-mkdirSync("assets/shots", { recursive: true });
+mkdirSync("public/assets/shots", { recursive: true });
 
 const items = readdirSync("data/items")
   .filter((f) => f.endsWith(".json"))
   .map((f) => readJson(`data/items/${f}`));
 const targets = only
   ? items.filter((i) => i.slug === only)
-  : items.filter((i) => !existsSync(`assets/shots/${i.slug}.webp`));
+  : items.filter((i) => !existsSync(`public/assets/shots/${i.slug}.webp`));
 if (!targets.length) {
   console.log("nothing to capture");
   process.exit(0);
@@ -60,7 +60,7 @@ async function capture(item) {
     await sharp(buf)
       .resize({ width: 1600 })
       .webp({ quality: 78 })
-      .toFile(`assets/shots/${item.slug}.webp`);
+      .toFile(`public/assets/shots/${item.slug}.webp`);
     ok.push(item.slug);
     console.log(`✓ ${item.slug}`);
   } catch (e) {

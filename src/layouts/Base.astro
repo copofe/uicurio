@@ -26,7 +26,17 @@ const enUrl = locale === "en" ? url : swap("en");
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <!-- Cloudflare Web Analytics：控制台开启站点后，将下面的注释换为带 token 的 beacon 脚本 -->
 </head>
-<body><slot /></body>
+<body>
+  <nav class="lang" aria-label="Language">
+    <a href={locale === "en" ? url : swap("en")} aria-current={locale === "en" ? "page" : undefined}>EN</a>
+    <a href={locale === "zh" ? url : swap("zh")} aria-current={locale === "zh" ? "page" : undefined}>中文</a>
+  </nav>
+  <script is:inline>
+    // 语言切换保留当前过滤状态（?f=&q=）
+    for (const a of document.querySelectorAll(".lang a")) if (location.search) a.href += location.search;
+  </script>
+  <slot />
+</body>
 </html>
 
 <style is:global>
@@ -38,8 +48,9 @@ const enUrl = locale === "en" ? url : swap("en");
 .side .logo{font-weight:600;font-size:15px;letter-spacing:-.02em}
 .side .tagline{color:var(--text-2);font-size:13px;margin-top:2px}
 .grp{margin-top:22px}
-.grp h3{font-size:12px;color:var(--text-2);font-weight:400;margin-bottom:6px}
-.navitem{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:4px 8px;border-radius:6px;font-size:13px}
+.grp h3{font-size:12px;color:var(--text-2);font-weight:400;margin-bottom:6px;letter-spacing:.05em}
+.navitem{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:4px 8px;border-radius:6px;font-size:13px;transition:background .12s}
+.navitem:hover{background:var(--surface-2)}
 .navitem .n{margin-left:auto;color:var(--text-2);font-variant-numeric:tabular-nums}
 .navitem[aria-current=page]{font-weight:600}
 .navitem[aria-current=page]::before{content:"•"}
@@ -52,25 +63,38 @@ label.check .n{margin-left:auto;color:var(--text-2);font-variant-numeric:tabular
 @media(max-width:639px){.main{padding:20px 16px 60px}}
 .toolbar{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
 .toolbar h1{font-size:24px;font-weight:600;letter-spacing:-.02em}
-.search{margin-left:auto;display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:8px;padding:5px 10px}
+.search{margin-left:auto;display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:8px;padding:5px 10px;transition:border-color .12s}
+.search:focus-within{border-color:var(--ink)}
 .search input{border:0;outline:0;font:inherit;font-size:13px;width:170px;background:none}
 .count{font-size:13px;color:var(--text-2);font-variant-numeric:tabular-nums}
 .grid{display:grid;gap:20px 12px;grid-template-columns:1fr}
 @media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
 @media(min-width:1280px){.grid{grid-template-columns:1fr 1fr 1fr}}
 .card{border-radius:var(--radius-card);display:block;position:relative}
-.cover{aspect-ratio:16/10;background:var(--surface-2);border-radius:var(--radius-card);overflow:hidden;position:relative}
+.cover{aspect-ratio:16/10;background:var(--surface-2);border-radius:var(--radius-card);overflow:hidden;position:relative;border:1px solid var(--border)}
 .cover img{width:100%;height:100%;object-fit:cover;transition:transform .12s ease-out}
+.coverlink{display:block}
+.card{transition:transform .15s ease-out}
+.card:hover{transform:translateY(-2px)}
+.card:hover .cover{box-shadow:0 8px 24px rgba(0,0,0,.09)}
 .card:hover .cover img{transform:scale(1.02)}
-.jump{position:absolute;right:8px;bottom:8px;width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:15px}
+.jump{position:absolute;right:8px;bottom:8px;width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:15px;transition:transform .12s ease-out}
+.card:hover .jump,.detail-in .jump:hover{transform:scale(1.06)}
 .meta{padding:10px 2px}
 .meta .t{font-size:14px;font-weight:600;display:flex;gap:6px;align-items:baseline}
 .meta .t span{font-weight:400;color:var(--text-2);font-size:13px}
 .meta .d{font-size:13px;color:var(--text-2);margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card.hidden{display:none}
-.empty{color:var(--text-2);padding:32px 0;display:none}
-.pill{font-size:12px;padding:2px 10px;border-radius:var(--radius-chip);background:var(--surface-2);color:var(--text-2)}
-.btn{padding:7px 16px;border-radius:8px;font-size:14px;font-weight:500;display:inline-block}
+.empty{color:var(--text-2);padding:32px 0;display:none}.pill{font-size:12px;padding:2px 10px;border-radius:var(--radius-chip);background:var(--surface-2);color:var(--text-2)}
+.btn{padding:7px 16px;border-radius:8px;font-size:14px;font-weight:500;display:inline-block;transition:opacity .12s,border-color .12s}
+.btn.pri{background:var(--ink);color:#fff}
+.btn.pri:hover{opacity:.88}
+.btn.ghost{border:1px solid var(--border)}
+.btn.ghost:hover{border-color:var(--ink)}
+.lang{position:fixed;top:14px;right:16px;z-index:50;display:flex;gap:6px;font-size:13px}
+.lang a{color:var(--text-2);padding:3px 12px;border-radius:9999px;background:var(--surface-2);transition:background .12s,color .12s}
+.lang a:hover{color:var(--text-1)}
+.lang a[aria-current]{background:var(--ink);color:#fff}
 .btn.pri{background:var(--ink);color:#fff}
 .btn.ghost{border:1px solid var(--border)}
 .crumbs{font-size:13px;color:var(--text-2);margin-bottom:18px}
