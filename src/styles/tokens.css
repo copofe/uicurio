@@ -119,15 +119,11 @@ kbd {
  display: flex;
  flex-direction: column;
  border-right: 1px solid var(--border);
- padding: 26px 18px 36px 22px;
- scrollbar-width: thin;
+ padding: 22px 18px 18px 22px;
 }
 .brand {
  display: block;
- margin-bottom: 4px;
-}
-.brand {
- display: block;
+ margin-bottom: 6px;
 }
 .brand .wordmark,
 .topbar .wordmark,
@@ -639,6 +635,9 @@ button.chip[aria-disabled="true"]:hover {
  min-height: 0;
  overflow-y: auto;
  scrollbar-width: none;
+}
+.side-scroll .side-block:first-child {
+ margin-top: 14px;
 }
 .side-scroll::-webkit-scrollbar {
  display: none;
