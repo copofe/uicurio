@@ -143,24 +143,31 @@ kbd {
  * pathLength=1 归一化 → dasharray/dashoffset 只用 0~1；
  * --i 逐笔延迟，u→i→c→u→r→i→o 顺序书写；.play 由首屏与主题切换触发 */
 .wordmark path {
+ fill-opacity: 0;
+ stroke: currentColor;
+ stroke-width: 3;
+ stroke-linecap: round;
+ stroke-linejoin: round;
  stroke-dasharray: 1;
  stroke-dashoffset: 1;
 }
 .wordmark.play path {
- animation: wordmark-draw 0.65s var(--ease) forwards;
- animation-delay: calc(150ms + var(--i, 0) * 110ms);
+ animation:
+  wordmark-draw 0.6s var(--ease) forwards,
+  wordmark-ink 0.5s var(--ease) forwards;
+ animation-delay:
+  calc(120ms + var(--i, 0) * 95ms),
+  calc(520ms + var(--i, 0) * 95ms);
 }
 @keyframes wordmark-draw {
- 0% {
-  opacity: 0;
-  stroke-dashoffset: 1;
- }
- 12% {
-  opacity: 1;
- }
- 100% {
-  opacity: 1;
+ to {
   stroke-dashoffset: 0;
+ }
+}
+@keyframes wordmark-ink {
+ to {
+  fill-opacity: 1;
+  stroke-opacity: 0;
  }
 }
 .brand-sub {
@@ -1174,5 +1181,7 @@ button.chip[aria-disabled="true"]:hover {
   animation: none !important;
   stroke-dasharray: none !important;
   stroke-dashoffset: 0 !important;
+  fill-opacity: 1 !important;
+  stroke-opacity: 0 !important;
  }
 }
