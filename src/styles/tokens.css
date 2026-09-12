@@ -116,7 +116,8 @@ kbd {
  top: 0;
  align-self: start;
  max-height: 100vh;
- overflow-y: auto;
+ display: flex;
+ flex-direction: column;
  border-right: 1px solid var(--border);
  padding: 26px 18px 36px 22px;
  scrollbar-width: thin;
@@ -125,10 +126,21 @@ kbd {
  display: block;
  margin-bottom: 4px;
 }
-.brand-word {
- font-size: 17px;
- font-weight: 700;
- letter-spacing: -0.02em;
+.brand {
+ display: block;
+}
+.brand .wordmark,
+.topbar .wordmark,
+.drawer .wordmark {
+ display: block;
+ height: 26px;
+ width: auto;
+}
+.topbar .wordmark {
+ height: 23px;
+}
+.drawer .wordmark {
+ height: 24px;
 }
 .brand-sub {
  display: block;
@@ -283,7 +295,7 @@ button.chip[aria-disabled="true"]:hover {
 /* ── 6. 主列：工具行 / 已选条 ─────────────────────────────── */
 .main {
  min-width: 0;
- padding: 30px clamp(18px, 4vw, 44px) 80px;
+ padding: 20px clamp(18px, 4vw, 44px) 80px;
 }
 .toolbar {
  position: sticky;
@@ -292,7 +304,7 @@ button.chip[aria-disabled="true"]:hover {
  display: flex;
  align-items: center;
  gap: 10px;
- margin: 22px 0 0;
+ margin: 4px 0 0;
  padding: 10px 0;
  background: color-mix(in srgb, var(--bg) 92%, transparent);
  backdrop-filter: blur(10px);
@@ -619,26 +631,21 @@ button.chip[aria-disabled="true"]:hover {
 }
 
 /* ── 8. 手写站名 + 侧栏底部（语言/主题）+ 主题 ─────────────── */
-@font-face {
- font-family: "Caveat";
- src: url("/fonts/caveat-600-latin.woff2") format("woff2");
- font-weight: 600;
- font-style: normal;
- font-display: swap;
-}
-.brand-word {
- font-family: "Caveat", var(--font-sans);
- font-size: 25px;
- font-weight: 600;
- letter-spacing: 0;
- line-height: 1;
-}
 .topbar .brand-word {
  font-size: 22px;
 }
+.side-scroll {
+ flex: 1 1 auto;
+ min-height: 0;
+ overflow-y: auto;
+ scrollbar-width: none;
+}
+.side-scroll::-webkit-scrollbar {
+ display: none;
+}
 .side-foot {
- margin-top: auto;
- padding-top: 18px;
+ flex: none;
+ padding-top: 14px;
  border-top: 1px solid var(--border);
  display: flex;
  align-items: center;

@@ -324,10 +324,22 @@
     drawer.setAttribute("aria-modal", "true");
 
     const head = el("div", "drawer-head");
-    head.appendChild(el("span", "brand-word", "uicurio"));
+    const brandLink = el("a", "brand");
+    brandLink.href = `/${LOCALE}/`;
+    brandLink.setAttribute("aria-label", "uicurio — home");
+    brandLink.appendChild(
+      new DOMParser().parseFromString(
+        '<svg class="wordmark" viewBox="0 0 96 34" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 15.5 C6 20, 7 24.5, 9.5 25.2 C11.5 25.7, 13.5 20.5, 14 15.5"></path><path d="M14 15.5 C14 20, 14.5 24, 16.5 24.8 C18.2 25.3, 19.6 23.4, 20.6 21.4"></path><path d="M24.5 16.5 C24 20, 24 23.5, 24.7 25.5"></path><path d="M26.6 10.6 L26.9 10.3"></path><path d="M38.5 15.8 C34 14.5, 30.5 17.5, 30.3 21 C30.1 24.5, 33.5 26.8, 38.5 25.6"></path><path d="M43.5 15.5 C43 20, 44 24.5, 46.5 25.2 C48.5 25.7, 50.5 20.5, 51 15.5"></path><path d="M51 15.5 C51 20, 51.5 24, 53.5 24.8 C55.3 25.4, 57.5 23, 58.6 20.4"></path><path d="M63 26.5 C62.5 22, 62.3 18, 62.8 14.8"></path><path d="M62.8 18.5 C64.5 16.6, 67.6 16.1, 69.4 17.2"></path><path d="M74 16.5 C73.6 20, 73.6 23.5, 74.3 25.5"></path><path d="M76.1 10.6 L76.4 10.3"></path><path d="M86.2 15.7 C83 15.4, 80 17.7, 80 20.8 C80 24.1, 82.9 26.3, 85.8 25.7 C88.8 25.1, 90.4 22.4, 89.9 19.7 C89.4 17.1, 87.1 15.6, 84.9 16.3"></path></svg>',
+        "image/svg+xml",
+      ).documentElement,
+    );
+    head.appendChild(brandLink);
     const langs = el("div", "langs");
     langs.setAttribute("aria-label", "Language");
-    for (const [code, label] of [["en", "EN"], ["zh", "中文"]]) {
+    for (const [code, label] of [
+      ["en", "EN"],
+      ["zh", "中文"],
+    ]) {
       const a = el("a", null, label);
       a.dataset.lang = code;
       if (code === LOCALE) a.setAttribute("aria-current", "page");
@@ -900,7 +912,11 @@
   bindPaletteKeys();
   // 主题切换 + 语言链接重写（侧栏底部与抽屉头共用 data-* 钩子）
   for (const b of $$("[data-theme-toggle]"))
-    b.addEventListener("click", () => applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
+    b.addEventListener("click", () =>
+      applyTheme(
+        document.documentElement.dataset.theme === "dark" ? "light" : "dark",
+      ),
+    );
   for (const a of $$("[data-lang]")) {
     const code = a.dataset.lang;
     const path = location.pathname.startsWith(`/${LOCALE}/`)
