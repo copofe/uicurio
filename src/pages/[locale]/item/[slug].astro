@@ -1,57 +1,103 @@
 ---
+// 条目详情（v2 item 形态）：面包屑 + 封面 + 标题/描述/CTA/元信息/标签 + 同柜推荐 + 前后翻页
 import Base from "../../../layouts/Base.astro";
-import Card from "../../../components/Card.astro";
+import Sidebar from "../../../components/Sidebar.astro";
+import CardV2 from "../../../components/CardV2.astro";
 import { ui, LOCALES } from "../../../i18n";
-import { items, tagById, categories, alternatives } from "../../../lib/data";
+import { items, categories, tagById } from "../../../lib/data";
 
 export function getStaticPaths() {
   return LOCALES.flatMap((locale) => items.map((item: any) => ({ params: { locale, slug: item.slug }, props: { item } })));
 }
-const { locale } = Astro.params;
+const { locale, slug } = Astro.params;
 const item = Astro.props.item as any;
 const t = ui[locale as keyof typeof ui];
 const cat = categories.find((c: any) => c.slug === item.category);
-const alts = alternatives(item);
-const title = `${item.name.en} — ${item.description.en.slice(0, 60)}… · uicurio`;
+const name = item.name[locale] ?? item.name.en;
 const description = item.description[locale] ?? item.description.en;
+
+// 收录序（added 倒序 = 画廊默认序）→ 前后翻页
+const byAdded = [...items].sort((a: any, b: any) => (a.added < b.added ? 1 : a.added > b.added ? -1 : 0));
+const idx = byAdded.findIndex((x: any) => x.slug === item.slug);
+const older = byAdded[idx + 1];
+const newer = byAdded[idx - 1];
+
+// 同柜推荐：同频道优先，不足 3 补同标签（v2 规则）
+const alts = items.filter((x: any) => x.slug !== item.slug && x.category === item.category);
+if (alts.length < 3) {
+  for (const x of items) {
+    if (alts.length >= 3) break;
+    if (x.slug === item.slug || alts.includes(x)) continue;
+    if (x.tags.some((tg: string) => item.tags.includes(tg))) alts.push(x);
+  }
+}
+const title = `${name} · uicurio`;
 ---
 <Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${item.screenshot}`}>
-  <main class="detail-in">
-    <nav class="crumbs">
-      <a href={`/${locale}/`}>uicurio</a> › <a href={`/${locale}/collections/${cat.slug}/`}>{cat.name[locale]}</a> › {item.name[locale]}
-    </nav>
-    <div class="cover"><img src={`/assets/shots/${item.screenshot}`} alt={item.name.en} width="1600" height="1000" /></div>
-    <h1>{item.name[locale]}</h1>
-    <p class="d">{description}</p>
-    <div class="btns">
-      <a class="btn pri" href={item.url} target="_blank" rel="noopener">{t.visitSite} ↗</a>
-      {item.repo && <a class="btn ghost" href={item.repo} target="_blank" rel="noopener">{t.source}</a>}
-    </div>
-    <div class="chips">
-      {item.tags.map((id: string) => {
-        const tag = tagById.get(id);
-        const n = items.filter((x: any) => x.tags.includes(id)).length;
-        return tag ? <a class="pill" href={`/${locale}/tags/${tag.slug}/`}>{tag.name[locale]} · {n}</a> : <span class="pill">{id}</span>;
-      })}
-    </div>
-    <p style="font-size:13px;color:var(--text-2)">{t.added} {item.added}</p>
-    {alts.length >= 2 && (
-      <section style="margin-top:40px">
-        <h3 style="font-size:13px;color:var(--text-2);font-weight:400;margin-bottom:10px">{t.alternatives}</h3>
-        <div class="grid">{alts.slice(0, 4).map((x: any) => <Card item={x} locale={locale} />)}</div>
-      </section>
-    )}
-    <p class="footer">{t.curatedBy}</p>
-  </main>
-</Base>
+  <div class="shell">
+    <Sidebar locale={locale} currentCat={item.category} showFacets={false} total={items.length} categories={categories.map((c: any) => ({ ...c, count: items.filter((i: any) => i.category === c.slug).length }))} />
+    <main class="main">
+      <div class="item-wrap">
+        <nav class="crumb" aria-label="Breadcrumb">
+          <a href={`/${locale}/`}>uicurio</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href={`/${locale}/collections/${cat.slug}/`}>{cat.name[locale]}</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span aria-current="page">{name}</span>
+        </nav>
 
-<style>
-  .detail-in { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
-  .cover { aspect-ratio: 16 / 10; border-radius: var(--radius-card); overflow: hidden; border: 1px solid var(--border); background: var(--surface-2); }
-  .cover img { width: 100%; height: 100%; object-fit: cover; }
-  h1 { font-size: 32px; font-weight: 600; letter-spacing: -0.02em; margin: 18px 0 6px; }
-  .d { color: var(--text-2); font-size: 15px; }
-  .btns { display: flex; gap: 8px; margin: 18px 0; }
-  .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 22px; }
-  .chips a:hover { background: var(--ink); color: #fff; }
-</style>
+        <div class="item-cover"><img src={`/assets/shots/${item.screenshot}`} alt={name} width="1600" height="1000" /></div>
+
+        <header class="item-head">
+          <h1>{name}</h1>
+          <p class="item-desc">{description}</p>
+          <div class="item-cta">
+            <a class="btn btn-solid" href={item.url} target="_blank" rel="noopener">{t.visitSite}
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+            </a>
+            {item.repo && <a class="btn btn-ghost" href={item.repo} target="_blank" rel="noopener">{t.source}</a>}
+          </div>
+          <p class="item-meta">
+            <span>{t.added} {item.added}</span>
+            <a href={`/${locale}/collections/${cat.slug}/`}>{cat.name[locale]}</a>
+          </p>
+          <div class="tagrow">
+            {item.tags.map((id: string) => {
+              const tag = tagById.get(id);
+              if (!tag) return null;
+              const n = items.filter((x: any) => x.tags.includes(id)).length;
+              return n >= 2
+                ? <a class="chip chip-tag" href={`/${locale}/tags/${tag.slug}/`}><span class="t">{tag.name[locale]}</span><span class="n">{n}</span></a>
+                : <span class="chip"><span class="t">{tag.name[locale]}</span></span>;
+            })}
+          </div>
+        </header>
+
+        {alts.length > 0 && (
+          <section class="sect">
+            <h2>{t.altTitle}</h2>
+            <p class="sect-sub">{t.altSub}</p>
+            <div class="grid">{alts.slice(0, 3).map((x: any, i: number) => <CardV2 item={x} locale={locale} index={i} />)}</div>
+          </section>
+        )}
+
+        <nav class="pager" aria-label="Prev / Next">
+          {older ? (
+            <a href={`/${locale}/item/${older.slug}/`}>
+              <span class="dir">{t.pagerOlder}</span>
+              <span class="pname">{older.name[locale] ?? older.name.en}</span>
+            </a>
+          ) : <span></span>}
+          {newer && (
+            <a class="next" href={`/${locale}/item/${newer.slug}/`}>
+              <span class="dir">{t.pagerNewer}</span>
+              <span class="pname">{newer.name[locale] ?? newer.name.en}</span>
+            </a>
+          )}
+        </nav>
+      </div>
+
+      <footer class="foot"><span>{t.foot}</span><span>uicurio.shinji.me</span></footer>
+    </main>
+  </div>
+</Base>

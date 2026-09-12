@@ -1,6 +1,8 @@
 ---
+// 频道页 = 该频道画廊（path 即频道，SEO 文档页；分面/搜索/排序在频道内交互）
 import Base from "../../../layouts/Base.astro";
-import Card from "../../../components/Card.astro";
+import Sidebar from "../../../components/Sidebar.astro";
+import Directory from "../../../components/Directory.astro";
 import { ui, LOCALES } from "../../../i18n";
 import { categories, items, tags } from "../../../lib/data";
 
@@ -13,48 +15,13 @@ const { locale, slug } = Astro.params;
 const cat = Astro.props.cat as any;
 const t = ui[locale as keyof typeof ui];
 const list = items.filter((i: any) => i.category === slug);
-const title = `${cat.name[locale]} — curated UI libraries · uicurio`;
+const catsWithCount = categories.map((c: any) => ({ ...c, count: items.filter((i: any) => i.category === c.slug).length }));
+const title = locale === "zh" ? `${cat.name.zh} — 精选 UI 库 · uicurio` : `${cat.name.en} — curated UI libraries · uicurio`;
 const description = cat.description[locale] ?? cat.description.en;
-// 岛数据：本频道条目 + facet 全集（供计数与过滤）
-const payload = {
-  locale,
-  items: list.map((i: any) => ({ slug: i.slug, tags: i.tags, name: i.name.en, desc: (i.description[locale] ?? i.description.en) })),
-  tags: tags.map((x: any) => ({ id: x.id, facet: x.facet, name: x.name[locale] })),
-  facets: ["function", "stack", "style", "scenario"],
-};
 ---
 <Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${list[0]?.screenshot}`}>
-  <div class="site">
-    <aside class="side">
-      <a class="logo" href={`/${locale}/`}>uicurio</a>
-      <div class="tagline">{t.tagline}</div>
-      <div class="grp"><h3>{t.browse}</h3>
-        {categories.map((c: any) => (
-          <a class="navitem" href={`/${locale}/collections/${c.slug}/`} aria-current={c.slug === slug ? "page" : undefined}>{c.name[locale]}<span class="n">{items.filter((i: any) => i.category === c.slug).length}</span></a>
-        ))}
-      </div>
-      {(["function", "stack", "style", "scenario"] as const).map((facet) => (
-        <div class="grp"><h3>{t[facet]}</h3>
-          {tags.filter((x: any) => x.facet === facet).map((x: any) => (
-            <label class="check" data-facet={facet}>
-              <input type="checkbox" data-filter={x.id} />{x.name[locale]}
-              <span class="n" data-count={x.id}>{list.filter((i: any) => i.tags.includes(x.id)).length}</span>
-            </label>
-          ))}
-        </div>
-      ))}
-      <div class="grp"><button id="dir-clear" class="btn ghost" style="display:none">{t.clearFilters}</button></div>
-    </aside>
-    <main class="main">
-      <div class="toolbar">
-        <h1>{cat.name[locale]}</h1>
-        <span class="search"><input id="dir-search" type="search" placeholder={t.search} aria-label={t.search} /></span>
-        <span class="count"><span id="dir-count">{list.length}</span> {t.results}</span>
-      </div>
-      <div class="grid" id="dir-grid">{list.map((i: any) => <Card item={i} locale={locale} />)}</div>
-      <p class="empty" id="dir-empty">{t.clearFilters}</p>
-    </main>
+  <div class="shell">
+    <Sidebar locale={locale} currentCat={slug} showFacets={true} channelItems={list} tags={tags} total={items.length} categories={catsWithCount} />
+    <Directory locale={locale} items={list} total={items.length} catSlug={slug} categories={catsWithCount} tags={tags} />
   </div>
-  <script type="application/json" id="dir-data" set:html={JSON.stringify(payload)} />
-  <script src="/island.js" defer></script>
 </Base>

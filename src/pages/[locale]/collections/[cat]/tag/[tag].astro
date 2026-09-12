@@ -1,8 +1,10 @@
 ---
+// 频道×标签组合着陆页（≥3 条才生成，票 08 门槛）：静态网格，零 JS
 import Base from "../../../../../layouts/Base.astro";
-import Card from "../../../../../components/Card.astro";
+import Sidebar from "../../../../../components/Sidebar.astro";
+import CardV2 from "../../../../../components/CardV2.astro";
 import { ui, LOCALES } from "../../../../../i18n";
-import { items, itemsWithTag, categories, TAG_MIN, COMBO_MIN } from "../../../../../lib/data";
+import { items, itemsWithTag, categories, tagById, COMBO_MIN } from "../../../../../lib/data";
 
 export function getStaticPaths() {
   return LOCALES.flatMap((locale) =>
@@ -17,26 +19,27 @@ export function getStaticPaths() {
 const { locale } = Astro.params;
 const cat = Astro.props.cat as any;
 const tagId = Astro.props.tagId as string;
-const tag = (await import("../../../../../lib/data")).tagById.get(tagId);
+const tag = tagById.get(tagId);
 const t = ui[locale as keyof typeof ui];
 const list = itemsWithTag(tagId).filter((i: any) => i.category === cat.slug);
 const title = locale === "zh" ? `${tag.name.zh} × ${cat.name.zh} · ${list.length} 个库 — uicurio` : `${tag.name.en} ${cat.name.en.toLowerCase()} – ${list.length} libraries · uicurio`;
 const description = locale === "zh" ? `频道「${cat.name.zh}」中带「${tag.name.zh}」标签的 ${list.length} 个严选库。` : `${list.length} curated ${cat.name.en.toLowerCase()} tagged “${tag.name.en}”.`;
 ---
 <Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${list[0]?.screenshot}`}>
-  <main class="wrap">
-    <nav class="crumbs">
-      <a href={`/${locale}/`}>uicurio</a> › <a href={`/${locale}/collections/${cat.slug}/`}>{cat.name[locale]}</a> › {tag.name[locale]}
-    </nav>
-    <h1>{tag.name[locale]}</h1>
-    <p class="sub">{description}</p>
-    <div class="grid">{list.map((i: any) => <Card item={i} locale={locale} />)}</div>
-    <p class="footer">{t.curatedBy}</p>
-  </main>
+  <div class="shell">
+    <Sidebar locale={locale} currentCat={cat.slug} showFacets={false} total={items.length} categories={categories.map((c: any) => ({ ...c, count: items.filter((i: any) => i.category === c.slug).length }))} />
+    <main class="main">
+      <nav class="crumb" aria-label="Breadcrumb">
+        <a href={`/${locale}/`}>uicurio</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <a href={`/${locale}/collections/${cat.slug}/`}>{cat.name[locale]}</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">{tag.name[locale]}</span>
+      </nav>
+      <h1 style="font-size:28px;font-weight:600;letter-spacing:-.015em;margin:18px 0 4px">{tag.name[locale]} × {cat.name[locale]}</h1>
+      <p style="color:var(--text-2)">{description}</p>
+      <div class="grid">{list.map((i: any, idx: number) => <CardV2 item={i} locale={locale} index={idx} />)}</div>
+      <footer class="foot"><span>{t.foot}</span><span>uicurio.shinji.me</span></footer>
+    </main>
+  </div>
 </Base>
-
-<style>
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 24px 80px; }
-  h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px; }
-  .sub { color: var(--text-2); margin-bottom: 24px; }
-</style>

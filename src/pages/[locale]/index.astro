@@ -1,46 +1,22 @@
 ---
+// 首页 = 全部藏品画廊（v2 index 形态：频道=全部，分面/搜索/排序全交互）
 import Base from "../../layouts/Base.astro";
-import Card from "../../components/Card.astro";
+import Sidebar from "../../components/Sidebar.astro";
+import Directory from "../../components/Directory.astro";
 import { ui, LOCALES } from "../../i18n";
-import { categories, items, featured, tagById } from "../../lib/data";
+import { categories, items, tags } from "../../lib/data";
 
 export function getStaticPaths() {
   return LOCALES.map((locale) => ({ params: { locale } }));
 }
 const { locale } = Astro.params;
 const t = ui[locale as keyof typeof ui];
+const catsWithCount = categories.map((c: any) => ({ ...c, count: items.filter((i: any) => i.category === c.slug).length }));
 const title = `uicurio — ${t.tagline}`;
 ---
 <Base locale={locale as any} title={title} description={t.homeIntro}>
-  <div class="site">
-    <aside class="side">
-      <span class="logo">uicurio</span>
-      <div class="tagline">{t.tagline}</div>
-      <div class="grp"><h3>{t.categories}</h3>
-        {categories.map((c: any) => (
-          <a class="navitem" href={`/${locale}/collections/${c.slug}/`}>{c.name[locale]}<span class="n">{items.filter((i: any) => i.category === c.slug).length}</span></a>
-        ))}
-      </div>
-      <div class="footer">{t.curatedBy}</div>
-    </aside>
-    <main class="main">
-      <h1 style="font-size:32px;font-weight:600;letter-spacing:-.02em;margin-bottom:6px">uicurio</h1>
-      <p style="color:var(--text-2);margin-bottom:28px">{t.homeIntro}</p>
-      {featured.length > 0 && <section>
-        <h2 style="font-size:13px;color:var(--text-2);font-weight:400;margin-bottom:12px">{t.featured}</h2>
-        <div class="grid">{featured.map((i: any) => <Card item={i} locale={locale} />)}</div>
-      </section>}
-      <section style="margin-top:36px">
-        <h2 style="font-size:13px;color:var(--text-2);font-weight:400;margin-bottom:12px">{t.browse}</h2>
-        <div class="grid">
-          {categories.map((c: any) => (
-            <a href={`/${locale}/collections/${c.slug}/`} style="border:1px solid var(--border);border-radius:var(--radius-card);padding:16px">
-              <div style="font-weight:600">{c.name[locale]} <span style="color:var(--text-2);font-weight:400;font-size:13px">{items.filter((i: any) => i.category === c.slug).length}</span></div>
-              <div style="color:var(--text-2);font-size:13px;margin-top:4px">{c.description[locale]}</div>
-            </a>
-          ))}
-        </div>
-      </section>
-    </main>
+  <div class="shell">
+    <Sidebar locale={locale} currentCat={null} showFacets={true} channelItems={items} tags={tags} total={items.length} categories={catsWithCount} />
+    <Directory locale={locale} items={items} total={items.length} catSlug={null} categories={catsWithCount} tags={tags} />
   </div>
 </Base>

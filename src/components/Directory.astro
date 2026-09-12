@@ -1,0 +1,58 @@
+---
+// v2 画廊主列：工具行(筛选/搜索/排序/计数) + 已选摘要条 + 网格 + 空态 + 页脚 + 岛载荷
+import { ui } from "../i18n";
+import { buildPayload } from "../lib/payload";
+import CardV2 from "./CardV2.astro";
+interface Props {
+  locale: string;
+  items: any[];
+  total: number;
+  catSlug: string | null;
+  categories: any[];
+  tags: any[];
+  allCount?: number;
+}
+const { locale, items, total, catSlug, categories, tags } = Astro.props;
+const t = ui[locale as keyof typeof ui];
+const sorted = [...items].sort((a: any, b: any) => (a.added < b.added ? 1 : a.added > b.added ? -1 : 0));
+const payload = buildPayload(locale as any, "gallery", catSlug);
+---
+<main class="main">
+  <div class="toolbar">
+    <button class="iconbtn filterbtn" type="button" aria-label={t.openNav}>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18l-7 8.5V19l-4 2v-7.5L3 5Z"></path></svg>
+    </button>
+    <div class="searchbox">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.5-4.5"></path></svg>
+      <input id="dir-search" type="search" placeholder={t.searchPh} aria-label={t.searchPh} />
+      <button class="clear" type="button" aria-label="×">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+      <button class="kbd" type="button" aria-label="⌘K">⌘K</button>
+    </div>
+    <div class="sortseg" role="group" aria-label="Sort">
+      <button type="button" data-sort="new" aria-pressed="true">{t.sortNew}</button>
+      <button type="button" data-sort="old" aria-pressed="false">{t.sortOld}</button>
+    </div>
+    <p class="resultcount" id="resultcount" aria-live="polite"><strong>{sorted.length}</strong> / {total} {t.resultsSuffix}</p>
+  </div>
+
+  <div class="activebar" id="activebar" hidden></div>
+
+  <section class="grid" id="dir-grid" aria-label="grid">
+    {sorted.map((i: any, idx: number) => <CardV2 item={i} locale={locale} index={idx} />)}
+  </section>
+
+  <div class="empty" id="dir-empty" hidden>
+    <div class="zero" aria-hidden="true">0</div>
+    <p>{t.emptyText}</p>
+    <button class="btn btn-ghost" id="dir-empty-clear" type="button">{t.emptyClear}</button>
+  </div>
+
+  <footer class="foot">
+    <span>{t.foot}</span>
+    <span>uicurio.shinji.me</span>
+  </footer>
+</main>
+<script type="application/json" id="dir-data" set:html={JSON.stringify(payload)} />
+<script src="/island.js" defer></script>

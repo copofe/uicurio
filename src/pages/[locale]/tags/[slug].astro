@@ -1,14 +1,16 @@
 ---
+// 标签着陆页（≥2 条才生成，票 08 门槛）：面包屑 + 标题 + 静态网格（零 JS 的 SEO 页）
 import Base from "../../../layouts/Base.astro";
-import Card from "../../../components/Card.astro";
+import Sidebar from "../../../components/Sidebar.astro";
+import CardV2 from "../../../components/CardV2.astro";
 import { ui, LOCALES } from "../../../i18n";
-import { items, tags, tagById, itemsWithTag, TAG_MIN } from "../../../lib/data";
+import { items, tags, itemsWithTag, TAG_MIN } from "../../../lib/data";
 
 export function getStaticPaths() {
   return LOCALES.flatMap((locale) =>
     tags
-      .filter((t: any) => itemsWithTag(t.id).length >= TAG_MIN)
-      .map((t: any) => ({ params: { locale, slug: t.slug }, props: { tag: t } }))
+      .filter((tg: any) => itemsWithTag(tg.id).length >= TAG_MIN)
+      .map((tg: any) => ({ params: { locale, slug: tg.slug }, props: { tag: tg } }))
   );
 }
 const { locale, slug } = Astro.params;
@@ -19,17 +21,18 @@ const title = locale === "zh" ? `${tag.name.zh} · 精选 ${list.length} 个库 
 const description = locale === "zh" ? `手工严选的 ${list.length} 个${tag.name.zh}相关的 UI 库。` : `${list.length} hand-picked UI libraries for ${tag.name.en}.`;
 ---
 <Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${list[0]?.screenshot}`}>
-  <main class="wrap">
-    <nav class="crumbs"><a href={`/${locale}/`}>uicurio</a> › {tag.name[locale]}</nav>
-    <h1>{tag.name[locale]}</h1>
-    <p class="sub">{description}</p>
-    <div class="grid">{list.map((i: any) => <Card item={i} locale={locale} />)}</div>
-    <p class="footer">{t.curatedBy}</p>
-  </main>
+  <div class="shell">
+    <Sidebar locale={locale} showFacets={false} total={items.length} categories={[]} />
+    <main class="main">
+      <nav class="crumb" aria-label="Breadcrumb">
+        <a href={`/${locale}/`}>uicurio</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">{tag.name[locale]}</span>
+      </nav>
+      <h1 style="font-size:28px;font-weight:600;letter-spacing:-.015em;margin:18px 0 4px">{tag.name[locale]}</h1>
+      <p style="color:var(--text-2)">{description}</p>
+      <div class="grid">{list.map((i: any, idx: number) => <CardV2 item={i} locale={locale} index={idx} />)}</div>
+      <footer class="foot"><span>{t.foot}</span><span>uicurio.shinji.me</span></footer>
+    </main>
+  </div>
 </Base>
-
-<style>
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 24px 80px; }
-  h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px; }
-  .sub { color: var(--text-2); margin-bottom: 24px; }
-</style>

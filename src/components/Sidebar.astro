@@ -1,0 +1,49 @@
+---
+// v2 侧栏：brand + 频道导航（真实链接，SEO 页间跳转）+ 可选分面 chip 组
+import { ui } from "../i18n";
+interface Props {
+  locale: string;
+  currentCat?: string | null;
+  showFacets?: boolean;
+  channelItems?: any[];
+  tags?: any[];
+  total: number;
+  categories: any[];
+}
+const { locale, currentCat = null, showFacets = false, channelItems = [], tags = [], total, categories } = Astro.props;
+const t = ui[locale as keyof typeof ui];
+const FACETS = ["function", "stack", "style", "scenario"] as const;
+const countIn = (id: string) => channelItems.filter((i: any) => i.tags.includes(id)).length;
+---
+<aside class="sidebar">
+  <a class="brand" href={`/${locale}/`}>
+    <span class="brand-word">uicurio</span>
+    <span class="brand-sub">{t.tagline}</span>
+  </a>
+  <div class="side-block">
+    <p class="side-label">{t.channels}</p>
+    <nav class="navlist" aria-label={t.channels}>
+      <a class="navrow" href={`/${locale}/`} aria-current={currentCat === null ? "page" : undefined}>
+        <i class="dot" aria-hidden="true"></i><span>{t.all}</span><span class="count">{total}</span>
+      </a>
+      {categories.map((c: any) => (
+        <a class="navrow" href={`/${locale}/collections/${c.slug}/`} aria-current={currentCat === c.slug ? "page" : undefined}>
+          <i class="dot" aria-hidden="true"></i><span>{c.name[locale]}</span><span class="count">{c.count}</span>
+        </a>
+      ))}
+    </nav>
+  </div>
+  {showFacets && (FACETS as readonly string[]).map((facet) => (
+    <div class="facet-group" data-facet={facet}>
+      <p class="side-label">{t[facet as "function" | "stack" | "style" | "scenario"]}</p>
+      <div class="chiprow">
+        {tags.filter((x: any) => x.facet === facet).map((x: any) => (
+          <button type="button" class="chip" data-tag={x.id} aria-pressed="false">
+            <span class="t">{x.name[locale]}</span>
+            <span class="n">{countIn(x.id)}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  ))}
+</aside>
