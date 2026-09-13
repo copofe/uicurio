@@ -5,7 +5,10 @@ import { mkdirSync, writeFileSync, rmSync } from "node:fs";
 // 收录日期按 Obsidian 表格顺序重建（表格序 = 收藏先后）：末条 = 迁移日，逐日回溯。
 // 真实日期若已知，直接改对应 data/items/<slug>.json 的 added 字段即可。
 const MIGRATED = "2026-09-11";
-const addedFor = (id) => new Date(new Date(MIGRATED + "T00:00:00Z").getTime() - (20 - id) * 86400000).toISOString().slice(0, 10);
+const addedFor = (id) =>
+  new Date(new Date(MIGRATED + "T00:00:00Z").getTime() - (20 - id) * 86400000)
+    .toISOString()
+    .slice(0, 10);
 
 const categories = [
   {

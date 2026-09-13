@@ -114,8 +114,8 @@ kbd {
 .sidebar {
  position: sticky;
  top: 0;
- align-self: start;
- max-height: 100vh;
+ height: 100vh;
+ overflow: hidden;
  display: flex;
  flex-direction: column;
  border-right: 1px solid var(--border);
