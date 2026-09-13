@@ -2,7 +2,10 @@
 // 跑完即冻结：整数 id 永不再用，仅存 migrations/obsidian-id-map.json 备查。
 import { mkdirSync, writeFileSync, rmSync } from "node:fs";
 
-const ADDED = "2026-09-11";
+// 收录日期按 Obsidian 表格顺序重建（表格序 = 收藏先后）：末条 = 迁移日，逐日回溯。
+// 真实日期若已知，直接改对应 data/items/<slug>.json 的 added 字段即可。
+const MIGRATED = "2026-09-11";
+const addedFor = (id) => new Date(new Date(MIGRATED + "T00:00:00Z").getTime() - (20 - id) * 86400000).toISOString().slice(0, 10);
 
 const categories = [
   {
@@ -516,7 +519,7 @@ for (const it of items) {
         screenshot: `${it.slug}.webp`,
         featured: it.featured,
         status: "published",
-        added: ADDED,
+        added: addedFor(it.id),
       },
       null,
       2,
@@ -526,7 +529,7 @@ for (const it of items) {
 }
 writeFileSync(
   "migrations/obsidian-id-map.json",
-  JSON.stringify({ items: idMap, frozen: ADDED }, null, 2) + "\n",
+  JSON.stringify({ items: idMap, frozen: MIGRATED }, null, 2) + "\n",
 );
 
 console.log(
