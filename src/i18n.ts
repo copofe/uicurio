@@ -1,7 +1,6 @@
 // 双语文案字典：构建期取用，零运行时
 export const ui = {
   en: {
-    tagline: "Only what I've vetted by hand.",
     homeIntro:
       "Every piece tried by hand, none filler. New gems added as I find them.",
     channels: "Channels",
@@ -41,7 +40,6 @@ export const ui = {
     theme: "Theme",
   },
   zh: {
-    tagline: "只收自己筛过一遍的东西。",
     homeIntro: "每一件都亲手试过，没有凑数。发现新宝随时收录。",
     channels: "频道",
     all: "全部",

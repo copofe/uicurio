@@ -10,4 +10,4 @@ export function getStaticPaths() {
 const { locale } = Astro.params;
 const t = ui[locale as keyof typeof ui];
 ---
-<GalleryShell locale={locale} currentCat={null} title={`uicurio — ${t.tagline}`} description={t.homeIntro} items={items} />
+<GalleryShell locale={locale} currentCat={null} title="uicurio" description={t.homeIntro} items={items} />
