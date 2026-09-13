@@ -1,6 +1,12 @@
 // uicurio 岛：DOM 壳。纯逻辑（过滤/排序/URL 编解码）在 src/lib/island-core.ts（vitest 直测）。
 // DOM 契约注册表：本文件与 Astro 模板之间的全部挂钩集中在 SEL——改 id/钩子只动 SEL 与对应模板。
-import { decodeFilters, encodeFilters, facetCount, matches, sortItems } from "../lib/island-core.ts";
+import {
+  decodeFilters,
+  encodeFilters,
+  facetCount,
+  matches,
+  sortItems,
+} from "../lib/island-core.ts";
 
 /* ── DOM 契约注册表 ── */
 const SEL = {
@@ -9,10 +15,9 @@ const SEL = {
   search: "#dir-search",
   searchBox: ".searchbox",
   searchClear: ".searchbox .clear",
-  count: "#resultcount",
   empty: "#dir-empty",
   emptyClear: "#dir-empty-clear",
-  sortButtons: ".sortseg button",
+  sortToggle: ".sorttoggle",
   chips: ".chip[data-tag]",
   menuBtn: ".topbar .menu-btn",
   searchBtn: ".topbar .search-btn",
@@ -39,7 +44,8 @@ function icon(name, size) {
     x: '<path d="M6 6l12 12M18 6L6 18"/>',
     aur: '<path d="M7 17 17 7M8 7h9v9"/>',
     enter: '<path d="M20 4v7a4 4 0 0 1-4 4H4"/><path d="m9 10-5 5 5 5"/>',
-    layers: '<path d="m12 2 10 6.5L12 15 2 8.5 12 2Z"/><path d="m2 13.5 10 6.5 10-6.5"/>',
+    layers:
+      '<path d="m12 2 10 6.5L12 15 2 8.5 12 2Z"/><path d="m2 13.5 10 6.5 10-6.5"/>',
     tag: '<path d="M12 2H4a2 2 0 0 0-2 2v8l9.3 9.3a1.7 1.7 0 0 0 2.4 0l7.6-7.6a1.7 1.7 0 0 0 0-2.4L12 2Z"/><circle cx="7.5" cy="7.5" r="1"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
     moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/>',
@@ -57,7 +63,10 @@ function icon(name, size) {
   for (const chunk of P[name].split("/>")) {
     if (!chunk) continue;
     const m = chunk.trim().match(/^<([a-z]+)/);
-    const child = document.createElementNS("http://www.w3.org/2000/svg", m ? m[1] : "path");
+    const child = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      m ? m[1] : "path",
+    );
     for (const a of chunk.trim().match(/([a-z-]+)="([^"]*)"/g) || []) {
       const kv = a.match(/([a-z-]+)="([^"]*)"/);
       child.setAttribute(kv[1], kv[2]);
@@ -116,7 +125,14 @@ function loadPayload() {
 
 /** 契约断言：载荷形状不符 = 构建期与岛的隐式契约断了，宁可整岛不启用也不带病运行 */
 function payloadOk(u) {
-  const itemOk = (i) => !!i && !!i.slug && !!i.name && typeof i.desc === "string" && Array.isArray(i.tags) && typeof i.shot === "string" && typeof i.added === "string";
+  const itemOk = (i) =>
+    !!i &&
+    !!i.slug &&
+    !!i.name &&
+    typeof i.desc === "string" &&
+    Array.isArray(i.tags) &&
+    typeof i.shot === "string" &&
+    typeof i.added === "string";
   return (
     !!u &&
     Array.isArray(u.items) &&
@@ -134,7 +150,12 @@ function payloadOk(u) {
 
 /* ── 状态 ── */
 const state = {
-  sel: { function: new Set(), stack: new Set(), style: new Set(), scenario: new Set() },
+  sel: {
+    function: new Set(),
+    stack: new Set(),
+    style: new Set(),
+    scenario: new Set(),
+  },
   q: "",
   sort: "new",
 };
@@ -153,7 +174,8 @@ const selPairs = () => {
   }
   return pairs;
 };
-const tagNames = () => Object.fromEntries(Object.entries(U.tags).map(([id, t]) => [id, t.name]));
+const tagNames = () =>
+  Object.fromEntries(Object.entries(U.tags).map(([id, t]) => [id, t.name]));
 const ctx = (skipFacet) => ({
   f: { pairs: selPairs(), q: state.q, sort: state.sort },
   sel: state.sel,
@@ -201,7 +223,8 @@ function applyTheme(t) {
 const homeURL = () => `/${LOCALE}/`;
 const itemURL = (slug) => `/${LOCALE}/item/${encodeURIComponent(slug)}/`;
 const catURL = (slug) => `/${LOCALE}/collections/${encodeURIComponent(slug)}/`;
-const tagPageURL = (tagId) => `/${LOCALE}/tags/${encodeURIComponent(tagId.split(":")[1])}/`;
+const tagPageURL = (tagId) =>
+  `/${LOCALE}/tags/${encodeURIComponent(tagId.split(":")[1])}/`;
 const go = (path) => {
   if (typeof path === "string" && path.startsWith("/")) location.assign(path);
 };
@@ -215,7 +238,8 @@ function gridSync(list) {
   // FLIP before：当前可见卡的纵坐标
   const before = new Map();
   for (const n of cardNodes.values()) {
-    if (!n.classList.contains("hidden")) before.set(n.dataset.slug, n.getBoundingClientRect().top);
+    if (!n.classList.contains("hidden"))
+      before.set(n.dataset.slug, n.getBoundingClientRect().top);
   }
   // 重排：可见卡按序移动；不在结果集的隐藏
   for (const item of list) {
@@ -267,14 +291,6 @@ function chipSync() {
   }
 }
 
-function countSync(list) {
-  const c = $(SEL.count);
-  if (!c) return;
-  c.replaceChildren();
-  c.appendChild(el("strong", null, String(list.length)));
-  c.appendChild(document.createTextNode(` / ${U.items.length}`));
-}
-
 function drawerCountSync(list) {
   const line = $(SEL.drawerCount);
   if (line) line.textContent = `${list.length} `;
@@ -301,10 +317,9 @@ function clearFiltersAndRefresh() {
 function refresh() {
   const list = sortItems(
     U.items.filter((i) => matches(i, ctx())),
-    state.sort
+    state.sort,
   );
   chipSync();
-  countSync(list);
   gridSync(list);
   drawerCountSync(list);
   writeURL();
@@ -330,7 +345,8 @@ function channelRows(container) {
     const n = U.items.filter((i) => i.cat === c.slug).length;
     const a = el("a", "navrow");
     a.href = catURL(c.slug);
-    if (U.channel && c.slug === U.channel) a.setAttribute("aria-current", "page");
+    if (U.channel && c.slug === U.channel)
+      a.setAttribute("aria-current", "page");
     const dot = el("i", "dot");
     dot.setAttribute("aria-hidden", "true");
     a.appendChild(dot);
@@ -361,7 +377,10 @@ function chipEl(tag) {
   const b = el("button", "chip");
   b.type = "button";
   b.dataset.tag = tag;
-  b.setAttribute("aria-pressed", state.sel[meta.facet].has(tag) ? "true" : "false");
+  b.setAttribute(
+    "aria-pressed",
+    state.sel[meta.facet].has(tag) ? "true" : "false",
+  );
   b.appendChild(el("span", "t", meta.name));
   b.appendChild(el("span", "n", "0"));
   return b;
@@ -457,11 +476,14 @@ function closeAll() {
   if (scrim) {
     scrim.classList.remove("open");
     setTimeout(() => {
-      if (!drawer.classList.contains("open") && !(palette && palette.classList.contains("open"))) scrim.hidden = true;
+      if (
+        !drawer.classList.contains("open") &&
+        !(palette && palette.classList.contains("open"))
+      )
+        scrim.hidden = true;
     }, 240);
   }
 }
-
 
 /* ── 命令面板 ── */
 let pInput;
@@ -545,17 +567,39 @@ function paletteData(q) {
   const rows = [];
   const ql = (q || "").toLowerCase();
   const items = U.items
-    .filter((it) => !ql || `${it.name} ${it.desc} ${it.tags.map((t) => tagName(t)).join(" ")}`.toLowerCase().includes(ql))
+    .filter(
+      (it) =>
+        !ql ||
+        `${it.name} ${it.desc} ${it.tags.map((t) => tagName(t)).join(" ")}`
+          .toLowerCase()
+          .includes(ql),
+    )
     .slice(0, 6);
   if (items.length) {
     const g = { label: S.pgItems, rows: [] };
-    for (const it of items) g.rows.push({ kind: "item", slug: it.slug, name: it.name, meta: catName(it.cat), cover: it.shot, q: ql });
+    for (const it of items)
+      g.rows.push({
+        kind: "item",
+        slug: it.slug,
+        name: it.name,
+        meta: catName(it.cat),
+        cover: it.shot,
+        q: ql,
+      });
     rows.push(g);
   }
-  const chans = U.categories.filter((c) => !ql || c.name.toLowerCase().includes(ql));
+  const chans = U.categories.filter(
+    (c) => !ql || c.name.toLowerCase().includes(ql),
+  );
   if (chans.length) {
     const g2 = { label: S.pgChannels, rows: [] };
-    for (const c of chans) g2.rows.push({ kind: "channel", slug: c.slug, name: c.name, meta: String(U.items.filter((i) => i.cat === c.slug).length) });
+    for (const c of chans)
+      g2.rows.push({
+        kind: "channel",
+        slug: c.slug,
+        name: c.name,
+        meta: String(U.items.filter((i) => i.cat === c.slug).length),
+      });
     rows.push(g2);
   }
   const tags = Object.keys(U.tags)
@@ -565,7 +609,12 @@ function paletteData(q) {
     const g3 = { label: S.pgTags, rows: [] };
     for (const t of tags) {
       const on = state.sel[tagFacet(t)] ? state.sel[tagFacet(t)].has(t) : false;
-      g3.rows.push({ kind: "tag", tag: t, name: U.tags[t].name, meta: on ? S.pSelected : S.pAdd });
+      g3.rows.push({
+        kind: "tag",
+        tag: t,
+        name: U.tags[t].name,
+        meta: on ? S.pSelected : S.pAdd,
+      });
     }
     rows.push(g3);
   }
@@ -660,7 +709,11 @@ function runRowAt(r) {
       closeAll();
     } else {
       const n = U.items.filter((i) => i.tags.includes(r.tag)).length;
-      go(n >= 2 ? tagPageURL(r.tag) : itemURL(U.items.find((i) => i.tags.includes(r.tag)).slug));
+      go(
+        n >= 2
+          ? tagPageURL(r.tag)
+          : itemURL(U.items.find((i) => i.tags.includes(r.tag)).slug),
+      );
     }
   }
 }
@@ -676,7 +729,11 @@ function bindPaletteKeys() {
     }
     if (e.key === "/" && !open) {
       const t = e.target;
-      const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable);
+      const typing =
+        t &&
+        (t.tagName === "INPUT" ||
+          t.tagName === "TEXTAREA" ||
+          t.isContentEditable);
       if (!typing) {
         e.preventDefault();
         openPalette();
@@ -692,13 +749,13 @@ function bindPaletteKeys() {
 
 /* ── 画廊同步：SSR 节点复用 ── */
 
-
 /* ── 顶栏绑定 ── */
 function buildTopbar() {
   const burger = $(SEL.menuBtn);
   if (burger) burger.addEventListener("click", openDrawer);
   const searchBtn = $(SEL.searchBtn);
-  if (searchBtn) searchBtn.addEventListener("click", () => openPalette(searchBtn));
+  if (searchBtn)
+    searchBtn.addEventListener("click", () => openPalette(searchBtn));
 }
 
 /* ── 工具行绑定 ── */
@@ -709,11 +766,14 @@ function buildToolbar() {
       input.value = state.q;
       $(SEL.searchBox).classList.add("has-value");
     }
-    input.addEventListener("input", debounce(() => {
-      state.q = input.value.trim();
-      $(SEL.searchBox).classList.toggle("has-value", !!input.value);
-      refresh();
-    }, 120));
+    input.addEventListener(
+      "input",
+      debounce(() => {
+        state.q = input.value.trim();
+        $(SEL.searchBox).classList.toggle("has-value", !!input.value);
+        refresh();
+      }, 120),
+    );
     const clear = $(SEL.searchClear);
     if (clear)
       clear.addEventListener("click", () => {
@@ -724,17 +784,22 @@ function buildToolbar() {
         input.focus();
       });
   }
-  for (const b of $$(SEL.sortButtons)) {
-    b.setAttribute("aria-pressed", b.dataset.sort === state.sort ? "true" : "false");
-    b.addEventListener("click", () => {
-      if (state.sort === b.dataset.sort) return;
-      state.sort = b.dataset.sort;
+  const sortBtn = $(SEL.sortToggle);
+  if (sortBtn) {
+    const paintSort = () => {
+      sortBtn.dataset.sort = state.sort;
+      const t = sortBtn.querySelector(".t");
+      if (t) t.textContent = state.sort === "old" ? S.sortOld : S.sortNew;
+    };
+    paintSort();
+    sortBtn.addEventListener("click", () => {
+      state.sort = state.sort === "new" ? "old" : "new";
       try {
         localStorage.setItem("uicurio.sort", state.sort);
       } catch {
         /* 私密模式 */
       }
-      for (const x of $$(SEL.sortButtons)) x.setAttribute("aria-pressed", x.dataset.sort === state.sort ? "true" : "false");
+      paintSort();
       refresh();
     });
   }
@@ -763,7 +828,11 @@ if (!U || !payloadOk(U)) {
   buildTopbar();
   bindPaletteKeys();
   for (const b of $$(SEL.themeToggle)) {
-    b.addEventListener("click", () => applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
+    b.addEventListener("click", () =>
+      applyTheme(
+        document.documentElement.dataset.theme === "dark" ? "light" : "dark",
+      ),
+    );
   }
   for (const sel of $$(SEL.langSelect)) {
     if (!sel.value) sel.value = LOCALE;
@@ -776,7 +845,8 @@ if (!U || !payloadOk(U)) {
     });
   }
   document.addEventListener("click", (e) => {
-    const chip = e.target && e.target.closest ? e.target.closest(SEL.chips) : null;
+    const chip =
+      e.target && e.target.closest ? e.target.closest(SEL.chips) : null;
     if (!chip || chip.getAttribute("aria-disabled") === "true") return;
     toggleTag(chip.dataset.tag);
   });

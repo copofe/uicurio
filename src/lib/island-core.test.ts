@@ -20,15 +20,41 @@ const tagNames: Record<string, string> = {
 };
 
 const items: ItemLike[] = [
-  { name: "Liveline", desc: "实时折线图", cat: "data-viz", tags: ["function:chart", "stack:react"], added: "2026-09-11" },
-  { name: "Diffs", desc: "代码 diff 渲染", cat: "files-code", tags: ["function:diff"], added: "2026-09-10" },
-  { name: "crd-ui", desc: "银行卡输入组件", cat: "input-controls", tags: ["function:card-input", "stack:react", "stack:vue"], added: "2026-09-09" },
-  { name: "Animal Island", desc: "温馨海岛风组件库", cat: "collections", tags: ["style:cozy", "stack:react"], added: "2026-09-08" },
+  {
+    name: "Liveline",
+    desc: "实时折线图",
+    cat: "data-viz",
+    tags: ["function:chart", "stack:react"],
+    added: "2026-09-11",
+  },
+  {
+    name: "Diffs",
+    desc: "代码 diff 渲染",
+    cat: "files-code",
+    tags: ["function:diff"],
+    added: "2026-09-10",
+  },
+  {
+    name: "crd-ui",
+    desc: "银行卡输入组件",
+    cat: "input-controls",
+    tags: ["function:card-input", "stack:react", "stack:vue"],
+    added: "2026-09-09",
+  },
+  {
+    name: "Animal Island",
+    desc: "温馨海岛风组件库",
+    cat: "collections",
+    tags: ["style:cozy", "stack:react"],
+    added: "2026-09-08",
+  },
 ];
 
 describe("decodeFilters / encodeFilters", () => {
   it("解码完整查询串（%2B 与手输 + 均可）", () => {
-    const f = decodeFilters("?f=stack.react+function.chart&q=%E6%8A%98%E7%BA%BF&sort=old");
+    const f = decodeFilters(
+      "?f=stack.react+function.chart&q=%E6%8A%98%E7%BA%BF&sort=old",
+    );
     expect(f.pairs).toEqual([
       { facet: "stack", tag: "react" },
       { facet: "function", tag: "chart" },
@@ -38,7 +64,8 @@ describe("decodeFilters / encodeFilters", () => {
   });
 
   it("编码是解码的逆运算（round-trip，规范形态 %2B）", () => {
-    const search = "?f=stack.react%2Bfunction.chart&q=%E6%8A%98%E7%BA%BF&sort=old";
+    const search =
+      "?f=stack.react%2Bfunction.chart&q=%E6%8A%98%E7%BA%BF&sort=old";
     const f = decodeFilters(search);
     expect("?" + encodeFilters(f)).toBe(search);
   });
@@ -54,7 +81,11 @@ describe("decodeFilters / encodeFilters", () => {
 });
 
 describe("matches", () => {
-  const mk = (pairs: { facet: string; tag: string }[], q = "", channel: string | null = null) => {
+  const mk = (
+    pairs: { facet: string; tag: string }[],
+    q = "",
+    channel: string | null = null,
+  ) => {
     const sel = emptySelection();
     for (const p of pairs) sel[p.facet]?.add(p.tag);
     return { f: { pairs, q, sort: "new" as const }, sel, channel, tagNames };
