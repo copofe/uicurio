@@ -4,9 +4,9 @@ import { createRequire } from "node:module";
 const fontkit = createRequire(import.meta.url)("fontkit");
 import { writeFileSync, readFileSync } from "node:fs";
 
-const font = fontkit.openSync("fonts-tmp/dattebayo.ttf");
+const font = fontkit.openSync("fonts-tmp/Carattere-Regular.ttf");
 
-const TEXT = "uicurio";
+const TEXT = "Uicurio";
 const SIZE = 100;
 const PAD = 3;
 
