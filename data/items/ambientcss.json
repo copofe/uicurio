@@ -1,0 +1,24 @@
+{
+  "slug": "ambientcss",
+  "name": {
+    "en": "Ambient CSS",
+    "zh": "Ambient CSS"
+  },
+  "description": {
+    "en": "A physics-based lighting system for CSS: define one light source and every shadow, highlight and surface gradient follows — calibrated against Blender raytraces.",
+    "zh": "以物理光照驱动的 CSS 影调系统：定义一盏光源，阴影、高光与表面渐变全部随之确定。参数经 Blender 光追校准，纯 box-shadow 实现。"
+  },
+  "url": "https://ambientcss.vercel.app/",
+  "repo": "https://github.com/kikkupico/ambientcss",
+  "category": "collections",
+  "tags": [
+    "style:ambient",
+    "stack:react",
+    "stack:vanilla-js",
+    "stack:zero-dependency"
+  ],
+  "screenshot": "ambientcss.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-12"
+}

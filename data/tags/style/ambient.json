@@ -1,0 +1,9 @@
+{
+  "id": "style:ambient",
+  "facet": "style",
+  "slug": "ambient",
+  "name": {
+    "en": "ambient light",
+    "zh": "物理光影"
+  }
+}

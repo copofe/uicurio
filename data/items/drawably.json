@@ -1,0 +1,24 @@
+{
+  "slug": "drawably",
+  "name": {
+    "en": "Drawably",
+    "zh": "Drawably"
+  },
+  "description": {
+    "en": "Hand-drawn UI controls — button, input, card, toggle and more. Every mount sketches a fresh doodle you can tune with roughness and boil.",
+    "zh": "手绘风 UI 控件集：按钮、输入框、卡片等 25 件。每次挂载都是一幅新的钢笔速写，粗糙度与抖动可调，选中喜欢的那版直接用。"
+  },
+  "url": "https://www.drawably.dev/",
+  "repo": "https://github.com/Danilaa1/drawably",
+  "category": "collections",
+  "tags": [
+    "style:sketchy",
+    "stack:react",
+    "stack:vanilla-js",
+    "stack:zero-dependency"
+  ],
+  "screenshot": "drawably.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-12"
+}

@@ -13,7 +13,16 @@ const readJson = (p) => {
 };
 
 const args = process.argv.slice(2);
-const only = args[0] && args[0] !== "--" ? args[0] : (args[1] ?? null);
+let only = null;
+let SETTLE_MS = 2500; // 默认稳态等待；顽固动画页用 --settle <ms> 覆盖
+for (let i = 0; i < args.length; i++) {
+  if (args[i] === "--settle") {
+    SETTLE_MS = parseInt(args[++i], 10);
+    continue;
+  }
+  if (args[i] === "--") continue;
+  if (only === null) only = args[i];
+}
 mkdirSync("public/assets/shots", { recursive: true });
 
 const items = readdirSync("data/items")
@@ -41,7 +50,7 @@ async function capture(item) {
   try {
     try {
       await page.goto(item.url, { waitUntil: "networkidle", timeout: 30_000 });
-      await page.waitForTimeout(2500);
+      await page.waitForTimeout(SETTLE_MS);
     } catch {
       // 二级策略：networkidle 超时（长轮询/分析脚本不断发请求的站）→ DOM 就绪 + 固定稳态等待
       try {
