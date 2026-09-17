@@ -1,0 +1,45 @@
+{
+  "slug": "solaris",
+  "name": {
+    "en": "Solaris",
+    "zh": "Solaris"
+  },
+  "description": {
+    "en": "Physically styled WebGL2 shader components for rendering the solar system and sky in React 19.",
+    "zh": "面向 React 19 的太阳系与天空着色器组件库：基于 WebGL2 物理光照与大气散射算法，渲染真实感天体与天空景象。"
+  },
+  "url": "https://solaris.cuvii.dev/sky/",
+  "repo": "https://github.com/thecuvii/solaris",
+  "category": "collections",
+  "tags": [
+    "function:3d",
+    "function:animation",
+    "stack:react",
+    "stack:webgl",
+    "style:ambient",
+    "style:design-engineer"
+  ],
+  "screenshot": "solaris.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-17",
+  "content": {
+    "en": "Solaris is a React component library dedicated to rendering celestial bodies and atmospheric scenes with physically styled GLSL shaders. Each of its 14 scenes—from textured terrestrial planets to procedural gas giants and ground-level skies—features responsive composition, pointer lean, directional lighting, and lens flare controls. Components are client-only and export dedicated entry points (such as @cuvii/solaris/sky and @cuvii/solaris/moon) for granular bundle optimization, while automatically handling offscreen pausing and WebGL context loss recovery.",
+    "zh": "Solaris 是专为 React 打造的物理着色器组件库，致力于在浏览器中以极高质量还原太阳系天体与地面天象。全库涵盖地球、月球、太阳、天空等 14 种天体与大气场景，深度模拟了大气消光、折射压扁、云带扰动、镜头眩光以及随指针倾斜的光影变换。各场景支持极细粒度的独立入口导入（如 @cuvii/solaris/sky、@cuvii/solaris/moon），并在底层内置了离屏暂停渲染、WebGL 上下文丢失自动恢复与无障碍动效降级。"
+  },
+  "components": [
+    "Sky (Procedural Atmosphere)",
+    "Sun (Solar Flare & Glare)",
+    "Earth (Day/Night & Clouds)",
+    "Moon & Lunar Eclipse",
+    "Mars (Albedo & Normal)",
+    "Jupiter (Atmospheric Bands)",
+    "Saturn & Volumetric Rings",
+    "Titan (Dense Atmosphere)",
+    "Uranus (Axial Tilt & Rings)",
+    "Neptune (Deep Methane Blue)",
+    "Mercury (Cratered Regolith)",
+    "Venus (Super-rotating Clouds)",
+    "Pluto (High-contrast Terrains)"
+  ]
+}
