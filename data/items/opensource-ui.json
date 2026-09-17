@@ -5,8 +5,8 @@
     "zh": "Opensource UI"
   },
   "description": {
-    "en": "Free, MIT-licensed copy-paste components for React and Next.js — 150+ production-ready components with live previews, built with TypeScript and Tailwind CSS v4.",
-    "zh": "MIT 协议的 React / Next.js 复制即用组件集：150+ 生产级组件、带实时预览，TypeScript + Tailwind CSS v4。"
+    "en": "A free UI library for React and Next.js — 200+ MIT-licensed copy-paste components, Tailwind CSS blocks, iPhone and MacBook mockups.",
+    "zh": "面向 React 与 Next.js 的免费开源 UI 库：收录 200+ 款 MIT 授权的即拷即用组件、Tailwind CSS 区块与高精度设备模型。"
   },
   "url": "https://opensourceui.in",
   "repo": "https://github.com/bidyut10/opensourceui",
@@ -20,5 +20,23 @@
   "screenshot": "opensource-ui.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-09-09"
+  "added": "2026-09-09",
+  "content": {
+    "en": "Opensource UI provides an extensive catalog of over 200 MIT-licensed components and marketing blocks tailored for modern React, Next.js, and Tailwind CSS projects. Notable highlights include photorealistic CSS device mockups (iPhone, MacBook, Apple Watch, and retro iPod with working scroll-wheel physics), versatile bento grid arrangements, interactive feature cards, pricing tiers, and copy-paste component source code with full TypeScript definitions.",
+    "zh": "Opensource UI 为现代 React 与 Next.js 项目提供了逾 200 款遵循 MIT 开源协议的即用型组件与营销页面区块。其最大亮点在于高精度的纯 CSS 设备拟真模型（涵盖 iPhone、MacBook、Apple Watch 以及具备机械转轮手感的复古 iPod 播放器），同时收录了丰富的 Bento 苹果风格便当网格、产品特性卡片、定价阶梯表、数据看板与无缝兼容 Tailwind 的完整 TypeScript 源码。"
+  },
+  "components": [
+    "iPhone Device Mockup",
+    "MacBook Screen Mockup",
+    "Apple Watch UI Frame",
+    "Classic iPod Interface",
+    "Bento Grid Showcase",
+    "Feature Cards",
+    "Pricing Tables",
+    "Testimonial Grids",
+    "Hero Layouts",
+    "Interactive Code Showcase",
+    "FAQ Accordion",
+    "Stats Counter"
+  ]
 }

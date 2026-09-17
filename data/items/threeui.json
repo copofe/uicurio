@@ -5,8 +5,8 @@
     "zh": "ThreeUI"
   },
   "description": {
-    "en": "Interactive Three.js components, templates and shaders with polished motion, Canvas/WebGL effects and copy-ready source.",
-    "zh": "可交互的 Three.js 组件、模板与着色器合集：动效精致、Canvas/WebGL 特效，源码即取即用。"
+    "en": "Interactive 3D UI components, templates, and WebGL shaders for modern web applications.",
+    "zh": "专业级 3D 网页交互组件与 WebGL 着色器库：将 Three.js 与现代 UI 深度结合，提供开箱即用的 3D 视觉元素。"
   },
   "url": "https://threeui.com/ui-elements",
   "category": "collections",
@@ -19,5 +19,19 @@
   "screenshot": "threeui.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-08-31"
+  "added": "2026-08-31",
+  "content": {
+    "en": "ThreeUI bridges the gap between WebGL 3D graphics and practical frontend UI design. Built on Three.js and modern shader techniques, it offers developers ready-to-use 3D interface components, interactive canvas shaders, animated particle backgrounds, and spatial hero templates. Every element is optimized for smooth 60fps frame rates, touch responsiveness, and effortless integration into standard web layouts.",
+    "zh": "ThreeUI 致力于架起复杂 WebGL 3D 渲染与实际前端 UI 界面之间的桥梁。基于 Three.js 及现代着色器算法，它提供了一系列开箱即用的 3D 界面元素、交互式着色器画布、动态粒子背景及空间感 Hero 区域模板。所有构件均经过严格的帧率优化与触控适配，让开发者无需精通图形学数学即可轻松在网页中引入电影级 3D 交互。"
+  },
+  "components": [
+    "Three.js Scene Canvas",
+    "Interactive WebGL Shaders",
+    "3D Hero Section Templates",
+    "Animated WebGL Backgrounds",
+    "Interactive 3D Buttons",
+    "Text Distortion Animations",
+    "Volumetric Fog & Lighting",
+    "Post-processing Bloom Effects"
+  ]
 }

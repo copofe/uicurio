@@ -5,8 +5,8 @@
     "zh": "DialKit"
   },
   "description": {
-    "en": "Live dial controls for React, Solid, Svelte, Vue and vanilla JS; tune motion, layout, color and animation timing in place.",
-    "zh": "可实时调校的旋钮控件：支持 React、Solid、Svelte、Vue 与原生 JS，直接在界面里调运动、布局、色彩与动画时序。"
+    "en": "Live controls for tuning interfaces in real time. Adjust values, compare versions, and edit animation timing in your running app.",
+    "zh": "在运行中实时微调界面的交互控制台：直接在页面上调整数值、比对多套参数变体并编辑弹簧动画时序。"
   },
   "url": "https://www.dialkit.dev",
   "repo": "https://github.com/joshpuckett/dialkit",
@@ -22,5 +22,23 @@
   "screenshot": "dialkit.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-09-02"
+  "added": "2026-09-02",
+  "content": {
+    "en": "DialKit puts live parametric controls right next to the interface you are designing or engineering. Rather than continually context-switching between code editors, hot reloads, and browser inspect panels, DialKit renders an elegant floating toolbar containing sliders, 2D touch pads, spring physics tuners, and timeline scrubbers. It supports React, Solid, Svelte, Vue, and vanilla JS, allowing designers and AI agents to tune layouts, colors, and motion timings by feel.",
+    "zh": "DialKit 是一款面向设计工程师的界面微调控制台。它将一套精致的可悬浮控制面板直接注入运行中的网页旁，内置数字滑块、2D 摇杆触摸板、弹簧阻尼调校器、贝塞尔曲线编辑器与折叠分组。告别在代码编辑器与浏览器控制台之间频繁修改数字和热重载的繁琐流程，支持在 React、Vue、Svelte、Solid 等多框架中凭借纯粹的感官手感实时调优动效与布局参数。"
+  },
+  "components": [
+    "Slider Control",
+    "Toggle Switch",
+    "Text Input",
+    "Select Dropdown",
+    "Color Picker",
+    "Image Upload",
+    "2D Pad Controller",
+    "Spring Physics Visualizer",
+    "Easing Curve Editor",
+    "Action Buttons",
+    "Collapsible Folders",
+    "Keyframe Parameter Timeline"
+  ]
 }

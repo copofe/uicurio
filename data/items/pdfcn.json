@@ -5,8 +5,8 @@
     "zh": "pdfcn"
   },
   "description": {
-    "en": "Beautifully designed, accessible and customizable PDF components built on Takumi and Forme; works with shadcn/ui.",
-    "zh": "基于 Takumi 与 Forme 构建的 PDF 组件集：美观、可访问、可定制，兼容 shadcn/ui。"
+    "en": "Free & open-source, ready-to-use, customizable PDF components for React. Copy, paste, and ship. Built on Takumi and Forme, works with shadcn/ui.",
+    "zh": "为 React 打造的高颜值可定制 PDF 打印排版组件库：基于 Takumi 与 Forme 构建，与 shadcn/ui 无缝契合，支持即拷即用。"
   },
   "url": "https://www.pdfcn.dev",
   "repo": "https://github.com/shadcn-labs/pdfcn",
@@ -18,5 +18,21 @@
   "screenshot": "pdfcn.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-09-01"
+  "added": "2026-09-01",
+  "content": {
+    "en": "pdfcn solves the long-standing developer pain of generating aesthetically pleasing, print-ready PDF documents from React applications. Built on top of Takumi and Forme, and designed to match the visual language of shadcn/ui, it provides clean, modular components for invoices, receipts, contracts, resumes, and formal certificates. It handles complex PDF typography, page breaks, header/footer pagination, and table overflow automatically.",
+    "zh": "pdfcn 彻底终结了前端开发在 React 中生成高颜值、可排版打印 PDF 文件的噩梦。组件库深度结合 Takumi 与 Forme 排版引擎，在视觉规范上完美对齐 shadcn/ui 设计哲学。开箱提供商业发票、财务收据、聘用合同、求职简历、认证证书等多种企业级排版模板，自动处理跨页断页、页眉页脚页码计算、多列网格及防伪水印。"
+  },
+  "components": [
+    "Corporate Invoice Template",
+    "Receipt & Bill Generator",
+    "Resume / CV Builder",
+    "Legal Contract Layout",
+    "Certificate Template",
+    "PDF Header & Footer",
+    "Paginated Data Table",
+    "QR Code & Barcode Block",
+    "Signature & Stamp Box",
+    "Watermark Layer"
+  ]
 }

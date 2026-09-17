@@ -8,8 +8,8 @@
     "@pierre/trees"
   ],
   "description": {
-    "en": "File-tree rendering with virtualization, Git status, drag-and-drop, search, context menus and built-in icon sets.",
-    "zh": "虚拟化文件树渲染：Git 状态、拖拽、搜索、右键菜单，内置图标集。"
+    "en": "@pierre/trees is an open source file tree rendering library built for performance and flexibility. Always virtualized, accessible, and packed with features.",
+    "zh": "来自 Pierre 的高性能开源文件树渲染库：原生全量虚拟滚动，无障碍支持完备，自带丰富特性与高定制性。"
   },
   "url": "https://trees.software/",
   "repo": "https://github.com/pierrecomputer/pierre/tree/main/packages/trees",
@@ -20,5 +20,20 @@
   "screenshot": "trees.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-08-25"
+  "added": "2026-08-25",
+  "content": {
+    "en": "@pierre/trees is a path-first, production-grade file tree library developed by The Pierre Computer Company. Engineered to effortlessly handle codebases with tens of thousands of files, it uses perpetual virtualization to ensure minimal DOM footprint and instant rendering. Notable features include smart empty-directory flattening (like GitHub/VS Code), live Git status coloring, drag-and-drop support, accessible keyboard navigation, built-in icon packs, and Shiki theme integration.",
+    "zh": "@pierre/trees 是由 Pierre Computer 打造的企业级路径优先文件目录树组件。为轻松驾驭数万乃至数十万文件规模的代码库而生，原生内置全量虚拟化滚动，确保极端体量下 DOM 节点数恒定且毫无卡顿。深度提供空目录智能扁平折叠（与 GitHub/VS Code 体验一致）、实时 Git 修改状态颜色徽章、拖拽重排、完整键盘无障碍操控及与 Shiki 主题色盘的深度融合。"
+  },
+  "components": [
+    "Virtualized File Tree (<FileTree />)",
+    "Flatten Empty Directories",
+    "Git Status Badges & Colors",
+    "Context Menu Composition",
+    "Drag and Drop Reordering",
+    "Search & Filter by Name",
+    "Built-in File Icon Sets",
+    "Shiki Theme Integration",
+    "Adjustable Density (Compact / Relaxed)"
+  ]
 }

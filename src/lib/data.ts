@@ -27,7 +27,11 @@ export const tags = FACETS.flatMap((facet) =>
 
 export const items = readdirSync(join("data", "items"))
   .filter((f) => f.endsWith(".json"))
-  .map((f) => read(join("data", "items", f)));
+  .map((f) => read(join("data", "items", f)))
+  .sort((a: any, b: any) => {
+    if (a.added !== b.added) return a.added < b.added ? 1 : -1;
+    return (a.slug || "").localeCompare(b.slug || "");
+  });
 
 export const tagById = new Map(tags.map((t: any) => [t.id, t]));
 export const itemsInCategory = (cat: string) =>

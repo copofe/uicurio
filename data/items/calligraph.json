@@ -5,8 +5,8 @@
     "zh": "Calligraph"
   },
   "description": {
-    "en": "Fluid text transitions powered by Motion; shared characters slide to new positions while entering and exiting characters fade; custom spring transitions; React 18+.",
-    "zh": "基于 Motion 的流畅文字转场：共有字符滑入新位置，进出字符淡入淡出；支持自定义弹簧动画；React 18+。"
+    "en": "Fluid text transitions powered by Motion. Shared characters slide to their new positions while entering characters fade in and exiting ones fade out.",
+    "zh": "由 Motion 驱动的流体文字变形动效库：同名字符平滑位移至新坐标，进退字符优雅淡入淡出。"
   },
   "url": "https://calligraph.raphaelsalaja.com",
   "repo": "https://github.com/raphaelsalaja/calligraph",
@@ -20,5 +20,18 @@
   "screenshot": "calligraph.webp",
   "featured": true,
   "status": "published",
-  "added": "2026-09-07"
+  "added": "2026-09-07",
+  "content": {
+    "en": "Calligraph brings Apple-grade fluid typography transitions to React applications. Built on top of Motion, it automatically calculates bounding boxes for matching glyphs between words or phrases, animating identical letters directly to their new positions while gracefully fading out removed letters and fading in new ones. It seamlessly supports font weight changes, font-size shifts, variable typography, and provides screen-reader accessible live regions.",
+    "zh": "Calligraph 为 React 带来了苹果发布会级别的流体字形过渡体验。基于 Motion 动效引擎，它能够自动比对新旧词句中的相同字形，并在文字切换时驱动字符沿贝塞尔轨迹平滑飞行至全新排版坐标，进退字形则伴随轻微位移淡入淡出。全面兼容字重变化、字号跨度缩放与可变字体，同时内置无障碍屏幕朗诵支持。"
+  },
+  "components": [
+    "Calligraph Container",
+    "Shared Character Motion Engine",
+    "Font Swapping Interpolation",
+    "Dynamic Word Carousel",
+    "Spring Physics Tuner",
+    "Accessible Live Region",
+    "Inline & Block Text Wrappers"
+  ]
 }

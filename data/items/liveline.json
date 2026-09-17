@@ -5,8 +5,8 @@
     "zh": "Liveline"
   },
   "description": {
-    "en": "Real-time animated line chart for React; canvas-rendered at 60fps for streaming data with line, multi-series and OHLC modes plus crosshair scrubbing; zero CSS imports.",
-    "zh": "React 实时动画折线图：canvas 60fps 渲染流式数据，支持单线、多序列与 OHLC 模式及十字线刷选；零 CSS 引入。"
+    "en": "Real-time animated charts for React. Line, multi-series, and candlestick modes, canvas-rendered at 60fps, zero CSS imports.",
+    "zh": "面向 React 的高性能实时流式动画图表库：Canvas 60fps 极速渲染，支持单线、多序列与 K 线模式，零 CSS 导入。"
   },
   "url": "https://benji.org/liveline",
   "repo": "https://github.com/benjitaylor/liveline",
@@ -21,5 +21,20 @@
   "screenshot": "liveline.webp",
   "featured": true,
   "status": "published",
-  "added": "2026-08-29"
+  "added": "2026-08-29",
+  "content": {
+    "en": "Liveline is an ultra-fast, canvas-based charting library designed specifically for streaming, real-time telemetry and financial data in React applications. Rendering at a consistent 60 frames per second on HTML5 Canvas, it handles continuous append streams without DOM thrashing or memory leaks. It offers multiple visualization modes—single series, overlaid multi-series, and financial candlesticks (OHLC)—complete with smooth momentum scrubbing, interactive crosshair overlays, and zero CSS dependencies.",
+    "zh": "Liveline 是一套专为流式遥测与高频金融行情数据设计的 React 实时 Canvas 图表库。底层完全基于 HTML5 Canvas 实现原生 60fps 硬件加速渲染，彻底杜绝高频数据追加导致的 DOM 重排与卡顿。开箱支持单折线、多序列混合折线与蜡烛图（OHLC）模式，自带惯性滑动、带磁吸反馈的十字辅助准星、动态时序视窗调节，且无需导入任何外部 CSS 文件。"
+  },
+  "components": [
+    "Single Line Chart",
+    "Multi-Series Chart",
+    "Candlestick (OHLC) Mode",
+    "Live Streaming Canvas Engine",
+    "Interactive Crosshair Scrubbing",
+    "Momentum Dragging",
+    "Real-time Value Overlay",
+    "Stepped Line Interpolation",
+    "Dynamic Time Windows"
+  ]
 }

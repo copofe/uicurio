@@ -5,8 +5,8 @@
     "zh": "Animal Island UI"
   },
   "description": {
-    "en": "Lightweight React + TypeScript component library (33 components) with an original cozy island-style design; WAI-ARIA APG accessible.",
-    "zh": "轻量 React + TypeScript 组件库（33 个组件），原创温馨海岛风设计，遵循 WAI-ARIA APG 无障碍标准。"
+    "en": "A cute, Animal Crossing-inspired React UI component library featuring delightful micro-interactions and hand-drawn styling.",
+    "zh": "动森风格的温馨治愈系 React UI 组件库，具备细腻可爱的微交互与手绘插画风格。"
   },
   "url": "https://guokaigdg.github.io/animal-island-ui",
   "repo": "https://github.com/guokaigdg/animal-island-ui",
@@ -19,5 +19,36 @@
   "screenshot": "animal-island-ui.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-09-04"
+  "added": "2026-09-04",
+  "content": {
+    "en": "Animal Island UI is a comprehensive React component library inspired by the cozy aesthetic of Animal Crossing. It provides over 30 production-ready components ranging from essential inputs and navigation to playful cursors, countdowns, and typewriter text animations. All components feature rounded silhouettes, warm earth-tone palettes, bouncy micro-interactions, and full TypeScript typing.",
+    "zh": "Animal Island UI 是一套灵感汲取自《集合啦！动物森友会》的轻量 React 组件库。全套收录了从基础表单输入、按钮卡片，到个性化游标、倒计时、打字机打字动效等逾 30 款开箱即用的 UI 组件。整套组件以圆润的造型曲线、温暖治愈的自然配色以及弹性微交互见长，自带完整的 TypeScript 类型支持。"
+  },
+  "components": [
+    "Button",
+    "Card",
+    "Carousel",
+    "Checkbox",
+    "CodeBlock",
+    "Collapse",
+    "Countdown",
+    "Cursor",
+    "DatePicker",
+    "Divider",
+    "Drawer",
+    "Modal",
+    "Notification",
+    "Pagination",
+    "Progress",
+    "Radio",
+    "Select",
+    "Skeleton",
+    "Switch",
+    "Table",
+    "Tabs",
+    "Tag",
+    "TimePicker",
+    "Tooltip",
+    "Typewriter"
+  ]
 }

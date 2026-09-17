@@ -1,12 +1,15 @@
 ---
-// 画廊主列：工具行（搜索/排序/计数）+ 卡片网格（SSR 全量渲染，岛做节点复用）+ 空态
+// 画廊主列：工具行（搜索/排序/视图/帮助）+ 已选条件栏 + 卡片网格（SSR 全量渲染，岛做节点复用）+ 空态
 import { ui } from "../i18n";
 import { buildPayload } from "../lib/payload";
 import CardV2 from "./CardV2.astro";
 interface Props { locale: string; items: any[]; catSlug: string | null; }
 const { locale, items, catSlug } = Astro.props;
 const t = ui[locale as keyof typeof ui];
-const sorted = [...items].sort((a: any, b: any) => (a.added < b.added ? 1 : a.added > b.added ? -1 : 0));
+const sorted = [...items].sort((a: any, b: any) => {
+  if (a.added !== b.added) return a.added < b.added ? 1 : -1;
+  return (a.slug || "").localeCompare(b.slug || "");
+});
 const payload = buildPayload(locale as any, "gallery", catSlug);
 ---
 <main class="main">
@@ -20,12 +23,18 @@ const payload = buildPayload(locale as any, "gallery", catSlug);
       <button class="clear" type="button" aria-label="×">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
       </button>
-      <button class="kbd" type="button" aria-label="⌘K">⌘K</button>
     </div>
-    <button class="sorttoggle" type="button" data-sort="new" aria-label={t.sortNew}>
-      <span class="t">{t.sortNew}</span>
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 16-4 4-4-4M17 20V4"></path><path d="m3 8 4-4 4 4M7 4v16"></path></svg>
-    </button>
+    <div class="tool-actions">
+      <button class="sorttoggle" type="button" data-sort="new" aria-label={t.sortNew}>
+        <span class="t">{t.sortNew}</span>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 16-4 4-4-4M17 20V4"></path><path d="m3 8 4-4 4 4M7 4v16"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="active-filters-bar" id="dir-active-filters" hidden>
+    <div class="active-filters-list"></div>
+    <button class="active-filters-clear" type="button" id="dir-active-clear">{t.clearAll}</button>
   </div>
 
   <section class="grid" id="dir-grid" aria-label="grid">

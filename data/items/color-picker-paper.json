@@ -8,8 +8,8 @@
     "Paper color picker"
   ],
   "description": {
-    "en": "Recreation of the Paper app's color picker; parses hex/RGB/HSL/HSB/display-p3/OKLCH and tolerates partial or malformed input.",
-    "zh": "Paper 应用取色器的复刻：解析 hex/RGB/HSL/HSB/display-p3/OKLCH，容错不完整或非法输入。"
+    "en": "An interactive color picker rebuilt from Paper: sRGB and Display P3, an OKLCH-aware hue ramp, and every notation CSS Color 4 can print.",
+    "zh": "复刻自 Paper 设计工具的专业色彩选择器：支持 sRGB 与广色域 Display P3、OKLCH 感知色相带及全量 CSS Color 4 格式导出。"
   },
   "url": "https://invisibledetails.com/playground/color-picker",
   "category": "input-controls",
@@ -19,5 +19,19 @@
   "screenshot": "color-picker-paper.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-08-28"
+  "added": "2026-08-28",
+  "content": {
+    "en": "Reconstructed from the acclaimed Paper design application, this color picker offers unmatched visual precision and color accuracy. It integrates modern CSS Color Module Level 4 specifications, allowing creators to toggle between standard sRGB and Display P3 wide gamut spaces. The hue ramp leverages the perceptually uniform OKLCH color space to eliminate artificial brightness dips (such as the muddy yellow transition in traditional RGB pickers), with instantaneous one-click exports across Hex, OKLCH, OKLAB, HSL, and RGB formats.",
+    "zh": "精准复刻自顶级设计工具 Paper 的专业级取色器。全面支持 CSS Color Module Level 4 现代色彩规范，可在标准 sRGB 与苹果 Display P3 广色域间无缝切换。色相环与过渡带深度融入 OKLCH 感知均匀色彩空间，根除了传统 RGB 色轮在黄绿色域的视觉亮度塌陷问题，并提供 Hex、OKLCH、OKLAB、HSL 与 RGB 的一键格式转换与拷贝。"
+  },
+  "components": [
+    "OKLCH Hue Ramp",
+    "2D Saturation-Lightness Canvas",
+    "Alpha Channel Slider",
+    "Display P3 Wide-Gamut Toggle",
+    "CSS Color 4 Formatter (Hex, RGB, HSL, OKLCH, OKLAB)",
+    "Eyedropper Tool",
+    "Preset Swatches",
+    "Color History"
+  ]
 }

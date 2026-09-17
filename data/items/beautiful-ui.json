@@ -5,8 +5,8 @@
     "zh": "Beautiful UI"
   },
   "description": {
-    "en": "Curated components and patterns for AI-native interfaces.",
-    "zh": "面向 AI 原生界面的精选组件与模式库。"
+    "en": "A curated library of crafted, copy-paste components for chat agents, thinking states, human-in-the-loop approvals, and AI-native interfaces.",
+    "zh": "面向 AI 原生界面的精选组件库：涵盖 Agent 聊天、思维链等待态、人机协同审批与上下文卡片等精雕细琢的交互组件。"
   },
   "url": "https://www.beautifului.dev/",
   "category": "collections",
@@ -16,5 +16,28 @@
   "screenshot": "beautiful-ui.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-08-23"
+  "added": "2026-08-23",
+  "content": {
+    "en": "Beautiful UI offers meticulously crafted copy-paste components specifically built for AI agents and generative UI workflows. Rather than generic buttons and inputs, it focuses on the unique UX challenges of modern AI software: real-time streaming text with blinking cursors, animated thinking & reasoning states, human-in-the-loop approval dialogs, collapsible tool execution chips, interactive diff tables, and prompt bars with rich context attachments.",
+    "zh": "Beautiful UI 专为 AI Agent 及生成式界面打造，聚焦解决现代 AI 产品的独特交互诉求。区别于通用组件库，它集中提供了流式打字输出、思维链思考等待指示器、人机闭环审批卡片、工具调用执行气泡、可交互 Diff 对比表格以及带上下文附件的 Prompt 输入栏等深度定制组件，支持即拷即用。"
+  },
+  "components": [
+    "Thinking Indicator",
+    "Streaming Text",
+    "Approval Card (Human-in-the-loop)",
+    "Tool Chips",
+    "Prompt Bar",
+    "Chat Stream",
+    "Task Rows",
+    "Recommendation Card",
+    "Context Cards",
+    "Diff Table",
+    "Records Table",
+    "Filter Table",
+    "Flowchart",
+    "Insight Cards",
+    "Code Block with Copy",
+    "Fine-tune Card",
+    "Selection Actions"
+  ]
 }

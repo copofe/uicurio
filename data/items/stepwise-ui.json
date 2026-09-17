@@ -5,8 +5,8 @@
     "zh": "Stepwise UI"
   },
   "description": {
-    "en": "Growing collection of copy-paste components with its own CLI registry; plain React, Vite and Remix friendly; React 19, Tailwind CSS v4.",
-    "zh": "持续生长的复制即用组件集，带自有 CLI 仓库（npx stepwise-ui init/add）；对 React、Vite、Remix 友好；React 19 + Tailwind CSS v4。"
+    "en": "A growing collection of React components for building modern products. Arrives as source code you can read, edit, and make your own with your coding agent.",
+    "zh": "专为现代产品迭代打造的 React 组件集合：全部以清晰可读的源码交付，与 AI 编程助手高度协同，设计感浑然天成。"
   },
   "url": "https://ui.stepwise.studio",
   "repo": "https://github.com/Stepwise-Studio/stepwise-ui",
@@ -18,5 +18,20 @@
   "screenshot": "stepwise-ui.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-09-08"
+  "added": "2026-09-08",
+  "content": {
+    "en": "Stepwise UI provides a thoughtful collection of step-by-step product interaction patterns, wizard flows, and stateful widgets for React applications. Engineered to look genuinely designed rather than procedurally generated, each component arrives as clean, self-contained source code that you can freely adapt, customize, or let your AI coding agent extend. Highlights include progressive onboarding steppers, choice matrices, and contextual drawer flows.",
+    "zh": "Stepwise UI 聚焦于打磨产品级流程与步骤引导交互。针对常见的注册向导、多步设置校验、复杂表单流转与上下文抽屉，它提供了设计质感精湛、拒绝流水线工业感的优雅模式。所有组件均以结构极其清晰的独立源码形式分发，不仅利于人类工程师直接按需微调，更针对 AI 编程 Agent 进行了友好注释，确保生成的产品界面具有出色的审美把控。"
+  },
+  "components": [
+    "Multi-step Wizard",
+    "Progress Stepper",
+    "Form Flow Container",
+    "Confirmation Modal",
+    "Interactive Checklist",
+    "Choice Card Grid",
+    "Status Badge",
+    "Onboarding Card",
+    "Context Drawer"
+  ]
 }

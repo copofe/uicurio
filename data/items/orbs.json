@@ -5,8 +5,8 @@
     "zh": "Orbs"
   },
   "description": {
-    "en": "Animated thinking-orb loading indicator for processing and AI states.",
-    "zh": "「思考星球」动画加载指示器，为处理中 / AI 状态而生。"
+    "en": "Dotted thought-orb loading indicators for AI & agent interfaces. Nine hand-tuned animated states on a 2D canvas — no WebGL, works identically everywhere.",
+    "zh": "专为 AI 与 Agent 界面打造的点阵粒子思维光球：纯 2D Canvas 呈现 9 种精调动画态，无 WebGL，全浏览器表现一致。"
   },
   "url": "https://libraries.dev/orbs",
   "repo": "https://github.com/Jakubantalik/thinking-orbs",
@@ -18,5 +18,21 @@
   "screenshot": "orbs.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-08-26"
+  "added": "2026-08-26",
+  "content": {
+    "en": "Thinking Orbs offers organic, particle-based thought indicators purpose-built for generative AI assistants, chat interfaces, and autonomous agent loops. Rendered entirely on a plain 2D canvas with zero WebGL overhead or shader incompatibilities, it runs at flawless 60fps across Chrome, Safari, and Firefox. It ships with 9 hand-crafted state transitions—including thinking waves, listening audio ripples, search spirals, error shakes, and completion bursts—each tuned in both compact and regular sizes.",
+    "zh": "Thinking Orbs 是一套专为生成式 AI 助手、智能体（Agent）工作流打造的点阵粒子思维光球指示器。不同于常规 WebGL 着色器在低端设备或不同浏览器间的渲染兼容隐患，它完全基于原生 2D Canvas 绘制，在 Chrome、Safari、Firefox 上表现严丝合缝。内置 9 种手工调校的生命周期动态——包括空闲自旋、深度思考波纹、语音监听波动、发散搜索螺旋、错误抖动与完成绽放，提供紧凑与常规两档标准尺寸。"
+  },
+  "components": [
+    "Idle Orbit",
+    "Thinking Wave",
+    "Pulse Ripple",
+    "Stream Drift",
+    "Search Spiral",
+    "Listening Audio-Reactive",
+    "Error Shake",
+    "Success Burst",
+    "Processing Twinkle",
+    "Dual Size Preset (Small / Regular)"
+  ]
 }

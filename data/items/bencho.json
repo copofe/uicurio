@@ -5,8 +5,8 @@
     "zh": "Bencho"
   },
   "description": {
-    "en": "Live component bench of interactive UI blocks — every block is live and adjustable; tune, bench, share, take; React + Motion.",
-    "zh": "活体组件试验台：每个 block 都是可调的活物——调一调、试一试、分享、带走；React + Motion。"
+    "en": "A library of live, interactive UI blocks you can explore, tweak, and take straight into your projects — everything is functional, not mocked.",
+    "zh": "沉浸式可交互 UI 区块实验室：所有组件均可在网页中直接调试手感与参数，开箱即用，拒绝静态占位。"
   },
   "url": "https://bencho.dev",
   "category": "collections",
@@ -18,5 +18,31 @@
   "screenshot": "bencho.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-09-10"
+  "added": "2026-09-10",
+  "content": {
+    "en": "Bencho is a living laboratory of interactive interface experiments and design engineering blocks. Built with Framer Motion and Tailwind CSS, each block is entirely interactive in the browser—allowing developers and designers to adjust physics parameters, inspect real-time state feedback, and copy modular code directly. Highlights include magnetic snapping selects, swipe-to-confirm sliders, liquid gooey drag interactions, and frosted-glass macOS dock bars.",
+    "zh": "Bencho 是一个由设计工程师主导的交互式组件实验场，基于 Framer Motion 与 Tailwind CSS 构建。页面上的每一个组件块都处于完全存活的可交互状态——支持即时调节弹簧阻尼、拖拽拉伸、吸附触发并复制代码。核心包含磁吸选择器、滑动确认条、果冻液体拉伸球、折叠透视卡片与磨砂玻璃风格 Dock 栏等突破常规的先锋交互构件。"
+  },
+  "components": [
+    "MagneticSelect",
+    "SlideConfirm",
+    "ColorPicker",
+    "Checklist",
+    "Carousel",
+    "Palette",
+    "TiltCard",
+    "LiquidGooey Ball",
+    "FoldCard",
+    "BrowserTabs",
+    "ActionNode",
+    "LiquidToggle",
+    "GlassToolbar",
+    "GlassRadialMenu",
+    "GlassStepper",
+    "GlassConfirm",
+    "GlassToasts",
+    "GlassDock",
+    "ProgressPill",
+    "CommandPalette"
+  ]
 }

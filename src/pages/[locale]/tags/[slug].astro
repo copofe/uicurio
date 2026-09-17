@@ -18,7 +18,7 @@ const { locale, slug } = Astro.params;
 const tag = Astro.props.tag as any;
 const t = ui[locale as keyof typeof ui];
 const list = itemsWithTag(tag.id);
-const title = locale === "zh" ? `${tag.name.zh} · 精选 ${list.length} 个库 — uicurio` : `${tag.name.en} – ${list.length} curated libraries · uicurio`;
+const title = locale === "zh" ? `${tag.name.zh} · 精选 ${list.length} 个库 — Uicurio` : `${tag.name.en} – ${list.length} curated libraries · Uicurio`;
 const description = locale === "zh" ? `手工严选的 ${list.length} 个${tag.name.zh}相关的 UI 库。` : `${list.length} hand-picked UI libraries for ${tag.name.en}.`;
 ---
 <Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${list[0]?.screenshot}`}>
@@ -26,7 +26,7 @@ const description = locale === "zh" ? `手工严选的 ${list.length} 个${tag.n
     <Sidebar locale={locale} showFacets={false} total={items.length} categories={[]} />
     <main class="main">
       <nav class="crumb" aria-label="Breadcrumb">
-        <a href={`/${locale}/`}>uicurio</a>
+        <a href={`/${locale}/`}>Uicurio</a>
         <span class="sep" aria-hidden="true">/</span>
         <span aria-current="page">{tag.name[locale]}</span>
       </nav>

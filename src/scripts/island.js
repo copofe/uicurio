@@ -18,7 +18,13 @@ const SEL = {
   empty: "#dir-empty",
   emptyClear: "#dir-empty-clear",
   sortToggle: ".sorttoggle",
+  activeFiltersBar: "#dir-active-filters",
+  activeFiltersList: "#dir-active-filters .active-filters-list",
+  activeFiltersClear: "#dir-active-clear",
   chips: ".chip[data-tag]",
+  facetToggle: "[data-facet-toggle]",
+  tagFilter: "[data-tag-filter]",
+  moreToggle: "[data-more-toggle]",
   menuBtn: ".topbar .menu-btn",
   searchBtn: ".topbar .search-btn",
   themeToggle: "[data-theme-toggle]",
@@ -49,6 +55,19 @@ function icon(name, size) {
     tag: '<path d="M12 2H4a2 2 0 0 0-2 2v8l9.3 9.3a1.7 1.7 0 0 0 2.4 0l7.6-7.6a1.7 1.7 0 0 0 0-2.4L12 2Z"/><circle cx="7.5" cy="7.5" r="1"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
     moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/>',
+    check: '<path d="M20 6 9 17l-5-5"/>',
+    dice: '<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M12 12h.01M8 8h.01M16 8h.01M8 16h.01M16 16h.01"/>',
+    globe:
+      '<circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+    grid: '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>',
+    media:
+      '<rect width="18" height="14" x="3" y="5" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="m21 15-5-5L5 21"/>',
+    list: '<line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/>',
+    copy: '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
+    arrowLeft: '<path d="m15 18-6-6 6-6"/>',
+    arrowRight: '<path d="m9 18 6-6-6-6"/>',
+    external:
+      '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/>',
   };
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("viewBox", "0 0 24 24");
@@ -60,16 +79,16 @@ function icon(name, size) {
   svg.setAttribute("stroke-linecap", "round");
   svg.setAttribute("stroke-linejoin", "round");
   svg.setAttribute("aria-hidden", "true");
-  for (const chunk of P[name].split("/>")) {
+  for (const chunk of (P[name] || P.search).split("/>")) {
     if (!chunk) continue;
     const m = chunk.trim().match(/^<([a-z]+)/);
     const child = document.createElementNS(
       "http://www.w3.org/2000/svg",
       m ? m[1] : "path",
     );
-    for (const a of chunk.trim().match(/([a-z-]+)="([^"]*)"/g) || []) {
-      const kv = a.match(/([a-z-]+)="([^"]*)"/);
-      child.setAttribute(kv[1], kv[2]);
+    for (const a of chunk.trim().match(/([a-z0-9-]+)="([^"]*)"/g) || []) {
+      const kv = a.match(/([a-z0-9-]+)="([^"]*)"/);
+      if (kv) child.setAttribute(kv[1], kv[2]);
     }
     svg.appendChild(child);
   }
@@ -104,8 +123,6 @@ const debounce = (fn, ms) => {
   };
 };
 
-/* ── 字标（手绘 SVG，gen-wordmark.mjs 产出）── */
-
 /* ── 载荷（岛 ↔ 构建期契约）── */
 let U = null;
 let LOCALE = "en";
@@ -123,7 +140,6 @@ function loadPayload() {
   }
 }
 
-/** 契约断言：载荷形状不符 = 构建期与岛的隐式契约断了，宁可整岛不启用也不带病运行 */
 function payloadOk(u) {
   const itemOk = (i) =>
     !!i &&
@@ -158,13 +174,17 @@ const state = {
   },
   q: "",
   sort: "new",
+  activePreviewSlug: null,
+  sheetReturnURL: null,
 };
-const cardNodes = new Map(); // slug → SSR 卡片节点（单一渲染源：CardV2.astro；岛只复用/排序/隐藏）
+const cardNodes = new Map(); // slug → SSR 卡片节点
 
 function initCardNodes() {
   const grid = $(SEL.grid);
   if (!grid) return;
-  for (const n of $$(SEL.grid + " .card")) cardNodes.set(n.dataset.slug, n);
+  for (const n of $$(SEL.grid + " .card")) {
+    cardNodes.set(n.dataset.slug, n);
+  }
 }
 
 const selPairs = () => {
@@ -184,20 +204,37 @@ const ctx = (skipFacet) => ({
   tagNames: tagNames(),
 });
 
-/* ── URL 双向同步（编码解码走 island-core）── */
+/* ── URL 构造与双向同步（编码解码走 island-core）── */
+const homeURL = () => `/${LOCALE}/`;
+const itemURL = (slug) => `/${LOCALE}/item/${encodeURIComponent(slug)}/`;
+const catURL = (slug) => `/${LOCALE}/collections/${encodeURIComponent(slug)}/`;
+const tagPageURL = (tagId) =>
+  `/${LOCALE}/tags/${encodeURIComponent(tagId.split(":")[1])}/`;
+const getGalleryBase = () => {
+  if (PAGE === "gallery") {
+    return U && U.channel ? catURL(U.channel) : homeURL();
+  }
+  return location.pathname;
+};
+const go = (path) => {
+  if (typeof path === "string" && path.startsWith("/")) location.assign(path);
+};
+
 function readURL() {
   const f = decodeFilters(location.search);
   for (const { facet, tag } of f.pairs) {
     if (U.tags[tag] && U.tags[tag].facet === facet) state.sel[facet].add(tag);
   }
   state.q = f.q;
-  if (f.sort === "old") state.sort = "old";
+  state.sort = f.sort === "old" ? "old" : "new";
 }
 
 function writeURL() {
+  if (state.activePreviewSlug) return;
   const qs = encodeFilters({ pairs: selPairs(), q: state.q, sort: state.sort });
+  const base = getGalleryBase();
   try {
-    history.replaceState(null, "", qs ? `?${qs}` : location.pathname);
+    history.replaceState(null, "", qs ? `${base}?${qs}` : base);
   } catch {
     /* file:// 容错 */
   }
@@ -211,7 +248,6 @@ function applyTheme(t) {
   } catch {
     /* 私密模式 */
   }
-  // 招牌细节：主题切换时字标重画一遍（antfu animated-svg-logo 技法）
   for (const svg of $$(SEL.wordmark)) {
     svg.classList.remove("play");
     void svg.getBoundingClientRect();
@@ -219,38 +255,106 @@ function applyTheme(t) {
   }
 }
 
-/* ── URL 构造 ── */
-const homeURL = () => `/${LOCALE}/`;
-const itemURL = (slug) => `/${LOCALE}/item/${encodeURIComponent(slug)}/`;
-const catURL = (slug) => `/${LOCALE}/collections/${encodeURIComponent(slug)}/`;
-const tagPageURL = (tagId) =>
-  `/${LOCALE}/tags/${encodeURIComponent(tagId.split(":")[1])}/`;
-const go = (path) => {
-  if (typeof path === "string" && path.startsWith("/")) location.assign(path);
-};
+/* ── Toast 提示 ── */
+let toastWrap = null;
+let toastTimer = null;
+function showToast(msg) {
+  if (!toastWrap) {
+    toastWrap = el("div", "toast-wrap");
+    document.body.appendChild(toastWrap);
+  }
+  toastWrap.replaceChildren();
+  const toast = el("div", "toast");
+  toast.appendChild(icon("check", 14));
+  toast.appendChild(document.createTextNode(msg));
+  toastWrap.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add("show"));
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 200);
+  }, 2200);
+}
 
-/* ── 藏品卡网格：SSR 节点复用（单一渲染源在 CardV2.astro，岛不建卡）── */
+/* ── 已选条件栏同步 ── */
+function activeFiltersSync() {
+  const bar = $(SEL.activeFiltersBar);
+  const listEl = $(SEL.activeFiltersList);
+  if (!bar || !listEl) return;
+
+  listEl.replaceChildren();
+  let count = 0;
+
+  if (state.q) {
+    const pill = el("span", "active-filter-pill");
+    pill.appendChild(
+      document.createTextNode(`${S.filterQuery || "Search"}: "${state.q}"`),
+    );
+    const del = el("button", "pill-del", "×");
+    del.type = "button";
+    del.setAttribute("aria-label", "Remove filter");
+    del.addEventListener("click", () => {
+      state.q = "";
+      const input = $(SEL.search);
+      if (input) {
+        input.value = "";
+        $(SEL.searchBox).classList.remove("has-value");
+      }
+      refresh();
+    });
+    pill.appendChild(del);
+    listEl.appendChild(pill);
+    count++;
+  }
+
+  for (const facet in state.sel) {
+    for (const tag of state.sel[facet]) {
+      const meta = U.tags[tag];
+      if (!meta) continue;
+      const pill = el("span", "active-filter-pill");
+      pill.appendChild(document.createTextNode(meta.name));
+      const del = el("button", "pill-del", "×");
+      del.type = "button";
+      del.setAttribute("aria-label", `Remove ${meta.name}`);
+      del.addEventListener("click", () => toggleTag(tag));
+      pill.appendChild(del);
+      listEl.appendChild(pill);
+      count++;
+    }
+  }
+
+  bar.hidden = count === 0;
+}
+
+/* ── 藏品卡网格：SSR 节点复用 ── */
+function currentActiveList() {
+  return sortItems(
+    U.items.filter((i) => matches(i, ctx())),
+    state.sort,
+  );
+}
+
 function gridSync(list) {
   const grid = $(SEL.grid);
   const empty = $(SEL.empty);
+  if (!grid || !empty) return;
   const visible = new Set(list.map((i) => i.slug));
 
-  // FLIP before：当前可见卡的纵坐标
   const before = new Map();
   for (const n of cardNodes.values()) {
     if (!n.classList.contains("hidden"))
       before.set(n.dataset.slug, n.getBoundingClientRect().top);
   }
-  // 重排：可见卡按序移动；不在结果集的隐藏
   for (const item of list) {
     const n = cardNodes.get(item.slug);
-    n.classList.remove("hidden");
-    grid.appendChild(n);
+    if (n) {
+      n.classList.remove("hidden");
+      grid.appendChild(n);
+    }
   }
   for (const [slug, n] of cardNodes) {
     if (!visible.has(slug)) n.classList.add("hidden");
   }
-  // FLIP after：位移 > 2px 的卡做回位动画（新显卡的 rect 为 0，自动跳过）
   if (!REDUCED) {
     requestAnimationFrame(() => {
       for (const n of cardNodes.values()) {
@@ -289,6 +393,31 @@ function chipSync() {
     const nn = b.querySelector(".n");
     if (nn) nn.textContent = String(n);
   }
+
+  // 同步分面标题上的已选激活角标
+  for (const facet in state.sel) {
+    const count = state.sel[facet].size;
+    for (const badge of $$(`[data-facet-badge="${facet}"]`)) {
+      badge.textContent = String(count);
+      badge.hidden = count === 0;
+    }
+  }
+
+  // 若折叠溢出区内有选中的标签，自动展开保证可见
+  for (const group of $$(".facet-group")) {
+    const overflow = group.querySelector(".chiprow-overflow");
+    const moreBtn = group.querySelector(SEL.moreToggle);
+    if (overflow && moreBtn) {
+      const hasActive = Array.from(overflow.querySelectorAll(SEL.chips)).some(
+        (c) => c.getAttribute("aria-pressed") === "true",
+      );
+      if (hasActive && overflow.hidden) {
+        overflow.hidden = false;
+        const t = moreBtn.querySelector(".t");
+        if (t) t.textContent = S.showLessTags || "Less";
+      }
+    }
+  }
 }
 
 function drawerCountSync(list) {
@@ -297,7 +426,8 @@ function drawerCountSync(list) {
 }
 
 function toggleTag(tag) {
-  const facet = U.tags[tag].facet;
+  const facet = U.tags[tag]?.facet;
+  if (!facet) return;
   if (state.sel[facet].has(tag)) state.sel[facet].delete(tag);
   else state.sel[facet].add(tag);
   refresh();
@@ -315,17 +445,452 @@ function clearFiltersAndRefresh() {
 }
 
 function refresh() {
-  const list = sortItems(
-    U.items.filter((i) => matches(i, ctx())),
-    state.sort,
-  );
+  const list = currentActiveList();
   chipSync();
   gridSync(list);
+  activeFiltersSync();
   drawerCountSync(list);
   writeURL();
 }
 
-/* ── 遮罩 / 抽屉 / 命令面板 ── */
+function randomPick() {
+  const list = currentActiveList();
+  const pool = list.length ? list : U.items;
+  if (!pool.length) return;
+  const picked = pool[Math.floor(Math.random() * pool.length)];
+  if (PAGE === "gallery") {
+    openSheet(picked.slug);
+  } else {
+    go(itemURL(picked.slug));
+  }
+}
+
+/* ── 居中大画布剧场弹窗 (Dribbble-style Showcase Modal) ── */
+let sheetScrim = null;
+let sheetPanel = null;
+let sheetFloatPrev = null;
+let sheetFloatNext = null;
+
+function buildSheet() {
+  sheetScrim = el("div", "sheet-scrim");
+  // 点击遮罩外围背景关闭弹窗
+  sheetScrim.addEventListener("click", (e) => {
+    if (e.target === sheetScrim) closeSheet();
+  });
+
+  // 悬浮左右翻页微控件 (Dribbble 标志性悬浮导航)
+  sheetFloatPrev = el("button", "sheet-float-nav sheet-float-prev");
+  sheetFloatPrev.type = "button";
+  sheetFloatPrev.setAttribute("aria-label", "Previous (←)");
+  sheetFloatPrev.title = "Previous (←)";
+  sheetFloatPrev.appendChild(icon("arrowLeft", 20));
+
+  sheetFloatNext = el("button", "sheet-float-nav sheet-float-next");
+  sheetFloatNext.type = "button";
+  sheetFloatNext.setAttribute("aria-label", "Next (→)");
+  sheetFloatNext.title = "Next (→)";
+  sheetFloatNext.appendChild(icon("arrowRight", 20));
+
+  sheetPanel = el("article", "sheet-panel");
+  sheetPanel.setAttribute("role", "dialog");
+  sheetPanel.setAttribute("aria-modal", "true");
+  sheetPanel.setAttribute("aria-label", S.preview || "Preview");
+  // 阻止弹窗内部点击冒泡关闭
+  sheetPanel.addEventListener("click", (e) => e.stopPropagation());
+
+  sheetScrim.appendChild(sheetFloatPrev);
+  sheetScrim.appendChild(sheetFloatNext);
+  sheetScrim.appendChild(sheetPanel);
+  document.body.appendChild(sheetScrim);
+}
+
+function openSheet(slug, fromPopState = false) {
+  const item = U.items.find((i) => i.slug === slug);
+  if (!item) return;
+
+  const wasOpen = sheetPanel && sheetPanel.classList.contains("open");
+  if (!wasOpen) {
+    state.sheetReturnURL = location.pathname + location.search + location.hash;
+  }
+  lastFocus = document.activeElement;
+  state.activePreviewSlug = slug;
+
+  const catObj = U.categories.find((c) => c.slug === item.cat);
+  const catName = catObj ? catObj.name : item.cat;
+  const activeList = currentActiveList();
+  const idx = activeList.findIndex((i) => i.slug === slug);
+  const prevItem = idx > 0 ? activeList[idx - 1] : null;
+  const nextItem =
+    idx >= 0 && idx < activeList.length - 1 ? activeList[idx + 1] : null;
+
+  // 联动更新悬浮翻页按钮状态
+  if (prevItem) {
+    sheetFloatPrev.disabled = false;
+    sheetFloatPrev.title = `← ${S.pagerPrev || "Previous"}: ${prevItem.name}`;
+    sheetFloatPrev.setAttribute("aria-label", sheetFloatPrev.title);
+    sheetFloatPrev.onclick = (e) => {
+      e.stopPropagation();
+      openSheet(prevItem.slug);
+    };
+  } else {
+    sheetFloatPrev.disabled = true;
+    sheetFloatPrev.title = S.pagerPrev || "Previous";
+    sheetFloatPrev.setAttribute("aria-label", sheetFloatPrev.title);
+    sheetFloatPrev.onclick = null;
+  }
+
+  if (nextItem) {
+    sheetFloatNext.disabled = false;
+    sheetFloatNext.title = `${nextItem.name} · ${S.pagerNext || "Next"} →`;
+    sheetFloatNext.setAttribute("aria-label", sheetFloatNext.title);
+    sheetFloatNext.onclick = (e) => {
+      e.stopPropagation();
+      openSheet(nextItem.slug);
+    };
+  } else {
+    sheetFloatNext.disabled = true;
+    sheetFloatNext.title = S.pagerNext || "Next";
+    sheetFloatNext.setAttribute("aria-label", sheetFloatNext.title);
+    sheetFloatNext.onclick = null;
+  }
+
+  let host = "";
+  try {
+    host = new URL(item.url).hostname.replace(/^www\./, "");
+  } catch {
+    host = item.url;
+  }
+
+  // 1. 顶部粘性栏 (Dribbble 风格顶部常驻导航)
+  const head = el("header", "sheet-head");
+  const headLeft = el("div", "sheet-head-left");
+
+  // Dribbble 创作者头像 (以 uicurio 品牌渐变环为标志)
+  const headAvatar = el("div", "sheet-avatar sheet-avatar-sm", "U");
+  headLeft.appendChild(headAvatar);
+
+  const headMeta = el("div", "sheet-head-meta");
+  const headTitle = el("h2", "sheet-head-title", item.name);
+  const headSub = el("div", "sheet-head-sub");
+  headSub.appendChild(document.createTextNode("Uicurio"));
+  headSub.appendChild(el("span", "sheet-byline-sep", "·"));
+  headSub.appendChild(el("span", "sheet-head-cat", catName));
+  headMeta.appendChild(headTitle);
+  headMeta.appendChild(headSub);
+  headLeft.appendChild(headMeta);
+  head.appendChild(headLeft);
+
+  const nav = el("div", "sheet-nav");
+
+  // 官方外链直达 (核心 Solid 主按钮，仿 Dribbble Get in touch / Visit 黑色胶囊)
+  const visitBtn = el("a", "btn btn-solid sheet-visit-btn");
+  visitBtn.href = item.url;
+  visitBtn.target = "_blank";
+  visitBtn.rel = "noopener";
+  visitBtn.appendChild(el("span", null, S.visitSite || "Visit site"));
+  visitBtn.appendChild(icon("aur", 13));
+  nav.appendChild(visitBtn);
+
+  // 复制链接 (仿 Dribbble Save / Share 幽灵胶囊)
+  const copyBtn = el("button", "btn btn-ghost sheet-copy-btn");
+  copyBtn.type = "button";
+  copyBtn.appendChild(icon("copy", 13));
+  copyBtn.appendChild(el("span", null, S.copyLink || "Copy Link"));
+  copyBtn.addEventListener("click", () => {
+    navigator.clipboard.writeText(item.url).then(() => {
+      showToast(S.copied || "Link copied!");
+    });
+  });
+  nav.appendChild(copyBtn);
+
+  // 打开全屏独立页
+  const fullPageLink = el("a", "iconbtn");
+  fullPageLink.href = itemURL(item.slug);
+  fullPageLink.setAttribute(
+    "aria-label",
+    S.openInNewTab || "Open standalone page",
+  );
+  fullPageLink.title = S.openInNewTab || "Open standalone page";
+  fullPageLink.appendChild(icon("external", 14));
+  nav.appendChild(fullPageLink);
+
+  // 关闭按钮
+  const closeBtn = el("button", "iconbtn sheet-close-btn");
+  closeBtn.type = "button";
+  closeBtn.setAttribute("aria-label", S.close || "Close");
+  closeBtn.title = (S.close || "Close") + " (Esc)";
+  closeBtn.appendChild(icon("x", 17));
+  closeBtn.addEventListener("click", () => closeSheet());
+  nav.appendChild(closeBtn);
+  head.appendChild(nav);
+
+  // 2. 舞台标题与作者 Byline (Dribbble 经典大字头与创作者署名条)
+  const stageIntro = el("div", "sheet-stage-intro");
+  const stageTitle = el("h1", "sheet-stage-title", item.name);
+  stageIntro.appendChild(stageTitle);
+
+  const byline = el("div", "sheet-byline");
+  const author = el("div", "sheet-author");
+  const stageAvatar = el("div", "sheet-avatar sheet-avatar-md", "U");
+  author.appendChild(stageAvatar);
+
+  const authorMeta = el("div", "sheet-author-meta");
+  const authorName = el("div", "sheet-author-name", "Uicurio");
+  const authorSub = el("div", "sheet-author-sub");
+
+  const badgeCurated = el("span", "sheet-badge sheet-badge-curated");
+  badgeCurated.appendChild(el("span", "badge-dot"));
+  badgeCurated.appendChild(
+    document.createTextNode(LOCALE === "zh" ? "官方精选收录" : "Featured"),
+  );
+  authorSub.appendChild(badgeCurated);
+
+  authorSub.appendChild(el("span", "sheet-byline-sep", "·"));
+  authorSub.appendChild(el("span", null, catName));
+
+  authorMeta.appendChild(authorName);
+  authorMeta.appendChild(authorSub);
+  author.appendChild(authorMeta);
+  byline.appendChild(author);
+
+  const bylineLinks = el("div", "sheet-byline-links");
+  const hostLink = el("a", "sheet-pill-link", host);
+  hostLink.href = item.url;
+  hostLink.target = "_blank";
+  hostLink.rel = "noopener";
+  hostLink.prepend(icon("external", 11));
+  bylineLinks.appendChild(hostLink);
+
+  if (item.repo) {
+    const repoLink = el("a", "sheet-pill-link", "GitHub ↗");
+    repoLink.href = item.repo;
+    repoLink.target = "_blank";
+    repoLink.rel = "noopener";
+    bylineLinks.appendChild(repoLink);
+  }
+  byline.appendChild(bylineLinks);
+  stageIntro.appendChild(byline);
+
+  // 3. 大画布全景封面 (Dribbble 剧场核心视口)
+  const coverWrap = el("div", "sheet-cover");
+  const coverLink = el("a");
+  coverLink.href = item.url;
+  coverLink.target = "_blank";
+  coverLink.rel = "noopener";
+  coverLink.title = `${S.visitSite || "Visit site"} · ${item.name}`;
+  const img = el("img");
+  img.src = `/assets/shots/${item.shot}`;
+  img.alt = item.name;
+  img.width = 1600;
+  img.height = 1000;
+  coverLink.appendChild(img);
+  coverWrap.appendChild(coverLink);
+
+  // 4. 叙述详情、组件展示与同柜推荐
+  const body = el("div", "sheet-body");
+  const descP = el("p", "sheet-desc", item.desc);
+  body.appendChild(descP);
+
+  // 包含组件板块 (从原站点解析的组件列表)
+  if (item.components && item.components.length > 0) {
+    const compSection = el("div", "sheet-components-section");
+    const compHeader = el("div", "sheet-components-header");
+    const compTitle = el(
+      "h4",
+      "sheet-components-title",
+      LOCALE === "zh" ? "包含组件" : "Included Components",
+    );
+    const compCount = el(
+      "span",
+      "sheet-components-count",
+      `${item.components.length}`,
+    );
+    compHeader.appendChild(compTitle);
+    compHeader.appendChild(compCount);
+    compSection.appendChild(compHeader);
+
+    const compList = el("div", "sheet-components-list");
+    for (const comp of item.components) {
+      const pill = el("span", "sheet-component-pill", comp);
+      compList.appendChild(pill);
+    }
+    compSection.appendChild(compList);
+    body.appendChild(compSection);
+  }
+
+  // 深度设计与工程解析内容 (content)
+  if (item.content) {
+    const contentP = el("p", "sheet-content-text", item.content);
+    body.appendChild(contentP);
+  }
+
+  // 探索标签 Pill (Dribbble 经典 #tag 风格)
+  const tagsWrap = el("div", "sheet-tags");
+  for (const tagId of item.tags) {
+    const meta = U.tags[tagId];
+    if (!meta) continue;
+    const chip = el("button", "sheet-tag-chip");
+    chip.type = "button";
+    chip.appendChild(document.createTextNode(`#${meta.name}`));
+    chip.addEventListener("click", () => {
+      closeSheet();
+      toggleTag(tagId);
+    });
+    tagsWrap.appendChild(chip);
+  }
+  body.appendChild(tagsWrap);
+
+  // 分隔线
+  body.appendChild(el("hr", "sheet-divider"));
+
+  // 同柜推荐（Dribbble 式 More by Category 专区）
+  const alts = U.items.filter(
+    (x) => x.slug !== item.slug && x.cat === item.cat,
+  );
+  if (alts.length < 3) {
+    for (const x of U.items) {
+      if (alts.length >= 3) break;
+      if (x.slug === item.slug || alts.includes(x)) continue;
+      if (x.tags.some((tg) => item.tags.includes(tg))) alts.push(x);
+    }
+  }
+  const related = alts.slice(0, 3);
+  if (related.length > 0) {
+    const relSection = el("div", "sheet-related-section");
+    const relHead = el("div", "sheet-related-head");
+    const relHeadLeft = el("div", "sheet-related-head-left");
+    relHeadLeft.appendChild(el("div", "sheet-avatar sheet-avatar-sm", "U"));
+    const relTitleBox = el("div");
+    relTitleBox.appendChild(
+      el(
+        "h3",
+        null,
+        LOCALE === "zh" ? `更多「${catName}」精选推荐` : `More in ${catName}`,
+      ),
+    );
+    relTitleBox.appendChild(
+      el(
+        "span",
+        "sheet-related-sub",
+        LOCALE === "zh"
+          ? "来自同一频道分类的高品质设计与工程藏品"
+          : "Curated design & engineering picks from this channel",
+      ),
+    );
+    relHeadLeft.appendChild(relTitleBox);
+    relHead.appendChild(relHeadLeft);
+
+    const relAllLink = el("a", "sheet-related-all");
+    relAllLink.href = `/${LOCALE}/collections/${item.cat}/`;
+    relAllLink.appendChild(
+      document.createTextNode(
+        LOCALE === "zh" ? "浏览频道全部 ↗" : "Browse all ↗",
+      ),
+    );
+    relHead.appendChild(relAllLink);
+    relSection.appendChild(relHead);
+
+    const relGrid = el("div", "sheet-related-grid");
+    for (const rItem of related) {
+      const rCard = el("button", "sheet-related-card");
+      rCard.type = "button";
+      const rThumb = el("div", "sheet-related-thumb");
+      const rImg = el("img");
+      rImg.src = `/assets/shots/${rItem.shot}`;
+      rImg.alt = rItem.name;
+      rImg.loading = "lazy";
+      rImg.decoding = "async";
+      rImg.width = 400;
+      rImg.height = 250;
+      rThumb.appendChild(rImg);
+      rCard.appendChild(rThumb);
+      rCard.appendChild(el("span", "sheet-related-title", rItem.name));
+      rCard.addEventListener("click", () => openSheet(rItem.slug));
+      relGrid.appendChild(rCard);
+    }
+    relSection.appendChild(relGrid);
+    body.appendChild(relSection);
+  }
+
+  // 底部翻页控制器
+  const pager = el("nav", "sheet-pager");
+  const prevPagerBtn = el("button", "sheet-pager-btn");
+  prevPagerBtn.type = "button";
+  prevPagerBtn.appendChild(icon("arrowLeft", 14));
+  const prevText = prevItem
+    ? `${S.pagerPrev || "Previous"}: ${prevItem.name}`
+    : S.pagerPrev || "Previous";
+  prevPagerBtn.appendChild(el("span", null, prevText));
+  if (prevItem) {
+    prevPagerBtn.addEventListener("click", () => openSheet(prevItem.slug));
+  } else {
+    prevPagerBtn.disabled = true;
+  }
+  pager.appendChild(prevPagerBtn);
+
+  const nextPagerBtn = el("button", "sheet-pager-btn");
+  nextPagerBtn.type = "button";
+  const nextText = nextItem
+    ? `${nextItem.name} · ${S.pagerNext || "Next"}`
+    : S.pagerNext || "Next";
+  nextPagerBtn.appendChild(el("span", null, nextText));
+  nextPagerBtn.appendChild(icon("arrowRight", 14));
+  if (nextItem) {
+    nextPagerBtn.addEventListener("click", () => openSheet(nextItem.slug));
+  } else {
+    nextPagerBtn.disabled = true;
+  }
+  pager.appendChild(nextPagerBtn);
+  body.appendChild(pager);
+
+  sheetPanel.replaceChildren(head, stageIntro, coverWrap, body);
+
+  // 打开动效与视口重置
+  if (sheetPanel) sheetPanel.scrollTop = 0;
+  sheetScrim.scrollTop = 0;
+  sheetScrim.classList.add("open");
+  sheetPanel.classList.add("open");
+  document.body.style.overflow = "hidden";
+
+  // URL push / replace state
+  if (fromPopState !== true) {
+    try {
+      if (wasOpen) {
+        history.replaceState({ preview: slug }, "", itemURL(slug));
+      } else {
+        history.pushState({ preview: slug }, "", itemURL(slug));
+      }
+    } catch {}
+  }
+}
+
+function closeSheet(fromPopState = false) {
+  if (!sheetPanel || !sheetPanel.classList.contains("open")) return;
+  sheetPanel.classList.remove("open");
+  sheetScrim.classList.remove("open");
+  document.body.style.overflow = "";
+  state.activePreviewSlug = null;
+
+  if (fromPopState === true) {
+    state.sheetReturnURL = null;
+  } else {
+    const qs = encodeFilters({
+      pairs: selPairs(),
+      q: state.q,
+      sort: state.sort,
+    });
+    const fallback = qs ? `${getGalleryBase()}?${qs}` : getGalleryBase();
+    const returnURL = state.sheetReturnURL || fallback;
+    state.sheetReturnURL = null;
+    try {
+      history.replaceState(null, "", returnURL);
+    } catch {}
+  }
+
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+
+/* ── 遮罩 / 抽屉 / 快捷键弹窗 / 命令面板 ── */
 let scrim;
 let drawer;
 let palette;
@@ -358,15 +923,67 @@ function channelRows(container) {
 }
 
 function facetGroups(container) {
+  // 移动端抽屉内的标签搜索
+  const searchWrap = el("div", "side-tag-filter-wrap");
+  const searchBox = el("div", "side-tag-search");
+  searchBox.appendChild(icon("search", 13));
+  const searchInput = el("input");
+  searchInput.type = "search";
+  searchInput.placeholder = S.filterTagsPh || "Filter tags…";
+  searchInput.dataset.tagFilter = "";
+  searchInput.setAttribute("aria-label", S.filterTagsPh || "Filter tags…");
+  searchBox.appendChild(searchInput);
+  searchWrap.appendChild(searchBox);
+  container.appendChild(searchWrap);
+
   for (const f of U.facets) {
     const group = el("div", "facet-group");
     group.dataset.facet = f.key;
-    group.appendChild(el("p", "side-label", f.name));
+    const head = el("button", "facet-head");
+    head.type = "button";
+    head.dataset.facetToggle = f.key;
+    head.appendChild(el("span", "side-label", f.name));
+    const badge = el("span", "facet-active-badge", "0");
+    badge.dataset.facetBadge = f.key;
+    badge.hidden = true;
+    head.appendChild(badge);
+    head.appendChild(icon("arrowRight", 12)).classList.add("facet-arrow");
+    head.addEventListener("click", () => {
+      group.classList.toggle("collapsed");
+    });
+    group.appendChild(head);
+
+    const facetTagKeys = Object.keys(U.tags)
+      .filter((t) => U.tags[t].facet === f.key)
+      .sort((a, b) => {
+        const countA = U.items.filter((i) => i.tags.includes(a)).length;
+        const countB = U.items.filter((i) => i.tags.includes(b)).length;
+        return countB - countA;
+      });
+
+    const INITIAL_LIMIT = 6;
+    const initialTags = facetTagKeys.slice(0, INITIAL_LIMIT);
+    const moreTags = facetTagKeys.slice(INITIAL_LIMIT);
+
     const row = el("div", "chiprow");
-    for (const t of Object.keys(U.tags)) {
-      if (U.tags[t].facet !== f.key) continue;
-      row.appendChild(chipEl(t));
+    for (const t of initialTags) row.appendChild(chipEl(t));
+
+    if (moreTags.length > 0) {
+      const overflow = el("div", "chiprow-overflow");
+      overflow.hidden = true;
+      for (const t of moreTags) overflow.appendChild(chipEl(t));
+      row.appendChild(overflow);
+
+      const moreBtn = el("button", "chip chip-more");
+      moreBtn.type = "button";
+      moreBtn.dataset.moreToggle = "";
+      moreBtn.dataset.moreCount = String(moreTags.length);
+      moreBtn.appendChild(
+        el("span", "t", `+${moreTags.length} ${S.showMoreTags || "more"}`),
+      );
+      row.appendChild(moreBtn);
     }
+
     group.appendChild(row);
     container.appendChild(group);
   }
@@ -395,7 +1012,7 @@ function buildDrawer() {
   const head = el("div", "drawer-head");
   const brandLink = el("a", "brand");
   brandLink.href = homeURL();
-  brandLink.setAttribute("aria-label", "uicurio — home");
+  brandLink.setAttribute("aria-label", "Uicurio — home");
   const wm = document.querySelector(SEL.wordmark);
   if (wm) brandLink.appendChild(wm.cloneNode(true));
   head.appendChild(brandLink);
@@ -467,6 +1084,7 @@ function openDrawer() {
 }
 
 function closeAll() {
+  closeSheet();
   if (drawer && drawer.classList.contains("open")) {
     drawer.classList.remove("open");
     document.body.style.overflow = "";
@@ -506,7 +1124,7 @@ function buildPalette() {
   pInput.setAttribute("aria-label", "Command palette");
   pInput.setAttribute("role", "combobox");
   pInput.setAttribute("aria-expanded", "false");
-  pInput.addEventListener("input", debounce(renderPalette, 90));
+  pInput.addEventListener("input", debounce(renderPalette, 80));
   head.appendChild(pInput);
   head.appendChild(el("kbd", null, "esc"));
   palette.appendChild(head);
@@ -517,9 +1135,9 @@ function buildPalette() {
 
   const foot = el("div", "palette-foot");
   for (const pair of [
-    ["↑↓", "选择"],
-    [null, "enter", "打开"],
-    ["esc", "关闭"],
+    ["↑↓", LOCALE === "zh" ? "选择" : "Navigate"],
+    [null, "enter", LOCALE === "zh" ? "打开" : "Open"],
+    ["esc", LOCALE === "zh" ? "关闭" : "Close"],
   ]) {
     const s = el("span");
     if (pair[0]) s.appendChild(el("kbd", null, pair[0]));
@@ -566,6 +1184,47 @@ function closePalette() {
 function paletteData(q) {
   const rows = [];
   const ql = (q || "").toLowerCase();
+
+  // 动作指令 Actions
+  const actionList = [
+    {
+      kind: "action",
+      act: "theme",
+      name: S.actTheme || "Toggle theme",
+      ico: "sun",
+      meta: "Action",
+    },
+    {
+      kind: "action",
+      act: "random",
+      name: S.actRandom || "Random pick",
+      ico: "dice",
+      meta: "Action",
+    },
+    {
+      kind: "action",
+      act: "clear",
+      name: S.actClear || "Clear all filters",
+      ico: "x",
+      meta: "Action",
+    },
+    {
+      kind: "action",
+      act: "lang",
+      name: S.actLang || "Switch language",
+      ico: "globe",
+      meta: "Action",
+    },
+  ];
+
+  const matchedActions = actionList.filter(
+    (a) => !ql || a.name.toLowerCase().includes(ql) || a.act.includes(ql),
+  );
+  if (matchedActions.length) {
+    rows.push({ label: S.actions || "Actions", rows: matchedActions });
+  }
+
+  // 藏品 Items
   const items = U.items
     .filter(
       (it) =>
@@ -588,6 +1247,8 @@ function paletteData(q) {
       });
     rows.push(g);
   }
+
+  // 频道 Channels
   const chans = U.categories.filter(
     (c) => !ql || c.name.toLowerCase().includes(ql),
   );
@@ -602,6 +1263,8 @@ function paletteData(q) {
       });
     rows.push(g2);
   }
+
+  // 标签 Tags
   const tags = Object.keys(U.tags)
     .filter((t) => !ql || U.tags[t].name.toLowerCase().includes(ql))
     .slice(0, 8);
@@ -647,13 +1310,24 @@ function renderPalette() {
         row.appendChild(nm);
       } else {
         const ic = el("span", "p-ico");
-        ic.appendChild(icon(r.kind === "channel" ? "layers" : "tag", 14));
+        ic.appendChild(
+          icon(
+            r.kind === "action"
+              ? r.ico
+              : r.kind === "channel"
+                ? "layers"
+                : "tag",
+            14,
+          ),
+        );
         row.appendChild(ic);
         const nm = el("span", "p-name");
         nm.appendChild(hi(r.name, r.q));
         row.appendChild(nm);
       }
-      row.appendChild(el("span", "p-meta", r.meta));
+      row.appendChild(
+        el("span", r.kind === "action" ? "p-action" : "p-meta", r.meta),
+      );
       row.addEventListener("click", () => runRowAt(r));
       pList.appendChild(row);
       pRows.push({ data: r, node: row });
@@ -699,8 +1373,30 @@ const tagFacet = (t) => (U.tags[t] ? U.tags[t].facet : null);
 const tagName = (t) => (U.tags[t] ? U.tags[t].name : t);
 
 function runRowAt(r) {
-  if (r.kind === "item") {
-    go(itemURL(r.slug));
+  if (r.kind === "action") {
+    closeAll();
+    if (r.act === "theme") {
+      applyTheme(
+        document.documentElement.dataset.theme === "dark" ? "light" : "dark",
+      );
+    } else if (r.act === "lang") {
+      const other = LOCALE === "en" ? "zh" : "en";
+      const path = location.pathname.startsWith(`/${LOCALE}/`)
+        ? location.pathname.replace(`/${LOCALE}/`, `/${other}/`)
+        : `/${other}/`;
+      location.assign(path + location.search);
+    } else if (r.act === "random") {
+      randomPick();
+    } else if (r.act === "clear") {
+      clearFiltersAndRefresh();
+    }
+  } else if (r.kind === "item") {
+    if (PAGE === "gallery") {
+      closeAll();
+      openSheet(r.slug);
+    } else {
+      go(itemURL(r.slug));
+    }
   } else if (r.kind === "channel") {
     go(catURL(r.slug));
   } else if (r.kind === "tag") {
@@ -718,36 +1414,69 @@ function runRowAt(r) {
   }
 }
 
-function bindPaletteKeys() {
+function bindGlobalKeys() {
   document.addEventListener("keydown", (e) => {
-    const open = palette.classList.contains("open");
-    if ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "K")) {
+    const isPaletteOpen = palette && palette.classList.contains("open");
+    const isDrawerOpen = drawer && drawer.classList.contains("open");
+    const isSheetOpen = sheetPanel && sheetPanel.classList.contains("open");
+    const isAnyOverlayOpen = isPaletteOpen || isDrawerOpen || isSheetOpen;
+
+    // 忽略所有附带 Cmd / Ctrl / Alt 的修饰键组合，避免抢占浏览器系统级行为
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    // Escape 关闭浮层
+    if (e.key === "Escape" && isAnyOverlayOpen) {
       e.preventDefault();
-      if (open) closeAll();
-      else openPalette();
+      closeAll();
       return;
     }
-    if (e.key === "/" && !open) {
-      const t = e.target;
-      const typing =
-        t &&
-        (t.tagName === "INPUT" ||
-          t.tagName === "TEXTAREA" ||
-          t.isContentEditable);
-      if (!typing) {
+
+    const t = e.target;
+    const isTyping =
+      t &&
+      (t.tagName === "INPUT" ||
+        t.tagName === "TEXTAREA" ||
+        t.isContentEditable);
+
+    if (isTyping) return;
+
+    // 弹窗内左右切换
+    if (isSheetOpen) {
+      if (e.key === "ArrowLeft") {
         e.preventDefault();
-        openPalette();
+        const activeList = currentActiveList();
+        const idx = activeList.findIndex(
+          (i) => i.slug === state.activePreviewSlug,
+        );
+        if (idx > 0) openSheet(activeList[idx - 1].slug);
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        const activeList = currentActiveList();
+        const idx = activeList.findIndex(
+          (i) => i.slug === state.activePreviewSlug,
+        );
+        if (idx >= 0 && idx < activeList.length - 1)
+          openSheet(activeList[idx + 1].slug);
       }
       return;
     }
-    if (e.key === "Escape" && open) {
-      e.preventDefault();
-      closeAll();
+
+    // 详情页键盘左右翻页
+    if (PAGE === "info" && !isAnyOverlayOpen) {
+      if (e.key === "ArrowLeft") {
+        const older = $(
+          ".sheet-float-prev, .sheet-pager a.sheet-pager-prev, .pager a:not(.next)",
+        );
+        if (older) older.click();
+      } else if (e.key === "ArrowRight") {
+        const newer = $(
+          ".sheet-float-next, .sheet-pager a.sheet-pager-next, .pager a.next",
+        );
+        if (newer) newer.click();
+      }
     }
   });
 }
-
-/* ── 画廊同步：SSR 节点复用 ── */
 
 /* ── 顶栏绑定 ── */
 function buildTopbar() {
@@ -784,6 +1513,7 @@ function buildToolbar() {
         input.focus();
       });
   }
+
   const sortBtn = $(SEL.sortToggle);
   if (sortBtn) {
     const paintSort = () => {
@@ -794,21 +1524,99 @@ function buildToolbar() {
     paintSort();
     sortBtn.addEventListener("click", () => {
       state.sort = state.sort === "new" ? "old" : "new";
-      try {
-        localStorage.setItem("uicurio.sort", state.sort);
-      } catch {
-        /* 私密模式 */
-      }
       paintSort();
       refresh();
     });
   }
+
+  // 清空已选条件
+  const activeClear = $(SEL.activeFiltersClear);
+  if (activeClear)
+    activeClear.addEventListener("click", clearFiltersAndRefresh);
+
   const fbtn = $(".filterbtn");
   if (fbtn) fbtn.addEventListener("click", openDrawer);
+
   const emptyClear = $(SEL.emptyClear);
   if (emptyClear) emptyClear.addEventListener("click", clearFiltersAndRefresh);
-  const kbdHint = $(".searchbox .kbd");
-  if (kbdHint) kbdHint.addEventListener("click", () => openPalette(kbdHint));
+}
+
+/* ── 侧栏分面手风琴与标签搜索绑定 ── */
+function buildSidebarAccordions() {
+  for (const btn of $$(SEL.facetToggle)) {
+    btn.addEventListener("click", () => {
+      const group = btn.closest(".facet-group");
+      if (group) {
+        group.classList.toggle("collapsed");
+        btn.setAttribute(
+          "aria-expanded",
+          group.classList.contains("collapsed") ? "false" : "true",
+        );
+      }
+    });
+  }
+
+  // "+N 展开" 按钮委派
+  document.addEventListener("click", (e) => {
+    const moreBtn =
+      e.target && e.target.closest ? e.target.closest(SEL.moreToggle) : null;
+    if (moreBtn) {
+      e.preventDefault();
+      const group = moreBtn.closest(".facet-group");
+      if (group) {
+        const overflow = group.querySelector(".chiprow-overflow");
+        if (overflow) {
+          overflow.hidden = !overflow.hidden;
+          const t = moreBtn.querySelector(".t");
+          const count = moreBtn.dataset.moreCount || "";
+          if (t) {
+            t.textContent = overflow.hidden
+              ? `+${count} ${S.showMoreTags || "more"}`
+              : S.showLessTags || "Less";
+          }
+        }
+      }
+    }
+  });
+
+  // 侧栏标签即时检索过滤
+  const tagFilterInputs = $$(SEL.tagFilter);
+  for (const input of tagFilterInputs) {
+    input.addEventListener(
+      "input",
+      debounce(() => {
+        const q = input.value.trim().toLowerCase();
+        for (const group of $$(".facet-group")) {
+          let matchInGroup = 0;
+          const chips = Array.from(group.querySelectorAll(SEL.chips));
+          for (const chip of chips) {
+            const t =
+              chip.querySelector(".t")?.textContent?.toLowerCase() || "";
+            const isMatch = !q || t.includes(q);
+            chip.style.display = isMatch ? "" : "none";
+            if (isMatch) matchInGroup++;
+          }
+          const overflow = group.querySelector(".chiprow-overflow");
+          const moreBtn = group.querySelector(SEL.moreToggle);
+          if (q) {
+            if (overflow) overflow.hidden = false;
+            if (moreBtn) moreBtn.style.display = "none";
+            group.classList.remove("collapsed");
+            group.style.display = matchInGroup > 0 ? "" : "none";
+          } else {
+            if (overflow) overflow.hidden = true;
+            if (moreBtn) {
+              moreBtn.style.display = "";
+              const t = moreBtn.querySelector(".t");
+              const count = moreBtn.dataset.moreCount || "";
+              if (t) t.textContent = `+${count} ${S.showMoreTags || "more"}`;
+            }
+            group.style.display = "";
+          }
+        }
+      }, 70),
+    );
+  }
 }
 
 /* ── 启动 ── */
@@ -823,10 +1631,23 @@ if (!U || !payloadOk(U)) {
   readURL();
   initCardNodes();
   buildScrim();
+  buildSheet();
   buildDrawer();
   buildPalette();
   buildTopbar();
-  bindPaletteKeys();
+  buildSidebarAccordions();
+  bindGlobalKeys();
+
+  // 浏览器前进/后退 popstate 联动
+  window.addEventListener("popstate", (e) => {
+    if (e.state && e.state.preview) {
+      openSheet(e.state.preview, true);
+    } else if (sheetPanel && sheetPanel.classList.contains("open")) {
+      closeSheet(true);
+    }
+  });
+
+  // 主题切换
   for (const b of $$(SEL.themeToggle)) {
     b.addEventListener("click", () =>
       applyTheme(
@@ -834,6 +1655,8 @@ if (!U || !payloadOk(U)) {
       ),
     );
   }
+
+  // 语言切换
   for (const sel of $$(SEL.langSelect)) {
     if (!sel.value) sel.value = LOCALE;
     sel.addEventListener("change", () => {
@@ -844,25 +1667,61 @@ if (!U || !payloadOk(U)) {
       location.assign(path + location.search);
     });
   }
+
+  // 卡片点击与委托
   document.addEventListener("click", (e) => {
+    // 复制链接委派
+    const copyBtn =
+      e.target && e.target.closest ? e.target.closest("[data-copy-url]") : null;
+    if (copyBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      const url = copyBtn.dataset.copyUrl;
+      if (url) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast(S.copied || "Link copied!");
+        });
+      }
+      return;
+    }
+
+    // 标签 Chip 委派
     const chip =
       e.target && e.target.closest ? e.target.closest(SEL.chips) : null;
-    if (!chip || chip.getAttribute("aria-disabled") === "true") return;
-    toggleTag(chip.dataset.tag);
-  });
-  if (PAGE === "gallery") {
-    try {
-      const saved = localStorage.getItem("uicurio.sort");
-      if (saved === "old") state.sort = "old";
-    } catch {
-      /* 私密模式 */
+    if (chip && chip.getAttribute("aria-disabled") !== "true") {
+      toggleTag(chip.dataset.tag);
+      return;
     }
-    if (state.sort !== "old" && state.sort !== "new") state.sort = "new";
+
+    // 卡片内链点击拦截 -> 唤起 Slide-over Sheet (保留中键/Cmd点击新标签打开)
+    if (PAGE === "gallery") {
+      const cardLink =
+        e.target && e.target.closest
+          ? e.target.closest(".card-link, .card-titlelink")
+          : null;
+      if (
+        cardLink &&
+        !e.metaKey &&
+        !e.ctrlKey &&
+        !e.shiftKey &&
+        e.button === 0
+      ) {
+        const card = cardLink.closest(".card");
+        if (card && card.dataset.slug) {
+          e.preventDefault();
+          openSheet(card.dataset.slug);
+        }
+      }
+    }
+  });
+
+  if (PAGE === "gallery") {
     const f = decodeFilters(location.search);
     for (const { facet, tag } of f.pairs) {
       if (U.tags[tag] && U.tags[tag].facet === facet) state.sel[facet].add(tag);
     }
     if (f.q) state.q = f.q;
+    state.sort = f.sort === "old" ? "old" : "new";
     buildToolbar();
     refresh();
   }

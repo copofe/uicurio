@@ -5,8 +5,8 @@
     "zh": "crd-ui"
   },
   "description": {
-    "en": "Dependency-free interactive credit/debit card components — brand detection, input masking, 3D flip; React, Vue, Svelte and vanilla JS.",
-    "zh": "零依赖交互银行卡输入组件：卡组织识别、输入掩码、3D 翻转；支持 React、Vue、Svelte 与原生 JS。"
+    "en": "A credit & debit card component for payment forms: live brand detection, 3D flip, themeable variants. Zero dependencies — React, Vue, Svelte and vanilla JS.",
+    "zh": "极具质感的支付表单银行卡交互组件：支持实时卡组织识别、3D 真实翻转、丰富卡面材质。零外部依赖，统一支持 React/Vue/Svelte/原生 JS。"
   },
   "url": "https://crd-ui.juanda.co/",
   "repo": "https://github.com/JuandaGarcia/crd-ui",
@@ -21,5 +21,19 @@
   "screenshot": "crd-ui.webp",
   "featured": true,
   "status": "published",
-  "added": "2026-08-27"
+  "added": "2026-08-27",
+  "content": {
+    "en": "crd-ui provides a hyper-polished credit and debit card interface designed for high-converting checkout flows. As the user enters details into regular payment fields, the card mirrors the input in real-time, displays live brand badges (Visa, Mastercard, Amex, JCB, UnionPay, and more), and realistically flips to the back when focusing the CVV/CVC field. Shipped with zero external dependencies and weighing under 10KB, it provides official bindings for React, Vue, Svelte, and vanilla HTML.",
+    "zh": "crd-ui 是一套专为高转化支付结账页打造的逼真 3D 信用卡输入组件。当用户在表单中输入卡号时，卡面会自适应进行 4 位分段格式化，并在毫秒级内自动匹配识别 Visa、Mastercard、Amex、JCB、银联等主流卡组织标志；光标聚焦至安全码输入框时，卡片将触发平滑真实的 3D 翻转翻至背面。纯 CSS 3D 硬件加速，零第三方依赖，打包体积小于 10KB。"
+  },
+  "components": [
+    "Interactive 3D Card Preview",
+    "Card Number Auto-formatter",
+    "Expiry Date Input",
+    "CVV / CVC with Auto-flip",
+    "Brand Detection (Visa, Mastercard, Amex, JCB, UnionPay, Discover)",
+    "Hologram & Microchip Layers",
+    "Custom Card Gradient Themes",
+    "International Form Localization"
+  ]
 }

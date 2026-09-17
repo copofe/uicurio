@@ -5,8 +5,8 @@
     "zh": "Spell UI"
   },
   "description": {
-    "en": "Refined, copy-paste React and Tailwind CSS components for design engineers — a large collection of high-quality components.",
-    "zh": "为设计工程师打造的 React + Tailwind CSS 组件集：精雕细琢、复制即用，量大质优。"
+    "en": "Beautiful, sophisticated UI components designed for modern React and Tailwind CSS applications.",
+    "zh": "精美先锋的创意 React UI 组件库：基于 Tailwind CSS，带来如魔法般赏心悦目的现代交互细节。"
   },
   "url": "https://spell.sh/",
   "repo": "https://github.com/xxtomm/spell-ui",
@@ -19,5 +19,21 @@
   "screenshot": "spell-ui.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-09-06"
+  "added": "2026-09-06",
+  "content": {
+    "en": "Spell UI delivers bold, imaginative interface components that elevate ordinary web applications into unforgettable sensory experiences. Designed for React and Tailwind CSS, it features high-concept micro-interactions such as volumetric ambient light rays, 3D perspective flipbooks, particle-exploding inputs, Spotify-style dynamic audio cards, and realistic interactive signatures, offering developers drop-in creative components with minimal configuration.",
+    "zh": "Spell UI 专注于打破常规网页的刻板平庸，为前端界面注入如魔法般的先锋视觉表现力。全套组件紧密围绕 React 与 Tailwind CSS 生态开发，集成了包括体积感环境光束（Light Rays）、3D 真实翻页透视书本、粒子爆炸提交输入框、Spotify 风格动态声浪卡片与逼真手写签名画板等极具辨识度的前沿创意组件。"
+  },
+  "components": [
+    "Light Rays Effect",
+    "Perspective 3D Book",
+    "Exploding Input Field",
+    "Spotify Music Card",
+    "Pop Button",
+    "Dynamic Hand Signature",
+    "Animated Mesh Gradient",
+    "Morphing Card",
+    "Glow Tabs",
+    "Floating Action Bar"
+  ]
 }

@@ -5,8 +5,8 @@
     "zh": "Spectrum UI"
   },
   "description": {
-    "en": "Open-source, animation-ready React components and blocks for SaaS and AI apps, blending Aceternity UI, Magic UI and shadcn/ui; Next.js + Tailwind CSS + Motion.",
-    "zh": "为 SaaS 与 AI 应用打造的开源动效组件与区块集：融汇 Aceternity UI、Magic UI 与 shadcn/ui 之长；Next.js + Tailwind CSS + Motion。"
+    "en": "Open-source, animation-ready React components and blocks built with Next.js, Tailwind CSS, Motion, TypeScript, and shadcn/ui for SaaS and AI apps.",
+    "zh": "面向 SaaS 与 AI 产品的开源动态 React 组件库：基于 Next.js、Tailwind CSS、Motion 与 shadcn/ui 深度打造。"
   },
   "url": "https://ui.spectrumhq.in",
   "repo": "https://github.com/arihantcodes/spectrum-ui",
@@ -24,5 +24,23 @@
   "screenshot": "spectrum-ui.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-09-11"
+  "added": "2026-09-11",
+  "content": {
+    "en": "Spectrum UI is an animation-first component library created for modern SaaS landing pages, AI agent applications, and design-led products. Built on the shadcn/ui foundation with Motion and Tailwind CSS, it offers over 50 copy-paste components and blocks featuring neon glow borders, interactive spotlight cards, shimmer effects, physics-based magnetic cursors, and fluid bento layouts, complete with an official MCP server for AI coding assistants.",
+    "zh": "Spectrum UI 是一套以动效为核心竞争力的开源组件与区块库，专为现代 SaaS 官网、AI 交互系统与独立开发者产品打造。底层架构深度融合 shadcn/ui 哲学、Motion 动画库与 Tailwind CSS，收录了逾 50 款涵盖流光边框、鼠标聚光灯追踪卡片、磨砂浮动导航坞、微噪点渐变背景、磁吸悬停按钮及便当盒网格的高阶动效组件，并官方提供 MCP Server 助力 AI 编程助手秒级调用。"
+  },
+  "components": [
+    "Glow Button",
+    "Shimmer Card",
+    "Animated Gradient Background",
+    "Dynamic Dock",
+    "Bento Grid Showcase",
+    "Noise Texture Overlay",
+    "Spotlight Card",
+    "Border Beam",
+    "Magnetic Button",
+    "Smooth Accordion",
+    "Floating Navigation",
+    "Sparkles Text"
+  ]
 }

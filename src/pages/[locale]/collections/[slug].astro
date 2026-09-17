@@ -12,7 +12,7 @@ export function getStaticPaths() {
 const { locale, slug } = Astro.params;
 const cat = Astro.props.cat as any;
 const list = items.filter((i: any) => i.category === slug);
-const title = locale === "zh" ? `${cat.name.zh} — 精选 UI 库 · uicurio` : `${cat.name.en} — curated UI libraries · uicurio`;
+const title = locale === "zh" ? `${cat.name.zh} — 精选 UI 库 · Uicurio` : `${cat.name.en} — curated UI libraries · Uicurio`;
 const description = cat.description[locale] ?? cat.description.en;
 ---
 <GalleryShell locale={locale} currentCat={slug} title={title} description={description} ogImage={`/assets/shots/${list[0]?.screenshot}`} items={list} />

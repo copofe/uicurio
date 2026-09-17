@@ -27,6 +27,8 @@ export function buildPayload(
       slug: i.slug,
       name: L(i.name),
       desc: L(i.description),
+      content: L(i.content) || "",
+      components: i.components || [],
       cat: i.category,
       tags: i.tags,
       url: i.url,

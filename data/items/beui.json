@@ -5,8 +5,8 @@
     "zh": "beUI"
   },
   "description": {
-    "en": "Free, open-source animated components for React and Next.js built with Motion and Tailwind CSS; copy the source or install via the shadcn CLI.",
-    "zh": "免费开源的 React / Next.js 动效组件库，Motion + Tailwind CSS 构建；可复制源码或用 shadcn CLI 安装。"
+    "en": "Free, open-source animated components for React and Next.js, built with Motion and Tailwind CSS. Copy the source or install with the shadcn CLI.",
+    "zh": "基于 Motion 与 Tailwind CSS 构建的高级动态组件库，支持直接源码拷贝或通过 shadcn CLI 一键安装至项目中。"
   },
   "url": "https://beui.dev",
   "repo": "https://github.com/starc007/ui-components",
@@ -22,5 +22,27 @@
   "screenshot": "beui.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-08-30"
+  "added": "2026-08-30",
+  "content": {
+    "en": "beUI provides a modern collection of micro-interaction primitives and animated building blocks for Next.js applications. Engineered around Framer Motion and Tailwind CSS, beUI components are designed to be copied directly into your codebase with complete ownership and zero lock-in. Standout components include financial data visualizations (returns heatmaps, target fans), morphing modal dialogs, iOS-style dynamic island notifications, floating docks, and smooth number rolling transitions.",
+    "zh": "beUI 是一套面向 Next.js 生态的现代动画微交互组件库，全面整合 Framer Motion 与 Tailwind CSS。所有组件秉承「源码归你所有」的理念，无需 npm 强绑定依赖，支持 shadcn CLI 快速分发。特色组件包括金融收益热力日历、价格目标散布扇、变形模态框、iOS 灵动岛通知胶囊、可展开操作栏与丝滑数字渐变翻转动效。"
+  },
+  "components": [
+    "Heat Calendar",
+    "Returns Calendar",
+    "Price Target Fan",
+    "Market Cards",
+    "Morphing Modal",
+    "Animated Toast Stack",
+    "Action Swap",
+    "Floating Dock",
+    "Dynamic Island",
+    "Command Palette",
+    "Expandable Action Bar",
+    "Expandable Tabs",
+    "Tilt Card",
+    "Bottom Sheet",
+    "Text Animation",
+    "Number Animation"
+  ]
 }

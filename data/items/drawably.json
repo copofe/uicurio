@@ -5,8 +5,8 @@
     "zh": "Drawably"
   },
   "description": {
-    "en": "Hand-drawn UI controls — button, input, card, toggle and more. Every mount sketches a fresh doodle you can tune with roughness and boil.",
-    "zh": "手绘风 UI 控件集：按钮、输入框、卡片等 25 件。每次挂载都是一幅新的钢笔速写，粗糙度与抖动可调，选中喜欢的那版直接用。"
+    "en": "Hand-drawn UI controls. Every mount generates a fresh pen sketch from seeded randomness, and the stroke boils like an animated doodle. Zero dependencies.",
+    "zh": "纯手绘涂鸦风 UI 控件库：每次装载均基于随机种子生成独一无二的钢笔草图笔触，自带微摇沸腾动效，零外部依赖。"
   },
   "url": "https://www.drawably.dev/",
   "repo": "https://github.com/Danilaa1/drawably",
@@ -20,5 +20,28 @@
   "screenshot": "drawably.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-09-12"
+  "added": "2026-09-12",
+  "content": {
+    "en": "Drawably transforms cold, rigid digital interfaces into warm, organic hand-drawn sketches. Every UI component is generated procedurally from seeded algorithmic randomness, producing subtle wobbles and pen texture. The strokes feature an animated 'boil' effect simulating traditional cell animation. Shipped with zero dependencies (~9 KB gzipped) and native React wrappers, it includes full form controls, buttons, text annotations (rough underlines, circles, highlights, arrows), and composite widgets.",
+    "zh": "Drawably 将机械冰冷的数字界面转化为充满温度的手绘钢笔速写。所有控件均通过算法程序化随机生成独一无二的毛刺与笔触边缘，且线条带有如传统赛璐珞定格动画般的微摇「沸腾（Boil）」动效。整包体积仅约 9KB（Gzip），零依赖，不仅涵盖按钮、输入框、单选多选与下拉菜单，还提供随文字流自适应的手绘波浪下划线、荧光记号笔涂抹、荧光笔圈选及指向箭头。"
+  },
+  "components": [
+    "DrawablyButton",
+    "DrawablyCheckbox",
+    "DrawablyRadio",
+    "DrawablyToggle",
+    "DrawablyInput",
+    "DrawablyTextarea",
+    "DrawablySelect",
+    "DrawablyCard",
+    "DrawablyBadge",
+    "DrawablyUnderline",
+    "DrawablyHighlight",
+    "DrawablyCircle",
+    "DrawablyArrow",
+    "DrawablyChip",
+    "DrawablyTabs",
+    "DrawablyTooltip",
+    "DrawablyAlert"
+  ]
 }

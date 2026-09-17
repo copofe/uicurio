@@ -23,7 +23,7 @@ const tagId = Astro.props.tagId as string;
 const tag = tagById.get(tagId);
 const t = ui[locale as keyof typeof ui];
 const list = itemsWithTag(tagId).filter((i: any) => i.category === cat.slug);
-const title = locale === "zh" ? `${tag.name.zh} × ${cat.name.zh} · ${list.length} 个库 — uicurio` : `${tag.name.en} ${cat.name.en.toLowerCase()} – ${list.length} libraries · uicurio`;
+const title = locale === "zh" ? `${tag.name.zh} × ${cat.name.zh} · ${list.length} 个库 — Uicurio` : `${tag.name.en} ${cat.name.en.toLowerCase()} – ${list.length} libraries · Uicurio`;
 const description = locale === "zh" ? `频道「${cat.name.zh}」中带「${tag.name.zh}」标签的 ${list.length} 个严选库。` : `${list.length} curated ${cat.name.en.toLowerCase()} tagged “${tag.name.en}”.`;
 ---
 <Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${list[0]?.screenshot}`}>
@@ -31,7 +31,7 @@ const description = locale === "zh" ? `频道「${cat.name.zh}」中带「${tag.
     <Sidebar locale={locale} currentCat={cat.slug} showFacets={false} total={items.length} categories={categories.map((c: any) => ({ ...c, count: items.filter((i: any) => i.category === c.slug).length }))} />
     <main class="main">
       <nav class="crumb" aria-label="Breadcrumb">
-        <a href={`/${locale}/`}>uicurio</a>
+        <a href={`/${locale}/`}>Uicurio</a>
         <span class="sep" aria-hidden="true">/</span>
         <a href={`/${locale}/collections/${cat.slug}/`}>{cat.name[locale]}</a>
         <span class="sep" aria-hidden="true">/</span>

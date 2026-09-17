@@ -1,9 +1,7 @@
 ---
-// 条目详情（v2 item 形态）：面包屑 + 封面 + 标题/描述/CTA/元信息/标签 + 同柜推荐 + 前后翻页
+// 条目详情（与弹窗完全统一的 Dribbble 全屏剧场形态）
 import Base from "../../../layouts/Base.astro";
-import Sidebar from "../../../components/Sidebar.astro";
 import Payload from "../../../components/Payload.astro";
-import CardV2 from "../../../components/CardV2.astro";
 import { ui, LOCALES } from "../../../i18n";
 import { items, categories, tagById } from "../../../lib/data";
 
@@ -13,17 +11,19 @@ export function getStaticPaths() {
 const { locale, slug } = Astro.params;
 const item = Astro.props.item as any;
 const t = ui[locale as keyof typeof ui];
-const cat = categories.find((c: any) => c.slug === item.category);
+const cat = categories.find((c: any) => c.slug === item.category) ?? { slug: item.category, name: { [locale]: item.category, en: item.category } };
 const name = item.name[locale] ?? item.name.en;
 const description = item.description[locale] ?? item.description.en;
+const content = item.content?.[locale] ?? item.content?.en;
+const components = item.components ?? [];
 
 // 收录序（added 倒序 = 画廊默认序）→ 前后翻页
-const byAdded = [...items].sort((a: any, b: any) => (a.added < b.added ? 1 : a.added > b.added ? -1 : 0));
+const byAdded = items;
 const idx = byAdded.findIndex((x: any) => x.slug === item.slug);
-const older = byAdded[idx + 1];
-const newer = byAdded[idx - 1];
+const prevItem = idx > 0 ? byAdded[idx - 1] : null;
+const nextItem = idx >= 0 && idx < byAdded.length - 1 ? byAdded[idx + 1] : null;
 
-// 同柜推荐：同频道优先，不足 3 补同标签（v2 规则）
+// 同柜推荐：同频道优先，不足 3 补同标签（与弹窗 openSheet 规则完全统一）
 const alts = items.filter((x: any) => x.slug !== item.slug && x.category === item.category);
 if (alts.length < 3) {
   for (const x of items) {
@@ -32,72 +32,212 @@ if (alts.length < 3) {
     if (x.tags.some((tg: string) => item.tags.includes(tg))) alts.push(x);
   }
 }
-const title = `${name} · uicurio`;
+const related = alts.slice(0, 3);
+
+let host = "";
+try {
+  host = new URL(item.url).hostname.replace(/^www\./, "");
+} catch {
+  host = item.url;
+}
+const title = `${name} · Uicurio`;
 ---
-<Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${item.screenshot}`}>
-  <div class="shell">
-    <Sidebar locale={locale} currentCat={item.category} showFacets={false} total={items.length} categories={categories.map((c: any) => ({ ...c, count: items.filter((i: any) => i.category === c.slug).length }))} />
-    <main class="main">
-      <div class="item-wrap">
-        <nav class="crumb" aria-label="Breadcrumb">
-          <a href={`/${locale}/`}>uicurio</a>
-          <span class="sep" aria-hidden="true">/</span>
-          <a href={`/${locale}/collections/${cat.slug}/`}>{cat.name[locale]}</a>
-          <span class="sep" aria-hidden="true">/</span>
-          <span aria-current="page">{name}</span>
-        </nav>
+<Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${item.screenshot}`} hideTopbar={true}>
+  <!-- 浮动左右导航箭头 (Dribbble 标志性悬浮边缘控件，屏幕 > 1360px 时显示) -->
+  {prevItem && (
+    <a class="sheet-float-nav sheet-float-prev" href={`/${locale}/item/${prevItem.slug}/`} aria-label={`${t.pagerPrev || "Previous"}: ${prevItem.name[locale] ?? prevItem.name.en}`} title={`${t.pagerPrev || "Previous"}: ${prevItem.name[locale] ?? prevItem.name.en}`}>
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+    </a>
+  )}
+  {nextItem && (
+    <a class="sheet-float-nav sheet-float-next" href={`/${locale}/item/${nextItem.slug}/`} aria-label={`${nextItem.name[locale] ?? nextItem.name.en} · ${t.pagerNext || "Next"}`} title={`${nextItem.name[locale] ?? nextItem.name.en} · ${t.pagerNext || "Next"}`}>
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+  )}
 
-        <div class="item-cover"><img src={`/assets/shots/${item.screenshot}`} alt={name} width="1600" height="1000" /></div>
-
-        <header class="item-head">
-          <h1>{name}</h1>
-          <p class="item-desc">{description}</p>
-          <div class="item-cta">
-            <a class="btn btn-solid" href={item.url} target="_blank" rel="noopener">{t.visitSite}
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg>
-            </a>
-            {item.repo && <a class="btn btn-ghost" href={item.repo} target="_blank" rel="noopener">{t.source}</a>}
+  <div class="sheet-page">
+    <!-- 1. 顶部粘性栏 (Dribbble 风格顶部常驻导航) -->
+    <header class="sheet-head">
+      <div class="sheet-head-left">
+        <a href={`/${locale}/`} class="sheet-avatar sheet-avatar-sm" aria-label="Uicurio">U</a>
+        <div class="sheet-head-meta">
+          <h2 class="sheet-head-title">{name}</h2>
+          <div class="sheet-head-sub">
+            <a href={`/${locale}/`} class="sheet-brand-link">Uicurio</a>
+            <span class="sheet-byline-sep">·</span>
+            <a href={`/${locale}/collections/${cat.slug}/`} class="sheet-head-cat">{cat.name[locale]}</a>
           </div>
-          <p class="item-meta">
-            <span>{t.added} {item.added}</span>
-            <a href={`/${locale}/collections/${cat.slug}/`}>{cat.name[locale]}</a>
-          </p>
-          <div class="tagrow">
-            {item.tags.map((id: string) => {
-              const tag = tagById.get(id);
-              if (!tag) return null;
-              const n = items.filter((x: any) => x.tags.includes(id)).length;
-              return n >= 2
-                ? <a class="chip chip-tag" href={`/${locale}/tags/${tag.slug}/`}><span class="t">{tag.name[locale]}</span><span class="n">{n}</span></a>
-                : <span class="chip"><span class="t">{tag.name[locale]}</span></span>;
-            })}
+        </div>
+      </div>
+      <div class="sheet-nav">
+        <a class="btn btn-solid sheet-visit-btn" href={item.url} target="_blank" rel="noopener">
+          <span>{t.visitSite}</span>
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+        </a>
+        <button class="btn btn-ghost sheet-copy-btn" type="button" data-copy-url={item.url}>
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          <span>{t.copyLink}</span>
+        </button>
+        <select class="langsel" data-lang-select aria-label="Language">
+          <option value="en" selected={locale === "en"}>English</option>
+          <option value="zh" selected={locale === "zh"}>中文</option>
+        </select>
+        <button type="button" class="iconbtn" data-theme-toggle aria-label={t.theme}>
+          <svg class="i-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path></svg>
+        </button>
+        <a class="iconbtn sheet-close-btn" href={`/${locale}/`} onclick="if (history.length > 1 && document.referrer.includes(location.host)) { history.back(); return false; }" aria-label={t.close || "Back"} title={t.close || "Back"}>
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- 2. 舞台标题与作者 Byline (Dribbble 经典大字头与创作者署名条) -->
+    <div class="sheet-stage-intro">
+      <h1 class="sheet-stage-title">{name}</h1>
+      <div class="sheet-byline">
+        <div class="sheet-author">
+          <div class="sheet-avatar sheet-avatar-md">U</div>
+          <div class="sheet-author-meta">
+            <div class="sheet-author-name">Uicurio</div>
+            <div class="sheet-author-sub">
+              <span class="sheet-badge sheet-badge-curated">
+                <span class="badge-dot"></span>
+                <span>{locale === "zh" ? "官方精选收录" : "Featured"}</span>
+              </span>
+              <span class="sheet-byline-sep">·</span>
+              <a href={`/${locale}/collections/${cat.slug}/`}>{cat.name[locale]}</a>
+            </div>
           </div>
-        </header>
-
-        {alts.length > 0 && (
-          <section class="sect">
-            <h2>{t.altTitle}</h2>
-            <p class="sect-sub">{t.altSub}</p>
-            <div class="grid">{alts.slice(0, 3).map((x: any, i: number) => <CardV2 item={x} locale={locale} index={i} />)}</div>
-          </section>
-        )}
-
-        <nav class="pager" aria-label="Prev / Next">
-          {older ? (
-            <a href={`/${locale}/item/${older.slug}/`}>
-              <span class="dir">{t.pagerOlder}</span>
-              <span class="pname">{older.name[locale] ?? older.name.en}</span>
-            </a>
-          ) : <span></span>}
-          {newer && (
-            <a class="next" href={`/${locale}/item/${newer.slug}/`}>
-              <span class="dir">{t.pagerNewer}</span>
-              <span class="pname">{newer.name[locale] ?? newer.name.en}</span>
+        </div>
+        <div class="sheet-byline-links">
+          <a class="sheet-pill-link" href={item.url} target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <span>{host}</span>
+          </a>
+          {item.repo && (
+            <a class="sheet-pill-link" href={item.repo} target="_blank" rel="noopener">
+              <span>GitHub ↗</span>
             </a>
           )}
-        </nav>
+        </div>
       </div>
-    </main>
+    </div>
+
+    <!-- 3. 大画布全景封面 (Dribbble 剧场核心视口) -->
+    <div class="sheet-cover">
+      <a href={item.url} target="_blank" rel="noopener" title={`${t.visitSite} · ${name}`}>
+        <img src={`/assets/shots/${item.screenshot}`} alt={name} width="1600" height="1000" />
+      </a>
+    </div>
+
+    <!-- 4. 叙述详情、组件展示与同柜推荐 -->
+    <div class="sheet-body">
+      <p class="sheet-desc">{description}</p>
+
+      {components.length > 0 && (
+        <div class="sheet-components-section">
+          <div class="sheet-components-header">
+            <h4 class="sheet-components-title">{locale === "zh" ? "包含组件" : "Included Components"}</h4>
+            <span class="sheet-components-count">{components.length}</span>
+          </div>
+          <div class="sheet-components-list">
+            {components.map((comp: string) => (
+              <span class="sheet-component-pill">{comp}</span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {content && <p class="sheet-content-text">{content}</p>}
+
+      <div class="sheet-tags">
+        {item.tags.map((id: string) => {
+          const tag = tagById.get(id);
+          if (!tag) return null;
+          return (
+            <a class="sheet-tag-chip" href={`/${locale}/tags/${tag.slug}/`}>
+              #{tag.name[locale]}
+            </a>
+          );
+        })}
+      </div>
+
+      <hr class="sheet-divider" />
+
+      {related.length > 0 && (
+        <div class="sheet-related-section">
+          <div class="sheet-related-head">
+            <div class="sheet-related-head-left">
+              <div class="sheet-avatar sheet-avatar-sm">U</div>
+              <div>
+                <h3>{locale === "zh" ? `更多「${cat.name[locale]}」精选推荐` : `More in ${cat.name[locale]}`}</h3>
+                <span class="sheet-related-sub">
+                  {locale === "zh" ? "来自同一频道分类的高品质设计与工程藏品" : "Curated design & engineering picks from this channel"}
+                </span>
+              </div>
+            </div>
+            <a class="sheet-related-all" href={`/${locale}/collections/${cat.slug}/`}>
+              {locale === "zh" ? "浏览频道全部 ↗" : "Browse all ↗"}
+            </a>
+          </div>
+          <div class="sheet-related-grid">
+            {related.map((rItem: any) => (
+              <a class="sheet-related-card" href={`/${locale}/item/${rItem.slug}/`}>
+                <div class="sheet-related-thumb">
+                  <img src={`/assets/shots/${rItem.screenshot}`} alt={rItem.name[locale] ?? rItem.name.en} loading="lazy" decoding="async" width="400" height="250" />
+                </div>
+                <span class="sheet-related-title">{rItem.name[locale] ?? rItem.name.en}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <nav class="sheet-pager" aria-label="Prev / Next">
+        {prevItem ? (
+          <a class="sheet-pager-btn sheet-pager-prev" href={`/${locale}/item/${prevItem.slug}/`}>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+            <span>{t.pagerPrev || "Previous"}: {prevItem.name[locale] ?? prevItem.name.en}</span>
+          </a>
+        ) : (
+          <button class="sheet-pager-btn" disabled type="button">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+            <span>{t.pagerPrev || "Previous"}</span>
+          </button>
+        )}
+        {nextItem ? (
+          <a class="sheet-pager-btn sheet-pager-next" href={`/${locale}/item/${nextItem.slug}/`}>
+            <span>{nextItem.name[locale] ?? nextItem.name.en} · {t.pagerNext || "Next"}</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+        ) : (
+          <button class="sheet-pager-btn" disabled type="button">
+            <span>{t.pagerNext || "Next"}</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        )}
+      </nav>
+    </div>
+
+    <!-- 5. 底部品牌与偏好控制条 -->
+    <footer class="sheet-footer">
+      <div class="sheet-footer-left">
+        <a href={`/${locale}/`} class="sheet-footer-brand">Uicurio</a>
+        <span class="sheet-footer-sep">·</span>
+        <span>{locale === "zh" ? "官方精选收录" : "Curated UI Collection"}</span>
+      </div>
+      <div class="sheet-footer-right">
+        <select class="langsel" data-lang-select aria-label="Language">
+          <option value="en" selected={locale === "en"}>English</option>
+          <option value="zh" selected={locale === "zh"}>中文</option>
+        </select>
+        <button type="button" class="iconbtn" data-theme-toggle aria-label={t.theme}>
+          <svg class="i-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path></svg>
+        </button>
+      </div>
+    </footer>
   </div>
   <Payload locale={locale} page="info" channel={item.category} />
 </Base>

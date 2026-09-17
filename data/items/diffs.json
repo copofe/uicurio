@@ -8,8 +8,8 @@
     "@pierre/diffs"
   ],
   "description": {
-    "en": "Render code snippets and file diffs — unified/split views, merge conflicts, inline editing and annotations — built on Shiki.",
-    "zh": "基于 Shiki 的代码片段与文件 diff 渲染：统一/分栏视图、合并冲突、行内编辑与批注。"
+    "en": "@pierre/diffs is an open source diff and code rendering library. Built on Shiki for syntax highlighting and theming, super customizable, and packed with features.",
+    "zh": "来自 Pierre 的开源 Diff 与代码渲染库：基于 Shiki 构建极致语法高亮，支持并排/统一对比视图与行内实时编辑。"
   },
   "url": "https://diffs.com/",
   "repo": "https://github.com/pierrecomputer/pierre/tree/main/packages/diffs",
@@ -20,5 +20,21 @@
   "screenshot": "diffs.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-08-24"
+  "added": "2026-08-24",
+  "content": {
+    "en": "@pierre/diffs is a state-of-the-art diff and code rendering library created by The Pierre Computer Company. Leveraging Shiki for robust grammar parsing and theme compatibility (supporting standard VS Code themes), it renders both split (side-by-side) and stacked (unified) diff layouts with exceptional performance. Features include inline editing, merge conflict resolution interfaces, review comment annotations, interactive token hovers, and chunk accept/reject workflows.",
+    "zh": "@pierre/diffs 是由 Pierre Computer 倾力打造的现代代码 Diff 呈现与对比编辑器。深度集成 Shiki 高亮引擎，原生支持全量 VS Code 主题色彩。提供分栏并排（Split）与行内堆叠（Stacked）两种标准布局模式，内置双向行内编辑能力、代码审查批注卡片、Git 冲突解决界面、语法 Token 悬停提示以及代码变更一键采纳/拒绝交互。"
+  },
+  "components": [
+    "Split Diff View (Side-by-side)",
+    "Stacked Diff View (Unified)",
+    "In-line Code Editor",
+    "Merge Conflict Resolver UI",
+    "Comments & Annotations",
+    "Accept / Reject Actions",
+    "Line Selection & Gutter Indicators",
+    "Token Hover Tooltips",
+    "Shiki Theming Engine",
+    "Custom Hunk Separators"
+  ]
 }

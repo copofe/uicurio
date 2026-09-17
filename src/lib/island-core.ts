@@ -113,14 +113,18 @@ export function facetCount(
   return n;
 }
 
-/** 收录序排序：new = 最新在前。Array.sort 为稳定排序（同日保持相对序） */
-export function sortItems<T extends { added: string }>(
+/** 收录序排序：new = 最新在前。同日按 slug 确定性排序 */
+export function sortItems<T extends { added: string; slug?: string }>(
   items: T[],
   sort: SortKey,
 ): T[] {
   return [...items].sort((a, b) => {
-    const d = a.added < b.added ? 1 : a.added > b.added ? -1 : 0;
-    return sort === "new" ? d : -d;
+    if (a.added !== b.added) {
+      const d = a.added < b.added ? 1 : -1;
+      return sort === "new" ? d : -d;
+    }
+    const s = (a.slug || "").localeCompare(b.slug || "");
+    return sort === "new" ? s : -s;
   });
 }
 

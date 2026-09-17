@@ -5,8 +5,8 @@
     "zh": "Math Curve Loaders"
   },
   "description": {
-    "en": "Gallery of mathematical loading animations; formula-driven curve motion with live controls, code export and HTML download.",
-    "zh": "数学公式加载动画画廊：公式驱动的曲线运动，可实时调参、导出代码与 HTML。"
+    "en": "A gallery of mathematical curve based loading animations built with plain HTML, CSS, and JavaScript.",
+    "zh": "基于优美数学参数曲线驱动的加载动画画廊：纯原生 HTML、CSS 与 JavaScript 实现，轻量零依赖。"
   },
   "url": "https://paidax01.github.io/math-curve-loaders",
   "repo": "https://github.com/Paidax01/math-curve-loaders",
@@ -18,5 +18,20 @@
   "screenshot": "math-curve-loaders.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-09-05"
+  "added": "2026-09-05",
+  "content": {
+    "en": "Math Curve Loaders transforms pure mathematics into expressive, hypnotic loading indicators. Using lightweight vector mathematics in vanilla JavaScript and Canvas/SVG, the project visualizes classical parametric curves—such as Rhodonea rose curves, Lissajous figures, hypotrochoids, cardioids, and Fourier-style epicyclic paths. Visitors can adjust mathematical frequency and damping parameters in real time and export production-ready code snippets with mathematical formula annotations.",
+    "zh": "Math Curve Loaders 将高深精妙的参数几何数学转化为兼具美感与催眠感的 UI 加载指示器。全项目基于纯原生 JS 与 Canvas/SVG 构建，生动演绎了玫瑰线（Rhodonea）、利萨茹图形（Lissajous）、内旋轮线（Hypotrochoid）、心脏线（Cardioid）及傅里叶本轮合成轨迹等经典力学与几何轨迹。支持在线交互式拖动参数滑块调节频次与阻尼，并可一键复制附带数学公式注释的独立代码片段。"
+  },
+  "components": [
+    "Particle Trail Loader",
+    "Rose Curves (Rhodonea)",
+    "Lissajous Curve",
+    "Hypotrochoid Curve",
+    "Cardioid Loop",
+    "Cassini Ovals",
+    "Fourier Epicycle Path",
+    "Interactive Parameter Slider",
+    "Formula Modal & Code Exporter"
+  ]
 }

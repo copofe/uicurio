@@ -1,4 +1,4 @@
-# uicurio
+# Uicurio
 
 UI 库收藏导航站 · 纯静态（Astro 7 + Cloudflare Pages）· **uicurio.shinji.me**
 

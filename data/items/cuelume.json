@@ -5,8 +5,8 @@
     "zh": "Cuelume"
   },
   "description": {
-    "en": "Tiny dependency-free library of carefully designed interaction sounds, synthesized live with Web Audio.",
-    "zh": "小而美的交互音效库：零依赖，Web Audio 实时合成。"
+    "en": "Seventeen carefully designed interaction sounds for the web. Synthesized live with Web Audio, with no audio files and zero runtime dependencies.",
+    "zh": "为现代 Web 设计的 17 款精雕微交互音效库：采用 Web Audio 纯实时合成算法，零静态音频文件，零依赖。"
   },
   "url": "https://cuelume-site.pages.dev",
   "repo": "https://github.com/Danilaa1/cuelume",
@@ -19,5 +19,26 @@
   "screenshot": "cuelume.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-09-03"
+  "added": "2026-09-03",
+  "content": {
+    "en": "Cuelume is a curated sound palette engineered to make web interfaces sound as good as they feel. Instead of requiring developers to bundle and preload megabytes of MP3 or WAV files, all 17 sound cues are mathematically synthesized on-the-fly using the browser's native Web Audio API oscillators and gain envelopes. Simply attach data-cuelume-hover or data-cuelume-press attributes to any HTML element and call bind() to activate instant, tactile acoustic feedback.",
+    "zh": "Cuelume 是一套让网页交互「声如其触」的精选微交互声音系统。它彻底打破了传统前端必须打包预加载数兆 MP3/WAV 音频资源的束缚，所有 17 款音效全部利用浏览器原生的 Web Audio API 振荡器与增益曲线实时纯数学合成。开发者仅需在任意按钮或链接上附加 data-cuelume-hover 或 data-cuelume-press HTML 属性并执行 bind()，即可为界面注入自然轻脆的声学反馈。"
+  },
+  "components": [
+    "Chime (Ascending bell)",
+    "Sparkle (Twinkle)",
+    "Droplet (Falling tone)",
+    "Bloom (Slow swell)",
+    "Whisper (Soft hush)",
+    "Tick (Crisp nav tick)",
+    "Press (Knock)",
+    "Release (Spring tick)",
+    "Toggle (Click-clack)",
+    "Success (Confirmation)",
+    "Error (Warning tone)",
+    "Pulse (Sensor sweep)",
+    "Scan",
+    "Pop",
+    "Snap"
+  ]
 }

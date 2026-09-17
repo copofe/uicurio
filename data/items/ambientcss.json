@@ -5,8 +5,8 @@
     "zh": "Ambient CSS"
   },
   "description": {
-    "en": "A physics-based lighting system for CSS: define one light source and every shadow, highlight and surface gradient follows — calibrated against Blender raytraces.",
-    "zh": "以物理光照驱动的 CSS 影调系统：定义一盏光源，阴影、高光与表面渐变全部随之确定。参数经 Blender 光追校准，纯 box-shadow 实现。"
+    "en": "A physics-based lighting system for CSS: define a light source, and every shadow, highlight and surface gradient follows from it — calibrated against Blender raytraces.",
+    "zh": "以物理光照驱动的 CSS 影调系统：定义一盏光源，阴影、高光与表面渐变随之自适应生成，基于 Blender 光线追踪校准，纯 box-shadow 渲染。"
   },
   "url": "https://ambientcss.vercel.app/",
   "repo": "https://github.com/kikkupico/ambientcss",
@@ -20,5 +20,19 @@
   "screenshot": "ambientcss.webp",
   "featured": false,
   "status": "published",
-  "added": "2026-09-12"
+  "added": "2026-09-12",
+  "content": {
+    "en": "Ambient CSS replaces hand-tuned shadow systems (like shadow-sm / shadow-md / shadow-lg) with a unified, physics-grounded lighting model. By declaring a single light source position, elevation, and intensity, all downstream UI components compute accurate drop shadows, inner ambient shadows, specular highlights, and surface gradient angles in real time. The mathematical models are calibrated against raytraced Blender reference renders and execute with zero JavaScript runtime using pure CSS custom properties.",
+    "zh": "Ambient CSS 彻底摒弃了传统 UI 中人工调校的离散阴影系统（如 shadow-sm / shadow-md / shadow-lg），引入统一的物理光照模型。开发者只需定义光源的位置坐标、仰角与光照强度，页面上所有 UI 组件的投射阴影、环境闭塞内阴影、表面高光以及漫反射渐变角均会自动联动实时计算。其光影算法参数直接基于 Blender 光追渲染基准校准，零 JS 依赖，纯 CSS 变量与 box-shadow 极速呈现。"
+  },
+  "components": [
+    "Light Source Controller",
+    "Tactile Rotary Knobs",
+    "Tactile Push Buttons",
+    "Segmented Rocker Switches",
+    "Smooth Toggle Sliders",
+    "Neumorphic Display Panel",
+    "Convex & Concave Surfaces",
+    "Surface Elevation Bevels"
+  ]
 }
