@@ -4,6 +4,7 @@ import Base from "../../../layouts/Base.astro";
 import Payload from "../../../components/Payload.astro";
 import { ui, LOCALES } from "../../../i18n";
 import { items, categories, tagById } from "../../../lib/data";
+import { esc, pickRelated, renderItemContent, type ItemView } from "../../../lib/item-view";
 
 export function getStaticPaths() {
   return LOCALES.flatMap((locale) => items.map((item: any) => ({ params: { locale, slug: item.slug }, props: { item } })));
@@ -11,11 +12,7 @@ export function getStaticPaths() {
 const { locale, slug } = Astro.params;
 const item = Astro.props.item as any;
 const t = ui[locale as keyof typeof ui];
-const cat = categories.find((c: any) => c.slug === item.category) ?? { slug: item.category, name: { [locale]: item.category, en: item.category } };
-const name = item.name[locale] ?? item.name.en;
 const description = item.description[locale] ?? item.description.en;
-const content = item.content?.[locale] ?? item.content?.en;
-const components = item.components ?? [];
 
 // 收录序（added 倒序 = 画廊默认序）→ 前后翻页
 const byAdded = items;
@@ -23,23 +20,47 @@ const idx = byAdded.findIndex((x: any) => x.slug === item.slug);
 const prevItem = idx > 0 ? byAdded[idx - 1] : null;
 const nextItem = idx >= 0 && idx < byAdded.length - 1 ? byAdded[idx + 1] : null;
 
-// 同柜推荐：同频道优先，不足 3 补同标签（与弹窗 openSheet 规则完全统一）
-const alts = items.filter((x: any) => x.slug !== item.slug && x.category === item.category);
-if (alts.length < 3) {
-  for (const x of items) {
-    if (alts.length >= 3) break;
-    if (x.slug === item.slug || alts.includes(x)) continue;
-    if (x.tags.some((tg: string) => item.tags.includes(tg))) alts.push(x);
-  }
-}
-const related = alts.slice(0, 3);
+// 条目内容区：与弹窗共用 item-view.ts 单一渲染源（结构性消除双份漂移）
+const toView = (x: any): ItemView => {
+  const c = categories.find((cc: any) => cc.slug === x.category);
+  return {
+    slug: x.slug,
+    name: x.name[locale] ?? x.name.en,
+    desc: x.description[locale] ?? x.description.en,
+    url: x.url,
+    repo: x.repo || null,
+    shot: x.screenshot,
+    content: x.content?.[locale] ?? x.content?.en ?? "",
+    components: x.components ?? [],
+    catName: c ? c.name[locale] ?? c.name.en : x.category,
+    catHref: `/${locale}/collections/${x.category}/`,
+    tags: (x.tags ?? []).map((id: string) => {
+      const tg = tagById.get(id);
+      return {
+        id,
+        name: tg ? tg.name[locale] ?? tg.name.en : id,
+        href: tg ? `/${locale}/tags/${tg.slug}/` : `/${locale}/`,
+      };
+    }),
+  };
+};
+const view = toView(item);
+const related = pickRelated(items.map(toView), view);
+const name = view.name;
 
-let host = "";
-try {
-  host = new URL(item.url).hostname.replace(/^www\./, "");
-} catch {
-  host = item.url;
-}
+// 页面自有的翻页器（弹窗的是动态版，见 island.js buildSheetPager）；经 bodySuffix 注入 .sheet-body 末尾
+const pagerSvgPrev = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>';
+const pagerSvgNext = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>';
+const bodySuffix = `<nav class="sheet-pager" aria-label="Prev / Next">${
+  prevItem
+    ? `<a class="sheet-pager-btn sheet-pager-prev" href="/${locale}/item/${prevItem.slug}/">${pagerSvgPrev}<span>${t.pagerPrev || "Previous"}: ${esc(prevItem.name[locale] ?? prevItem.name.en)}</span></a>`
+    : `<button class="sheet-pager-btn" disabled type="button">${pagerSvgPrev}<span>${t.pagerPrev || "Previous"}</span></button>`
+}${
+  nextItem
+    ? `<a class="sheet-pager-btn sheet-pager-next" href="/${locale}/item/${nextItem.slug}/"><span>${esc(nextItem.name[locale] ?? nextItem.name.en)} · ${t.pagerNext || "Next"}</span>${pagerSvgNext}</a>`
+    : `<button class="sheet-pager-btn" disabled type="button"><span>${t.pagerNext || "Next"}</span>${pagerSvgNext}</button>`
+}</nav>`;
+const itemContentHtml = renderItemContent(view, related, locale, bodySuffix);
 const title = `${name} · Uicurio`;
 ---
 <Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${item.screenshot}`} hideTopbar={true}>
@@ -76,125 +97,8 @@ const title = `${name} · Uicurio`;
       </div>
     </header>
 
-    <!-- 2. 舞台署名行（与弹窗一致：条目名占名称位，无头像/徽章） -->
-    <div class="sheet-stage-intro">
-      <div class="sheet-byline">
-        <div class="sheet-author">
-          <div class="sheet-author-meta">
-            <h1 class="sheet-author-name">{name}</h1>
-            <div class="sheet-author-sub">
-              <a href={`/${locale}/collections/${cat.slug}/`}>{cat.name[locale]}</a>
-            </div>
-          </div>
-        </div>
-        <div class="sheet-byline-links">
-          <a class="sheet-pill-link" href={item.url} target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-            <span>{host}</span>
-          </a>
-          {item.repo && (
-            <a class="sheet-pill-link" href={item.repo} target="_blank" rel="noopener">
-              <span>GitHub ↗</span>
-            </a>
-          )}
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. 大画布全景封面 (Dribbble 剧场核心视口) -->
-    <div class="sheet-cover">
-      <a href={item.url} target="_blank" rel="noopener" title={`${t.visitSite} · ${name}`}>
-        <img src={`/assets/shots/${item.screenshot}`} alt={name} width="1600" height="1000" />
-      </a>
-    </div>
-
-    <!-- 4. 叙述详情、组件展示与同柜推荐 -->
-    <div class="sheet-body">
-      <p class="sheet-desc">{description}</p>
-
-      {components.length > 0 && (
-        <div class="sheet-components-section">
-          <div class="sheet-components-header">
-            <h4 class="sheet-components-title">{locale === "zh" ? "包含组件" : "Included Components"}</h4>
-            <span class="sheet-components-count">{components.length}</span>
-          </div>
-          <div class="sheet-components-list">
-            {components.map((comp: string) => (
-              <span class="sheet-component-pill">{comp}</span>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {content && <p class="sheet-content-text">{content}</p>}
-
-      <div class="sheet-tags">
-        {item.tags.map((id: string) => {
-          const tag = tagById.get(id);
-          if (!tag) return null;
-          return (
-            <a class="sheet-tag-chip" href={`/${locale}/tags/${tag.slug}/`}>
-              #{tag.name[locale]}
-            </a>
-          );
-        })}
-      </div>
-
-      <hr class="sheet-divider" />
-
-      {related.length > 0 && (
-        <div class="sheet-related-section">
-          <div class="sheet-related-head">
-            <div class="sheet-related-head-left">
-              <div>
-                <h3>{locale === "zh" ? `更多「${cat.name[locale]}」精选推荐` : `More in ${cat.name[locale]}`}</h3>
-                <span class="sheet-related-sub">
-                  {locale === "zh" ? "来自同一频道分类的高品质设计与工程藏品" : "Curated design & engineering picks from this channel"}
-                </span>
-              </div>
-            </div>
-            <a class="sheet-related-all" href={`/${locale}/collections/${cat.slug}/`}>
-              {locale === "zh" ? "浏览频道全部 ↗" : "Browse all ↗"}
-            </a>
-          </div>
-          <div class="sheet-related-grid">
-            {related.map((rItem: any) => (
-              <a class="sheet-related-card" href={`/${locale}/item/${rItem.slug}/`}>
-                <div class="sheet-related-thumb">
-                  <img src={`/assets/shots/${rItem.screenshot}`} alt={rItem.name[locale] ?? rItem.name.en} loading="lazy" decoding="async" width="400" height="250" />
-                </div>
-                <span class="sheet-related-title">{rItem.name[locale] ?? rItem.name.en}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <nav class="sheet-pager" aria-label="Prev / Next">
-        {prevItem ? (
-          <a class="sheet-pager-btn sheet-pager-prev" href={`/${locale}/item/${prevItem.slug}/`}>
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-            <span>{t.pagerPrev || "Previous"}: {prevItem.name[locale] ?? prevItem.name.en}</span>
-          </a>
-        ) : (
-          <button class="sheet-pager-btn" disabled type="button">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-            <span>{t.pagerPrev || "Previous"}</span>
-          </button>
-        )}
-        {nextItem ? (
-          <a class="sheet-pager-btn sheet-pager-next" href={`/${locale}/item/${nextItem.slug}/`}>
-            <span>{nextItem.name[locale] ?? nextItem.name.en} · {t.pagerNext || "Next"}</span>
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-          </a>
-        ) : (
-          <button class="sheet-pager-btn" disabled type="button">
-            <span>{t.pagerNext || "Next"}</span>
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-          </button>
-        )}
-      </nav>
-    </div>
+    <!-- 2–4. 条目内容区：与弹窗共享 item-view.ts 单一渲染源（署名行→封面→正文→同柜推荐→翻页器） -->
+    <Fragment set:html={itemContentHtml} />
 
     <!-- 5. 底部品牌与偏好控制条 -->
     <footer class="sheet-footer">

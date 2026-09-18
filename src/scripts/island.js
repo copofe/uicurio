@@ -11,6 +11,7 @@ import {
   queryTokens,
   sortItems,
 } from "../lib/island-core.ts";
+import { pickRelated, renderItemContent } from "../lib/item-view.ts";
 
 /* ── DOM 契约注册表 ── */
 const SEL = {
@@ -190,7 +191,7 @@ const cardNodes = new Map(); // slug → SSR 卡片节点
 function initCardNodes() {
   const grid = $(SEL.grid);
   if (!grid) return;
-  for (const n of $$(SEL.grid + " .card")) {
+  for (const n of $$(`${SEL.grid} .card`)) {
     cardNodes.set(n.dataset.slug, n);
   }
 }
@@ -544,7 +545,7 @@ function buildSheet() {
   sheetFloatClose = el("button", "sheet-float-close");
   sheetFloatClose.type = "button";
   sheetFloatClose.setAttribute("aria-label", S.close || "Close");
-  sheetFloatClose.title = (S.close || "Close") + " (Esc)";
+  sheetFloatClose.title = `${S.close || "Close"} (Esc)`;
   sheetFloatClose.appendChild(icon("x", 18));
   sheetFloatClose.addEventListener("click", () => closeSheet());
 
@@ -573,8 +574,6 @@ function openSheet(slug, fromPopState = false) {
   lastFocus = document.activeElement;
   state.activePreviewSlug = slug;
 
-  const catObj = U.categories.find((c) => c.slug === item.cat);
-  const catName = catObj ? catObj.name : item.cat;
   const activeList = currentActiveList();
   const idx = activeList.findIndex((i) => i.slug === slug);
   const prevItem = idx > 0 ? activeList[idx - 1] : null;
@@ -612,193 +611,61 @@ function openSheet(slug, fromPopState = false) {
     sheetFloatNext.onclick = null;
   }
 
-  let host = "";
-  try {
-    host = new URL(item.url).hostname.replace(/^www\./, "");
-  } catch {
-    host = item.url;
-  }
+  // 内容区（署名行→封面→正文→同柜推荐）由 item-view.ts 单一渲染源生成，与详情页共用同一模板
 
-  // 顶部粘性导航栏已移除：关闭由悬浮 X / Esc / 遮罩点击承担
-  // 条目名直接落在署名行作者位（下方），不另设大标题避免重名两次
-  const stageIntro = el("div", "sheet-stage-intro");
-
-  // 舞台署名行 (Dribbble 经典创作者署名条)
-  // 大号舞台标题与头部标题重复，已移除；头部保留唯一条目名
-
-  const byline = el("div", "sheet-byline");
-  const author = el("div", "sheet-author");
-  // 不放头像：策展站每条目同源，恒定的 U 无信息量，且紧邻条目名会被误读为条目 Logo
-
-  const authorMeta = el("div", "sheet-author-meta");
-  const authorName = el("div", "sheet-author-name", item.name);
-  const authorSub = el("div", "sheet-author-sub");
-  authorSub.appendChild(el("span", null, catName));
-
-  authorMeta.appendChild(authorName);
-  authorMeta.appendChild(authorSub);
-  author.appendChild(authorMeta);
-  byline.appendChild(author);
-
-  const bylineLinks = el("div", "sheet-byline-links");
-  const hostLink = el("a", "sheet-pill-link", host);
-  hostLink.href = item.url;
-  hostLink.target = "_blank";
-  hostLink.rel = "noopener";
-  hostLink.prepend(icon("external", 11));
-  bylineLinks.appendChild(hostLink);
-
-  if (item.repo) {
-    const repoLink = el("a", "sheet-pill-link", "GitHub ↗");
-    repoLink.href = item.repo;
-    repoLink.target = "_blank";
-    repoLink.rel = "noopener";
-    bylineLinks.appendChild(repoLink);
-  }
-  byline.appendChild(bylineLinks);
-  stageIntro.appendChild(byline);
-
-  // 3. 大画布全景封面 (Dribbble 剧场核心视口)
-  const coverWrap = el("div", "sheet-cover");
-  const coverLink = el("a");
-  coverLink.href = item.url;
-  coverLink.target = "_blank";
-  coverLink.rel = "noopener";
-  coverLink.title = `${S.visitSite || "Visit site"} · ${item.name}`;
-  const img = el("img");
-  img.src = `/assets/shots/${item.shot}`;
-  img.alt = item.name;
-  img.width = 1600;
-  img.height = 1000;
-  coverLink.appendChild(img);
-  coverWrap.appendChild(coverLink);
-
-  // 4. 叙述详情、组件展示与同柜推荐
-  const body = el("div", "sheet-body");
-  const descP = el("p", "sheet-desc", item.desc);
-  body.appendChild(descP);
-
-  // 包含组件板块 (从原站点解析的组件列表)
-  if (item.components && item.components.length > 0) {
-    const compSection = el("div", "sheet-components-section");
-    const compHeader = el("div", "sheet-components-header");
-    const compTitle = el(
-      "h4",
-      "sheet-components-title",
-      LOCALE === "zh" ? "包含组件" : "Included Components",
-    );
-    const compCount = el(
-      "span",
-      "sheet-components-count",
-      `${item.components.length}`,
-    );
-    compHeader.appendChild(compTitle);
-    compHeader.appendChild(compCount);
-    compSection.appendChild(compHeader);
-
-    const compList = el("div", "sheet-components-list");
-    for (const comp of item.components) {
-      const pill = el("span", "sheet-component-pill", comp);
-      compList.appendChild(pill);
-    }
-    compSection.appendChild(compList);
-    body.appendChild(compSection);
-  }
-
-  // 深度设计与工程解析内容 (content)
-  if (item.content) {
-    const contentP = el("p", "sheet-content-text", item.content);
-    body.appendChild(contentP);
-  }
-
-  // 探索标签 Pill (Dribbble 经典 #tag 风格)
-  const tagsWrap = el("div", "sheet-tags");
-  for (const tagId of item.tags) {
-    const meta = U.tags[tagId];
-    if (!meta) continue;
-    const chip = el("button", "sheet-tag-chip");
-    chip.type = "button";
-    chip.appendChild(document.createTextNode(`#${meta.name}`));
-    chip.addEventListener("click", () => {
-      closeSheet();
-      toggleTag(tagId);
-    });
-    tagsWrap.appendChild(chip);
-  }
-  body.appendChild(tagsWrap);
-
-  // 分隔线
-  body.appendChild(el("hr", "sheet-divider"));
-
-  // 同柜推荐（Dribbble 式 More by Category 专区）
-  const alts = U.items.filter(
-    (x) => x.slug !== item.slug && x.cat === item.cat,
+  const view = itemViewOf(item);
+  const related = pickRelated(
+    U.items.map(itemViewOf),
+    view,
   );
-  if (alts.length < 3) {
-    for (const x of U.items) {
-      if (alts.length >= 3) break;
-      if (x.slug === item.slug || alts.includes(x)) continue;
-      if (x.tags.some((tg) => item.tags.includes(tg))) alts.push(x);
+  // 共享渲染器输出的全部插值均经 item-view esc() 转义（数据为策展受控内容）
+  const fragment = document.createRange().createContextualFragment(
+    renderItemContent(view, related, LOCALE),
+  );
+  sheetPanel.replaceChildren(fragment);
+
+  // 行为委托：相关卡→换片（拦截导航）；标签芯片→关闭并切换筛选（详情页则自然导航）
+  sheetPanel.addEventListener("click", (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    const rel = e.target.closest ? e.target.closest("[data-related-slug]") : null;
+    if (rel) {
+      e.preventDefault();
+      openSheet(rel.getAttribute("data-related-slug"));
+      return;
     }
-  }
-  const related = alts.slice(0, 3);
-  if (related.length > 0) {
-    const relSection = el("div", "sheet-related-section");
-    const relHead = el("div", "sheet-related-head");
-    const relHeadLeft = el("div", "sheet-related-head-left");
-    const relTitleBox = el("div");
-    relTitleBox.appendChild(
-      el(
-        "h3",
-        null,
-        LOCALE === "zh" ? `更多「${catName}」精选推荐` : `More in ${catName}`,
-      ),
-    );
-    relTitleBox.appendChild(
-      el(
-        "span",
-        "sheet-related-sub",
-        LOCALE === "zh"
-          ? "来自同一频道分类的高品质设计与工程藏品"
-          : "Curated design & engineering picks from this channel",
-      ),
-    );
-    relHeadLeft.appendChild(relTitleBox);
-    relHead.appendChild(relHeadLeft);
-
-    const relAllLink = el("a", "sheet-related-all");
-    relAllLink.href = `/${LOCALE}/collections/${item.cat}/`;
-    relAllLink.appendChild(
-      document.createTextNode(
-        LOCALE === "zh" ? "浏览频道全部 ↗" : "Browse all ↗",
-      ),
-    );
-    relHead.appendChild(relAllLink);
-    relSection.appendChild(relHead);
-
-    const relGrid = el("div", "sheet-related-grid");
-    for (const rItem of related) {
-      const rCard = el("button", "sheet-related-card");
-      rCard.type = "button";
-      const rThumb = el("div", "sheet-related-thumb");
-      const rImg = el("img");
-      rImg.src = `/assets/shots/${rItem.shot}`;
-      rImg.alt = rItem.name;
-      rImg.loading = "lazy";
-      rImg.decoding = "async";
-      rImg.width = 400;
-      rImg.height = 250;
-      rThumb.appendChild(rImg);
-      rCard.appendChild(rThumb);
-      rCard.appendChild(el("span", "sheet-related-title", rItem.name));
-      rCard.addEventListener("click", () => openSheet(rItem.slug));
-      relGrid.appendChild(rCard);
+    const tagChip = e.target.closest ? e.target.closest("[data-tag-id]") : null;
+    if (tagChip) {
+      e.preventDefault();
+      closeSheet();
+      toggleTag(tagChip.getAttribute("data-tag-id"));
     }
-    relSection.appendChild(relGrid);
-    body.appendChild(relSection);
-  }
+  });
 
-  // 底部翻页控制器
+  const body = sheetPanel.querySelector(".sheet-body");
+  body.appendChild(buildSheetPager(prevItem, nextItem));
+
+
+  // 打开动效与视口重置
+  if (sheetPanel) sheetPanel.scrollTop = 0;
+  sheetScrim.scrollTop = 0;
+  sheetScrim.classList.add("open");
+  sheetPanel.classList.add("open");
+  document.body.style.overflow = "hidden";
+
+  // URL push / replace state
+  if (fromPopState !== true) {
+    try {
+      if (wasOpen) {
+        history.replaceState({ preview: slug }, "", itemURL(slug));
+      } else {
+        history.pushState({ preview: slug }, "", itemURL(slug));
+      }
+    } catch {}
+  }
+}
+
+/** 弹窗底部翻页器：跟随当前筛选列表的动态上一件/下一件（详情页的翻页器是 SSR 的，不入共享区） */
+function buildSheetPager(prevItem, nextItem) {
   const pager = el("nav", "sheet-pager");
   const prevPagerBtn = el("button", "sheet-pager-btn");
   prevPagerBtn.type = "button";
@@ -827,27 +694,7 @@ function openSheet(slug, fromPopState = false) {
     nextPagerBtn.disabled = true;
   }
   pager.appendChild(nextPagerBtn);
-  body.appendChild(pager);
-
-  sheetPanel.replaceChildren(stageIntro, coverWrap, body);
-
-  // 打开动效与视口重置
-  if (sheetPanel) sheetPanel.scrollTop = 0;
-  sheetScrim.scrollTop = 0;
-  sheetScrim.classList.add("open");
-  sheetPanel.classList.add("open");
-  document.body.style.overflow = "hidden";
-
-  // URL push / replace state
-  if (fromPopState !== true) {
-    try {
-      if (wasOpen) {
-        history.replaceState({ preview: slug }, "", itemURL(slug));
-      } else {
-        history.pushState({ preview: slug }, "", itemURL(slug));
-      }
-    } catch {}
-  }
+  return pager;
 }
 
 function closeSheet(fromPopState = false) {
@@ -1301,16 +1148,9 @@ function renderPalette() {
         row.appendChild(nm);
       } else {
         const ic = el("span", "p-ico");
-        ic.appendChild(
-          icon(
-            r.kind === "action"
-              ? r.ico
-              : r.kind === "channel"
-                ? "layers"
-                : "tag",
-            14,
-          ),
-        );
+        const paletteIcon =
+          r.kind === "action" ? r.ico : r.kind === "channel" ? "layers" : "tag";
+        ic.appendChild(icon(paletteIcon, 14));
         row.appendChild(ic);
         const nm = el("span", "p-name");
         nm.appendChild(hi(r.name, r.q));
@@ -1361,6 +1201,24 @@ const catName = (slug) => {
   return c ? c.name : slug;
 };
 const tagFacet = (t) => (U.tags[t] ? U.tags[t].facet : null);
+/** 载荷条目 → 共享渲染器视图（item-view.ts 的 ItemView） */
+const itemViewOf = (i) => ({
+  slug: i.slug,
+  name: i.name,
+  desc: i.desc,
+  url: i.url,
+  repo: i.repo || null,
+  shot: i.shot,
+  content: i.content || "",
+  components: i.components || [],
+  catName: catName(i.cat),
+  catHref: catURL(i.cat),
+  tags: (i.tags || []).map((id) => ({
+    id,
+    name: U.tags[id] ? U.tags[id].name : id,
+    href: `/${LOCALE}/tags/${(U.tags[id] && U.tags[id].slug) || id.split(":")[1]}/`,
+  })),
+});
 
 function runRowAt(r) {
   if (r.kind === "action") {
