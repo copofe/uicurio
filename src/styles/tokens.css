@@ -80,6 +80,10 @@ button {
 [hidden] {
  display: none !important;
 }
+/* 岛过滤：gridSync 对未命中卡加 .hidden 类（规则曾缺失，导致搜索/筛选视觉上不生效） */
+.hidden {
+ display: none !important;
+}
 ::selection {
  background: var(--ink);
  color: var(--on-ink);
