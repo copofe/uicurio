@@ -56,28 +56,12 @@ const title = `${name} · Uicurio`;
   )}
 
   <div class="sheet-page">
-    <!-- 1. 顶部粘性栏 (Dribbble 风格顶部常驻导航) -->
+    <!-- 1. 页面导航栏（仅保留功能性控件；条目信息由署名行承载，与弹窗一致） -->
     <header class="sheet-head">
       <div class="sheet-head-left">
         <a href={`/${locale}/`} class="sheet-avatar sheet-avatar-sm" aria-label="Uicurio">U</a>
-        <div class="sheet-head-meta">
-          <h2 class="sheet-head-title">{name}</h2>
-          <div class="sheet-head-sub">
-            <a href={`/${locale}/`} class="sheet-brand-link">Uicurio</a>
-            <span class="sheet-byline-sep">·</span>
-            <a href={`/${locale}/collections/${cat.slug}/`} class="sheet-head-cat">{cat.name[locale]}</a>
-          </div>
-        </div>
       </div>
       <div class="sheet-nav">
-        <a class="btn btn-solid sheet-visit-btn" href={item.url} target="_blank" rel="noopener">
-          <span>{t.visitSite}</span>
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg>
-        </a>
-        <button class="btn btn-ghost sheet-copy-btn" type="button" data-copy-url={item.url}>
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-          <span>{t.copyLink}</span>
-        </button>
         <select class="langsel" data-lang-select aria-label="Language">
           <option value="en" selected={locale === "en"}>English</option>
           <option value="zh" selected={locale === "zh"}>中文</option>
@@ -92,20 +76,13 @@ const title = `${name} · Uicurio`;
       </div>
     </header>
 
-    <!-- 2. 舞台标题与作者 Byline (Dribbble 经典大字头与创作者署名条) -->
+    <!-- 2. 舞台署名行（与弹窗一致：条目名占名称位，无头像/徽章） -->
     <div class="sheet-stage-intro">
-      <h1 class="sheet-stage-title">{name}</h1>
       <div class="sheet-byline">
         <div class="sheet-author">
-          <div class="sheet-avatar sheet-avatar-md">U</div>
           <div class="sheet-author-meta">
-            <div class="sheet-author-name">Uicurio</div>
+            <h1 class="sheet-author-name">{name}</h1>
             <div class="sheet-author-sub">
-              <span class="sheet-badge sheet-badge-curated">
-                <span class="badge-dot"></span>
-                <span>{locale === "zh" ? "官方精选收录" : "Featured"}</span>
-              </span>
-              <span class="sheet-byline-sep">·</span>
               <a href={`/${locale}/collections/${cat.slug}/`}>{cat.name[locale]}</a>
             </div>
           </div>
@@ -169,7 +146,6 @@ const title = `${name} · Uicurio`;
         <div class="sheet-related-section">
           <div class="sheet-related-head">
             <div class="sheet-related-head-left">
-              <div class="sheet-avatar sheet-avatar-sm">U</div>
               <div>
                 <h3>{locale === "zh" ? `更多「${cat.name[locale]}」精选推荐` : `More in ${cat.name[locale]}`}</h3>
                 <span class="sheet-related-sub">
