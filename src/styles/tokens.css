@@ -993,6 +993,7 @@ button.chip[aria-disabled="true"]:hover {
  gap: 4px 14px;
 }
 .sheet-author-name {
+ margin: 0;
  font-size: 26px;
  font-weight: 700;
  letter-spacing: -0.02em;
