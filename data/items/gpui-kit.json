@@ -1,0 +1,35 @@
+{
+  "slug": "gpui-kit",
+  "name": {
+    "en": "GPUI Kit",
+    "zh": "GPUI Kit"
+  },
+  "description": {
+    "en": "A GPUI component kit for Rust desktop apps: data tables, docking, charts, code editor.",
+    "zh": "面向 Rust 桌面的 GPUI 组件套件：数据表格、停靠布局、图表与代码编辑器开箱即用，GPU 渲染保障信息密集界面依然流畅。"
+  },
+  "url": "https://gpui-kit.com",
+  "repo": "https://github.com/longbridge/gpui-kit",
+  "category": "collections",
+  "tags": [
+    "function:chart"
+  ],
+  "screenshot": "gpui-kit.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-18",
+  "content": {
+    "en": "GPUI Kit is a Rust desktop application framework built on GPUI, the GPU-rendered UI toolkit behind the Zed editor, and proven in production at Longbridge Pro. Aimed at information-dense software, it ships data tables with virtual scrolling and resizable columns, virtualized lists, a rope-backed code editor with Tree-sitter highlighting and LSP support, serializable dock layouts, charts, and semantic multi-theming — every frame drawn on the GPU. The ecosystem is layered like shadcn for the desktop: gpui-component for a polished styled system, gpui-base for unstyled behavior primitives when you want to own the design system, and gpui-shell for extending a shipped Rust host with sandboxed JavaScript panels.",
+    "zh": "GPUI Kit 是构建在 GPUI（Zed 编辑器背后的 GPU 渲染 UI 工具包）之上的 Rust 桌面应用框架，从商业桌面应用 Longbridge Pro 的真实需求中生长而来。它为信息密集型软件而生：内置虚拟滚动与可调列宽的数据表格、虚拟化列表、基于 Rope 与 Tree-sitter 且带 LSP 支持的代码编辑器、可序列化的停靠布局、图表与语义化多主题，全部由 GPU 绘制以保持高帧率。生态分层借鉴了 shadcn 的思路：gpui-component 提供开箱即用的完整视觉系统，gpui-base 提供无样式行为基座供你自建设计系统，gpui-shell 则让已发布的 Rust 宿主加载沙箱化 JavaScript 面板扩展。"
+  },
+  "components": [
+    "Data Table",
+    "Virtualized List",
+    "Dock Area",
+    "Code Editor",
+    "Charts",
+    "Multi-Theme System",
+    "Markdown & HTML Rendering",
+    "JavaScript Extension Shell"
+  ]
+}
