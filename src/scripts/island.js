@@ -518,6 +518,7 @@ let sheetScrim = null;
 let sheetPanel = null;
 let sheetFloatPrev = null;
 let sheetFloatNext = null;
+let sheetFloatClose = null;
 
 function buildSheet() {
   sheetScrim = el("div", "sheet-scrim");
@@ -539,6 +540,14 @@ function buildSheet() {
   sheetFloatNext.title = "Next (→)";
   sheetFloatNext.appendChild(icon("arrowRight", 20));
 
+  // 悬浮关闭（头部导航已移除，关闭是唯一常驻控件；不复用 .sheet-float-nav，那个 <1360px 会隐藏）
+  sheetFloatClose = el("button", "sheet-float-close");
+  sheetFloatClose.type = "button";
+  sheetFloatClose.setAttribute("aria-label", S.close || "Close");
+  sheetFloatClose.title = (S.close || "Close") + " (Esc)";
+  sheetFloatClose.appendChild(icon("x", 18));
+  sheetFloatClose.addEventListener("click", () => closeSheet());
+
   sheetPanel = el("article", "sheet-panel");
   sheetPanel.setAttribute("role", "dialog");
   sheetPanel.setAttribute("aria-modal", "true");
@@ -548,6 +557,7 @@ function buildSheet() {
 
   sheetScrim.appendChild(sheetFloatPrev);
   sheetScrim.appendChild(sheetFloatNext);
+  sheetScrim.appendChild(sheetFloatClose);
   sheetScrim.appendChild(sheetPanel);
   document.body.appendChild(sheetScrim);
 }
@@ -609,59 +619,9 @@ function openSheet(slug, fromPopState = false) {
     host = item.url;
   }
 
-  // 1. 顶部粘性栏 (Dribbble 风格顶部常驻导航)
-  const head = el("header", "sheet-head");
-  const headLeft = el("div", "sheet-head-left");
+  // 顶部粘性导航栏已移除：与署名行/封面链接信息重复，关闭由悬浮 X / Esc / 遮罩点击承担
 
-  // Dribbble 创作者头像 (以 uicurio 品牌渐变环为标志)
-  const headAvatar = el("div", "sheet-avatar sheet-avatar-sm", "U");
-  headLeft.appendChild(headAvatar);
-
-  const headMeta = el("div", "sheet-head-meta");
-  const headTitle = el("h2", "sheet-head-title", item.name);
-  const headSub = el("div", "sheet-head-sub");
-  headSub.appendChild(document.createTextNode("Uicurio"));
-  headSub.appendChild(el("span", "sheet-byline-sep", "·"));
-  headSub.appendChild(el("span", "sheet-head-cat", catName));
-  headMeta.appendChild(headTitle);
-  headMeta.appendChild(headSub);
-  headLeft.appendChild(headMeta);
-  head.appendChild(headLeft);
-
-  const nav = el("div", "sheet-nav");
-
-  // 官方外链直达 (核心 Solid 主按钮，仿 Dribbble Get in touch / Visit 黑色胶囊)
-  const visitBtn = el("a", "btn btn-solid sheet-visit-btn");
-  visitBtn.href = item.url;
-  visitBtn.target = "_blank";
-  visitBtn.rel = "noopener";
-  visitBtn.appendChild(el("span", null, S.visitSite || "Visit site"));
-  visitBtn.appendChild(icon("aur", 13));
-  nav.appendChild(visitBtn);
-
-  // 复制链接 (仿 Dribbble Save / Share 幽灵胶囊)
-  const copyBtn = el("button", "btn btn-ghost sheet-copy-btn");
-  copyBtn.type = "button";
-  copyBtn.appendChild(icon("copy", 13));
-  copyBtn.appendChild(el("span", null, S.copyLink || "Copy Link"));
-  copyBtn.addEventListener("click", () => {
-    navigator.clipboard.writeText(item.url).then(() => {
-      showToast(S.copied || "Link copied!");
-    });
-  });
-  nav.appendChild(copyBtn);
-
-  // 关闭按钮
-  const closeBtn = el("button", "iconbtn sheet-close-btn");
-  closeBtn.type = "button";
-  closeBtn.setAttribute("aria-label", S.close || "Close");
-  closeBtn.title = (S.close || "Close") + " (Esc)";
-  closeBtn.appendChild(icon("x", 17));
-  closeBtn.addEventListener("click", () => closeSheet());
-  nav.appendChild(closeBtn);
-  head.appendChild(nav);
-
-  // 2. 舞台标题与作者 Byline (Dribbble 经典大字头与创作者署名条)
+  // 2. 舞台署名行 (Dribbble 经典创作者署名条)
   const stageIntro = el("div", "sheet-stage-intro");
   // 大号舞台标题与头部标题重复，已移除；头部保留唯一条目名
 
@@ -870,7 +830,7 @@ function openSheet(slug, fromPopState = false) {
   pager.appendChild(nextPagerBtn);
   body.appendChild(pager);
 
-  sheetPanel.replaceChildren(head, stageIntro, coverWrap, body);
+  sheetPanel.replaceChildren(stageIntro, coverWrap, body);
 
   // 打开动效与视口重置
   if (sheetPanel) sheetPanel.scrollTop = 0;

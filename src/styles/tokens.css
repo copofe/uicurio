@@ -791,6 +791,34 @@ button.chip[aria-disabled="true"]:hover {
  }
 }
 
+/* 弹窗悬浮关闭（头部导航已移除；独立于 .sheet-float-nav，全视口尺寸常驻可见） */
+.sheet-float-close {
+ position: fixed;
+ top: 64px;
+ right: 28px;
+ z-index: 130;
+ width: 44px;
+ height: 44px;
+ border-radius: 50%;
+ background: color-mix(in srgb, var(--surface) 92%, transparent);
+ backdrop-filter: blur(14px);
+ -webkit-backdrop-filter: blur(14px);
+ border: 1px solid var(--border);
+ color: var(--text-1);
+ box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ cursor: pointer;
+ transition:
+  background var(--dur-fast) ease,
+  transform var(--dur-fast) ease;
+}
+.sheet-float-close:hover {
+ border-color: var(--ink);
+ transform: scale(1.08);
+}
+
 /* 独立详情页 (全屏 Dribbble 剧场形态，与弹窗完全统一) */
 .sheet-page {
  position: relative;
@@ -1385,6 +1413,12 @@ button.chip[aria-disabled="true"]:hover {
   top: max(40px, env(safe-area-inset-top, 24px));
   height: calc(100% - max(40px, env(safe-area-inset-top, 24px)));
   border-radius: 16px 16px 0 0;
+ }
+ .sheet-float-close {
+  top: 52px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
  }
  .sheet-head {
   padding: 0 16px;
