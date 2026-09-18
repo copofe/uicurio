@@ -1,0 +1,9 @@
+# 静态资源全部带内容哈希（faZnUcy9/DNAcSksz 随内容变），可放心长缓存；
+# 显式声明避免中间层回退到模糊 TTL（如 4h），确保发布后命名变化即缓存失效。
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/*
+  Cache-Control: public, max-age=0, must-revalidate
