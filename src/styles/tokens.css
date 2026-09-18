@@ -1128,14 +1128,12 @@ button.chip[aria-disabled="true"]:hover {
  font-weight: 500;
  line-height: 1.8;
  color: var(--text-1);
- max-width: 900px;
 }
 .sheet-content-text {
  margin: 0;
  font-size: 15px;
  line-height: 1.85;
  color: var(--text-2);
- max-width: 900px;
 }
 
 /* 包含组件模块 (Component Showcase) */
@@ -1147,7 +1145,6 @@ button.chip[aria-disabled="true"]:hover {
  border-radius: 16px;
  border: 1px solid var(--border);
  background: var(--surface-2);
- max-width: 900px;
 }
 .sheet-components-header {
  display: flex;

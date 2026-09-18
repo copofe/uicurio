@@ -651,17 +651,6 @@ function openSheet(slug, fromPopState = false) {
   });
   nav.appendChild(copyBtn);
 
-  // 打开全屏独立页
-  const fullPageLink = el("a", "iconbtn");
-  fullPageLink.href = itemURL(item.slug);
-  fullPageLink.setAttribute(
-    "aria-label",
-    S.openInNewTab || "Open standalone page",
-  );
-  fullPageLink.title = S.openInNewTab || "Open standalone page";
-  fullPageLink.appendChild(icon("external", 14));
-  nav.appendChild(fullPageLink);
-
   // 关闭按钮
   const closeBtn = el("button", "iconbtn sheet-close-btn");
   closeBtn.type = "button";
@@ -674,8 +663,7 @@ function openSheet(slug, fromPopState = false) {
 
   // 2. 舞台标题与作者 Byline (Dribbble 经典大字头与创作者署名条)
   const stageIntro = el("div", "sheet-stage-intro");
-  const stageTitle = el("h1", "sheet-stage-title", item.name);
-  stageIntro.appendChild(stageTitle);
+  // 大号舞台标题与头部标题重复，已移除；头部保留唯一条目名
 
   const byline = el("div", "sheet-byline");
   const author = el("div", "sheet-author");
@@ -685,15 +673,6 @@ function openSheet(slug, fromPopState = false) {
   const authorMeta = el("div", "sheet-author-meta");
   const authorName = el("div", "sheet-author-name", "Uicurio");
   const authorSub = el("div", "sheet-author-sub");
-
-  const badgeCurated = el("span", "sheet-badge sheet-badge-curated");
-  badgeCurated.appendChild(el("span", "badge-dot"));
-  badgeCurated.appendChild(
-    document.createTextNode(LOCALE === "zh" ? "官方精选收录" : "Featured"),
-  );
-  authorSub.appendChild(badgeCurated);
-
-  authorSub.appendChild(el("span", "sheet-byline-sep", "·"));
   authorSub.appendChild(el("span", null, catName));
 
   authorMeta.appendChild(authorName);
@@ -1423,7 +1402,6 @@ const catName = (slug) => {
   return c ? c.name : slug;
 };
 const tagFacet = (t) => (U.tags[t] ? U.tags[t].facet : null);
-const tagName = (t) => (U.tags[t] ? U.tags[t].name : t);
 
 function runRowAt(r) {
   if (r.kind === "action") {
