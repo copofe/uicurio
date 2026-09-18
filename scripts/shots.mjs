@@ -36,8 +36,44 @@ if (!targets.length) {
   process.exit(0);
 }
 
-const PROXY = process.env.SHOTS_PROXY ?? "http://127.0.0.1:7890";
-const browser = await chromium.launch({ proxy: { server: PROXY } });
+import net from "node:net";
+
+// 代理探测：若配置的代理端口无服务响应，则自动回退为直连，避免无代理环境下全局挂起
+async function detectProxy(proxyUrl) {
+  if (!proxyUrl || proxyUrl === "none" || proxyUrl === "direct") return null;
+  try {
+    const { hostname, port } = new URL(proxyUrl);
+    return await new Promise((resolve) => {
+      const socket = net.createConnection(
+        { host: hostname, port: Number(port) },
+        () => {
+          socket.destroy();
+          resolve(proxyUrl);
+        },
+      );
+      socket.setTimeout(600);
+      socket.on("timeout", () => {
+        socket.destroy();
+        resolve(null);
+      });
+      socket.on("error", () => {
+        socket.destroy();
+        resolve(null);
+      });
+    });
+  } catch {
+    return null;
+  }
+}
+
+const configuredProxy = process.env.SHOTS_PROXY ?? "http://127.0.0.1:7890";
+const activeProxy = await detectProxy(configuredProxy);
+if (!activeProxy && configuredProxy) {
+  console.log(`[shots] 代理 ${configuredProxy} 未启动，已自动切换为直连`);
+}
+const browser = await chromium.launch(
+  activeProxy ? { proxy: { server: activeProxy } } : {},
+);
 const ok = [];
 const failed = [];
 const CONCURRENCY = 3;

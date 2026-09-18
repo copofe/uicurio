@@ -1,0 +1,43 @@
+{
+  "slug": "23rd",
+  "name": {
+    "en": "23rd",
+    "zh": "23rd"
+  },
+  "description": {
+    "en": "An opinionated shadcn/ui registry of high-character components for React and Svelte 5, featuring ASCII fluid, GLSL shaders, and organic motion.",
+    "zh": "极具个性表达的 shadcn/ui 组件注册表：支持 React 与 Svelte 5，涵盖 ASCII 流体、GLSL 着色器天象与有机动效。"
+  },
+  "url": "https://23rd.dev/docs",
+  "repo": "https://github.com/radiumcoders/23rd.dev",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:shadcn",
+    "stack:react",
+    "stack:svelte",
+    "style:design-engineer"
+  ],
+  "screenshot": "23rd.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-17",
+  "content": {
+    "en": "23rd is an opinionated component registry built on top of the shadcn ecosystem, providing ready-to-ship, distinctive UI elements for developers and design engineers. Supporting both React and Svelte 5 through the standard shadcn CLI, it breaks away from generic component templates by committing to bold aesthetics: interactive ASCII fluid simulations, responsive GLSL shader skies and fire tongues, CRT phosphor music rain, Bayer-dithered 404 pages, and perspective 3D spring-scroll folios. Each element comes with carefully calibrated default physics, radii, and typography that feel instantly finished.",
+    "zh": "23rd 是一套基于 shadcn 生态的极具设计主张的组件注册表，专为追求鲜明视觉与交互张力的前端开发者打造。全库支持通过标准 shadcn CLI 一键安装到 React 或 Svelte 5 项目中。不同于常规组件库求稳的平庸基调，23rd 勇敢选择了极具辨识度的技术与艺术结合路线：包含交互式 ASCII 流体模拟、GLSL 着色器天空与火舌、CRT 荧光流坠、拜尔点阵（Bayer）抖动 404 画布，以及视角后倾的 3D 弹簧翻页效果。所有组件均自带精调的空间、动效手感与配色默认值，开箱即拥有极高完成度。"
+  },
+  "components": [
+    "ASCII Fluid Simulation",
+    "ASCII Interactive Logo",
+    "Shader Sky (Atmosphere & Rain)",
+    "Shader Fire",
+    "Shader Gradient",
+    "Logo Burst Tentacles",
+    "Phosphor CRT Score",
+    "Dithered 404 Page",
+    "Folio 3D Spring Scroll",
+    "Radiant Lines Starfield",
+    "Gooey Color Picker",
+    "Stretchy Footer"
+  ]
+}

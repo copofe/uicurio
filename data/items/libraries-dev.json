@@ -1,0 +1,39 @@
+{
+  "slug": "libraries-dev",
+  "name": {
+    "en": "Libraries.dev",
+    "zh": "Libraries.dev"
+  },
+  "description": {
+    "en": "High-crafted React effect libraries tailored for AI agents, featuring Border Beam, Thinking Orbs, Gooey, Liquid Metal, and Image Loaders.",
+    "zh": "专为 AI 与智能体界面打造的高质感 React 特效组件库：包含流光边框、思维光球、流体黏连、液态金属与图像生成加载器。"
+  },
+  "url": "https://libraries.dev/",
+  "repo": "https://github.com/Jakubantalik/Libraries.dev",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "function:loading-indicator",
+    "stack:react",
+    "style:design-engineer",
+    "scenario:ai-native"
+  ],
+  "screenshot": "libraries-dev.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-17",
+  "content": {
+    "en": "Libraries.dev is a curated suite of production-ready React effect libraries purpose-built for modern AI agent products and craft-focused web applications. Developed by Jakub Antalík, the toolkit provides five standalone, high-performance visual effects: Border Beam (an animated rainbow glow following arbitrary element borders), Thinking Orbs (2D canvas particle thought-state indicators), Gooey (liquid morphing and merging UI pieces), Liquid Metal (real-time reflective chrome rings for buttons and icons), and Image Generation (WebGL card generation loaders). Each effect ships as an independent npm package with TypeScript definitions and zero unnecessary dependencies.",
+    "zh": "Libraries.dev 是一套专为新一代 AI 智能体应用与高审美前端界面打造的 React 特效组件套件，由设计师兼工程师 Jakub Antalík 独立打磨。全套工具箱涵盖五个独立开箱的高质感视觉特效：Border Beam（自适应任意边框的彩虹流光外框）、Thinking Orbs（纯 2D Canvas 打造的 9 种智能体思维波纹与状态球）、Gooey（液体般融合与分离的黏连流体交互）、Liquid Metal（实时反射环境光的液态金属材质环）以及 Image Generation（用于生图卡片的 WebGL 渐进加载态）。各个效果均支持独立 npm 包按需安装，配齐完整 TypeScript 类型。"
+  },
+  "components": [
+    "Border Beam (@libraries/beam)",
+    "Thinking Orbs (@libraries/orb)",
+    "Gooey Liquid UI (@libraries/gooey)",
+    "Liquid Metal (@libraries/metal)",
+    "Image Generation Loader (@libraries/image)",
+    "Interactive Playgrounds",
+    "Figma Design Assets",
+    "Custom Shaders & Canvas Controls"
+  ]
+}
