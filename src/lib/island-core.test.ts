@@ -6,7 +6,10 @@ import {
   emptySelection,
   encodeFilters,
   facetCount,
+  hayMatches,
+  hayVariants,
   matches,
+  queryTokens,
   sortItems,
   type ItemLike,
   type TagMetaLike,
@@ -29,6 +32,8 @@ const items: ItemLike[] = [
   {
     name: "Liveline",
     desc: "实时折线图",
+    content:
+      "专为流式遥测设计的实时 Canvas 图表库，支持单线、多序列与 K 线、蜡烛图（OHLC）模式。",
     cat: "data-viz",
     tags: ["function:chart", "stack:react"],
     added: "2026-09-11",
@@ -143,6 +148,31 @@ describe("matches", () => {
     expect(matches(items[2], mk([], "react card"))).toBe(true);
     expect(matches(items[2], mk([], "3d 银行卡"))).toBe(true);
     expect(matches(items[2], mk([], "react chart"))).toBe(false);
+  });
+
+  it("中英混排空格互通：无空格输入命中带空格文案 (k线 ↔ K 线)", () => {
+    expect(matches(items[0], mk([], "k线"))).toBe(true); // content 中为「K 线」
+    expect(matches(items[0], mk([], "K线"))).toBe(true);
+    expect(matches(items[2], mk([], "reactvue"))).toBe(true); // desc 中为「React/Vue」
+    expect(matches(items[0], mk([], "react19"))).toBe(false); // 无关词仍不误报
+  });
+
+  it("详情正文 content 入检索索引 (蜡烛图仅出现在正文)", () => {
+    expect(matches(items[0], mk([], "蜡烛图"))).toBe(true);
+    expect(matches(items[0], mk([], "遥测"))).toBe(true);
+    // 正文权重不改变「不搜 tag」语义：content 不含 react 时仍不命中
+    expect(matches(items[0], mk([], "React"))).toBe(false);
+  });
+
+  it("hayVariants / queryTokens / hayMatches 变体契约", () => {
+    const hay = hayVariants("React 19 · Chart_AI 原生");
+    expect(hay.normalized).toBe("react 19 · chart ai 原生"); // · 不在分隔符集合
+    expect(hay.compact).toBe("react19·chartai原生");
+    expect(hayMatches(hay, "react19")).toBe(true); // react19 ↔ React 19
+    expect(hayMatches(hay, "ai原生")).toBe(true);
+    expect(hayMatches(hay, "k线")).toBe(false); // 仅空格差异互通，隔字母不互通
+    expect(queryTokens("  - crd ")).toEqual(["crd"]); // 纯分隔符词剔除
+    expect(queryTokens("")).toEqual([]);
   });
 
   it("跨分面 AND：stack:react 与 function:chart 同时命中", () => {

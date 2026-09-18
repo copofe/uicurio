@@ -14,6 +14,7 @@ export interface ItemLike {
   altDesc?: string;
   components?: string[];
   repo?: string | null;
+  content?: string; // 详情正文（弹窗深度解析文本；入检索索引）
   cat: string;
   tags: string[]; // 标签 id（facet:slug）
   added: string;
@@ -78,8 +79,41 @@ export interface MatchCtx {
   tagNames: Record<string, TagMetaLike>; // tagId → 显示名或完整元数据
 }
 
-/** 构造条目的全文本检索索引（双语名/描述、Slug、Repo、组件列表；不检索 tag） */
-function buildHaystack(item: ItemLike): { raw: string; normalized: string } {
+/** 文本归一化三变体：原始小写 / 分隔符转空格 / 去空白紧凑。中英混排空格互通（k线 ↔ K 线、AI原生 ↔ AI 原生） */
+export interface HayVariants {
+  raw: string;
+  normalized: string;
+  compact: string;
+}
+
+export function hayVariants(text: string): HayVariants {
+  const raw = text.toLowerCase();
+  const normalized = raw.replace(/[-_./]/g, " ");
+  const compact = normalized.replace(/\s+/g, "");
+  return { raw, normalized, compact };
+}
+
+/** 查询分词：多词 AND；纯分隔符词（如单独的 "-"）剔除，避免退化为全匹配 */
+export function queryTokens(q: string): string[] {
+  return (q || "")
+    .trim()
+    .toLowerCase()
+    .split(/\s+/)
+    .filter((t) => t && t.replace(/[-_./\s]/g, "") !== "");
+}
+
+/** 单个查询词对归一化 haystack 的命中判断 */
+export function hayMatches(hay: HayVariants, token: string): boolean {
+  const t = hayVariants(token);
+  return (
+    hay.raw.includes(t.raw) ||
+    hay.normalized.includes(t.normalized) ||
+    hay.compact.includes(t.compact)
+  );
+}
+
+/** 构造条目的全文本检索索引（双语名/描述/正文、Slug、Repo、组件列表；不检索 tag） */
+function buildHaystack(item: ItemLike): HayVariants {
   const parts: string[] = [
     item.name || "",
     item.altName || "",
@@ -87,31 +121,22 @@ function buildHaystack(item: ItemLike): { raw: string; normalized: string } {
     item.desc || "",
     item.altDesc || "",
     item.repo || "",
+    item.content || "",
   ];
 
   if (Array.isArray(item.components)) {
     for (const c of item.components) parts.push(c);
   }
 
-  const raw = parts.join(" ").toLowerCase();
-  const normalized = raw.replace(/[-_./]/g, " ");
-  return { raw, normalized };
+  return hayVariants(parts.join(" "));
 }
 
-/** 查询词匹配判断：支持多词 AND 分词、标点归一化（如 crd-ui 与 crd ui 互通）与双语穿透；不搜 tag */
+/** 查询词匹配判断：支持多词 AND 分词、标点归一化（crd-ui 与 crd ui 互通）、中英混排去空格互通与双语穿透；不搜 tag */
 export function itemMatchesQuery(item: ItemLike, q: string): boolean {
-  if (!q || !q.trim()) return true;
-  const tokens = q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const tokens = queryTokens(q);
   if (!tokens.length) return true;
-  const { raw, normalized } = buildHaystack(item);
-  return tokens.every((token) => {
-    const tokenNorm = token.replace(/[-_./]/g, " ");
-    return (
-      raw.includes(token) ||
-      normalized.includes(token) ||
-      normalized.includes(tokenNorm)
-    );
-  });
+  const hay = buildHaystack(item);
+  return tokens.every((token) => hayMatches(hay, token));
 }
 
 /** 频道内过滤：跨分面 AND；q 命中名称/描述/双语/组件/仓库（不搜 tag）；skipFacet 排除自身 facet 约束 */
@@ -164,6 +189,7 @@ function scoreItem(item: ItemLike, q: string): number {
   const altName = (item.altName || "").toLowerCase();
   const desc = (item.desc || "").toLowerCase();
   const altDesc = (item.altDesc || "").toLowerCase();
+  const content = (item.content || "").toLowerCase();
 
   for (const t of tokens) {
     // 1. Slug & Name 精准 / 前缀 / 包含匹配
@@ -180,6 +206,9 @@ function scoreItem(item: ItemLike, q: string): number {
     if (Array.isArray(item.components)) {
       if (item.components.some((c) => c.toLowerCase().includes(t))) total += 8;
     }
+
+    // 4. 详情正文匹配（权重最低，仅作兜底召回）
+    if (content.includes(t)) total += 5;
   }
   return total;
 }

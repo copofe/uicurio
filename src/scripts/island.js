@@ -4,8 +4,11 @@ import {
   decodeFilters,
   encodeFilters,
   facetCount,
+  hayMatches,
+  hayVariants,
   itemMatchesQuery,
   matches,
+  queryTokens,
   sortItems,
 } from "../lib/island-core.ts";
 
@@ -1289,22 +1292,11 @@ function paletteData(q) {
     rows.push(g);
   }
 
-  // 频道 Channels
+  // 频道 Channels（与主检索同一套归一化：分隔符/中英混排空格互通）
   const chans = U.categories.filter((c) => {
     if (!ql) return true;
-    const chanHay = `${c.slug} ${c.name}`.toLowerCase();
-    const chanNorm = chanHay.replace(/[-_./]/g, " ");
-    return ql
-      .split(/\s+/)
-      .filter(Boolean)
-      .every((tok) => {
-        const tokNorm = tok.replace(/[-_./]/g, " ");
-        return (
-          chanHay.includes(tok) ||
-          chanNorm.includes(tok) ||
-          chanNorm.includes(tokNorm)
-        );
-      });
+    const chanHay = hayVariants(`${c.slug} ${c.name}`);
+    return queryTokens(ql).every((tok) => hayMatches(chanHay, tok));
   });
   if (chans.length) {
     const g2 = { label: S.pgChannels, rows: [] };
@@ -1318,25 +1310,15 @@ function paletteData(q) {
     rows.push(g2);
   }
 
-  // 标签 Tags
+  // 标签 Tags（与主检索同一套归一化）
   const tags = Object.keys(U.tags)
     .filter((t) => {
       if (!ql) return true;
       const tag = U.tags[t];
-      const tagHay =
-        `${t} ${tag.name} ${tag.altName || ""} ${tag.slug || ""}`.toLowerCase();
-      const tagNorm = tagHay.replace(/[-_./]/g, " ");
-      return ql
-        .split(/\s+/)
-        .filter(Boolean)
-        .every((tok) => {
-          const tokNorm = tok.replace(/[-_./]/g, " ");
-          return (
-            tagHay.includes(tok) ||
-            tagNorm.includes(tok) ||
-            tagNorm.includes(tokNorm)
-          );
-        });
+      const tagHay = hayVariants(
+        `${t} ${tag.name} ${tag.altName || ""} ${tag.slug || ""}`,
+      );
+      return queryTokens(ql).every((tok) => hayMatches(tagHay, tok));
     })
     .slice(0, 8);
   if (tags.length) {
