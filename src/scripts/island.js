@@ -619,11 +619,9 @@ function openSheet(slug, fromPopState = false) {
     host = item.url;
   }
 
-  // 顶部粘性导航栏已移除：与署名行/封面链接信息重复，关闭由悬浮 X / Esc / 遮罩点击承担
-  // 条目名以舞台标题呈现（头部移除后这里唯一展示名）
+  // 顶部粘性导航栏已移除：关闭由悬浮 X / Esc / 遮罩点击承担
+  // 条目名直接落在署名行作者位（下方），不另设大标题避免重名两次
   const stageIntro = el("div", "sheet-stage-intro");
-  const stageTitle = el("h1", "sheet-stage-title", item.name);
-  stageIntro.appendChild(stageTitle);
 
   // 舞台署名行 (Dribbble 经典创作者署名条)
   // 大号舞台标题与头部标题重复，已移除；头部保留唯一条目名
@@ -634,7 +632,7 @@ function openSheet(slug, fromPopState = false) {
   author.appendChild(stageAvatar);
 
   const authorMeta = el("div", "sheet-author-meta");
-  const authorName = el("div", "sheet-author-name", "Uicurio");
+  const authorName = el("div", "sheet-author-name", item.name);
   const authorSub = el("div", "sheet-author-sub");
   authorSub.appendChild(el("span", null, catName));
 
