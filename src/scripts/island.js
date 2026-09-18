@@ -628,8 +628,7 @@ function openSheet(slug, fromPopState = false) {
 
   const byline = el("div", "sheet-byline");
   const author = el("div", "sheet-author");
-  const stageAvatar = el("div", "sheet-avatar sheet-avatar-md", "U");
-  author.appendChild(stageAvatar);
+  // 不放头像：策展站每条目同源，恒定的 U 无信息量，且紧邻条目名会被误读为条目 Logo
 
   const authorMeta = el("div", "sheet-author-meta");
   const authorName = el("div", "sheet-author-name", item.name);
@@ -747,7 +746,6 @@ function openSheet(slug, fromPopState = false) {
     const relSection = el("div", "sheet-related-section");
     const relHead = el("div", "sheet-related-head");
     const relHeadLeft = el("div", "sheet-related-head-left");
-    relHeadLeft.appendChild(el("div", "sheet-avatar sheet-avatar-sm", "U"));
     const relTitleBox = el("div");
     relTitleBox.appendChild(
       el(
