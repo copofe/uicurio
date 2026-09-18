@@ -620,9 +620,12 @@ function openSheet(slug, fromPopState = false) {
   }
 
   // 顶部粘性导航栏已移除：与署名行/封面链接信息重复，关闭由悬浮 X / Esc / 遮罩点击承担
-
-  // 2. 舞台署名行 (Dribbble 经典创作者署名条)
+  // 条目名以舞台标题呈现（头部移除后这里唯一展示名）
   const stageIntro = el("div", "sheet-stage-intro");
+  const stageTitle = el("h1", "sheet-stage-title", item.name);
+  stageIntro.appendChild(stageTitle);
+
+  // 舞台署名行 (Dribbble 经典创作者署名条)
   // 大号舞台标题与头部标题重复，已移除；头部保留唯一条目名
 
   const byline = el("div", "sheet-byline");
