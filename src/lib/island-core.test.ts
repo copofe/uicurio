@@ -9,9 +9,15 @@ import {
   matches,
   sortItems,
   type ItemLike,
+  type TagMetaLike,
 } from "./island-core.ts";
 
-const tagNames: Record<string, string> = {
+const tagNames: Record<string, TagMetaLike> = {
+  "function:card-input": {
+    name: "卡号输入",
+    altName: "card input",
+    slug: "card-input",
+  },
   "function:chart": "图表",
   "function:diff": "diff",
   "stack:react": "React",
@@ -35,8 +41,14 @@ const items: ItemLike[] = [
     added: "2026-09-10",
   },
   {
+    slug: "crd-ui",
     name: "crd-ui",
-    desc: "银行卡输入组件",
+    altName: "crd-ui",
+    desc: "极具质感的支付表单银行卡交互组件：支持 React/Vue/Svelte",
+    altDesc:
+      "A credit & debit card component for payment forms in React and Vue",
+    components: ["CVV / CVC with Auto-flip", "Interactive 3D Card Preview"],
+    repo: "https://github.com/JuandaGarcia/crd-ui",
     cat: "input-controls",
     tags: ["function:card-input", "stack:react", "stack:vue"],
     added: "2026-09-09",
@@ -96,11 +108,41 @@ describe("matches", () => {
     expect(matches(items[0], mk([], "", "files-code"))).toBe(false);
   });
 
-  it("q 命中名称/描述/标签显示名", () => {
+  it("q 命中名称/描述/双语/组件/仓库", () => {
     expect(matches(items[0], mk([], "liveline"))).toBe(true);
     expect(matches(items[0], mk([], "折线图"))).toBe(true);
-    expect(matches(items[0], mk([], "React"))).toBe(true); // 标签名
     expect(matches(items[0], mk([], "zzz"))).toBe(false);
+  });
+
+  it("q 不搜 tag：仅有 tag 但名称/描述中未出现的词不被搜索命中", () => {
+    // items[0] (Liveline) 拥有 stack:react 标签，但名称与描述中均无 React
+    expect(matches(items[0], mk([], "React"))).toBe(false);
+    // items[2] (crd-ui) 描述中明确写有 React，因此命中
+    expect(matches(items[2], mk([], "React"))).toBe(true);
+  });
+
+  it("q 支持连字符与空格互通搜索 (crd-ui 与 crd ui)", () => {
+    expect(matches(items[2], mk([], "crd ui"))).toBe(true);
+    expect(matches(items[2], mk([], "crd-ui"))).toBe(true);
+    expect(matches(items[2], mk([], "crd"))).toBe(true);
+  });
+
+  it("q 支持英文核心词穿透检索中文条目 (card, credit, payment)", () => {
+    expect(matches(items[2], mk([], "card"))).toBe(true);
+    expect(matches(items[2], mk([], "credit"))).toBe(true);
+    expect(matches(items[2], mk([], "payment"))).toBe(true);
+    expect(matches(items[2], mk([], "银行卡"))).toBe(true);
+  });
+
+  it("q 支持组件名与仓库名检索 (cvv, JuandaGarcia)", () => {
+    expect(matches(items[2], mk([], "cvv"))).toBe(true);
+    expect(matches(items[2], mk([], "JuandaGarcia"))).toBe(true);
+  });
+
+  it("q 支持多词 AND 分词检索 (react card, 3d 银行卡)", () => {
+    expect(matches(items[2], mk([], "react card"))).toBe(true);
+    expect(matches(items[2], mk([], "3d 银行卡"))).toBe(true);
+    expect(matches(items[2], mk([], "react chart"))).toBe(false);
   });
 
   it("跨分面 AND：stack:react 与 function:chart 同时命中", () => {

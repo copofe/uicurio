@@ -9,6 +9,8 @@ export function buildPayload(
 ) {
   const t = ui[locale];
   const L = (o: any) => o?.[locale] ?? o?.en ?? "";
+  const altLocale = locale === "zh" ? "en" : "zh";
+  const altL = (o: any) => o?.[altLocale] ?? "";
   return {
     locale,
     page,
@@ -21,12 +23,22 @@ export function buildPayload(
       { key: "scenario", name: t.scenario },
     ],
     tags: Object.fromEntries(
-      tags.map((x: any) => [x.id, { facet: x.facet, name: L(x.name) }]),
+      tags.map((x: any) => [
+        x.id,
+        {
+          facet: x.facet,
+          name: L(x.name),
+          altName: altL(x.name),
+          slug: x.slug || "",
+        },
+      ]),
     ),
     items: items.map((i: any) => ({
       slug: i.slug,
       name: L(i.name),
+      altName: altL(i.name),
       desc: L(i.description),
+      altDesc: altL(i.description),
       content: L(i.content) || "",
       components: i.components || [],
       cat: i.category,

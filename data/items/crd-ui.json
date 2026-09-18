@@ -13,10 +13,12 @@
   "category": "input-controls",
   "tags": [
     "function:card-input",
+    "function:3d",
     "stack:react",
     "stack:vue",
     "stack:svelte",
-    "stack:vanilla-js"
+    "stack:vanilla-js",
+    "stack:zero-dependency"
   ],
   "screenshot": "crd-ui.webp",
   "featured": true,

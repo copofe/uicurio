@@ -7,12 +7,21 @@ export type Facet = (typeof FACETS)[number];
 export type SortKey = "new" | "old";
 
 export interface ItemLike {
+  slug?: string;
   name: string;
+  altName?: string;
   desc: string;
+  altDesc?: string;
+  components?: string[];
+  repo?: string | null;
   cat: string;
   tags: string[]; // 标签 id（facet:slug）
   added: string;
 }
+
+export type TagMetaLike =
+  | string
+  | { name?: string; altName?: string; slug?: string };
 
 export type Selection = Record<string, Set<string>>; // facet → tag id 集合
 export interface FilterPairs {
@@ -66,10 +75,46 @@ export interface MatchCtx {
   sel: Selection;
   channel: string | null; // 频道页 path 即频道；首页 null = 全部
   skipFacet?: string; // 分面计数时排除自身 facet
-  tagNames: Record<string, string>; // tagId → 显示名（q 检索命中标签名）
+  tagNames: Record<string, TagMetaLike>; // tagId → 显示名或完整元数据
 }
 
-/** 频道内过滤：跨分面 AND；q 命中名称/描述/标签显示名；skipFacet 排除自身 facet 约束 */
+/** 构造条目的全文本检索索引（双语名/描述、Slug、Repo、组件列表；不检索 tag） */
+function buildHaystack(item: ItemLike): { raw: string; normalized: string } {
+  const parts: string[] = [
+    item.name || "",
+    item.altName || "",
+    item.slug || "",
+    item.desc || "",
+    item.altDesc || "",
+    item.repo || "",
+  ];
+
+  if (Array.isArray(item.components)) {
+    for (const c of item.components) parts.push(c);
+  }
+
+  const raw = parts.join(" ").toLowerCase();
+  const normalized = raw.replace(/[-_./]/g, " ");
+  return { raw, normalized };
+}
+
+/** 查询词匹配判断：支持多词 AND 分词、标点归一化（如 crd-ui 与 crd ui 互通）与双语穿透；不搜 tag */
+export function itemMatchesQuery(item: ItemLike, q: string): boolean {
+  if (!q || !q.trim()) return true;
+  const tokens = q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if (!tokens.length) return true;
+  const { raw, normalized } = buildHaystack(item);
+  return tokens.every((token) => {
+    const tokenNorm = token.replace(/[-_./]/g, " ");
+    return (
+      raw.includes(token) ||
+      normalized.includes(token) ||
+      normalized.includes(tokenNorm)
+    );
+  });
+}
+
+/** 频道内过滤：跨分面 AND；q 命中名称/描述/双语/组件/仓库（不搜 tag）；skipFacet 排除自身 facet 约束 */
 export function matches(
   item: ItemLike,
   ctx: {
@@ -77,15 +122,11 @@ export function matches(
     sel: Selection;
     channel: string | null;
     skipFacet?: string;
-    tagNames: Record<string, string>;
+    tagNames: Record<string, TagMetaLike>;
   },
 ): boolean {
   if (ctx.channel && item.cat !== ctx.channel) return false;
-  if (ctx.f.q) {
-    const hay =
-      `${item.name} ${item.desc} ${item.tags.map((t) => ctx.tagNames[t] ?? t).join(" ")}`.toLowerCase();
-    if (!hay.includes(ctx.f.q.toLowerCase())) return false;
-  }
+  if (ctx.f.q && !itemMatchesQuery(item, ctx.f.q)) return false;
   for (const facet in ctx.sel) {
     if (facet === ctx.skipFacet || !ctx.sel[facet].size) continue;
     if (!item.tags.some((t) => ctx.sel[facet].has(t))) return false;
@@ -100,7 +141,7 @@ export function facetCount(
     f: FilterPairs;
     sel: Selection;
     channel: string | null;
-    tagNames: Record<string, string>;
+    tagNames: Record<string, TagMetaLike>;
   },
   facet: string,
   tag: string,
@@ -113,12 +154,55 @@ export function facetCount(
   return n;
 }
 
-/** 收录序排序：new = 最新在前。同日按 slug 确定性排序 */
-export function sortItems<T extends { added: string; slug?: string }>(
-  items: T[],
-  sort: SortKey,
-): T[] {
+/** 检索相关度评分（用于搜索时的排序优化；不评分 tag） */
+function scoreItem(item: ItemLike, q: string): number {
+  if (!q || !q.trim()) return 0;
+  const tokens = q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  let total = 0;
+  const slug = (item.slug || "").toLowerCase();
+  const name = (item.name || "").toLowerCase();
+  const altName = (item.altName || "").toLowerCase();
+  const desc = (item.desc || "").toLowerCase();
+  const altDesc = (item.altDesc || "").toLowerCase();
+
+  for (const t of tokens) {
+    // 1. Slug & Name 精准 / 前缀 / 包含匹配
+    if (slug === t || name === t || altName === t) total += 100;
+    else if (slug.startsWith(t) || name.startsWith(t) || altName.startsWith(t))
+      total += 60;
+    else if (name.includes(t) || altName.includes(t) || slug.includes(t))
+      total += 40;
+
+    // 2. 描述匹配
+    if (desc.includes(t) || altDesc.includes(t)) total += 15;
+
+    // 3. 组件名称匹配
+    if (Array.isArray(item.components)) {
+      if (item.components.some((c) => c.toLowerCase().includes(t))) total += 8;
+    }
+  }
+  return total;
+}
+
+/** 排序：若提供 q，按相关度评分从高到低排序；同分或无 q 时按收录日期排序（new = 最新在前） */
+export function sortItems<
+  T extends {
+    added: string;
+    slug?: string;
+    name?: string;
+    altName?: string;
+    desc?: string;
+    altDesc?: string;
+    tags?: string[];
+    components?: string[];
+  },
+>(items: T[], sort: SortKey, q = ""): T[] {
   return [...items].sort((a, b) => {
+    if (q && q.trim()) {
+      const scoreA = scoreItem(a as any, q);
+      const scoreB = scoreItem(b as any, q);
+      if (scoreA !== scoreB) return scoreB - scoreA;
+    }
     if (a.added !== b.added) {
       const d = a.added < b.added ? 1 : -1;
       return sort === "new" ? d : -d;
@@ -137,5 +221,6 @@ export function activeList<T extends ItemLike>(
   return sortItems(
     items.filter((it) => matches(it, ctx)),
     sort,
+    ctx.f.q,
   );
 }

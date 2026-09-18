@@ -4,6 +4,7 @@ import {
   decodeFilters,
   encodeFilters,
   facetCount,
+  itemMatchesQuery,
   matches,
   sortItems,
 } from "../lib/island-core.ts";
@@ -97,21 +98,25 @@ function icon(name, size) {
 
 function hi(text, q) {
   const out = document.createDocumentFragment();
-  if (!q) {
+  if (!q || !text) {
+    out.appendChild(document.createTextNode(text || ""));
+    return out;
+  }
+  const tokens = q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if (!tokens.length) {
     out.appendChild(document.createTextNode(text));
     return out;
   }
-  const lower = text.toLowerCase();
-  const ql = q.toLowerCase();
-  let i = 0;
-  for (;;) {
-    const hit = lower.indexOf(ql, i);
-    if (hit === -1) break;
-    if (hit > i) out.appendChild(document.createTextNode(text.slice(i, hit)));
-    out.appendChild(el("mark", null, text.slice(hit, hit + q.length)));
-    i = hit + q.length;
+  const escaped = tokens.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const regex = new RegExp(`(${escaped.join("|")})`, "gi");
+  const parts = text.split(regex);
+  for (const part of parts) {
+    if (tokens.includes(part.toLowerCase())) {
+      out.appendChild(el("mark", null, part));
+    } else if (part) {
+      out.appendChild(document.createTextNode(part));
+    }
   }
-  if (i < text.length) out.appendChild(document.createTextNode(text.slice(i)));
   return out;
 }
 
@@ -194,8 +199,7 @@ const selPairs = () => {
   }
   return pairs;
 };
-const tagNames = () =>
-  Object.fromEntries(Object.entries(U.tags).map(([id, t]) => [id, t.name]));
+const tagNames = () => U.tags;
 const ctx = (skipFacet) => ({
   f: { pairs: selPairs(), q: state.q, sort: state.sort },
   sel: state.sel,
@@ -331,6 +335,7 @@ function currentActiveList() {
   return sortItems(
     U.items.filter((i) => matches(i, ctx())),
     state.sort,
+    state.q,
   );
 }
 
@@ -379,6 +384,46 @@ function gridSync(list) {
   }
   grid.toggleAttribute("hidden", list.length === 0);
   empty.hidden = list.length > 0;
+  if (list.length === 0) {
+    const emptyHint = empty.querySelector(".empty-cross-channel");
+    if (state.q && U.channel) {
+      const globalCount = U.items.filter((i) =>
+        matches(i, { ...ctx(), channel: null }),
+      ).length;
+      if (globalCount > 0) {
+        let hintEl = emptyHint;
+        if (!hintEl) {
+          hintEl = el("div", "empty-cross-channel");
+          hintEl.style.marginTop = "14px";
+          empty.appendChild(hintEl);
+        }
+        hintEl.replaceChildren();
+        const p = el(
+          "p",
+          null,
+          LOCALE === "zh"
+            ? `当前频道无结果，但在全站找到 ${globalCount} 件匹配藏品：`
+            : `No results in current channel, but found ${globalCount} ${globalCount === 1 ? "match" : "matches"} across all channels:`,
+        );
+        p.style.fontSize = "0.9rem";
+        p.style.opacity = "0.85";
+        p.style.marginBottom = "8px";
+        const a = el(
+          "a",
+          "btn btn-primary",
+          LOCALE === "zh" ? "查看全站搜索结果" : "View all results",
+        );
+        a.href = `/${LOCALE}/?q=${encodeURIComponent(state.q)}`;
+        a.style.display = "inline-block";
+        hintEl.appendChild(p);
+        hintEl.appendChild(a);
+      } else if (emptyHint) {
+        emptyHint.remove();
+      }
+    } else if (emptyHint) {
+      emptyHint.remove();
+    }
+  }
 }
 
 function chipSync() {
@@ -1224,16 +1269,12 @@ function paletteData(q) {
     rows.push({ label: S.actions || "Actions", rows: matchedActions });
   }
 
-  // 藏品 Items
-  const items = U.items
-    .filter(
-      (it) =>
-        !ql ||
-        `${it.name} ${it.desc} ${it.tags.map((t) => tagName(t)).join(" ")}`
-          .toLowerCase()
-          .includes(ql),
-    )
-    .slice(0, 6);
+  // 藏品 Items（不搜 tag，搜名称/描述/双语/组件/仓库）
+  const items = sortItems(
+    U.items.filter((it) => itemMatchesQuery(it, q)),
+    "new",
+    q,
+  ).slice(0, 8);
   if (items.length) {
     const g = { label: S.pgItems, rows: [] };
     for (const it of items)
@@ -1249,9 +1290,22 @@ function paletteData(q) {
   }
 
   // 频道 Channels
-  const chans = U.categories.filter(
-    (c) => !ql || c.name.toLowerCase().includes(ql),
-  );
+  const chans = U.categories.filter((c) => {
+    if (!ql) return true;
+    const chanHay = `${c.slug} ${c.name}`.toLowerCase();
+    const chanNorm = chanHay.replace(/[-_./]/g, " ");
+    return ql
+      .split(/\s+/)
+      .filter(Boolean)
+      .every((tok) => {
+        const tokNorm = tok.replace(/[-_./]/g, " ");
+        return (
+          chanHay.includes(tok) ||
+          chanNorm.includes(tok) ||
+          chanNorm.includes(tokNorm)
+        );
+      });
+  });
   if (chans.length) {
     const g2 = { label: S.pgChannels, rows: [] };
     for (const c of chans)
@@ -1266,7 +1320,24 @@ function paletteData(q) {
 
   // 标签 Tags
   const tags = Object.keys(U.tags)
-    .filter((t) => !ql || U.tags[t].name.toLowerCase().includes(ql))
+    .filter((t) => {
+      if (!ql) return true;
+      const tag = U.tags[t];
+      const tagHay =
+        `${t} ${tag.name} ${tag.altName || ""} ${tag.slug || ""}`.toLowerCase();
+      const tagNorm = tagHay.replace(/[-_./]/g, " ");
+      return ql
+        .split(/\s+/)
+        .filter(Boolean)
+        .every((tok) => {
+          const tokNorm = tok.replace(/[-_./]/g, " ");
+          return (
+            tagHay.includes(tok) ||
+            tagNorm.includes(tok) ||
+            tagNorm.includes(tokNorm)
+          );
+        });
+    })
     .slice(0, 8);
   if (tags.length) {
     const g3 = { label: S.pgTags, rows: [] };
