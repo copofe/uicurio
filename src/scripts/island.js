@@ -614,20 +614,19 @@ function openSheet(slug, fromPopState = false) {
   // 内容区（署名行→封面→正文→同柜推荐）由 item-view.ts 单一渲染源生成，与详情页共用同一模板
 
   const view = itemViewOf(item);
-  const related = pickRelated(
-    U.items.map(itemViewOf),
-    view,
-  );
+  const related = pickRelated(U.items.map(itemViewOf), view);
   // 共享渲染器输出的全部插值均经 item-view esc() 转义（数据为策展受控内容）
-  const fragment = document.createRange().createContextualFragment(
-    renderItemContent(view, related, LOCALE),
-  );
+  const fragment = document
+    .createRange()
+    .createContextualFragment(renderItemContent(view, related, LOCALE));
   sheetPanel.replaceChildren(fragment);
 
   // 行为委托：相关卡→换片（拦截导航）；标签芯片→关闭并切换筛选（详情页则自然导航）
   sheetPanel.addEventListener("click", (e) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-    const rel = e.target.closest ? e.target.closest("[data-related-slug]") : null;
+    const rel = e.target.closest
+      ? e.target.closest("[data-related-slug]")
+      : null;
     if (rel) {
       e.preventDefault();
       openSheet(rel.getAttribute("data-related-slug"));
@@ -643,7 +642,6 @@ function openSheet(slug, fromPopState = false) {
 
   const body = sheetPanel.querySelector(".sheet-body");
   body.appendChild(buildSheetPager(prevItem, nextItem));
-
 
   // 打开动效与视口重置
   if (sheetPanel) sheetPanel.scrollTop = 0;

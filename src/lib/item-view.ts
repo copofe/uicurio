@@ -5,98 +5,99 @@
 // 行为分层靠渐进增强：标签芯片与相关卡在详情页是普通链接，在弹窗里被事件委托拦截转为筛选/换片。
 
 export interface ItemTagView {
-  id: string;
-  name: string;
-  href: string;
+    id: string;
+    name: string;
+    href: string;
 }
 
 export interface ItemView {
-  slug: string;
-  name: string;
-  desc: string;
-  url: string;
-  repo: string | null;
-  shot: string;
-  content: string;
-  components: string[];
-  catName: string;
-  catHref: string;
-  tags: ItemTagView[];
+    slug: string;
+    name: string;
+    desc: string;
+    url: string;
+    repo: string | null;
+    shot: string;
+    content: string;
+    components: string[];
+    catName: string;
+    catHref: string;
+    tags: ItemTagView[];
 }
 
 export interface RelatedItemView {
-  slug: string;
-  name: string;
-  shot: string;
-  catSlug: string;
-  tagIds: string[];
+    slug: string;
+    name: string;
+    shot: string;
+    catSlug: string;
+    tagIds: string[];
 }
 
 const ENTITIES: Record<string, string> = {
-  "&": "&amp;",
-  "<": "&lt;",
-  ">": "&gt;",
-  '"': "&quot;",
-  "'": "&#39;",
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
 };
 
 export function esc(s: string): string {
-  return String(s ?? "").replace(/[&<>"']/g, (c) => ENTITIES[c]);
+    return String(s ?? "").replace(/[&<>"']/g, (c) => ENTITIES[c]);
 }
 
 export function hostOf(url: string): string {
-  try {
-    return new URL(url).hostname.replace(/^www\./, "");
-  } catch {
-    return url;
-  }
+    try {
+        return new URL(url).hostname.replace(/^www\./, "");
+    } catch {
+        return url;
+    }
 }
 
 /** 同柜推荐唯一算法：同频道优先，不足 n 补同标签，排除自身，封顶 n */
 export function pickRelated<T extends RelatedItemView>(
-  all: T[],
-  current: T,
-  n = 3,
+    all: T[],
+    current: T,
+    n = 3,
 ): T[] {
-  const alts = all.filter(
-    (x) => x.slug !== current.slug && x.catSlug === current.catSlug,
-  );
-  if (alts.length < n) {
-    for (const x of all) {
-      if (alts.length >= n) break;
-      if (x.slug === current.slug || alts.includes(x)) continue;
-      if (x.tagIds.some((tg) => current.tagIds.includes(tg))) alts.push(x);
+    const alts = all.filter(
+        (x) => x.slug !== current.slug && x.catSlug === current.catSlug,
+    );
+    if (alts.length < n) {
+        for (const x of all) {
+            if (alts.length >= n) break;
+            if (x.slug === current.slug || alts.includes(x)) continue;
+            if (x.tagIds.some((tg) => current.tagIds.includes(tg)))
+                alts.push(x);
+        }
     }
-  }
-  return alts.slice(0, n);
+    return alts.slice(0, n);
 }
 
 const EXTERNAL_SVG =
-  '<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>';
+    '<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>';
 
 /**
  * 渲染条目内容区：署名行 → 封面 → 正文（描述/包含组件/深度解析/标签/分隔线/同柜推荐）。
  * bodySuffix 追加在 .sheet-body 末尾（详情页放 SSR 翻页器；弹窗运行时另行挂动态翻页）。
  */
 export function renderItemContent(
-  view: ItemView,
-  related: RelatedItemView[],
-  locale: string,
-  bodySuffix = "",
+    view: ItemView,
+    related: RelatedItemView[],
+    locale: string,
+    bodySuffix = "",
 ): string {
-  const zh = locale === "zh";
-  const name = esc(view.name);
+    const zh = locale === "zh";
+    const name = esc(view.name);
 
-  const tagsHtml = view.tags
-    .map(
-      (t) =>
-        `<a class="sheet-tag-chip" href="${esc(t.href)}" data-tag-id="${esc(t.id)}">#${esc(t.name)}</a>`,
-    )
-    .join("");
+    const tagsHtml = view.tags
+        .map(
+            (t) =>
+                `<a class="sheet-tag-chip" href="${esc(t.href)}" data-tag-id="${esc(t.id)}">#${esc(t.name)}</a>`,
+        )
+        .join("");
 
-  const componentsHtml =
-    view.components.length > 0
-      ? `<div class="sheet-components-section">
+    const componentsHtml =
+        view.components.length > 0
+            ? `<div class="sheet-components-section">
         <div class="sheet-components-header">
           <h4 class="sheet-components-title">${zh ? "包含组件" : "Included Components"}</h4>
           <span class="sheet-components-count">${view.components.length}</span>
@@ -105,11 +106,11 @@ export function renderItemContent(
           ${view.components.map((c) => `<span class="sheet-component-pill">${esc(c)}</span>`).join("")}
         </div>
       </div>`
-      : "";
+            : "";
 
-  const relatedHtml =
-    related.length > 0
-      ? `<div class="sheet-related-section">
+    const relatedHtml =
+        related.length > 0
+            ? `<div class="sheet-related-section">
         <div class="sheet-related-head">
           <div class="sheet-related-head-left">
             <div>
@@ -121,19 +122,19 @@ export function renderItemContent(
         </div>
         <div class="sheet-related-grid">
           ${related
-            .map(
-              (r) =>
-                `<a class="sheet-related-card" href="/${zh ? "zh" : "en"}/item/${esc(r.slug)}/" data-related-slug="${esc(r.slug)}">
+              .map(
+                  (r) =>
+                      `<a class="sheet-related-card" href="/${zh ? "zh" : "en"}/item/${esc(r.slug)}/" data-related-slug="${esc(r.slug)}">
               <div class="sheet-related-thumb"><img src="/assets/shots/${esc(r.shot)}" alt="${esc(r.name)}" loading="lazy" decoding="async" width="400" height="250" /></div>
               <span class="sheet-related-title">${esc(r.name)}</span>
             </a>`,
-            )
-            .join("")}
+              )
+              .join("")}
         </div>
       </div>`
-      : "";
+            : "";
 
-  return `<div class="sheet-stage-intro">
+    return `<div class="sheet-stage-intro">
       <div class="sheet-byline">
         <div class="sheet-author">
           <div class="sheet-author-meta">

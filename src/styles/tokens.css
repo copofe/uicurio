@@ -987,12 +987,16 @@ button.chip[aria-disabled="true"]:hover {
 }
 .sheet-author-meta {
  display: flex;
- flex-direction: column;
- gap: 3px;
+ flex-direction: row;
+ align-items: baseline;
+ flex-wrap: wrap;
+ gap: 4px 14px;
 }
 .sheet-author-name {
- font-size: 14.5px;
- font-weight: 600;
+ font-size: 26px;
+ font-weight: 700;
+ letter-spacing: -0.02em;
+ line-height: 1.2;
  color: var(--text-1);
 }
 .sheet-author-sub {
