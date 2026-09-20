@@ -62,9 +62,52 @@ const bodySuffix = `<nav class="sheet-pager" aria-label="Prev / Next">${
     : `<button class="sheet-pager-btn" disabled type="button"><span>${t.pagerNext || "Next"}</span>${pagerSvgNext}</button>`
 }</nav>`;
 const itemContentHtml = renderItemContent(view, related, locale, bodySuffix);
-const title = `${name} · Uicurio`;
+const title = `${name} — ${view.catName} · Uicurio`;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Uicurio",
+      "item": `https://uicurio.shinji.me/${locale}/`
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": view.catName,
+      "item": `https://uicurio.shinji.me/${locale}/collections/${item.category}/`
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": name,
+      "item": `https://uicurio.shinji.me/${locale}/item/${item.slug}/`
+    }
+  ]
+};
+
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": name,
+  "description": description,
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web",
+  "url": item.url,
+  "image": `https://uicurio.shinji.me/assets/shots/${item.screenshot}`,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+};
 ---
 <Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${item.screenshot}`} hideTopbar={true}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
   <!-- 浮动左右导航箭头 (Dribbble 标志性悬浮边缘控件，屏幕 > 1360px 时显示) -->
   {prevItem && (
     <a class="sheet-float-nav sheet-float-prev" href={`/${locale}/item/${prevItem.slug}/`} aria-label={`${t.pagerPrev || "Previous"}: ${prevItem.name[locale] ?? prevItem.name.en}`} title={`${t.pagerPrev || "Previous"}: ${prevItem.name[locale] ?? prevItem.name.en}`}>

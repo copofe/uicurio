@@ -17,6 +17,7 @@ const { locale, currentCat, title, description, ogImage, items } = Astro.props;
 const t = ui[locale as keyof typeof ui];
 ---
 <Base locale={locale as any} title={title} description={description} ogImage={ogImage}>
+  <slot name="head" slot="head" />
   <div class="shell">
     <Sidebar locale={locale} currentCat={currentCat} showFacets={true} channelItems={items} />
     <Directory locale={locale} items={items} catSlug={currentCat} />

@@ -1,0 +1,41 @@
+{
+  "slug": "dither-kit",
+  "name": {
+    "en": "Dither Kit",
+    "zh": "Dither Kit"
+  },
+  "description": {
+    "en": "Composable dithered charts and components for shadcn/ui on a tiny canvas engine.",
+    "zh": "基于轻量 Canvas 引擎的复古抖动风格图表与组件库，兼容 shadcn/ui 与 Recharts 式声明 API。"
+  },
+  "url": "https://www.tripwire.sh/dither-kit",
+  "repo": "https://github.com/Boring-Software-Inc/dither-kit",
+  "category": "data-viz",
+  "tags": [
+    "function:chart",
+    "stack:react",
+    "stack:canvas",
+    "stack:shadcn",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "dither-kit.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-20",
+  "content": {
+    "en": "Dither Kit is a collection of composable, dithered charts and interactive UI components designed for shadcn/ui projects. Built on a tiny Canvas engine without Recharts, it renders area, bar, line, pie, and radar charts using ordered-dither fills that hold up across light and dark modes. It features entrance animations, gliding scrub tooltips, selection states, sparkles, and color bloom effects, with a children-as-config API and companion components like generative pixel avatars and dithered buttons.",
+    "zh": "Dither Kit 是一套专为 shadcn/ui 生态打造的复古抖动风格图表与交互组件库。底层基于极简 Canvas 渲染引擎，摆脱了对 Recharts 的依赖，提供面积图、柱状图、折线图、饼图与雷达图等可视化图表。图表支持亮暗色有序抖动（Ordered Dither）填充、入场动效、平滑悬浮浮窗、光晕（Bloom）与微光闪烁效果，采用直观的子组件声明式配置 API，并附带生成式像素头像与抖动渐变按钮等衍生组件。"
+  },
+  "components": [
+    "Area Chart",
+    "Bar Chart",
+    "Line Chart",
+    "Pie & Donut Chart",
+    "Radar Chart",
+    "Sparkline",
+    "Generative Dither Avatar",
+    "Dither Button",
+    "Dither Gradient Wash"
+  ]
+}

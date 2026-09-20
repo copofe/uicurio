@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://uicurio.shinji.me/sitemap-index.xml
+Sitemap: https://uicurio.shinji.me/sitemap-0.xml

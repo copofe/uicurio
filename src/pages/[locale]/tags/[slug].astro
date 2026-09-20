@@ -20,8 +20,28 @@ const t = ui[locale as keyof typeof ui];
 const list = itemsWithTag(tag.id);
 const title = locale === "zh" ? `${tag.name.zh} · 精选 ${list.length} 个库 — Uicurio` : `${tag.name.en} – ${list.length} curated libraries · Uicurio`;
 const description = locale === "zh" ? `手工严选的 ${list.length} 个${tag.name.zh}相关的 UI 库。` : `${list.length} hand-picked UI libraries for ${tag.name.en}.`;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Uicurio",
+      "item": `https://uicurio.shinji.me/${locale}/`
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": tag.name[locale] ?? tag.name.en,
+      "item": `https://uicurio.shinji.me/${locale}/tags/${tag.slug}/`
+    }
+  ]
+};
 ---
 <Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${list[0]?.screenshot}`}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <div class="shell">
     <Sidebar locale={locale} showFacets={false} total={items.length} categories={[]} />
     <main class="main">

@@ -9,5 +9,19 @@ export function getStaticPaths() {
 }
 const { locale } = Astro.params;
 const t = ui[locale as keyof typeof ui];
+const title = locale === "zh"
+  ? "Uicurio — 精选高质感开源 UI 库与动效组件"
+  : "Uicurio — Hand-picked UI Libraries & Design Engineering Gems";
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Uicurio",
+  "url": `https://uicurio.shinji.me/${locale}/`,
+  "description": t.homeIntro,
+  "inLanguage": locale === "zh" ? "zh-CN" : "en-US"
+};
 ---
-<GalleryShell locale={locale} currentCat={null} title="Uicurio" description={t.homeIntro} items={items} />
+<GalleryShell locale={locale} currentCat={null} title={title} description={t.homeIntro} items={items}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+</GalleryShell>
