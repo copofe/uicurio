@@ -1,0 +1,45 @@
+{
+  "slug": "react-bits",
+  "name": {
+    "en": "React Bits",
+    "zh": "React Bits"
+  },
+  "description": {
+    "en": "Over 200 animated React components, interactive backgrounds, and creative text effects.",
+    "zh": "收录超 200 款高品质 React 动效组件库：涵盖文字特效、互动背景与微交互，支持 JS/TS 及 Tailwind 双模式。"
+  },
+  "url": "https://reactbits.dev",
+  "repo": "https://github.com/DavidHDev/react-bits",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "function:text-animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:typescript",
+    "style:ambient",
+    "style:design-engineer"
+  ],
+  "screenshot": "react-bits.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-18",
+  "content": {
+    "en": "React Bits is an extensive, open-source library of creative, animation-focused React components built for developers who want to stand out. It features over 200 modular animations spanning expressive typography (ASCII, blur reveal, decrypted text), interactive canvas backgrounds (Aurora, Balatro, Ballpit, Beams), smooth UI primitives, and micro-interactions. Every component is zero-overhead, copy-paste ready, and ships in 4 distinct implementation flavors: JavaScript with CSS or Tailwind, and TypeScript with CSS or Tailwind.",
+    "zh": "React Bits 是一套以高水准视觉与动效为核心的大型开源 React 组件库，专为追求鲜明交互张力的前端开发者打造。全库收录超 200 个即拷即用模块，涵盖表现力极强的文字动效（ASCII 文本、模糊显隐、解密字符乱码）、丰富且高性能的 Canvas 互动背景（Aurora 极光、Balatro 纸牌、重力球池、发光光束）以及细腻的微交互控件。每个组件均提供 JS/TS 与纯 CSS/Tailwind 四种组合形态，轻量解耦，零冗余依赖。"
+  },
+  "components": [
+    "Aurora Background",
+    "Balatro Shader",
+    "ASCII Text",
+    "Decrypted Text",
+    "Blur Text",
+    "Ballpit Physics",
+    "Antigravity Particle",
+    "Blob Cursor",
+    "Click Spark",
+    "Circular Text",
+    "Beams Background",
+    "Border Glow"
+  ]
+}
