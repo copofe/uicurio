@@ -832,8 +832,16 @@ button.chip[aria-disabled="true"]:hover {
  border-radius: 0 !important;
  border-top: none;
 }
-.sheet-page .sheet-head-left a.sheet-avatar {
+.sheet-page .sheet-head .brand {
+ margin-bottom: 0;
+ display: flex;
+ align-items: center;
+ color: var(--text-1);
  text-decoration: none;
+}
+.sheet-page .sheet-head .wordmark {
+ height: 26px;
+ width: auto;
 }
 
 /* 弹窗主体页面容器 (Dribbble 风格全宽画卷 + 顶部留黑遮罩) */
@@ -920,51 +928,6 @@ button.chip[aria-disabled="true"]:hover {
  height: 38px;
  border-radius: 50%;
  border: 1px solid var(--border);
-}
-
-/* 头像与徽章体系 */
-.sheet-avatar {
- border-radius: 50%;
- background: linear-gradient(
-  135deg,
-  var(--ink) 0%,
-  color-mix(in srgb, var(--ink) 60%, #6366f1) 100%
- );
- color: var(--on-ink);
- font-weight: 700;
- display: inline-flex;
- align-items: center;
- justify-content: center;
- box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
- flex-shrink: 0;
- user-select: none;
-}
-.sheet-avatar-sm {
- width: 36px;
- height: 36px;
- font-size: 14px;
-}
-.sheet-badge {
- display: inline-flex;
- align-items: center;
- gap: 5px;
- padding: 2px 8px;
- border-radius: 999px;
- font-size: 11px;
- font-weight: 500;
- white-space: nowrap;
-}
-.sheet-badge-curated {
- background: color-mix(in srgb, #10b981 12%, transparent);
- color: #059669;
- border: 1px solid color-mix(in srgb, #10b981 25%, transparent);
-}
-.badge-dot {
- width: 6px;
- height: 6px;
- border-radius: 50%;
- background: #10b981;
- box-shadow: 0 0 6px #10b981;
 }
 
 /* 舞台署名行 (居中内容区) */
@@ -1376,6 +1339,9 @@ button.chip[aria-disabled="true"]:hover {
  }
  .sheet-page .sheet-head .langsel {
   display: none;
+ }
+ .sheet-page .sheet-head .wordmark {
+  height: 22px;
  }
  .sheet-footer {
   width: calc(100% - 32px);

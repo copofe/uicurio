@@ -2,6 +2,7 @@
 // 条目详情（与弹窗完全统一的 Dribbble 全屏剧场形态）
 import Base from "../../../layouts/Base.astro";
 import Payload from "../../../components/Payload.astro";
+import Wordmark from "../../../components/Wordmark.astro";
 import { ui, LOCALES } from "../../../i18n";
 import { items, categories, tagById } from "../../../lib/data";
 import { esc, pickRelated, renderItemContent, type ItemView } from "../../../lib/item-view";
@@ -80,7 +81,9 @@ const title = `${name} · Uicurio`;
     <!-- 1. 页面导航栏（仅保留功能性控件；条目信息由署名行承载，与弹窗一致） -->
     <header class="sheet-head">
       <div class="sheet-head-left">
-        <a href={`/${locale}/`} class="sheet-avatar sheet-avatar-sm" aria-label="Uicurio">U</a>
+        <a class="brand" href={`/${locale}/`} aria-label="Uicurio — home">
+          <Wordmark />
+        </a>
       </div>
       <div class="sheet-nav">
         <select class="langsel" data-lang-select aria-label="Language">
