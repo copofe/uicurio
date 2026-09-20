@@ -1,0 +1,44 @@
+{
+  "slug": "rare-ui",
+  "name": {
+    "en": "Rare UI",
+    "zh": "Rare UI"
+  },
+  "description": {
+    "en": "A curated registry of rare animated React components built with Motion and shadcn.",
+    "zh": "精选小众且高辨识度的 React 动效组件集：基于 Motion 与 Tailwind 打造，支持 shadcn CLI 一键安装。"
+  },
+  "url": "https://www.rareui.com",
+  "repo": "https://github.com/swamimalode07/rare-ui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "stack:motion",
+    "style:design-engineer"
+  ],
+  "screenshot": "rare-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-20",
+  "content": {
+    "en": "Rare UI is a free, open-source registry of distinctive, animation-driven React components created to help interfaces break away from cookie-cutter designs. Built on Tailwind CSS and Motion, every element—from physics-based gravity letters and interactive 3D fluid orbs to tactile duration pickers and macOS-style expanding folder drawers—is contained within a single file. Users can copy the source directly or install any component into modern React and Next.js applications using the standard shadcn CLI.",
+    "zh": "Rare UI 是一套拒绝平庸同质化设计的开源小众 React 动效组件集。专注于提供常规组件库鲜少涵盖的高交互质感元素：包括带物理碰撞跌落的重力字符（Gravity Letters）、可交互流动光球（Fluid Orb）、仿 macOS 折叠收纳效果的文件夹卡片（Folder Component）、触觉反馈时间选择器（Duration Picker）以及黏性果冻导航（Gooey Nav）。全系基于 Tailwind CSS 与 Motion 打造，单组件单文件封装，原生支持通过标准 shadcn CLI 一键引入项目中。"
+  },
+  "components": [
+    "Folder Component",
+    "Duration Picker",
+    "Fluid Orb",
+    "Gravity Letters",
+    "OTP Input",
+    "Bounce Sidebar",
+    "Gooey Nav",
+    "Grid Reveal",
+    "Matrix Orb",
+    "Proximity Sidebar",
+    "Emoji Reaction",
+    "Notification Bell"
+  ]
+}
