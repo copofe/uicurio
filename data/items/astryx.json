@@ -1,0 +1,48 @@
+{
+  "slug": "astryx",
+  "name": {
+    "en": "Astryx",
+    "zh": "Astryx"
+  },
+  "description": {
+    "en": "An agent-ready React design system from Meta, built on StyleX with customizable themes.",
+    "zh": "Meta 开源的 Agent 友好型 React 设计系统，基于 StyleX 构建，内置 150+ 无障碍组件与多套主题预设。"
+  },
+  "url": "https://astryx.atmeta.com",
+  "repo": "https://github.com/facebook/astryx",
+  "category": "collections",
+  "tags": [
+    "function:loading-indicator",
+    "function:animation",
+    "scenario:ai-native",
+    "stack:react",
+    "stack:typescript",
+    "style:design-engineer"
+  ],
+  "screenshot": "astryx.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-22",
+  "content": {
+    "en": "Astryx is Meta's open-source design system engineered for both human engineers and AI coding agents. Powered by StyleX and React, it brings over 150 accessible, production-tested primitives, pre-built application templates, and a zero-runtime CSS footprint. Standout capabilities include dedicated AI chat composers, rich streaming text primitives, design tokens with instant multi-theme swapping, and an agent-first CLI that scaffolds and swizzles components directly into your repository.",
+    "zh": "Astryx 是 Meta 经过内部数千个项目实战验证后开源的设计系统，专为现代开发者与 AI Coding Agent 协同工作打造。依托 React 与 StyleX 零运行时样式引擎，Astryx 提供了 150 多个高度无障碍的原子组件与现成全流程模板。其亮点在于深度拥抱 AI 原生交互（如 AI 对话输入框、流式打字输出与思维链状态提示）、基于设计令牌的即时多主题切换，以及能够将组件源码与规范无缝注入项目的 Agent 友好型 CLI 工具。"
+  },
+  "components": [
+    "Chat Composer",
+    "App Shell",
+    "Bottom Sheet",
+    "Breadcrumbs",
+    "Button",
+    "Calendar",
+    "Card",
+    "Carousel",
+    "Clickable Card",
+    "Dialog",
+    "Drawer",
+    "Progress Bar",
+    "Badge",
+    "Avatar",
+    "Table",
+    "Selectable Card"
+  ]
+}
