@@ -1,0 +1,53 @@
+{
+  "slug": "obsidian-ui",
+  "name": {
+    "en": "ObsidianUI",
+    "zh": "ObsidianUI"
+  },
+  "description": {
+    "en": "A collection of creative animated React components built with Motion and Tailwind CSS.",
+    "zh": "基于 Motion 与 Tailwind CSS 构建的创意 React 动效组件库，主打灵动光标跟随、画廊滚动与质感微交互。"
+  },
+  "url": "https://www.temp.obsidianui.dev",
+  "repo": "https://github.com/Atharvsinh-codez/ObsidianUI",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "function:text-animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:motion",
+    "style:design-engineer",
+    "style:ambient"
+  ],
+  "screenshot": "obsidian-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-22",
+  "content": {
+    "en": "ObsidianUI is an open-source React component library crafted for developers and designers who want to elevate their interfaces with expressive motion. Built on top of Tailwind CSS and Framer Motion, it features a curated set of interactive effects including Apple-style spotlights, magnetic image trails, physics rope cursors, SVG path marquees, 3D book flips, and fractal glass shaders. Every component comes with cleanly isolated source code, enabling fast copy-paste integration and flexible customization.",
+    "zh": "ObsidianUI 是一套面向创意网页与现代产品的开源 React 动效组件库，基于 Tailwind CSS 与 Framer Motion 深度定制。区别于常规基础组件，它专注于提供极具视觉张力的交互模块，涵盖 Apple 风格聚光灯、磁性图片拖尾、物理绳索与气场光标、SVG 路径跑马灯、3D 翻书以及分形玻璃折射等独特微动效。所有组件均以独立源码分发，开箱即用且高度可拓展。"
+  },
+  "components": [
+    "Apple Spotlight",
+    "Magnetic Image Trail",
+    "Rope Cursor",
+    "Butterfly Trail Cursor",
+    "Colorful Cursor Aura",
+    "Fractal Glass",
+    "Book Flip",
+    "Curved Plane",
+    "Grid Lift",
+    "Hover Slider",
+    "Draggable Marquee",
+    "Parallax Gallery",
+    "Scroll Stack",
+    "Marquee on SVG Path",
+    "SVG Pixel Reveal",
+    "Interactive Arrows",
+    "Arrow Fill Button",
+    "Dotted Grid",
+    "Interactive Blur Reveal",
+    "Text Fill Animation"
+  ]
+}
