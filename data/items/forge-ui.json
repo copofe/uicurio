@@ -1,0 +1,49 @@
+{
+  "slug": "forge-ui",
+  "name": {
+    "en": "Forge UI",
+    "zh": "Forge UI"
+  },
+  "description": {
+    "en": "Animated React and Tailwind UI components and blocks compatible with shadcn/ui.",
+    "zh": "兼容 shadcn/ui 的 React 与 Tailwind 动效组件库，提供开箱即用的 SaaS 区块、微交互与落地页模板。"
+  },
+  "url": "https://forgeui.in/",
+  "repo": "https://github.com/AmanShakya0018/forgeui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "function:text-animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:motion",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "forge-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Forge UI is a curated React and Tailwind CSS UI library featuring animated components, marketing blocks, illustrations, and full landing page templates. Fully compatible with the shadcn/ui ecosystem, it provides copy-paste ready code powered by Motion and GSAP, spanning auth clusters, AI interface widgets (LLM Nexus, Integration Orbit), fluid canvas backgrounds, and smooth text typography effects.",
+    "zh": "Forge UI 是一套基于 React 与 Tailwind CSS 的高质感动效组件库，深度兼容 shadcn/ui 生态。全库涵盖精美的 SaaS 营销区块、插画控件以及完整的落地页模版，底层依托 Motion 与 GSAP 驱动，提供包括智能认证卡片、AI 交互面板（LLM Nexus、轨道拓扑）、流动 Canvas 背景与文字微动效等即拷即用模块，帮助开发者快速交付视觉精致的现代 Web 应用。"
+  },
+  "components": [
+    "Animated Form",
+    "Animated OTP",
+    "Auth Cluster",
+    "Integration Orbit",
+    "LLM Nexus",
+    "Neural Lock",
+    "Notification Center",
+    "Setup Sequence",
+    "Progress Stack",
+    "Text Morph",
+    "Text Reveal",
+    "Text Shimmer",
+    "Chromatic Fluid",
+    "Caustica",
+    "Lumadrift",
+    "Waveform"
+  ]
+}
