@@ -1,0 +1,54 @@
+{
+  "slug": "rewamp-ui",
+  "name": {
+    "en": "Rewamp UI",
+    "zh": "Rewamp UI"
+  },
+  "description": {
+    "en": "A copy-paste React component collection built with Motion, Tailwind CSS, and Three.js.",
+    "zh": "基于 Motion、Tailwind CSS 与 Three.js 构建的 React 创意组件库，主打流体光影、物理微交互与着色器动效。"
+  },
+  "url": "https://www.rewampui.com/",
+  "repo": "https://github.com/palakonweb/Rewamp-UI",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "function:text-animation",
+    "function:3d",
+    "stack:react",
+    "stack:tailwind",
+    "stack:motion",
+    "stack:threejs",
+    "style:design-engineer",
+    "style:ambient"
+  ],
+  "screenshot": "rewamp-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Rewamp UI is a curated collection of interactive, physically styled React components designed to make modern web interfaces feel alive. Built with React 19, Tailwind CSS 4, Framer Motion, and Three.js, it departs from standard form elements to deliver expressive micro-interactions: fluid-morph WebGL orbs, water caustics and aurora canvas backgrounds, tactile day/night and cosmic sparkle toggles, kinetic reel text, and 3D card carousels. All components are delivered as clean source code with zero NPM package lock-in, installable via a dedicated CLI or direct copy-paste.",
+    "zh": "Rewamp UI 是一套专注于赋予网页鲜活生命力的 React 创意动效组件集。基于 React 19、Tailwind CSS 4、Framer Motion 以及 Three.js 打造，它跳出传统表单与基础控件的局限，聚焦高辨识度的视觉微交互：包括 WebGL 流体渐变光球、水波焦散与极光动态背景、带物理回弹的日夜天象与宇宙星光切换开关、动力学胶卷文字，以及 3D 环形卡片轮播等。全系组件无专用 npm 依赖包裹，支持通过配套 CLI 一键注入或直接源码拷贝，由开发者完全掌控实现细节。"
+  },
+  "components": [
+    "Water Caustics Background",
+    "Aurora Background",
+    "Fluid Morph Orb",
+    "Arch Card Carousel",
+    "Flower Sidebar",
+    "Day Night Sky Toggle",
+    "Glass Orb Toggle",
+    "Cosmic Sparkle Toggle",
+    "Landscape Orb Toggle",
+    "Kinetic Reel Text",
+    "Gradient Reveal Text",
+    "Morph Search Capsule",
+    "Googly Eyes Button",
+    "Liquid Cursor Gradient",
+    "Hyperspeed Warp",
+    "Ascii Matrix Hover",
+    "Neumorphic Download Button",
+    "Perspective Flip Deck",
+    "Editorial 3D Orbit Carousel"
+  ]
+}
