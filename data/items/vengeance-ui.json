@@ -1,0 +1,35 @@
+{
+  "slug": "vengeance-ui",
+  "name": {
+    "en": "Vengeance UI",
+    "zh": "Vengeance UI"
+  },
+  "description": {
+    "en": "Animated React components featuring kinetic scroll interactions and bold motion.",
+    "zh": "以动力学滚动交互、强张力入场动效与现代排版见长的 React 组件集。"
+  },
+  "url": "https://www.vengeanceui.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:motion",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "vengeance-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Vengeance UI is an expressive animated React component kit emphasizing bold kinetic motion, scroll-choreographed transformations, and striking dark-mode layouts. Designed to give startup sites and personal portfolios unmistakable visual weight and dynamic energy.",
+    "zh": "Vengeance UI 是一套以极具视觉张力的动力学滚动交互与深色未来主义排版为核心的 React 组件套件。它特别优化了随页面视差滚动而渐进变形的联动动效、强烈视错觉卡片与高对比度文字入场，赋予站点不可忽视的视觉分量与现代动感。"
+  },
+  "components": [
+    "Scroll Choreography Deck",
+    "Kinetic Text Burst",
+    "Dynamic Depth Card",
+    "Morphing Action Bar",
+    "Vengeance Hero Section"
+  ]
+}

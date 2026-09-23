@@ -1,0 +1,35 @@
+{
+  "slug": "painterly",
+  "name": {
+    "en": "Painterly",
+    "zh": "Painterly"
+  },
+  "description": {
+    "en": "Artistic canvas and shader loading indicators designed for creative web apps.",
+    "zh": "艺术质感的 Canvas 动态加载器与水彩光影反馈控件，适合创意设计网站。"
+  },
+  "url": "https://painterly.design-tools.workers.dev/",
+  "repo": "https://github.com/yannbf/painterly",
+  "category": "loading-feedback",
+  "tags": [
+    "function:loading-indicator",
+    "stack:canvas",
+    "stack:react",
+    "style:ambient",
+    "style:design-engineer"
+  ],
+  "screenshot": "painterly.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Painterly brings painterly, fluid canvas and shader loading indicators to modern React web projects. Moving beyond conventional spinning circles, Painterly renders soft brushstrokes, generative fluid bleeds, and organic visual feedback.",
+    "zh": "Painterly 是一组跳脱出传统几何旋转 Loader 的艺术级 Canvas / WebGL 动态加载指示器。它运用柔和的水彩笔触晕染、生成式流体扩散与动态光影，让页面等待过程化身为富有美学观赏性的视觉体验。"
+  },
+  "components": [
+    "Watercolor Bleed Loader",
+    "Brushstroke Orbit",
+    "Pigment Wave Spinner",
+    "Pastel Pulse Feedback"
+  ]
+}

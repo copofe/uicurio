@@ -1,0 +1,33 @@
+{
+  "slug": "fluid-functionalism",
+  "name": {
+    "en": "Fluid Functionalism",
+    "zh": "Fluid Functionalism"
+  },
+  "description": {
+    "en": "Design principles and interactive components engineered with purposeful physical animation.",
+    "zh": "融合物理力学动效与目的性功能主义交互的现代 Web 设计实验系统。"
+  },
+  "url": "https://www.fluidfunctionalism.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:motion",
+    "style:design-engineer"
+  ],
+  "screenshot": "fluid-functionalism.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Fluid Functionalism proposes a design engineering philosophy where visual motion serves immediate functional utility rather than mere ornamentation. It demonstrates spatial momentum, tactile spring resistance, and layout morphing where every frame communicates state change.",
+    "zh": "Fluid Functionalism 提出了将界面动效转化为纯粹功能性指引的设计工程哲学。它拒绝华而不实的装饰性动画，通过弹簧阻尼的势能反馈、惯性位移与连贯的布局形变，让界面的每一次状态迁移都具备直观清晰的物理意义与操作确定感。"
+  },
+  "components": [
+    "Momentum Drawer",
+    "Spring Kinetic Button",
+    "Functional State Morph",
+    "Tactile Resistance Slider"
+  ]
+}

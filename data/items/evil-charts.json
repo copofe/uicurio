@@ -1,0 +1,37 @@
+{
+  "slug": "evil-charts",
+  "name": {
+    "en": "Evil Charts",
+    "zh": "Evil Charts"
+  },
+  "description": {
+    "en": "Animated SVG charts designed specifically for shadcn/ui with minimal weight.",
+    "zh": "专为 shadcn/ui 定制的轻量级 SVG 动效图表库，由 Evil Martians 团队设计。"
+  },
+  "url": "https://evilcharts.com/",
+  "repo": "https://github.com/evilmartians/evil-charts",
+  "category": "data-viz",
+  "tags": [
+    "function:chart",
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "evil-charts.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Evil Charts is an expressive, ultra-lightweight SVG chart library created by Evil Martians. Tailored to drop into shadcn/ui projects without heavy chart framework baggage, it delivers crisp line charts, glowing gradients, animated tooltips, and bar visualizations with pure SVG and CSS animations.",
+    "zh": "Evil Charts 是由著名设计咨询团队 Evil Martians 出品的超轻量级 SVG 动效图表库。它专为 shadcn/ui 体系量身定制，彻底摆脱了传统庞大图表库的包体积负担，利用极简的 SVG 几何计算与 CSS 动效，呈现出发光折线图、平滑面积图与精致的数据悬浮提示框。"
+  },
+  "components": [
+    "Animated Line Chart",
+    "Glowing Area Chart",
+    "Minimal Bar Chart",
+    "Interactive SVG Tooltip",
+    "Sparkline Indicator"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "slug": "transitions",
+  "name": {
+    "en": "Transitions",
+    "zh": "Transitions"
+  },
+  "description": {
+    "en": "Curated collection of CSS transition recipes, custom easings, and animations.",
+    "zh": "精选现代 CSS 动画过渡配方、自定义贝塞尔缓动曲线与动效实验场。"
+  },
+  "url": "https://transitions.dev/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:vanilla-js",
+    "style:design-engineer"
+  ],
+  "screenshot": "transitions.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Transitions.dev is an interactive laboratory and reference guide for pure CSS transition timing functions and physics easings. Curated for motion designers and design engineers, it offers visual cubic-bezier curves, spring approximation presets, and drop-in keyframe recipes.",
+    "zh": "Transitions.dev 是一座面向动效工程师与设计工程师的现代 CSS 过渡曲线实验场。它可视化收录并对比了数十种高质感的贝塞尔缓动函数、弹簧物理近似曲线以及即拷即用的 CSS 关键帧配方，帮助网页元素摆脱生硬机械感。"
+  },
+  "components": [
+    "Spring Approximation Easing",
+    "Cubic Bezier Inspector",
+    "Smooth Fade Scale",
+    "Morphing Layout Transition",
+    "Keyframe Motion Recipe"
+  ]
+}

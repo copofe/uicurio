@@ -1,0 +1,35 @@
+{
+  "slug": "re-ui",
+  "name": {
+    "en": "Re UI",
+    "zh": "Re UI"
+  },
+  "description": {
+    "en": "Accessible and customizable UI components built using Base UI primitives.",
+    "zh": "依托 Base UI 底层原语构建的高可访问性、自由定制的现代组件库。"
+  },
+  "url": "https://reui.io/",
+  "repo": "https://github.com/reui/reui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "re-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Re UI leverages the latest Base UI headless primitives to craft accessible, highly customisable components styled with modern Tailwind CSS. It focuses on accessible keyboard loops, robust popover positioning, and clean, developer-friendly composition APIs.",
+    "zh": "Re UI 借助最新一代 Base UI 无样式底层原语，打造出兼顾严苛无障碍标准与现代 Tailwind CSS 审美的 React 组件库。其组件严格遵循 W3C 键盘操作逻辑，定位浮层稳定，代码组合方式符合人体工学，易于融入各类设计体系。"
+  },
+  "components": [
+    "Accessible Dialog",
+    "Positioned Popover",
+    "Flexible Dropdown",
+    "Custom Select",
+    "Keyboard Slider"
+  ]
+}

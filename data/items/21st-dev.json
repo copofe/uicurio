@@ -1,0 +1,37 @@
+{
+  "slug": "21st-dev",
+  "name": {
+    "en": "21st.dev",
+    "zh": "21st.dev"
+  },
+  "description": {
+    "en": "Community registry for shadcn components, motion primitives, and full blocks.",
+    "zh": "最大的 shadcn 开放注册表社区，收录海量即拷即用的动效组件与交互区块。"
+  },
+  "url": "https://21st.dev/",
+  "repo": "https://github.com/21st-dev/magic",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "21st-dev.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "21st.dev is the open component marketplace and registry for Design Engineers. Built on the shadcn component distribution pattern, it enables creators worldwide to share interactive components, experimental shaders, and production-ready blocks with live interactive sandboxes and one-click CLI installations.",
+    "zh": "21st.dev 是面向设计工程师群体的开放式组件分发平台与社区 Registry。基于 shadcn 的解耦分发机制，它汇聚了全球独立创作者分享的前沿微交互、WebGL 着色器以及精雕细琢的页面区块，支持实时在线沙盒预览与一键 CLI 本地导入。"
+  },
+  "components": [
+    "Interactive 3D Cards",
+    "Glow Buttons",
+    "Shader Canvas",
+    "Dynamic Navbars",
+    "Bento Grid Showcase",
+    "Animated Hero Blocks"
+  ]
+}

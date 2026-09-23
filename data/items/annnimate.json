@@ -1,0 +1,34 @@
+{
+  "slug": "annnimate",
+  "name": {
+    "en": "Annnimate",
+    "zh": "Annnimate"
+  },
+  "description": {
+    "en": "Production-ready GSAP motion components and fluid scroll animations for web.",
+    "zh": "基于 GSAP 打造的生产级动效组件与丝滑视差滚动交互库。"
+  },
+  "url": "https://annnimate.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:vanilla-js",
+    "stack:react",
+    "style:design-engineer"
+  ],
+  "screenshot": "annnimate.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Annnimate curates production-ready motion components and scroll-triggered animations powered by GreenSock (GSAP). Perfect for creative agencies and high-end brand showcases, it delivers high-performance timeline choreographies without performance drops.",
+    "zh": "Annnimate 是一套基于行业标杆引擎 GreenSock (GSAP) 精雕细琢的生产级网页动效组件库。全库专为高端品牌展示与创意互动站点打造，提供了包含视差滚动触发、分层时间轴编排以及多元素联动入场等强表现力控件，运行帧率极其稳定。"
+  },
+  "components": [
+    "ScrollTrigger Pin Hero",
+    "Horizontal Pan Deck",
+    "Text Split Reveal",
+    "Magnetic Hover Item",
+    "Timeline Choreographer"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "slug": "ruru-ui",
+  "name": {
+    "en": "Ruru UI",
+    "zh": "Ruru UI"
+  },
+  "description": {
+    "en": "Accessible and customizable UI components engineered for polished React apps.",
+    "zh": "专为打磨高品质 React 应用而设计的无障碍优先与高度可定制组件库。"
+  },
+  "url": "https://ui.ruru.build/",
+  "repo": "https://github.com/rurubuild/ruru-ui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "ruru-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Ruru UI is a modern, accessible component library crafted for developers building polished web applications. Styled with Tailwind CSS, Ruru UI focuses on clear visual hierarchy, keyboard navigation ergonomics, and dark mode elegance.",
+    "zh": "Ruru UI 是一套专注于提升现代 Web 应用程序细腻质感的 React 现代组件库。全面基于 Tailwind CSS 构建，强调明确的视觉层级划分、严谨舒适的键盘导航以及优雅深邃的暗色主题呈现，为开发团队提供可靠的基础控件支撑。"
+  },
+  "components": [
+    "Ergonomic Dialog",
+    "Clean Dropdown",
+    "Responsive Tabs",
+    "Modern Form Field",
+    "Floating Popover"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "slug": "interior-dev",
+  "name": {
+    "en": "interior.dev",
+    "zh": "interior.dev"
+  },
+  "description": {
+    "en": "Micro-interactions and tactile UI controls finely tuned for click responsiveness.",
+    "zh": "专为极致点击响应与细腻触觉反馈调校的现代 Web 微交互控件集合。"
+  },
+  "url": "https://www.interior.dev/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:motion",
+    "style:design-engineer"
+  ],
+  "screenshot": "interior-dev.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "interior.dev is an ongoing design engineering exploration into tactile micro-interactions and high-craft UI controls. Focused on the visceral feel of clicks, spring dampening, and haptic illusions on the web, it presents components that make digital inputs feel mechanically authentic.",
+    "zh": "interior.dev 是一项专注于网页界面触觉感知与微交互手感的高水准设计工程实践。全库深度探寻鼠标按下与弹起瞬间的物理弹簧阻尼、形变位移与视觉力学假象，让纯数字屏幕上的按钮、滑块与开关拥有如同实体高端电子仪器一般的机械操作快感。"
+  },
+  "components": [
+    "Tactile Click Switch",
+    "Haptic Spring Button",
+    "Damped Slider Rail",
+    "Visceral Radio Capsule"
+  ]
+}

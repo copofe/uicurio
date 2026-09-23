@@ -1,0 +1,36 @@
+{
+  "slug": "daisyui",
+  "name": {
+    "en": "daisyUI",
+    "zh": "daisyUI"
+  },
+  "description": {
+    "en": "Most popular component class library for Tailwind CSS with deep semantic theme support.",
+    "zh": "广受欢迎的 Tailwind CSS 语义化类名组件库，内置丰富的主题切换系统。"
+  },
+  "url": "https://daisyui.com/",
+  "repo": "https://github.com/saadeghi/daisyui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:tailwind",
+    "stack:vanilla-js"
+  ],
+  "screenshot": "daisyui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "daisyUI is the most widely adopted component plugin for Tailwind CSS. Instead of writing verbose utility chains for common UI patterns, daisyUI introduces semantic class names like btn, card, and modal, accompanied by over 30 built-in themes and pure-CSS interaction primitives.",
+    "zh": "daisyUI 是社区极具人气的 Tailwind CSS 语义化组件插件。它将冗长的原子化类名提炼为类似 btn、card、modal 等简洁明了的语义化类名，同时内置了 30 多款开箱即用的预设主题与纯 CSS 交互，极大精简了 HTML 代码量并保持了极高的构建性能。"
+  },
+  "components": [
+    "Button",
+    "Modal Dialog",
+    "Drawer Sidebar",
+    "Theme Controller",
+    "Navbar",
+    "Accordion",
+    "Card"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "slug": "kibo-ui",
+  "name": {
+    "en": "Kibo UI",
+    "zh": "Kibo UI"
+  },
+  "description": {
+    "en": "Component registry tailored for AI interfaces, chat experiences, and workflows.",
+    "zh": "专为 AI 交互、大模型对话与智能体工作流定制的现代化 UI 组件注册表。"
+  },
+  "url": "https://www.kibo-ui.com/",
+  "repo": "https://github.com/haydenbleasel/kibo",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "scenario:ai-native",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "kibo-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Kibo UI is a curated component registry specifically designed for AI-native interfaces, LLM interactions, and agentic workflows. Built by Hayden Bleasel, it features streaming text renderers, branchable chat threads, prompt composers, tool call inspectors, and canvas node editors compatible with the shadcn CLI.",
+    "zh": "Kibo UI 是一套专注于解决 AI 原生交互体验的专门组件注册表。由 Hayden Bleasel 发起，全库针对 LLM 对话、提示词输入、打字机流式输出、Agent 工具调用卡片以及思维链折叠展示等前沿 AI 场景进行了高度工程化封装，完全兼容 shadcn CLI 分发规范。"
+  },
+  "components": [
+    "Streaming Message",
+    "Prompt Input Composer",
+    "Tool Call Inspector",
+    "Thought Chain Accordion",
+    "Agent Status Pill",
+    "Model Selector"
+  ]
+}

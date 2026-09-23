@@ -1,0 +1,34 @@
+{
+  "slug": "oneko",
+  "name": {
+    "en": "Oneko",
+    "zh": "Oneko"
+  },
+  "description": {
+    "en": "Classic nostalgic pixel cat companion that delightfully chases your cursor.",
+    "zh": "随鼠标指针灵动追逐嬉戏的经典复古像素猫桌面伙伴 Web 组件。"
+  },
+  "url": "https://oneko.dhrv.pw/",
+  "repo": "https://github.com/adryd325/oneko.js",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:vanilla-js",
+    "style:cozy",
+    "style:design-engineer"
+  ],
+  "screenshot": "oneko.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Oneko brings the beloved 1989 classic desktop companion to the modern web. Packaged as a zero-dependency script, the nostalgic pixelated cat wakes up, runs playfully after the visitor's cursor, scratches the screen, and takes catnaps when the cursor stays idle.",
+    "zh": "Oneko 将诞生于 1989 年经典的桌面像素猫猫伙伴带到了现代网页中。作为一个极轻量的零依赖前端脚本，这只惹人喜爱的复古小猫会在用户移动鼠标时飞奔追逐指针、在屏幕边缘挠墙爪击，并在停下时卷成一团惬意打呼噜，极富人情味与童趣。"
+  },
+  "components": [
+    "Cursor Chaser Cat",
+    "Idle Sleep State",
+    "Scratch Wall Behavior",
+    "Pixel Sprite Animator"
+  ]
+}

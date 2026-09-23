@@ -1,0 +1,38 @@
+{
+  "slug": "heroui",
+  "name": {
+    "en": "HeroUI",
+    "zh": "HeroUI"
+  },
+  "description": {
+    "en": "Beautiful, fast and modern React UI library, formerly known as NextUI.",
+    "zh": "现代、极速且视觉优雅的 React UI 库（前身为 NextUI），基于 Tailwind 构建。"
+  },
+  "url": "https://www.heroui.com/",
+  "repo": "https://github.com/heroui-inc/heroui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:typescript",
+    "style:design-engineer"
+  ],
+  "screenshot": "heroui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "HeroUI (formerly NextUI) is a premier React UI library built on top of Tailwind CSS and React Aria. Known for its gorgeous default styling, fluid spring transitions, full keyboard accessibility, and comprehensive TypeScript support, HeroUI elevates modern SaaS design out of the box.",
+    "zh": "HeroUI（前身为知名项目 NextUI）是一套融合了极佳美学质感与工程性能的 React UI 库。底层基于 React Aria 无障碍原语与 Tailwind CSS 深度构建，具备无懈可击的键盘导航逻辑、优雅的弹簧动画与自适应色彩系统，能快速打造企业级现代 SaaS 应用。"
+  },
+  "components": [
+    "Autocomplete",
+    "Button with Ripple",
+    "Modal with Backdrop Blur",
+    "Pagination",
+    "Snippet",
+    "Tabs",
+    "Navbar"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "slug": "prompt-kit",
+  "name": {
+    "en": "Prompt Kit",
+    "zh": "Prompt Kit"
+  },
+  "description": {
+    "en": "Chat and AI interface component primitives for building natural conversational apps.",
+    "zh": "面向大语言模型对话与智能体打造的自然语言交互界面核心组件原语。"
+  },
+  "url": "https://www.prompt-kit.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "scenario:ai-native",
+    "stack:react",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "prompt-kit.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Prompt Kit provides developers with essential UI primitives for crafting state-of-the-art conversational AI interfaces. From multi-modal prompt inputs, suggestion chips, and code copy blocks to streaming message bubbles, Prompt Kit accelerates AI product engineering.",
+    "zh": "Prompt Kit 是一套专为快速搭建下一代 AI 对话与生成式交互界面打造的前端组件原语库。涵盖多模态富文本输入胶囊、智能建议词气泡、流式文本渲染气泡与代码片段一键拷贝容器，帮助工程师敏捷交付丝滑的 LLM 应用交互体验。"
+  },
+  "components": [
+    "Multimodal Prompt Bar",
+    "Suggestion Prompt Chips",
+    "Streaming Chat Bubble",
+    "Token Counter Pill",
+    "Code Snippet Inspector"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "slug": "fancy-components",
+  "name": {
+    "en": "Fancy Components",
+    "zh": "Fancy Components"
+  },
+  "description": {
+    "en": "Playful and physics-driven React components to bring joyful motion to the web.",
+    "zh": "充满趣味与物理力学动效的 React 创意组件库，主打重力球池、磁吸与弹性交互。"
+  },
+  "url": "https://www.fancycomponents.dev/",
+  "repo": "https://github.com/fancy-components/fancy-components",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:motion",
+    "style:design-engineer"
+  ],
+  "screenshot": "fancy-components.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Fancy Components is a playful, creative React component library created by Daniel Petho. It specializes in tactile physical animations, gravity effects, spring physics, and cursor interactions that make websites visually memorable and deeply delightful to interact with.",
+    "zh": "Fancy Components 是一套主打趣味性与沉浸物理触感的 React 创意组件集合。由 Daniel Petho 设计开发，全库收录了大量突破常规交互思维的控件：如具有重力落体碰撞的球池卡片、磁吸跟随按钮、视差悬浮卡与粒子背景等，能够让网页瞬间焕发生动的游戏化趣味。"
+  },
+  "components": [
+    "Gravity Ballpit",
+    "Magnetic Button",
+    "Floating Phone",
+    "Physics Cards",
+    "Gooey Cursor",
+    "Liquid Toggle"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "slug": "syntax-ui",
+  "name": {
+    "en": "Syntax UI",
+    "zh": "Syntax UI"
+  },
+  "description": {
+    "en": "Animated copy-paste components and creative interactions for landing pages.",
+    "zh": "专为现代落地页打造的即拷即用 React 动效组件与创意交互合集。"
+  },
+  "url": "https://syntaxui.com/",
+  "repo": "https://github.com/SyntaxUI/syntaxui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "function:text-animation",
+    "stack:react",
+    "stack:motion",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "syntax-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Syntax UI is a rich catalog of free, copy-paste animated React and Tailwind components designed to make modern landing pages pop. From dynamic text rotators and ripple buttons to gradient hero sections, Syntax UI equips indie hackers with eye-catching visual blocks.",
+    "zh": "Syntax UI 是一套充满创意活力的开源 React + Tailwind CSS 动效组件平台。致力于让独立开发者能像拼积木一样快速搭建出令人难忘的产品主页，全库收录了文字翻转动效、霓虹波纹按钮、交互式 Bento 网格与炫彩背景发生器。"
+  },
+  "components": [
+    "Text Rotator",
+    "Ripple Button",
+    "Gradient Hero Banner",
+    "Interactive Bento Cell",
+    "Border Beam Capsule"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "slug": "glimm",
+  "name": {
+    "en": "glimm",
+    "zh": "glimm"
+  },
+  "description": {
+    "en": "Shader-driven fluid page transitions and visual effects for Next.js applications.",
+    "zh": "基于 GPU 着色器驱动的 Next.js 极具流体质感整页路由切换动效方案。"
+  },
+  "url": "https://glimm.dev/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:nextjs",
+    "stack:webgl",
+    "stack:react",
+    "style:ambient",
+    "style:design-engineer"
+  ],
+  "screenshot": "glimm.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "glimm introduces GPU fragment shader page transitions to modern Next.js applications. Moving past basic CSS fades, glimm captures route snapshots and applies liquid morphs, ripple warps, and chromatic aberrations during navigation, delivering an ultra-slick app-like experience.",
+    "zh": "glimm 将底层 WebGL 片元着色器（Fragment Shader）引入了 Next.js 路由过渡生态。它在页面切换瞬间捕获 DOM 视图纹理快照，并通过着色器实时计算流体融解、波纹扭曲与色散位移动画，呈现出如同原生顶级客户端应用般的非凡转场质感。"
+  },
+  "components": [
+    "Liquid Route Transition",
+    "Chromatic Aberration Warp",
+    "Ripple Page Switcher",
+    "Next.js App Router Bridge"
+  ]
+}

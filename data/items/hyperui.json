@@ -1,0 +1,35 @@
+{
+  "slug": "hyperui",
+  "name": {
+    "en": "HyperUI",
+    "zh": "HyperUI"
+  },
+  "description": {
+    "en": "Free open-source Tailwind CSS components for marketing, ecommerce and app UI.",
+    "zh": "面向营销页面、电子商务与中后台界面的免费开源 Tailwind CSS 组件集。"
+  },
+  "url": "https://www.hyperui.dev/",
+  "repo": "https://github.com/markmead/hyperui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:tailwind",
+    "stack:vanilla-js"
+  ],
+  "screenshot": "hyperui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "HyperUI is a free collection of open-source Tailwind CSS components crafted by Mark Mead. Covering marketing sections, ecommerce product grids, announcements, and application UI, HyperUI focuses on clean copy-paste markup without unnecessary dependencies.",
+    "zh": "HyperUI 是由 Mark Mead 独立开发维护的高品质免费开源 Tailwind CSS 组件库。全库聚焦于实用性极强的营销页面片段、电商商品卡片、公告栏与应用交互微控件，代码干净利落零依赖，直接拷贝即可无缝融入已有项目。"
+  },
+  "components": [
+    "Ecommerce Cards",
+    "Announcement Banners",
+    "Stats Widgets",
+    "Form Controls",
+    "Footers",
+    "Navbars"
+  ]
+}

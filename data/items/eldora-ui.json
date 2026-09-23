@@ -1,0 +1,36 @@
+{
+  "slug": "eldora-ui",
+  "name": {
+    "en": "Eldora UI",
+    "zh": "Eldora UI"
+  },
+  "description": {
+    "en": "Animated React components and interactive hero sections tailored for startups.",
+    "zh": "专为现代初创产品打造的 React 动效组件与交互式 Hero 区块集合。"
+  },
+  "url": "https://eldoraui.site/",
+  "repo": "https://github.com/karthikmudunuri/eldoraui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:motion",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "eldora-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Eldora UI is an open-source animated component library built with React, Motion, and Tailwind CSS by Karthik Mudunuri. Designed specifically for web startups, it features modern cards with glow borders, animated badge pills, grid beams, and dynamic text reveals.",
+    "zh": "Eldora UI 是由 Karthik Mudunuri 开发的开源动效组件库，依托 React、Motion 与 Tailwind CSS 构建。它专为科技初创团队打造，收录了发光边框卡片、悬浮光束网格、微动效徽标与流光文本等现代科技感浓郁的落地页核心元素。"
+  },
+  "components": [
+    "Grid Beam Background",
+    "Glow Border Card",
+    "Animated Badge Pill",
+    "Flickering Grid",
+    "Word Pull Up Animation"
+  ]
+}

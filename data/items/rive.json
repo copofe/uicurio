@@ -1,0 +1,33 @@
+{
+  "slug": "rive",
+  "name": {
+    "en": "Rive",
+    "zh": "Rive"
+  },
+  "description": {
+    "en": "Interactive vector animation tool and runtime powered by state machines.",
+    "zh": "基于状态机与紧凑运行时驱动的跨平台实时交互矢量动效平台。"
+  },
+  "url": "https://rive.app/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:vanilla-js",
+    "stack:react",
+    "style:design-engineer"
+  ],
+  "screenshot": "rive.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Rive revolutionises real-time interactive vector graphics by empowering designers and engineers to build interactive animations controlled by state machines. Rive files are minuscule in size and execute at 120fps with full programmatic input handling across web, mobile, and games.",
+    "zh": "Rive 彻底重构了设计师与工程师交付复杂动效的工作流。通过内置的状态机（State Machine）逻辑，矢量动效可直接根据代码传递的布尔值、数值与光标触发状态分支流转，文件体积极其微小且在 Web 与移动端均能以满帧极速渲染。"
+  },
+  "components": [
+    "State Machine Canvas",
+    "Interactive Character Rig",
+    "Vector Graphics Renderer",
+    "Pointer Event Listener"
+  ]
+}

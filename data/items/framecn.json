@@ -1,0 +1,35 @@
+{
+  "slug": "framecn",
+  "name": {
+    "en": "framecn",
+    "zh": "framecn"
+  },
+  "description": {
+    "en": "Video rendering and timeline components for React, built on Editframe.",
+    "zh": "基于 Editframe 构建的 React 视频合成、时间轴编辑与多媒体动效组件。"
+  },
+  "url": "https://framecn.dev/",
+  "repo": "https://github.com/framecn/framecn",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "framecn.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "framecn delivers programmatic video rendering and dynamic canvas composition components for React. Built on Editframe and styled within the shadcn aesthetic, it allows developers to build browser-based video editors, animated social clips, and programmatic timeline renders.",
+    "zh": "framecn 是一套专为浏览器端多媒体合成与程序化视频渲染打造的 React 组件套件。依托 Editframe 视频管线与 shadcn 极简交互界面，它使开发者能够轻松在网页中构建多轨道时间轴、关键帧动画编排以及动态视频片段导出功能。"
+  },
+  "components": [
+    "Video Timeline Track",
+    "Keyframe Scrubber",
+    "Media Composition Canvas",
+    "Playback Control Bar",
+    "Export Progress Indicator"
+  ]
+}

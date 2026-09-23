@@ -1,0 +1,35 @@
+{
+  "slug": "ui-layouts",
+  "name": {
+    "en": "UI Layouts",
+    "zh": "UI Layouts"
+  },
+  "description": {
+    "en": "Full-page layouts, hero sections, and interactive headers built with Tailwind.",
+    "zh": "涵盖整页排版、交互式导航与 Hero 区块的高质量 Tailwind 布局库。"
+  },
+  "url": "https://ui-layouts.com/",
+  "repo": "https://github.com/naymurdev/ui-layouts",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "ui-layouts.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "UI Layouts by Naymur Rahman offers full-page layout patterns, creative hero headers, and animated component compositions crafted with React and Tailwind CSS. It serves as an open layout recipe book for developers seeking contemporary structure ideas.",
+    "zh": "UI Layouts 是由 Naymur Rahman 发起维护的整页布局方案与动效交互合集。依托 React 与 Tailwind CSS，它提供了大量富有表现力的全屏落地页模板、粘性滚动导航与创意排版构图，是探索新颖页面结构的实用灵感库。"
+  },
+  "components": [
+    "Modern Grid Layout",
+    "Sticky Header System",
+    "Parallax Hero Banner",
+    "Bento Grid Showcase",
+    "Interactive Footer"
+  ]
+}

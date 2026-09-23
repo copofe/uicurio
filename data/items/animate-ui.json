@@ -1,0 +1,37 @@
+{
+  "slug": "animate-ui",
+  "name": {
+    "en": "Animate UI",
+    "zh": "Animate UI"
+  },
+  "description": {
+    "en": "Accessible shadcn UI components beautifully animated with Motion and CSS.",
+    "zh": "为 shadcn/ui 组件注入细腻 Motion 动画的高无障碍动效增强库。"
+  },
+  "url": "https://animate-ui.com/",
+  "repo": "https://github.com/animate-ui/animate-ui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:motion",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "animate-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Animate UI is a curated extension of the shadcn/ui ecosystem focused on fluid, physics-based animations. Powered by Motion, it enriches standard shadcn components (dialogs, drawers, dropdowns, buttons) with natural easing curves and delightful micro-interactions without sacrificing accessibility.",
+    "zh": "Animate UI 是一套专注于为 shadcn/ui 组件生态赋予物理动效生命的扩展库。依托 Motion 强大的弹簧动力学引擎，它在严格保留原始无障碍规范的前提下，为对话框、抽屉、下拉菜单与按钮等日常控件注入细腻灵动的缓动曲线与形变微动效。"
+  },
+  "components": [
+    "Animated Dialog",
+    "Fluid Drawer",
+    "Magnetic Hover Pill",
+    "Morphing Popover",
+    "Stagger List"
+  ]
+}

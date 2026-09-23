@@ -1,0 +1,34 @@
+{
+  "slug": "dot-matrix",
+  "name": {
+    "en": "Dot Matrix",
+    "zh": "Dot Matrix"
+  },
+  "description": {
+    "en": "Over fifty customizable dot-matrix loaders and pixel indicators for shadcn/ui.",
+    "zh": "超过 50 款专为 shadcn/ui 打造的高可定制点阵式像素 Loading 加载动画库。"
+  },
+  "url": "https://dotmatrix.zzzzshawn.cloud/",
+  "category": "loading-feedback",
+  "tags": [
+    "function:loading-indicator",
+    "stack:react",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "dot-matrix.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Dot Matrix brings industrial, retro LED matrix displays to modern React applications. Created by Shawn, it provides over 50 unique dot-matrix loading indicators, wave patterns, digital digit counters, and pixel pulse animations fully compatible with the shadcn component ecosystem.",
+    "zh": "Dot Matrix 将工业仪器与老式 LED 点阵显示屏的机械美学带入现代 React 界面。由 Shawn 精心构建，全库包含超 50 款独具特色的点阵式 Loading 动画、正弦波浪律动、数字阵列刷新与像素脉冲反馈，深度适配 shadcn 架构，极客风格出众。"
+  },
+  "components": [
+    "LED Wave Matrix",
+    "Digital Dot Counter",
+    "Spiral Matrix Spinner",
+    "Pulse Pixel Indicator",
+    "Sine Wave Grid"
+  ]
+}

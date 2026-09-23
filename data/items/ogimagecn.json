@@ -1,0 +1,34 @@
+{
+  "slug": "ogimagecn",
+  "name": {
+    "en": "ogimagecn",
+    "zh": "ogimagecn"
+  },
+  "description": {
+    "en": "Dynamic Open Graph image components and generator using Satori and shadcn.",
+    "zh": "结合 Satori 与 shadcn 美学规范的动态社交分享卡片（OG Image）生成组件。"
+  },
+  "url": "https://www.ogimagecn.com/",
+  "repo": "https://github.com/ogimagecn/ogimagecn",
+  "category": "files-code",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "ogimagecn.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "ogimagecn simplifies the generation of gorgeous social preview (Open Graph) images using Vercel Satori and the shadcn/ui aesthetic. It offers ready-to-use JSX components that render directly to SVG and PNG on the edge, ensuring consistent branding across Twitter, Discord, and LinkedIn.",
+    "zh": "ogimagecn 是一套专为快速生成高质量社交媒体分享封面（OG Image）打造的前端组件工具。它将 Vercel Satori 边缘渲染引擎与 shadcn 极简设计规范完美结合，提供纯 JSX 模板，可在 Edge 运行时毫秒级合成出排版精致的 SVG 与 PNG 社交分享卡片。"
+  },
+  "components": [
+    "Social Card Template",
+    "Edge OG Generator",
+    "Gradient Preview Frame",
+    "Dynamic Tag Header"
+  ]
+}

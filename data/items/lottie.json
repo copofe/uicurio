@@ -1,0 +1,32 @@
+{
+  "slug": "lottie",
+  "name": {
+    "en": "Lottie",
+    "zh": "Lottie"
+  },
+  "description": {
+    "en": "Lightweight JSON-based vector animation format and cross-platform runtime.",
+    "zh": "基于 JSON 格式的高性能轻量矢量动画标准格式与跨平台运行时。"
+  },
+  "url": "https://lottiefiles.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:vanilla-js",
+    "stack:react"
+  ],
+  "screenshot": "lottie.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Lottie is an open-source animation file format that renders After Effects vector animations in real time using JSON. Maintained and popularized by LottieFiles, it allows designers to ship rich, resolution-independent vector illustrations and icon micro-animations at a fraction of the weight of GIFs or MP4s.",
+    "zh": "Lottie 是一种将 Adobe After Effects 复杂矢量动画解析为纯 JSON 数据并在多端原生渲染的标准技术。相比传统 GIF 或 MP4 视频，Lottie 文件体积减少 80% 以上且无论如何缩放均保持矢量锐利清晰，广泛应用于应用启动引导与交互成就动画。"
+  },
+  "components": [
+    "Lottie Player Canvas",
+    "Interactive Frame Scrubber",
+    "Segment Playback Controller",
+    "Dynamic Color Palettes"
+  ]
+}

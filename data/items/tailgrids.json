@@ -1,0 +1,35 @@
+{
+  "slug": "tailgrids",
+  "name": {
+    "en": "TailGrids",
+    "zh": "TailGrids"
+  },
+  "description": {
+    "en": "Extensive library of responsive, beautifully crafted UI blocks for Tailwind.",
+    "zh": "包含数百个精心调校的响应式 Tailwind CSS UI 页面区块与组件系统。"
+  },
+  "url": "https://tailgrids.com/",
+  "repo": "https://github.com/TailGrids/tailgrids",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:tailwind",
+    "stack:react"
+  ],
+  "screenshot": "tailgrids.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "TailGrids is an extensive UI block collection built on pure Tailwind CSS. Offering over 600 components, blocks, and templates across core marketing, ecommerce, and dashboard categories, it serves as a robust building kit for fast-moving web teams.",
+    "zh": "TailGrids 是一套覆盖面极广的 Tailwind CSS 页面区块库。收录了超 600 个响应式组件与页面片段，涵盖品牌营销站、电商交易流与后台管理中枢等核心业务场景，提供 React、HTML 与 Vue 等多代码形态，开箱即拷。"
+  },
+  "components": [
+    "Hero Sections",
+    "Feature Cards",
+    "Pricing Grids",
+    "Team Showcase",
+    "Blog Lists",
+    "Contact Modals"
+  ]
+}

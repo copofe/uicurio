@@ -1,0 +1,39 @@
+{
+  "slug": "radix-ui",
+  "name": {
+    "en": "Radix Primitives",
+    "zh": "Radix Primitives"
+  },
+  "description": {
+    "en": "Unstyled, accessible UI components for building high-quality design systems.",
+    "zh": "开源无样式底层 React 组件库，专为构建高质量设计系统与无障碍界面而设计。"
+  },
+  "url": "https://www.radix-ui.com/",
+  "repo": "https://github.com/radix-ui/primitives",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:typescript"
+  ],
+  "screenshot": "radix-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Radix Primitives is an open-source UI component library for building high-quality, accessible design systems and web apps. Maintained by WorkOS, it provides unstyled, low-level components with robust keyboard navigation, focus management, screen reader support, and fully composable APIs that integrate seamlessly with any styling solution.",
+    "zh": "Radix Primitives 是目前应用最广泛的底层无样式 React 组件体系之一，现由 WorkOS 维护。它专注解决复杂 UI 组件中最棘手的交互与无障碍难题（包括键盘导航循环、焦点陷阱捕获、屏幕阅读器适配等），其组件呈乐高积木式高度可组合，能够无缝契合任何 CSS 方案。"
+  },
+  "components": [
+    "Dialog",
+    "Dropdown Menu",
+    "Popover",
+    "Tooltip",
+    "ContextMenu",
+    "NavigationMenu",
+    "HoverCard",
+    "Collapsible",
+    "Slider",
+    "ToggleGroup"
+  ]
+}

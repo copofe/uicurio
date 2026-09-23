@@ -1,0 +1,36 @@
+{
+  "slug": "startercn",
+  "name": {
+    "en": "startercn",
+    "zh": "startercn"
+  },
+  "description": {
+    "en": "Comprehensive shadcn/ui registry template with docs, landing page, and AI agent support.",
+    "zh": "集成了官方文档、落地页与 AI Agent 支持的一站式 shadcn 注册表脚手架。"
+  },
+  "url": "https://startercn.vercel.app/",
+  "repo": "https://github.com/startercn/startercn",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "startercn.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "startercn is an all-in-one starter template for developers wanting to launch their own custom shadcn/ui registry. Built with Next.js, Fumadocs, and Tailwind, it comes equipped with automatic component schema generation, live playground previews, and full LLM agent discovery compatibility.",
+    "zh": "startercn 是一套专为开发者创建并发布自主 shadcn/ui Registry 打造的一站式工程脚手架。基于 Next.js、Fumadocs 与 Tailwind 构建，自带完整的元数据自动生成脚本、代码在线沙盒预览以及面向 LLM 智能体的上下文索引能力。"
+  },
+  "components": [
+    "Registry Documentation System",
+    "Interactive Component Preview",
+    "Code Copy Tabs",
+    "CLI Command Generator",
+    "Agent llms.txt Exporter"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "slug": "motion-primitives",
+  "name": {
+    "en": "Motion Primitives",
+    "zh": "Motion Primitives"
+  },
+  "description": {
+    "en": "Advanced motion and interactive components built with Motion and Tailwind CSS.",
+    "zh": "由 ibelick 打造的高质感动效与微交互组件库，依托 Motion 和 Tailwind CSS。"
+  },
+  "url": "https://motion-primitives.com/",
+  "repo": "https://github.com/ibelick/motion-primitives",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "function:text-animation",
+    "stack:react",
+    "stack:motion",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "motion-primitives.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Motion Primitives is an open-source collection of advanced motion-driven UI components created by Julien Thibeaut (ibelick). Built with Motion (Framer Motion) and Tailwind CSS, each component is engineered with smooth spring physics, fluid layout morphing, and tactile click animations ready for modern web apps.",
+    "zh": "Motion Primitives 是由知名设计工程师 Julien Thibeaut (ibelick) 打造的开源动效交互组件集。基于 Motion 与 Tailwind CSS 深度打磨，全库专注于自然细腻的弹簧物理曲线、平滑的布局形变过渡与高品质微交互体验，源码完全开放即粘即用。"
+  },
+  "components": [
+    "Text Morph",
+    "Accordion",
+    "Toolbar Expandable",
+    "Dialog Morph",
+    "Infinite Slider",
+    "Popover Magnetic",
+    "Cursor Tracker",
+    "Disclosure"
+  ]
+}

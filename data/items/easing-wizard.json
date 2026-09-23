@@ -1,0 +1,32 @@
+{
+  "slug": "easing-wizard",
+  "name": {
+    "en": "Easing Wizard",
+    "zh": "Easing Wizard"
+  },
+  "description": {
+    "en": "Visual spring generator and easing curve designer for modern CSS animations.",
+    "zh": "专为现代 CSS 动画量身打造的可视化弹簧物理模拟器与缓动曲线生成器。"
+  },
+  "url": "https://easingwizard.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:vanilla-js",
+    "style:design-engineer"
+  ],
+  "screenshot": "easing-wizard.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Easing Wizard is a browser-based tool for visualising, fine-tuning, and generating linear() easing springs for CSS. By approximating real-world physics into pure CSS timing functions, it allows web developers to achieve bouncy, fluid animations without any runtime JavaScript.",
+    "zh": "Easing Wizard 是一款用于实时调试与生成纯 CSS linear() 弹簧物理缓动曲线的可视化神器。它通过数学插值将真实的质量块阻尼物理运动转化为现代 CSS 原生支持的时序关键点，让纯 CSS 动画也能具备令人赞叹的物理回弹质感，彻底省去 JS 运行时开销。"
+  },
+  "components": [
+    "Spring Parameter Sliders",
+    "Interactive Motion Preview",
+    "CSS linear() Code Exporter",
+    "Curve Comparison Inspector"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "slug": "component-gallery",
+  "name": {
+    "en": "The Component Gallery",
+    "zh": "The Component Gallery"
+  },
+  "description": {
+    "en": "A collection of design system components from the best interface libraries.",
+    "zh": "横向对比各大真实设计系统组件实现的权威参考库与设计工程师灵感聚合站。"
+  },
+  "url": "https://component.gallery/",
+  "repo": "https://github.com/iangroundwater/component-gallery",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "style:design-engineer"
+  ],
+  "screenshot": "component-gallery.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "The Component Gallery is an exhaustive reference collection of interface components drawn from real-world design systems around the globe. Curated by Iain Bean, it indexes hundreds of components across dozens of public design systems (like Apple, Polaris, Primer, Carbon), providing design engineers with invaluable side-by-side taxonomy and pattern analysis.",
+    "zh": "The Component Gallery 是一套汇集全球知名企业公开设计系统的全景组件索引库。它系统性地梳理了来自 Apple、Shopify Polaris、GitHub Primer、IBM Carbon 等数十个顶级设计系统的实际控件落地范式，为界面设计师与前端架构师提供了极具参考价值的命名分类与交互形态对比。"
+  },
+  "components": [
+    "Design System Index",
+    "Component Taxonomy",
+    "Pattern Comparisons",
+    "Accessibility Guidelines"
+  ]
+}

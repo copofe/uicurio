@@ -1,0 +1,32 @@
+{
+  "slug": "shadcn-labs",
+  "name": {
+    "en": "Shadcn Labs",
+    "zh": "Shadcn Labs"
+  },
+  "description": {
+    "en": "Curated ecosystem and exploration lab for emerging shadcn/ui community registries.",
+    "zh": "汇集前沿新兴 shadcn/ui 社区注册表、扩展库与开发工具的生态实验聚合站。"
+  },
+  "url": "https://www.shadcn-labs.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "shadcn-labs.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Shadcn Labs is an experimental portal indexing the rapidly growing universe of community-built shadcn extensions, third-party registries, and design system tools. It tracks cutting-edge innovations and facilitates cross-registry component discovery.",
+    "zh": "Shadcn Labs 是一个追踪并聚合全球 shadcn/ui 开源生态前沿动向的创新实验室与索引平台。它系统性梳理了社区涌现的个性化 Registry、三方扩展库、自动化脚本与主题工具，是洞察现代化前端分发趋势的极佳窗口。"
+  },
+  "components": [
+    "Registry Directory",
+    "Experimental Sandbox",
+    "Tooling Collection",
+    "Ecosystem Newsfeed"
+  ]
+}

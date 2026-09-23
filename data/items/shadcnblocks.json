@@ -1,0 +1,37 @@
+{
+  "slug": "shadcnblocks",
+  "name": {
+    "en": "shadcnblocks",
+    "zh": "shadcnblocks"
+  },
+  "description": {
+    "en": "Comprehensive library of ready-to-use shadcn website blocks and UI sections.",
+    "zh": "收录数千款精巧的 shadcn/ui 完整页面区块与营销落地页组件集合。"
+  },
+  "url": "https://www.shadcnblocks.com/",
+  "repo": "https://github.com/shadcnblocks/shadcnblocks",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "shadcnblocks.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "shadcnblocks is a massive, meticulously structured repository of ready-made website blocks built entirely with shadcn/ui and Tailwind CSS. Covering hero sections, bento grids, pricing matrices, feature showcases, and footers, it allows teams to rapidly construct conversion-optimized marketing pages.",
+    "zh": "shadcnblocks 是目前规模庞大的开源 shadcn/ui 页面级区块代码库。完全遵循 Tailwind CSS 与 shadcn 结构规范，囊括了英雄区（Hero）、Bento 矩阵网格、多版本定价表、功能对比卡片与页脚等全套商业建站区块，支持直接拷贝源码加速产品落地。"
+  },
+  "components": [
+    "Hero Sections",
+    "Pricing Tables",
+    "Bento Grids",
+    "Feature Showcases",
+    "Testimonial Wall",
+    "CTA Blocks"
+  ]
+}

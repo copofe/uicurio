@@ -1,0 +1,34 @@
+{
+  "slug": "morphicons",
+  "name": {
+    "en": "morphicons",
+    "zh": "morphicons"
+  },
+  "description": {
+    "en": "Spring-physics icon morphing animation library for smooth state transitions.",
+    "zh": "基于弹簧物理学的高品质矢量图标形状平滑形变动效动画库。"
+  },
+  "url": "https://www.morphicons.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:vanilla-js",
+    "stack:react",
+    "style:design-engineer"
+  ],
+  "screenshot": "morphicons.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "morphicons is a specialty icon library that uses spring physics and path interpolation to morph smoothly between different icon states (such as play to pause, burger to cross, or check to loading). The seamless vector transitions elevate user perception of polish.",
+    "zh": "morphicons 是一套专注于解决矢量图标形态平滑过渡的专业动效库。通过精密的 SVG 贝塞尔路径插值与弹簧力学算法，它实现了播放/暂停、汉堡菜单/关闭叉号、复制成功等高频状态间丝滑无断点的形状形变，为界面微反馈注入十足的工匠细节。"
+  },
+  "components": [
+    "Play Pause Morph",
+    "Menu Close Transition",
+    "Copy Check Transformation",
+    "Expand Collapse Path",
+    "Volume Mute Interpolator"
+  ]
+}

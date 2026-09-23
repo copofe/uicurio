@@ -1,0 +1,36 @@
+{
+  "slug": "flyonui",
+  "name": {
+    "en": "FlyonUI",
+    "zh": "FlyonUI"
+  },
+  "description": {
+    "en": "Semantic, accessible Tailwind CSS component library ready for Tailwind v4.",
+    "zh": "面向 Tailwind CSS v4 打造的无障碍、语义化类名全套组件库。"
+  },
+  "url": "https://flyonui.com/",
+  "repo": "https://github.com/themeselection/flyonui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:tailwind",
+    "stack:vanilla-js"
+  ],
+  "screenshot": "flyonui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "FlyonUI is an open-source, semantic Tailwind CSS component library combining semantic markup, built-in JavaScript interactivity, and Tailwind CSS v4 support. Designed for speed and developer ergonomics, it includes over 80 responsive components with rich theme presets.",
+    "zh": "FlyonUI 是一套全新开源的语义化 Tailwind CSS 组件库，原生准备好拥抱 Tailwind CSS v4 架构。它将精简的语义化类名与免配置的原生 JS 交互结合，收录超 80 个高响应式组件与丰富的主题变体，兼顾轻量体积与极速开发体验。"
+  },
+  "components": [
+    "Accordion",
+    "Collapse",
+    "Dropdown Menu",
+    "Modal",
+    "Offcanvas",
+    "Tabs",
+    "Stepper"
+  ]
+}

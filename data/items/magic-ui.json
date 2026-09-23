@@ -1,0 +1,41 @@
+{
+  "slug": "magic-ui",
+  "name": {
+    "en": "Magic UI",
+    "zh": "Magic UI"
+  },
+  "description": {
+    "en": "Over 150 animated components crafted for landing pages and modern products.",
+    "zh": "专为营销落地页与现代 Web 产品量身定制的顶级 React 动效组件库。"
+  },
+  "url": "https://magicui.design/",
+  "repo": "https://github.com/magicuidesign/magicui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "function:text-animation",
+    "stack:react",
+    "stack:motion",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "magic-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Magic UI is a premier open-source collection of over 150 animated components built with React, Tailwind CSS, and Motion. Designed specifically for high-conversion landing pages and modern developer products, Magic UI popularised effects like Bento Grids, Globe visualizers, Shimmer buttons, and animated retro grids.",
+    "zh": "Magic UI 是由 Dillion Verma 创立并风靡设计工程师圈子的开源动效组件库。全库收录超 150 款精美控件，深度适配 shadcn 架构，引领了 Bento Grid 矩阵、3D 交互地球、发光粒子线条、流光边框按钮与复古网格背景等现代落地页设计潮流。"
+  },
+  "components": [
+    "Bento Grid",
+    "Interactive Globe",
+    "Shimmer Button",
+    "Animated Beam",
+    "Meteors Background",
+    "Retro Grid",
+    "Particles Canvas",
+    "Border Beam"
+  ]
+}

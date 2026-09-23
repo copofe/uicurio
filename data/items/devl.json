@@ -1,0 +1,33 @@
+{
+  "slug": "devl",
+  "name": {
+    "en": "devl",
+    "zh": "devl"
+  },
+  "description": {
+    "en": "Minimalist and experimental UI components exploring frontier web aesthetics.",
+    "zh": "探索前沿 Web 交互美学与极简概念边界的实验性 React UI 组件库。"
+  },
+  "url": "https://www.devl.dev/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "style:design-engineer"
+  ],
+  "screenshot": "devl.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "devl is an experimental sandbox and component gallery exploring minimalist typography, stark monochromatic contrasts, and avant-garde interactive physics on the web. It serves as a creative playground for design engineers pushing modern digital aesthetics.",
+    "zh": "devl 是一座探索极简黑白排版美学与先锋交互概念的实验性组件艺廊。它运用极致克制的线条构图、冷峻的单色对比与前卫的物理力学反馈，挑战千篇一律的商业 UI 范式，为设计工程师提供突破常规的先锋交互灵感。"
+  },
+  "components": [
+    "Monochrome Minimal Card",
+    "Stark Line Menu",
+    "Experimental Slider",
+    "Raw Wireframe Modal",
+    "Typography Kinetic Header"
+  ]
+}

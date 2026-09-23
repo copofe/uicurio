@@ -1,0 +1,32 @@
+{
+  "slug": "shoogle",
+  "name": {
+    "en": "Shoogle",
+    "zh": "Shoogle"
+  },
+  "description": {
+    "en": "Specialized search engine spanning the growing ecosystem of shadcn registries.",
+    "zh": "横跨全网各大开源 shadcn 社区注册表的高效垂直组件搜索引擎。"
+  },
+  "url": "https://shoogle.dev/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "shoogle.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Shoogle is a unified search index and component discovery engine spanning hundreds of independent shadcn/ui community registries. It indexes components, dependencies, authors, and CLI install commands, allowing developers to search the decentralized registry ecosystem from one clean interface.",
+    "zh": "Shoogle 是面向去中心化 shadcn/ui 社区注册表生态的垂直搜索引擎。它统一索引了全球各大创作者发布的独立 Registry、组件依赖项、作者元信息以及一键 CLI 安装命令，帮助前端开发者快速定位并横向对比散落在各处的优质组件。"
+  },
+  "components": [
+    "Unified Registry Search",
+    "CLI Command Copier",
+    "Live Component Inspector",
+    "Dependency Compatibility Checker"
+  ]
+}

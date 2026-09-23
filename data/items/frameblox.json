@@ -1,0 +1,32 @@
+{
+  "slug": "frameblox",
+  "name": {
+    "en": "Frameblox",
+    "zh": "Frameblox"
+  },
+  "description": {
+    "en": "Modular Framer sections and production templates engineered for web designers.",
+    "zh": "专为网页设计师与创意工程师打造的模块化 Framer 动效区块与整页模版。"
+  },
+  "url": "https://frameblox.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "style:design-engineer"
+  ],
+  "screenshot": "frameblox.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Frameblox is an extensive library of modular Framer sections, smart components, and visual layouts built for digital designers and startup founders. With slick micro-interactions and pre-configured responsive layouts, it streamlines high-end web page creation.",
+    "zh": "Frameblox 是专为数字产品设计师与创意工程师打造的模块化 Framer 区块库。全库收录数十款带有精心调校动效与自适应排版的现代 Hero、功能网格与交互导航，让无代码或低代码构建高水准展示站点变得极其敏捷。"
+  },
+  "components": [
+    "Framer Bento Hero",
+    "Smart Interactive Slider",
+    "Morphing Navigation Bar",
+    "Feature Showcase Block",
+    "Responsive Pricing Card"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "slug": "blocks-so",
+  "name": {
+    "en": "blocks.so",
+    "zh": "blocks.so"
+  },
+  "description": {
+    "en": "Open-source website blocks and components installable directly via shadcn CLI.",
+    "zh": "开源的现代化网页区块库，支持通过 shadcn CLI 命令行直接注入项目。"
+  },
+  "url": "https://blocks.so/",
+  "repo": "https://github.com/lalit2005/blocks",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "blocks-so.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "blocks.so provides cleanly crafted, open-source landing page blocks designed to be installed seamlessly using the shadcn CLI registry protocol. Developed by Lalit, each block is responsive, dark-mode ready, and optimized for instant production usage.",
+    "zh": "blocks.so 是一套现代且高雅的开源落地页区块库，原生支持通过 shadcn CLI 注册表命令直接将组件拉取到本地工程中。所有区块均原生适配暗色模式与响应式断点，代码纯净解耦，可快速组装高质量落地页。"
+  },
+  "components": [
+    "Minimalist Hero",
+    "Feature Carousel",
+    "Interactive Pricing",
+    "FAQ Accordion Section",
+    "Social Proof Bar"
+  ]
+}

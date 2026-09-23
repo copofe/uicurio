@@ -1,0 +1,34 @@
+{
+  "slug": "butter-nav",
+  "name": {
+    "en": "Butter Nav",
+    "zh": "Butter Nav"
+  },
+  "description": {
+    "en": "Mega-menu featuring fluid layout morphing transitions and silky physics.",
+    "zh": "具液态形变平滑过渡与物理动效的现代 Mega-menu 导航组件。"
+  },
+  "url": "https://butter-nav.vercel.app/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:motion",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "butter-nav.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Butter Nav is an exquisitely tuned mega-menu navigation component for React. Built with Motion and Tailwind CSS, it delivers fluid morphing container transitions, pointer-tracking pill highlights, and smooth height adaptations as users glide between dropdown categories.",
+    "zh": "Butter Nav 是一套追求极致手感与物理流体形变的 React Mega-menu 导航组件。基于 Motion 与 Tailwind CSS 构建，当鼠标在不同菜单分类间滑移时，导航面板能实现如黄油般丝滑的容器尺寸平滑变形与磁吸高亮跟随，极富设计工程师审美。"
+  },
+  "components": [
+    "Fluid Morph Dropdown",
+    "Magnetic Hover Pill",
+    "Adaptive Container Height",
+    "Responsive Mobile Drawer"
+  ]
+}

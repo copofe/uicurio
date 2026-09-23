@@ -1,0 +1,37 @@
+{
+  "slug": "number-flow",
+  "name": {
+    "en": "NumberFlow",
+    "zh": "NumberFlow"
+  },
+  "description": {
+    "en": "A component to transition, format, and animate numbers smoothly in modern web.",
+    "zh": "优雅顺滑的数字流式过渡与翻滚动效组件，支持跨现代前端框架与数字格式化。"
+  },
+  "url": "https://number-flow.barvian.me/",
+  "repo": "https://github.com/barvian/number-flow",
+  "category": "text-typography",
+  "tags": [
+    "function:text-animation",
+    "function:animation",
+    "stack:react",
+    "stack:vue",
+    "stack:svelte",
+    "style:design-engineer"
+  ],
+  "screenshot": "number-flow.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "NumberFlow is an open-source UI component designed for smooth, continuous number transitions and localized numerical animations. Created by Max Barvian, it handles decimal changes, currency shifts, sign changes, and layout resizing with zero layout shift, supporting React, Vue, Svelte, and vanilla JavaScript.",
+    "zh": "NumberFlow 是由 Max Barvian 开发的一款在数字变动时提供丝滑物理位移动画的轻量级前端组件。它巧妙解决了数字宽度跳动、正负号翻转与货币符号排版过渡难题，支持高度自适应且零布局抖动，深度适配 React、Vue、Svelte 及原生 JS 环境。"
+  },
+  "components": [
+    "Continuous Counter",
+    "Currency Formatter",
+    "Percentage Shift",
+    "Trend Indicator Animation",
+    "Dynamic Number Scroller"
+  ]
+}

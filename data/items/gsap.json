@@ -1,0 +1,35 @@
+{
+  "slug": "gsap",
+  "name": {
+    "en": "GSAP",
+    "zh": "GSAP"
+  },
+  "description": {
+    "en": "Industry-standard, ultra-high-performance JavaScript timeline animation engine.",
+    "zh": "业界标杆级、极高运行性能的专业 JavaScript 时间轴动画核心引擎。"
+  },
+  "url": "https://gsap.com/",
+  "repo": "https://github.com/greensock/GSAP",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:vanilla-js",
+    "stack:react",
+    "style:design-engineer"
+  ],
+  "screenshot": "gsap.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "GSAP (GreenSock Animation Platform) is the industry standard for high-performance timeline choreographies and scroll animations. Trusted by leading creative agencies worldwide, GSAP animates CSS properties, SVG paths, Canvas, and WebGL with unmatched cross-browser consistency and microsecond precision.",
+    "zh": "GSAP（GreenSock Animation Platform）是全球创意交互网站与高端商业站点的核心动画引擎。凭借历经二十年打磨的惊人性能优化与微秒级时间轴编排系统，它能够无缝驱动 CSS、SVG 路径变形、Canvas 以及 Three.js 场景，消除浏览器渲染掉帧与兼容性烦恼。"
+  },
+  "components": [
+    "ScrollTrigger Plugin",
+    "Timeline Sequencer",
+    "MorphSVG Path Interpolator",
+    "Draggable Controller",
+    "Flip Transition Plugin"
+  ]
+}

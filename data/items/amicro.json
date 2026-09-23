@@ -1,0 +1,35 @@
+{
+  "slug": "amicro",
+  "name": {
+    "en": "Amicro",
+    "zh": "Amicro"
+  },
+  "description": {
+    "en": "Lightweight drop-in React micro-animation primitives for clickable elements.",
+    "zh": "专注点击反馈与微交互的轻量级 React 微动效原语，即插即用且极致轻盈。"
+  },
+  "url": "https://amicro.vercel.app/",
+  "repo": "https://github.com/anurag-k-21/amicro",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "amicro.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Amicro provides subtle, responsive micro-animations for buttons, toggles, and interactive elements in React applications. Designed to enhance the perceived speed and tactile quality of interfaces without bloating bundle sizes.",
+    "zh": "Amicro 是一套专注于提升点击手感与界面微反馈的 React 微动画原语库。它专注于按钮水波、图标弹跳与轻量触觉动效，即贴即用，在不增加前端体积负担的前提下显著强化页面的精致感与操作确定性。"
+  },
+  "components": [
+    "Micro Bounce Button",
+    "Ripple Press",
+    "Icon Swapper",
+    "Tactile Switch",
+    "Shimmer Trigger"
+  ]
+}

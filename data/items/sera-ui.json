@@ -1,0 +1,36 @@
+{
+  "slug": "sera-ui",
+  "name": {
+    "en": "Sera UI",
+    "zh": "Sera UI"
+  },
+  "description": {
+    "en": "Minimalist React components designed for effortless shadcn CLI integration.",
+    "zh": "针对 shadcn CLI 深度优化的极简主义 React 组件与微交互合集。"
+  },
+  "url": "https://seraui.com/",
+  "repo": "https://github.com/SeraUI/sera-ui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "sera-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Sera UI is an open collection of minimalist, meticulously designed React components structured for seamless integration with shadcn CLI. Focusing on micro-motion and subtle tactile feedback, Sera UI gives developer dashboards and landing pages a polished edge.",
+    "zh": "Sera UI 是一套强调极简克制与细腻触觉反馈的开源 React 组件集。完美贴合 shadcn CLI 注册表生态，它在按钮按下形变、菜单展开阻尼感与卡片悬浮投影上做了大量微调，让基础控件呈现出高级的设计工匠质感。"
+  },
+  "components": [
+    "Tactile Button",
+    "Subtle Card",
+    "Fluid Drawer",
+    "Damped Menu",
+    "Minimal Input"
+  ]
+}

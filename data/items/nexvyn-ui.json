@@ -1,0 +1,34 @@
+{
+  "slug": "nexvyn-ui",
+  "name": {
+    "en": "Nexvyn UI",
+    "zh": "Nexvyn UI"
+  },
+  "description": {
+    "en": "Polished drop-in components and sleek interactive cards for digital products.",
+    "zh": "针对数字产品与科技页面精心雕琢的即插即用 React 交互卡片与微组件。"
+  },
+  "url": "https://ui.nexvyn.dev/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "nexvyn-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Nexvyn UI delivers meticulously crafted, modern drop-in React components tailored for high-converting SaaS interfaces and developer landing pages. Built with Tailwind CSS, it offers glowing border cards, subtle hovering states, and modern layout primitives.",
+    "zh": "Nexvyn UI 是一套专注于打磨细微视觉品质与交互手感的即插即用型 React 组件库。全面基于 Tailwind CSS 构建，它通过精妙的微光边框、暗色背景对比与触觉悬浮反馈，让普通的界面控件呈现出如同高端硬件工艺品般的设计质感。"
+  },
+  "components": [
+    "Glow Hover Card",
+    "Dynamic Status Capsule",
+    "Interactive Pill Button",
+    "Subtle Feature Grid",
+    "Layered Modal"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "slug": "nex-ui",
+  "name": {
+    "en": "Nex UI",
+    "zh": "Nex UI"
+  },
+  "description": {
+    "en": "Extensible and accessible component library designed for modern web startups.",
+    "zh": "专为现代科技初创团队打造的高扩展性、无障碍优先的 React 组件系统。"
+  },
+  "url": "https://nexui.dev/",
+  "repo": "https://github.com/nex-ui/nex-ui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "nex-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Nex UI is a modern, extensible React component library engineered for fast-paced startup workflows. Built with accessibility at its core and styled via Tailwind CSS, it offers a complete design language with cohesive typography, robust forms, and intuitive dialogs.",
+    "zh": "Nex UI 是一套面向敏捷科技团队打造的无障碍优先 React UI 组件库。以 Tailwind CSS 作为样式层，拥有统一协调的设计语言规范，涵盖了从基础表单输入、交互式浮层到多层级中后台导航，具备优秀的类型提示与开箱即用的开发人体工学。"
+  },
+  "components": [
+    "Modal System",
+    "Accessible Select",
+    "Tabs Navigation",
+    "Badge Indicator",
+    "Toast Notifications"
+  ]
+}

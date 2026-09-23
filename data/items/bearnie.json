@@ -1,0 +1,33 @@
+{
+  "slug": "bearnie",
+  "name": {
+    "en": "Bearnie",
+    "zh": "Bearnie"
+  },
+  "description": {
+    "en": "Component collection and landing page blocks designed for Astro and Tailwind.",
+    "zh": "专为 Astro 框架与 Tailwind CSS 深度定制的轻量极速组件集合。"
+  },
+  "url": "https://bearnie.dev/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "bearnie.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Bearnie is a lightweight UI kit and block collection purpose-built for the Astro web framework and styled with Tailwind CSS. It leverages Astro's zero-JS-by-default architecture to ship lightning-fast content sites, blogs, and SaaS landing pages with zero hydration overhead.",
+    "zh": "Bearnie 是一套专为现代 Astro 静态站点生成框架量身打造的 Tailwind CSS 页面区块库。它完全契合 Astro「默认零 JavaScript」的群岛渲染理念，所提供的英雄区块、文章列表与导航栏均无不必要的客户端水合负担，实现近乎满分的性能跑分。"
+  },
+  "components": [
+    "Astro Island Hero",
+    "Static Feature Grid",
+    "Zero-JS Navigation Bar",
+    "Article Showcase Card",
+    "Minimalist CTA"
+  ]
+}

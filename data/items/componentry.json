@@ -1,0 +1,34 @@
+{
+  "slug": "componentry",
+  "name": {
+    "en": "Componentry",
+    "zh": "Componentry"
+  },
+  "description": {
+    "en": "Customizable React UI primitives and theme foundations for rapid product design.",
+    "zh": "为加速现代产品交付打造的高度可定制 React 底层原语与主题基础设施。"
+  },
+  "url": "https://componentry.dev/",
+  "repo": "https://github.com/crystal-ball/componentry",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:typescript"
+  ],
+  "screenshot": "componentry.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Componentry is an accessible, theme-driven component library created to accelerate product design systems in React. It couples headless interaction mechanics with an expressive design token system, supporting rapid brand theming with rock-solid accessibility defaults.",
+    "zh": "Componentry 是一套无障碍优先、设计令牌驱动的现代化 React 基础组件系统。它将无样式的底层交互逻辑与灵活的 Design Tokens 主题体系相结合，兼顾轻巧体积与强扩展能力，助力团队高效搭建统一品牌调性的前端产品。"
+  },
+  "components": [
+    "Theme System Provider",
+    "Accessible Drawer",
+    "Design Token Modal",
+    "Responsive Nav",
+    "Flexible Dropdown"
+  ]
+}

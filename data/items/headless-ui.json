@@ -1,0 +1,41 @@
+{
+  "slug": "headless-ui",
+  "name": {
+    "en": "Headless UI",
+    "zh": "Headless UI"
+  },
+  "description": {
+    "en": "Completely unstyled, fully accessible UI components from the Tailwind Labs team.",
+    "zh": "由 Tailwind 官方团队打造的完全无样式、高无障碍性交互组件原语。"
+  },
+  "url": "https://headlessui.com/",
+  "repo": "https://github.com/tailwindlabs/headlessui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:vue",
+    "stack:tailwind",
+    "stack:typescript"
+  ],
+  "screenshot": "headless-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Headless UI is a suite of completely unstyled, fully accessible UI components designed to integrate flawlessly with Tailwind CSS. Developed by the Tailwind Labs team for both React and Vue, it handles keyboard interactions, aria attributes, and transition lifecycles behind the scenes.",
+    "zh": "Headless UI 是由 Tailwind Labs 官方出品的完全无样式、全无障碍支持的核心交互组件库。同时原生支持 React 与 Vue，在底层完善处理了键盘焦点循环、WAI-ARIA 状态与过渡动画生命周期，与 Tailwind CSS 的原子化类名形成了天衣无缝的搭档。"
+  },
+  "components": [
+    "Menu (Dropdown)",
+    "Listbox (Select)",
+    "Combobox (Autocomplete)",
+    "Dialog (Modal)",
+    "Disclosure (Accordion)",
+    "Popover",
+    "Radio Group",
+    "Switch",
+    "Tabs",
+    "Transition"
+  ]
+}

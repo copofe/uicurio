@@ -1,0 +1,36 @@
+{
+  "slug": "cult-ui",
+  "name": {
+    "en": "Cult UI",
+    "zh": "Cult UI"
+  },
+  "description": {
+    "en": "Curated animated React components crafted with Framer Motion and Tailwind.",
+    "zh": "基于 Framer Motion 与 Tailwind 打造的现代 React 动效与微交互组件库。"
+  },
+  "url": "https://www.cult-ui.com/",
+  "repo": "https://github.com/nimpl-org/cult-ui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:motion",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "cult-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Cult UI is a collection of expressive, motion-rich React components built by the Nimpl team. Featuring glassmorphic surfaces, tactile drag interactions, dynamic island replicas, and fluid tab switches, it helps developers deliver distinctive, high-craft web experiences.",
+    "zh": "Cult UI 是由 Nimpl 团队打造的先锋动效 React 组件库。全库深度结合 Framer Motion 与 Tailwind CSS，收录了诸如灵动岛卡片、物理拖拽交互控件、毛玻璃悬浮条与流体式 Tab 切换器等极具个性的界面实验与成品组件。"
+  },
+  "components": [
+    "Dynamic Island Capsule",
+    "Glassmorphic Dock",
+    "Tactile Draggable Card",
+    "Fluid Tab Switcher",
+    "Gradient Radial Glow"
+  ]
+}

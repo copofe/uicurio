@@ -1,0 +1,48 @@
+{
+  "slug": "shadcn-ui",
+  "name": {
+    "en": "shadcn/ui",
+    "zh": "shadcn/ui"
+  },
+  "description": {
+    "en": "Beautifully designed components that you can copy and paste into your apps.",
+    "zh": "代码直接拷入项目的现代 UI 组件库事实标准，基于 Radix 与 Tailwind 构建。"
+  },
+  "url": "https://ui.shadcn.com/",
+  "repo": "https://github.com/shadcn-ui/ui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "stack:typescript",
+    "style:design-engineer"
+  ],
+  "screenshot": "shadcn-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "shadcn/ui is the pioneering copy-paste component architecture for the modern web. Instead of distributing components as a black-box NPM dependency, shadcn/ui provides beautifully crafted, accessible React primitives that you copy directly into your project codebase via CLI. Built on Radix UI and styled with Tailwind CSS, it offers developers absolute freedom to inspect, customize, and extend every line of code without abstraction overhead.",
+    "zh": "shadcn/ui 彻底改变了现代 Web 前端组件的交付范式。它打破了传统将组件封装为黑盒 npm 依赖的做法，提供了一套基于 Radix UI 原语与 Tailwind CSS 精心调校的高质感 React 控件。开发者可通过 CLI 将源码直接下载至本地项目中，真正享有 100% 的代码掌控权与修改自由度，现已成为现代 Web 界面工程的事实标准。"
+  },
+  "components": [
+    "Accordion",
+    "Alert Dialog",
+    "Button",
+    "Calendar",
+    "Card",
+    "Combobox",
+    "Command",
+    "Dialog",
+    "Dropdown Menu",
+    "Form",
+    "Popover",
+    "Select",
+    "Sheet",
+    "Table",
+    "Tabs",
+    "Toast"
+  ]
+}

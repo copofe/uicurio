@@ -1,0 +1,35 @@
+{
+  "slug": "coss-ui",
+  "name": {
+    "en": "coss ui",
+    "zh": "coss ui"
+  },
+  "description": {
+    "en": "Accessible copy-paste UI components built on top of Base UI and Tailwind CSS.",
+    "zh": "基于 Base UI 与 Tailwind CSS 构建的高无障碍性即拷即用现代组件库。"
+  },
+  "url": "https://coss.com/ui",
+  "repo": "https://github.com/coss-ui/coss",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "coss-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "coss ui is a modular collection of accessible, copy-paste React components powered by Base UI primitives and Tailwind CSS styling. Designed for developer ergonomics, it pairs Base UI's robust unstyled interaction logic with crisp, modern typography and dark mode presets.",
+    "zh": "coss ui 是一套基于全新 Base UI 原语与 Tailwind CSS 深度打造的即拷即用型 React 组件库。它充分结合了 Base UI 出色的底层状态管理和无障碍特性，融合了现代简约的排版与精致的暗色主题，为开发者提供高水准的基础组件方案。"
+  },
+  "components": [
+    "Base Dialog",
+    "Accessible Dropdown",
+    "Modern Select",
+    "Segmented Tabs",
+    "Tooltip Popover"
+  ]
+}

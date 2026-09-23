@@ -1,0 +1,34 @@
+{
+  "slug": "reverse-ui",
+  "name": {
+    "en": "Reverse UI",
+    "zh": "Reverse UI"
+  },
+  "description": {
+    "en": "Creative React and Tailwind CSS components built with playful micro-interactions.",
+    "zh": "融合趣味微交互与创新布局思想的 React 与 Tailwind CSS 组件库。"
+  },
+  "url": "https://reverseui.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "reverse-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Reverse UI challenges conventional web layout norms with unexpected, delightful micro-interactions and creative component variations. Powered by React and Tailwind CSS, it offers unconventional navigation schemes, kinetic hover states, and interactive cards for creative portfolios.",
+    "zh": "Reverse UI 是一套敢于打破传统常规网页布局定式的创意 React 组件库。依托 React 与 Tailwind CSS 构建，它通过反常规导航逻辑、动力学悬浮反馈与富有戏剧性的卡片形变，为设计师作品集与创意代理商站点增添鲜明的品牌调性。"
+  },
+  "components": [
+    "Inverted Navigation",
+    "Kinetic Hover Card",
+    "Dynamic Split Screen",
+    "Interactive Carousel",
+    "Creative Drawer"
+  ]
+}

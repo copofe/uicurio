@@ -1,0 +1,35 @@
+{
+  "slug": "rolling-number",
+  "name": {
+    "en": "Rolling Number",
+    "zh": "Rolling Number"
+  },
+  "description": {
+    "en": "Smooth digit-rolling number counter component with spring physics for React.",
+    "zh": "带物理弹簧惯性的平滑字符齿轮滚动数字计数器 React 组件。"
+  },
+  "url": "https://rolling.kitlangton.dev/",
+  "repo": "https://github.com/kitlangton/rolling-number",
+  "category": "text-typography",
+  "tags": [
+    "function:text-animation",
+    "function:animation",
+    "stack:react",
+    "stack:motion",
+    "style:design-engineer"
+  ],
+  "screenshot": "rolling-number.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Rolling Number is a specialized React component built by Kit Langton that renders numbers with smooth, continuous mechanical rolling physics. Ideal for pricing dashboards, live trading feeds, and gamified point counters, each digit spins independently with spring dampening.",
+    "zh": "Rolling Number 是由 Kit Langton 打造的具有纯正机械滚轮手感的 React 动态数字计数组件。专为金融行情看板、仪表盘数值变动与积分变现等场景调校，每个数位均拥有独立的物理弹簧阻尼转轮，能呈现出如同老式机械表与机场翻牌器般的精密工业质感。"
+  },
+  "components": [
+    "Spring Digit Roller",
+    "Metric Counter Wheel",
+    "Currency Shift Transition",
+    "Independent Column Spin"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "slug": "devouring-details",
+  "name": {
+    "en": "Devouring Details",
+    "zh": "Devouring Details"
+  },
+  "description": {
+    "en": "Interactive digital book teaching micro-interaction design and tactile craft.",
+    "zh": "深入剖析数字微交互本质、界面物理手感与设计工程细节的交互式数字专著。"
+  },
+  "url": "https://devouringdetails.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "style:design-engineer"
+  ],
+  "screenshot": "devouring-details.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Devouring Details is a masterclass interactive digital book exploring the nuances of micro-interactions, spatial mechanics, and tactile feedback in software interfaces. Written with playable live demonstrations, it dissects why certain digital details evoke genuine physical delight.",
+    "zh": "Devouring Details 是一本探索现代软件界面微交互奥秘、空间机械力学与触觉质感的交互式电子专著。全书随处嵌入了可直接上手操作的实时代码交互实验，深入拆解了为何优秀的微小细节能够唤起用户如同把玩高级实体仪器一般的由衷愉悦。"
+  },
+  "components": [
+    "Interactive Book Reader",
+    "Playable Physics Sandbox",
+    "Micro-interaction Dissection",
+    "Haptic Feedback Guide"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "slug": "unlumen-ui",
+  "name": {
+    "en": "unlumen UI",
+    "zh": "unlumen UI"
+  },
+  "description": {
+    "en": "Minimalist, dark-mode first React component library installable via CLI.",
+    "zh": "专为暗色模式打造的极简主义 React 组件库，支持 CLI 一键导入。"
+  },
+  "url": "https://ui.unlumen.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "unlumen-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "unlumen UI is a dark-mode first, minimalist component collection created for developers crafting focused developer tooling and terminal-adjacent web dashboards. It offers precision spacing, muted grays, and razor-sharp borders installable via a dedicated CLI.",
+    "zh": "unlumen UI 是一套优先面向纯深色与低照度环境打造的极简主义 React 组件库。专门针对开发者工具、云控制台与终端风格中后台设计，它采用了克制的暗灰渐变阶梯与极细的高精度边框，为专业级软件赋予专注内敛的技术气息。"
+  },
+  "components": [
+    "Dark Console Modal",
+    "Precision Tab Strip",
+    "Muted Toggle Switch",
+    "Minimalist Tooltip",
+    "Status Dot Bar"
+  ]
+}

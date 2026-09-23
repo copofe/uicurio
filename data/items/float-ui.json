@@ -1,0 +1,35 @@
+{
+  "slug": "float-ui",
+  "name": {
+    "en": "Float UI",
+    "zh": "Float UI"
+  },
+  "description": {
+    "en": "Modern, clean Tailwind CSS and React components crafted for marketing sites.",
+    "zh": "干净优雅的 Tailwind CSS 与 React 营销落地页组件库，支持快速建站。"
+  },
+  "url": "https://floatui.com/",
+  "repo": "https://github.com/MarsCodeOrg/floatui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:tailwind",
+    "stack:react",
+    "stack:vue"
+  ],
+  "screenshot": "float-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Float UI offers beautiful, modern website components and landing page templates built with Tailwind CSS, React, and Vue. Free and open source, it empowers builders to assemble polished SaaS marketing websites in minutes with responsive, dark-mode ready components.",
+    "zh": "Float UI 是一套极简优雅的现代化 Tailwind CSS 开源组件库。全库专注于现代 SaaS 与数字化产品的营销落地页搭建，提供 React 与 Vue 双模式代码，所有区块均自带精致的响应式断点调优与暗色模式支持。"
+  },
+  "components": [
+    "Hero Banners",
+    "Feature Sections",
+    "Pricing Cards",
+    "Testimonial Sliders",
+    "Newsletter Callouts"
+  ]
+}

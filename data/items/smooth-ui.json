@@ -1,0 +1,36 @@
+{
+  "slug": "smooth-ui",
+  "name": {
+    "en": "Smooth UI",
+    "zh": "Smooth UI"
+  },
+  "description": {
+    "en": "Motion-heavy React components ready to copy and paste for silky user interfaces.",
+    "zh": "重度动画与丝滑交互兼具的 React 动效组件库，即粘即用零摩擦。"
+  },
+  "url": "https://smoothui.dev/",
+  "repo": "https://github.com/eduardconstantin/smoothui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:motion",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "smooth-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Smooth UI is an open-source, animation-centric collection of React components developed by Eduard Constantin. Leveraging Framer Motion and Tailwind CSS, each component is fine-tuned to eliminate abrupt transitions, ensuring that layout changes feel organic and tactile.",
+    "zh": "Smooth UI 是由 Eduard Constantin 主理的以极致平滑动效为核心卖点的开源 React 组件库。深度运用 Framer Motion 与 Tailwind CSS，消除了任何生硬突兀的视觉跳变，使得弹出层展开、卡片悬浮与页面切换如水流般自然顺畅。"
+  },
+  "components": [
+    "Smooth Drawer",
+    "Spring Accordion",
+    "Floating Pill Menu",
+    "Fluid Notification Stack",
+    "Tactile Button Press"
+  ]
+}

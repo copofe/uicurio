@@ -1,0 +1,40 @@
+{
+  "slug": "flowbite",
+  "name": {
+    "en": "Flowbite",
+    "zh": "Flowbite"
+  },
+  "description": {
+    "en": "Ecosystem of open-source UI components built with Tailwind CSS utility classes.",
+    "zh": "生态成熟完备的开源 Tailwind CSS 组件库，深度支持 React、Vue 与 Svelte。"
+  },
+  "url": "https://flowbite.com/",
+  "repo": "https://github.com/themesberg/flowbite",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:tailwind",
+    "stack:react",
+    "stack:vue",
+    "stack:svelte",
+    "stack:vanilla-js"
+  ],
+  "screenshot": "flowbite.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Flowbite is one of the most mature, battle-tested open-source component libraries built entirely on Tailwind CSS. With native wrappers for React, Vue, Svelte, and Angular, Flowbite offers everything from modals, datepickers, and navbars to comprehensive dashboard layouts.",
+    "zh": "Flowbite 是 Tailwind CSS 生态中体系最为完备老牌的开源组件库之一。它原生提供 React、Vue、Svelte 与 Angular 等多框架绑定封装，涵盖表单控件、日期拾取器、导航栏、图表整合与复杂中后台交互，已服务数十万生产项目。"
+  },
+  "components": [
+    "Datepicker",
+    "Modal",
+    "Navbar",
+    "Sidebar",
+    "Toast",
+    "Speed Dial",
+    "Tooltip",
+    "Dropdown"
+  ]
+}

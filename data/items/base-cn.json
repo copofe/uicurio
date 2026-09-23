@@ -1,0 +1,36 @@
+{
+  "slug": "base-cn",
+  "name": {
+    "en": "Base CN",
+    "zh": "Base CN"
+  },
+  "description": {
+    "en": "Base UI component primitives adapted for the shadcn copy-paste CLI format.",
+    "zh": "将 Base UI 优秀的无样式底层原语重构适配为 shadcn 即拷即用格式的组件库。"
+  },
+  "url": "https://basecn.dev/",
+  "repo": "https://github.com/basecn/basecn",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "base-cn.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Base CN bridges MUI's upcoming Base UI primitives with the popular shadcn/ui distribution methodology. It reimagines the core shadcn components using Base UI as the unstyled foundation, offering enhanced keyboard ergonomics, cleaner markup, and zero CSS runtime overhead.",
+    "zh": "Base CN 将 MUI 与 Radix 团队推出的下一代 Base UI 底层原语接入了当下流行的 shadcn/ui 源码拷贝分发体系。它使用 Base UI 替换传统的 Radix 原语，提供更为精简的代码实现、更出色的键盘手感，并延续了 shadcn 的高审美设计风貌。"
+  },
+  "components": [
+    "Base Dialog",
+    "Base Select",
+    "Base Slider",
+    "Base Tabs",
+    "Base Popover"
+  ]
+}

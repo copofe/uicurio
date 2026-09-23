@@ -1,0 +1,36 @@
+{
+  "slug": "lightswind",
+  "name": {
+    "en": "Lightswind",
+    "zh": "Lightswind"
+  },
+  "description": {
+    "en": "Tailwind CSS components featuring ambient lighting, neon glows, and dark aesthetics.",
+    "zh": "主打物理光影、霓虹流光与深色暗调美学的 Tailwind CSS 特色组件库。"
+  },
+  "url": "https://lightswind.com/",
+  "repo": "https://github.com/nawed2611/lightswind",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "style:ambient",
+    "style:design-engineer"
+  ],
+  "screenshot": "lightswind.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Lightswind is a specialty component library built with React and Tailwind CSS centered on luminescence, light borders, and neon glow effects. Developed by Nawed, it offers glowing borders, animated laser grids, neon text, and ambient cards designed to capture user focus.",
+    "zh": "Lightswind 是一套以发光倒影、流光霓虹与环境光模拟为核心特色的 React + Tailwind CSS 组件库。由 Nawed 发起，收录了激光扫光边框、霓虹辉光文字、放射光晕卡片等极富赛博科技质感的视觉控件，极易成为页面的视觉焦点。"
+  },
+  "components": [
+    "Neon Glow Border",
+    "Laser Grid Hero",
+    "Ambient Radial Card",
+    "Luminescent Button",
+    "Pulsing Light Indicator"
+  ]
+}

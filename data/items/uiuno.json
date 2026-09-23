@@ -1,0 +1,33 @@
+{
+  "slug": "uiuno",
+  "name": {
+    "en": "Uiuno",
+    "zh": "Uiuno"
+  },
+  "description": {
+    "en": "AI-assisted workspace for discovering, previewing, and organizing shadcn components.",
+    "zh": "聚合、实时预览与智能编排全网 shadcn 优质组件的 AI 工作台。"
+  },
+  "url": "https://uiuno.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "scenario:ai-native",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "uiuno.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Uiuno is an AI-powered visual workspace designed to streamline how developers discover, assemble, and organize components across the distributed shadcn ecosystem. With semantic component search, real-time code remixing, and registry management, Uiuno boosts UI development velocity.",
+    "zh": "Uiuno 是一款专为 shadcn 生态开发者设计的 AI 辅助可视化组件工作台。它打破了各独立 Registry 间的信息孤岛，提供基于语义的智能组件发现、在线实时代码微调混音与可视化排版编排，极大提升了从查找组件到工程落地的敏捷度。"
+  },
+  "components": [
+    "Visual Component Canvas",
+    "AI Code Remix Panel",
+    "Multi-registry Browser",
+    "One-click CLI Exporter"
+  ]
+}

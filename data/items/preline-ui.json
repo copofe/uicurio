@@ -1,0 +1,36 @@
+{
+  "slug": "preline-ui",
+  "name": {
+    "en": "Preline UI",
+    "zh": "Preline UI"
+  },
+  "description": {
+    "en": "Open-source Tailwind CSS components tailored for complex SaaS dashboards.",
+    "zh": "专为复杂 SaaS 中后台仪表盘与企业级产品打造的 Tailwind CSS 组件库。"
+  },
+  "url": "https://preline.co/",
+  "repo": "https://github.com/htmlstreamofficial/preline",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:tailwind",
+    "stack:react",
+    "stack:vue"
+  ],
+  "screenshot": "preline-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Preline UI is a comprehensive open-source library of pre-built UI components based on the Tailwind CSS utility framework. With deep focus on SaaS dashboards and enterprise applications, Preline includes advanced plugins for data tables, charts, range sliders, and rich form validation.",
+    "zh": "Preline UI 是一套专注于复杂 SaaS 中后台系统与企业软件的开源 Tailwind CSS 组件库。由 Htmlstream 团队打造，它内置了强大的数据表格、动态图表、富滑块与表单校验插件，深度适配 React 与 Vue，为企业级产品提供扎实的 UI 基座。"
+  },
+  "components": [
+    "Data Tables",
+    "Advanced Modals",
+    "Dashboard Layouts",
+    "Range Sliders",
+    "ApexCharts Wrappers",
+    "Form Validations"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "slug": "termcn",
+  "name": {
+    "en": "termcn",
+    "zh": "termcn"
+  },
+  "description": {
+    "en": "Terminal UI components for React, built on Ink, OpenTUI, and shadcn conventions.",
+    "zh": "专为 React 与 Web 打造的纯正终端风格组件库，融合 Ink 与 shadcn 规范。"
+  },
+  "url": "https://termcn.dev/",
+  "repo": "https://github.com/termcn/termcn",
+  "category": "files-code",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "termcn.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "termcn provides developers with genuine terminal and command-line style components designed for the browser. Drawing architecture from Ink and OpenTUI while adhering to shadcn copy-paste norms, termcn lets you embed interactive ASCII windows, ANSI logs, and shell prompts directly in React apps.",
+    "zh": "termcn 是一套将命令行与终端审美完美带入浏览器的专用 React 组件库。借鉴了 Ink 与 OpenTUI 的底层排版逻辑，并深度契合 shadcn 即拷即用分发模式，它提供了具有纯正等宽排版、ANSI 颜色渲染、闪烁光标与流水日志输出的终端交互卡片。"
+  },
+  "components": [
+    "Terminal Window Frame",
+    "ASCII Command Prompt",
+    "ANSI Log Streamer",
+    "Blinking Cursor",
+    "CLI Options Selector"
+  ]
+}

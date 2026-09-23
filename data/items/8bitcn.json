@@ -1,0 +1,37 @@
+{
+  "slug": "8bitcn",
+  "name": {
+    "en": "8bitcn",
+    "zh": "8bitcn"
+  },
+  "description": {
+    "en": "Retro 8-bit pixel art style UI components built on top of shadcn/ui.",
+    "zh": "复古 8 位像素艺术风格的 shadcn/ui 组件库，还原街机与怀旧游戏机界面质感。"
+  },
+  "url": "https://8bitcn.com/",
+  "repo": "https://github.com/8bitcn/8bitcn",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "8bitcn.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "8bitcn brings retro gaming nostalgia to modern web interfaces by reimagining shadcn/ui with an 8-bit pixel aesthetic. It features pixelated borders, retro typography, gaming HUD dialogs, and vintage buttons compatible with the standard shadcn CLI workflow.",
+    "zh": "8bitcn 将经典街机与复古像素游戏机的视觉风貌带入现代前端世界。它将 shadcn/ui 的核心组件库全部以 8-bit 像素艺术重新绘制，具有硬朗的阶梯像素边框、经典复古字体与生命值/技能槽式控件，兼容 shadcn CLI 工作流，极客与怀旧风味浓郁。"
+  },
+  "components": [
+    "Pixel Button",
+    "Arcade Card",
+    "Retro Dialog",
+    "8-bit Progress Bar",
+    "Pixel Tooltip",
+    "Gaming HUD Tabs"
+  ]
+}

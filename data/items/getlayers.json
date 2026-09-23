@@ -1,0 +1,33 @@
+{
+  "slug": "getlayers",
+  "name": {
+    "en": "GetLayers",
+    "zh": "GetLayers"
+  },
+  "description": {
+    "en": "AI prompts and visual section recipes for cinematic, highly layered web pages.",
+    "zh": "为构建电影级分层视觉与光影质感 Web 页面而生的 AI 提示词与切片库。"
+  },
+  "url": "https://getlayers.ai/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "scenario:ai-native",
+    "style:ambient",
+    "style:design-engineer"
+  ],
+  "screenshot": "getlayers.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "GetLayers provides a rich catalogue of AI-assisted visual section blueprints, depth effects, and cinematic layering techniques for modern web developers. It focuses on sophisticated lighting, glass reflections, and layered spatial hierarchy.",
+    "zh": "GetLayers 是一套专注于提升网页空间纵深感与电影级视觉层次的前沿资源库。它运用 AI 辅助生成的设计蓝图与分层着色算法，为开发者提供具有多重光照漫反射、毛玻璃折射与景深悬浮效果的页面级区块，使扁平界面瞬间拥有三维立体层次。"
+  },
+  "components": [
+    "Cinematic Hero Layer",
+    "Depth Reflection Card",
+    "Ambient Light Spill",
+    "Spatial Glass Shelf"
+  ]
+}

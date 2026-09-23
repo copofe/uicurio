@@ -1,0 +1,36 @@
+{
+  "slug": "editorcn",
+  "name": {
+    "en": "editorcn",
+    "zh": "editorcn"
+  },
+  "description": {
+    "en": "Headless rich text editor components for React, built on Tiptap and shadcn.",
+    "zh": "基于 Tiptap 与 shadcn 打造的无头高扩展性 React 富文本编辑器组件库。"
+  },
+  "url": "https://editorcn.vercel.app/",
+  "repo": "https://github.com/editorcn/editorcn",
+  "category": "files-code",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "editorcn.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "editorcn delivers an elegant, Notion-style rich text editing experience engineered with Tiptap and shadcn/ui. Featuring slash commands, floating bubble menus, markdown shortcuts, code block syntax highlighting, and image drag-and-drop, it gives apps a modern publishing interface.",
+    "zh": "editorcn 是一套深度融合 Tiptap 富文本核心与 shadcn 交互规范的模块化现代编辑器。具备类 Notion 的斜杠命令菜单（Slash Command）、划词悬浮格式栏、Markdown 快捷输入、代码高亮与图片拖拽上传，能无缝嵌入笔记与知识库类产品。"
+  },
+  "components": [
+    "Floating Bubble Toolbar",
+    "Slash Command Menu",
+    "Syntax Highlight Codeblock",
+    "Markdown Table Node",
+    "Draggable Block Handle"
+  ]
+}

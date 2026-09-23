@@ -1,0 +1,36 @@
+{
+  "slug": "motion-dev",
+  "name": {
+    "en": "Motion",
+    "zh": "Motion"
+  },
+  "description": {
+    "en": "Production-ready animation and gesture library for React and modern JavaScript.",
+    "zh": "前身为 Framer Motion，现代 Web 与 React 动效手势引擎的事实标准。"
+  },
+  "url": "https://motion.dev/",
+  "repo": "https://github.com/motiondivision/motion",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:motion",
+    "stack:react",
+    "stack:typescript",
+    "style:design-engineer"
+  ],
+  "screenshot": "motion-dev.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Motion (formerly Framer Motion) is the production-ready animation engine powering modern web aesthetics. Created by Matt Perry, Motion combines declarative syntax, physics-based springs, multi-touch gestures, and layout morphing with buttery 60fps performance across React and vanilla JavaScript.",
+    "zh": "Motion（前身为享誉业界的 Framer Motion）是现代前端动效领域的绝对事实标准。由 Matt Perry 开发，全库将声明式 API、真实的弹簧阻尼力学模拟、复杂手势识别与连续布局形变融为一体，为整个现代 Web 与设计工程师生态提供了不可或缺的动力学基础设施。"
+  },
+  "components": [
+    "Spring Physics Core",
+    "Layout Morph Animation",
+    "Gesture Recognizer",
+    "Scroll Timeline Driver",
+    "Exit Animate Presence"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "slug": "great-ui",
+  "name": {
+    "en": "Great UI",
+    "zh": "Great UI"
+  },
+  "description": {
+    "en": "Copy-paste React and Tailwind CSS components built with accessible mechanics.",
+    "zh": "融合无障碍机制与清新现代审美的即拷即用 React + Tailwind 组件集。"
+  },
+  "url": "https://www.great-ui.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "style:design-engineer"
+  ],
+  "screenshot": "great-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Great UI provides modern, copy-paste React components styled with Tailwind CSS. Designed to help frontend builders ship clean, accessible web interfaces without design friction, Great UI includes polished form elements, navigation layouts, and marketing sections.",
+    "zh": "Great UI 是一套倡导纯净清爽审美的即拷即用型 React + Tailwind CSS 组件库。全库免安装多余重型依赖，覆盖了日常应用开发所需的高频控件、优雅的排版布局与落地页营销片段，开箱即可为项目注入清晰专业的视觉秩序。"
+  },
+  "components": [
+    "Accessible Form Input",
+    "Clean Navbar",
+    "Modern Card Stack",
+    "Pricing Table",
+    "Alert Notification Bar"
+  ]
+}

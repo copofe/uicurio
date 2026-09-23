@@ -1,0 +1,33 @@
+{
+  "slug": "amacro",
+  "name": {
+    "en": "Amacro",
+    "zh": "Amacro"
+  },
+  "description": {
+    "en": "Drop-in page reveal animations and fluid scene curtain transitions for React.",
+    "zh": "提供无缝页面切场、动态内容揭幕与流体幕布过渡的 React 动效库。"
+  },
+  "url": "https://amacro.vercel.app/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:motion",
+    "style:design-engineer"
+  ],
+  "screenshot": "amacro.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Amacro specializes in cinematic scene transitions and full-page reveal animations for React. Utilizing fluid mask curtains, radial aperture expansions, and smooth stagger reveals, Amacro ensures page route changes feel cohesive and theatrical.",
+    "zh": "Amacro 是一套专注于电影式场景转场与整页揭幕动效的 React 组件库。通过巧妙运用流体遮罩幕布、径向光圈展开与连贯的子元素阶梯淡入，它让页面路由切换与大区块切换呈现出极具戏剧性与高级仪式感的视觉体验。"
+  },
+  "components": [
+    "Fluid Curtain Transition",
+    "Radial Aperture Reveal",
+    "Scene Morph Overlay",
+    "Stagger Page Opener"
+  ]
+}

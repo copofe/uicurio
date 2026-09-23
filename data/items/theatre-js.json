@@ -1,0 +1,37 @@
+{
+  "slug": "theatre-js",
+  "name": {
+    "en": "Theatre.js",
+    "zh": "Theatre.js"
+  },
+  "description": {
+    "en": "Visual motion design sequencer and animation studio for DOM, Three.js, and WebGL.",
+    "zh": "专为 DOM、Three.js 与 WebGL 打造的可视化时间轴动效定序器与编排工作室。"
+  },
+  "url": "https://www.theatrejs.com/",
+  "repo": "https://github.com/theatre-js/theatre",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "function:3d",
+    "stack:threejs",
+    "stack:webgl",
+    "stack:vanilla-js",
+    "style:design-engineer"
+  ],
+  "screenshot": "theatre-js.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Theatre.js is an animation design studio and timeline sequencer that plugs directly into your codebase. It provides visual keyframe scrubbers, curve editors, and property inspectors within the browser, empowering design engineers to choreograph cinematic 3D scenes in Three.js and complex DOM interactions.",
+    "zh": "Theatre.js 是一套直接嵌入前端代码运行时的可视化动效工作室与专业级关键帧定序器。它将类似 After Effects 的多轨道时间轴、曲线图编辑器与属性探查器注入浏览器中，让设计工程师能够以所见即所得的极高效率编排 Three.js 3D 场景与沉浸式多镜头 Web 叙事。"
+  },
+  "components": [
+    "Browser Studio Overlay",
+    "Keyframe Curve Editor",
+    "Property Sheet Controller",
+    "3D Camera Sequencer",
+    "State Export Snapshot"
+  ]
+}

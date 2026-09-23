@@ -1,0 +1,34 @@
+{
+  "slug": "textmotion",
+  "name": {
+    "en": "textmotion",
+    "zh": "textmotion"
+  },
+  "description": {
+    "en": "Zero-dependency, high-performance kinetic text roll animation primitive.",
+    "zh": "零依赖、超轻量的纯物理文本字符翻滚与排版动力学动画原语。"
+  },
+  "url": "https://textmotion.dev/",
+  "category": "text-typography",
+  "tags": [
+    "function:text-animation",
+    "function:animation",
+    "stack:zero-dependency",
+    "stack:vanilla-js",
+    "style:design-engineer"
+  ],
+  "screenshot": "textmotion.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "textmotion is a zero-dependency kinetic text animation primitive designed for maximum frame rates. It handles character rolling, staggered line reveals, and word scrambles with zero external framework overhead, making it universally embeddable into any web project.",
+    "zh": "textmotion 是一套专注于纯粹动力学文字翻滚与入场动效的零依赖轻量原语。无论是单字符阶梯滚动、行间错落显现还是乱码解密，它均以极简的原生 DOM 和微小 CSS 变量运作，无任何第三方包依赖，极速即插即用。"
+  },
+  "components": [
+    "Kinetic Text Scroller",
+    "Character Decipher Roll",
+    "Staggered Line Opener",
+    "Zero-dependency Text Runner"
+  ]
+}

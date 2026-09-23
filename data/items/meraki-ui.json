@@ -1,0 +1,35 @@
+{
+  "slug": "meraki-ui",
+  "name": {
+    "en": "Meraki UI",
+    "zh": "Meraki UI"
+  },
+  "description": {
+    "en": "Responsive Tailwind CSS components featuring full right-to-left language support.",
+    "zh": "支持全套 RTL（从右至左）排版的优雅响应式 Tailwind CSS 组件集合。"
+  },
+  "url": "https://merakiui.com/",
+  "repo": "https://github.com/merakiui/merakiui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:tailwind",
+    "stack:react",
+    "stack:vue"
+  ],
+  "screenshot": "meraki-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Meraki UI is a curated collection of beautiful, responsive Tailwind CSS components designed with built-in Right-to-Left (RTL) language direction support. Created by Khatab Wedaa, it includes alert bars, cards, navbars, and heroes optimized for global multi-lingual applications.",
+    "zh": "Meraki UI 是一套兼具视觉美感与多语言普适性的开源 Tailwind CSS 组件集。其最大特色在于开箱即支持完整的 RTL（从右至左语言，如阿拉伯语、希伯来语）排版镜像，收录了丰富的警告框、信息卡片、导航栏与 Hero 区块，助力全球化产品出海。"
+  },
+  "components": [
+    "RTL Hero Sections",
+    "Notification Alerts",
+    "Product Cards",
+    "Authentication Forms",
+    "Navbars with RTL Toggle"
+  ]
+}

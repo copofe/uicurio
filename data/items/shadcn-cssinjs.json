@@ -1,0 +1,35 @@
+{
+  "slug": "shadcn-cssinjs",
+  "name": {
+    "en": "shadcn-cssinjs",
+    "zh": "shadcn-cssinjs"
+  },
+  "description": {
+    "en": "shadcn UI components re-engineered for emotion and styled-components setups.",
+    "zh": "将 shadcn/ui 组件解构并适配为 CSS-in-JS（Emotion / Styled）架构的实现。"
+  },
+  "url": "https://www.shadcn-cssinjs.com/",
+  "repo": "https://github.com/shadcn-cssinjs/shadcn-cssinjs",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:shadcn",
+    "stack:typescript"
+  ],
+  "screenshot": "shadcn-cssinjs.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "shadcn-cssinjs addresses enterprise codebases that rely on Emotion or styled-components rather than Tailwind CSS. It ports shadcn/ui's beloved Radix-backed components and clean design language to traditional CSS-in-JS paradigms without sacrificing component quality.",
+    "zh": "shadcn-cssinjs 专为采用 Emotion 或 styled-components 技术栈的企业级前端工程打造。它将 shadcn/ui 标志性的高品质 Radix 组件设计与交互逻辑完整移植到 CSS-in-JS 环境中，让不使用 Tailwind 的团队同样能够享受到 shadcn 体系的便利。"
+  },
+  "components": [
+    "Styled Dialog",
+    "Emotion Button",
+    "CSSinJS Popover",
+    "Theme Provider Bridge",
+    "Radix Select Wrapper"
+  ]
+}

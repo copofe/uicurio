@@ -1,0 +1,33 @@
+{
+  "slug": "gradient-spin",
+  "name": {
+    "en": "Gradient Spin",
+    "zh": "Gradient Spin"
+  },
+  "description": {
+    "en": "Spinning gradient loading indicator and conic ring spinner for modern React.",
+    "zh": "采用圆锥渐变流光与多重光晕的现代 React 旋转加载指示器组件。"
+  },
+  "url": "https://gradient-spin.vercel.app/",
+  "category": "loading-feedback",
+  "tags": [
+    "function:loading-indicator",
+    "stack:react",
+    "style:ambient",
+    "style:design-engineer"
+  ],
+  "screenshot": "gradient-spin.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Gradient Spin is a modern, GPU-optimized loading indicator component for React. Utilizing CSS conic gradients, smooth keyframe rotation, and soft ambient blur masks, it replaces default monochrome spinners with a fluid, luminous orbital animation.",
+    "zh": "Gradient Spin 是一款采用现代 CSS 圆锥渐变（Conic Gradient）与微光模糊滤镜的高颜值 React 加载指示器。它摒弃了传统单色旋转菊花的沉闷，利用流动的光谱渐变与环境辉光，为界面的数据等待过程带来极富现代科技感的动态美学体验。"
+  },
+  "components": [
+    "Conic Gradient Spinner",
+    "Ambient Glow Ring",
+    "Pulsing Orb Loader",
+    "Speed Controlled Ring"
+  ]
+}

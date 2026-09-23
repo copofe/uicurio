@@ -1,0 +1,43 @@
+{
+  "slug": "base-ui",
+  "name": {
+    "en": "Base UI",
+    "zh": "Base UI"
+  },
+  "description": {
+    "en": "Unstyled, accessible UI component primitives for React by MUI and Radix.",
+    "zh": "由 MUI 与 Radix 团队联手打造的下一代 React 无样式高无障碍底层组件原语。"
+  },
+  "url": "https://base-ui.com/",
+  "repo": "https://github.com/mui/base-ui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:typescript",
+    "style:design-engineer"
+  ],
+  "screenshot": "base-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-23",
+  "content": {
+    "en": "Base UI is a next-generation library of unstyled, accessible UI component primitives for React, developed collaboratively by the creators of Material UI and Radix. Designed to serve as the bedrock for modern design systems, Base UI emphasizes rock-solid WAI-ARIA accessibility, ergonomic state machines, and complete styling freedom with zero runtime overhead.",
+    "zh": "Base UI 是由 Material UI 与 Radix 核心作者联袂打造的下一代 React 无样式底层组件库。它专为构建企业级设计系统与前沿交互界面而生，内置严谨完善的 WAI-ARIA 无障碍规范与稳健的状态机逻辑，剥离了任何固化的 CSS 样式，赋予开发者对排版、动画与视觉表现无拘无束的定制空间。"
+  },
+  "components": [
+    "Accordion",
+    "AlertDialog",
+    "Checkbox",
+    "Dialog",
+    "Menu",
+    "Popover",
+    "Radio",
+    "ScrollArea",
+    "Select",
+    "Slider",
+    "Switch",
+    "Tabs",
+    "Tooltip"
+  ]
+}
