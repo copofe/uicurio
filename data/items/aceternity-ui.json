@@ -19,7 +19,9 @@
     "stack:tailwind",
     "stack:threejs",
     "style:design-engineer",
-    "style:ambient"
+    "style:ambient",
+    "function:3d",
+    "stack:canvas"
   ],
   "screenshot": "aceternity-ui.webp",
   "featured": false,

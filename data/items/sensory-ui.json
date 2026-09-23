@@ -10,7 +10,7 @@
   },
   "url": "https://www.sensory-ui.com/",
   "repo": "https://github.com/sensory-ui/sensory-ui",
-  "category": "collections",
+  "category": "loading-feedback",
   "tags": [
     "function:sound-effects",
     "stack:web-audio",

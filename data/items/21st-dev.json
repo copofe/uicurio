@@ -16,7 +16,9 @@
     "stack:react",
     "stack:tailwind",
     "stack:shadcn",
-    "style:design-engineer"
+    "style:design-engineer",
+    "function:3d",
+    "stack:canvas"
   ],
   "screenshot": "21st-dev.webp",
   "featured": false,

@@ -16,7 +16,9 @@
     "stack:react",
     "stack:tailwind",
     "stack:shadcn",
-    "style:design-engineer"
+    "style:design-engineer",
+    "stack:nextjs",
+    "scenario:ai-native"
   ],
   "screenshot": "startercn.webp",
   "featured": false,

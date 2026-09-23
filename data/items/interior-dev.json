@@ -9,7 +9,7 @@
     "zh": "专为极致点击响应与细腻触觉反馈调校的现代 Web 微交互控件集合。"
   },
   "url": "https://www.interior.dev/",
-  "category": "collections",
+  "category": "input-controls",
   "tags": [
     "function:animation",
     "stack:react",

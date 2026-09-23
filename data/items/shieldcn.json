@@ -10,9 +10,8 @@
   },
   "url": "https://shieldcn.dev/",
   "repo": "https://github.com/shieldcn/shieldcn",
-  "category": "loading-feedback",
+  "category": "files-code",
   "tags": [
-    "function:loading-indicator",
     "stack:shadcn",
     "style:design-engineer"
   ],

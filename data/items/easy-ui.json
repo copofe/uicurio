@@ -14,7 +14,8 @@
     "function:animation",
     "stack:react",
     "stack:tailwind",
-    "style:design-engineer"
+    "style:design-engineer",
+    "stack:nextjs"
   ],
   "screenshot": "easy-ui.webp",
   "featured": false,

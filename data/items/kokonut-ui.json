@@ -17,7 +17,8 @@
     "stack:motion",
     "stack:tailwind",
     "stack:shadcn",
-    "style:design-engineer"
+    "style:design-engineer",
+    "scenario:ai-native"
   ],
   "screenshot": "kokonut-ui.webp",
   "featured": false,

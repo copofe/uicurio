@@ -15,7 +15,8 @@
     "function:animation",
     "stack:vanilla-js",
     "style:cozy",
-    "style:design-engineer"
+    "style:design-engineer",
+    "stack:zero-dependency"
   ],
   "screenshot": "oneko.webp",
   "featured": false,

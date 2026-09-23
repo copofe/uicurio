@@ -18,7 +18,9 @@
     "stack:tailwind",
     "stack:motion",
     "stack:shadcn",
-    "style:design-engineer"
+    "style:design-engineer",
+    "scenario:ai-native",
+    "stack:canvas"
   ],
   "screenshot": "forge-ui.webp",
   "featured": false,

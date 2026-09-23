@@ -10,12 +10,13 @@
   },
   "url": "https://soundcn.xyz/",
   "repo": "https://github.com/soundcn/soundcn",
-  "category": "collections",
+  "category": "loading-feedback",
   "tags": [
     "function:sound-effects",
     "stack:web-audio",
     "stack:react",
-    "style:design-engineer"
+    "style:design-engineer",
+    "stack:shadcn"
   ],
   "screenshot": "soundcn.webp",
   "featured": false,
