@@ -933,7 +933,19 @@ function buildPalette() {
   pInput.setAttribute("aria-label", "Command palette");
   pInput.setAttribute("role", "combobox");
   pInput.setAttribute("aria-expanded", "false");
-  pInput.addEventListener("input", debounce(renderPalette, 80));
+  let pComposing = false;
+  const debouncedRenderPalette = debounce(renderPalette, 80);
+  pInput.addEventListener("compositionstart", () => {
+    pComposing = true;
+  });
+  pInput.addEventListener("compositionend", () => {
+    pComposing = false;
+    renderPalette();
+  });
+  pInput.addEventListener("input", (e) => {
+    if (pComposing || e.isComposing) return;
+    debouncedRenderPalette();
+  });
   head.appendChild(pInput);
   head.appendChild(el("kbd", null, "esc"));
   palette.appendChild(head);
@@ -1319,14 +1331,27 @@ function buildToolbar() {
       input.value = state.q;
       $(SEL.searchBox).classList.add("has-value");
     }
-    input.addEventListener(
-      "input",
-      debounce(() => {
-        state.q = input.value.trim();
-        $(SEL.searchBox).classList.toggle("has-value", !!input.value);
-        refresh();
-      }, 120),
-    );
+    let isComposing = false;
+    const doSearch = () => {
+      const nextQ = input.value.trim();
+      $(SEL.searchBox).classList.toggle("has-value", !!input.value);
+      if (state.q === nextQ) return;
+      state.q = nextQ;
+      refresh();
+    };
+    const debouncedSearch = debounce(doSearch, 120);
+
+    input.addEventListener("compositionstart", () => {
+      isComposing = true;
+    });
+    input.addEventListener("compositionend", () => {
+      isComposing = false;
+      doSearch();
+    });
+    input.addEventListener("input", (e) => {
+      if (isComposing || e.isComposing) return;
+      debouncedSearch();
+    });
     const clear = $(SEL.searchClear);
     if (clear)
       clear.addEventListener("click", () => {
@@ -1406,40 +1431,51 @@ function buildSidebarAccordions() {
   // 侧栏标签即时检索过滤
   const tagFilterInputs = $$(SEL.tagFilter);
   for (const input of tagFilterInputs) {
-    input.addEventListener(
-      "input",
-      debounce(() => {
-        const q = input.value.trim().toLowerCase();
-        for (const group of $$(".facet-group")) {
-          let matchInGroup = 0;
-          const chips = Array.from(group.querySelectorAll(SEL.chips));
-          for (const chip of chips) {
-            const t =
-              chip.querySelector(".t")?.textContent?.toLowerCase() || "";
-            const isMatch = !q || t.includes(q);
-            chip.style.display = isMatch ? "" : "none";
-            if (isMatch) matchInGroup++;
-          }
-          const overflow = group.querySelector(".chiprow-overflow");
-          const moreBtn = group.querySelector(SEL.moreToggle);
-          if (q) {
-            if (overflow) overflow.hidden = false;
-            if (moreBtn) moreBtn.style.display = "none";
-            group.classList.remove("collapsed");
-            group.style.display = matchInGroup > 0 ? "" : "none";
-          } else {
-            if (overflow) overflow.hidden = true;
-            if (moreBtn) {
-              moreBtn.style.display = "";
-              const t = moreBtn.querySelector(".t");
-              const count = moreBtn.dataset.moreCount || "";
-              if (t) t.textContent = `+${count} ${S.showMoreTags || "more"}`;
-            }
-            group.style.display = "";
-          }
+    let tagComposing = false;
+    const filterTags = () => {
+      const q = input.value.trim().toLowerCase();
+      for (const group of $$(".facet-group")) {
+        let matchInGroup = 0;
+        const chips = Array.from(group.querySelectorAll(SEL.chips));
+        for (const chip of chips) {
+          const t =
+            chip.querySelector(".t")?.textContent?.toLowerCase() || "";
+          const isMatch = !q || t.includes(q);
+          chip.style.display = isMatch ? "" : "none";
+          if (isMatch) matchInGroup++;
         }
-      }, 70),
-    );
+        const overflow = group.querySelector(".chiprow-overflow");
+        const moreBtn = group.querySelector(SEL.moreToggle);
+        if (q) {
+          if (overflow) overflow.hidden = false;
+          if (moreBtn) moreBtn.style.display = "none";
+          group.classList.remove("collapsed");
+          group.style.display = matchInGroup > 0 ? "" : "none";
+        } else {
+          if (overflow) overflow.hidden = true;
+          if (moreBtn) {
+            moreBtn.style.display = "";
+            const t = moreBtn.querySelector(".t");
+            const count = moreBtn.dataset.moreCount || "";
+            if (t) t.textContent = `+${count} ${S.showMoreTags || "more"}`;
+          }
+          group.style.display = "";
+        }
+      }
+    };
+    const debouncedFilterTags = debounce(filterTags, 70);
+
+    input.addEventListener("compositionstart", () => {
+      tagComposing = true;
+    });
+    input.addEventListener("compositionend", () => {
+      tagComposing = false;
+      filterTags();
+    });
+    input.addEventListener("input", (e) => {
+      if (tagComposing || e.isComposing) return;
+      debouncedFilterTags();
+    });
   }
 }
 
