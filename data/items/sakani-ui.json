@@ -1,0 +1,41 @@
+{
+  "slug": "sakani-ui",
+  "name": {
+    "en": "Sakani",
+    "zh": "Sakani"
+  },
+  "description": {
+    "en": "Open-source React design system with 114+ accessible components matching Figma 1:1.",
+    "zh": "开源 React 设计系统：提供与 Figma 1:1 对齐的 114+ 无障碍组件与 41 套整页区块。"
+  },
+  "url": "https://www.sakaniui.com/",
+  "repo": "https://github.com/samzydd/Sakani-design-system",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:typescript",
+    "style:design-engineer"
+  ],
+  "screenshot": "sakani-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-24",
+  "content": {
+    "en": "Sakani is an open-source React design system engineered to bridge design and code with zero redlines. It features over 114 accessible components built on semantic tokens and 41 production-ready layout blocks across dashboards, analytics, and settings. With full Figma token alignment, CSS variable theming, and built-in dark mode, it allows developers and designers to build consistent user interfaces rapidly.",
+    "zh": "Sakani 是一套专为消除设计与研发割裂而打造的开源 React 设计系统。整套系统提供 114+ 款符合无障碍标准的原子级组件与 41 套开箱即用的仪表盘、数据分析与管理后台区块。基于语义化设计令牌（Tokens）与原生 CSS 变量驱动，提供与 Figma 规范 1:1 精确对应的暗黑模式支持与极简定制体验。"
+  },
+  "components": [
+    "Button",
+    "Input",
+    "Card",
+    "Modal",
+    "Dropdown",
+    "Pricing Table",
+    "Kanban Board",
+    "Data Table",
+    "Sidebar",
+    "Theme Switcher"
+  ]
+}
