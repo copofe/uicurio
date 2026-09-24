@@ -1,0 +1,36 @@
+{
+  "slug": "pin-ui",
+  "name": {
+    "en": "Pin UI",
+    "zh": "Pin UI"
+  },
+  "description": {
+    "en": "Turns Pinterest visual ideas into production-ready, copy-paste React components.",
+    "zh": "将 Pinterest 视觉灵感转化为开箱即用、支持弹簧物理与微交互的精美 React 组件库。"
+  },
+  "url": "https://www.pinui.xyz/",
+  "repo": "https://github.com/Rachit315/Pin-UI",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "function:sound-effects",
+    "stack:react",
+    "stack:typescript",
+    "stack:motion",
+    "style:design-engineer"
+  ],
+  "screenshot": "pin-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-24",
+  "content": {
+    "en": "Pin UI is an open-source React component library created by Rachit Thakur that bridges the gap between Dribbble/Pinterest static concept designs and real production code. Designed for modern web applications, it provides copy-paste components with fine-tuned spring physics, tactile sound synthesis, and compatibility with the shadcn component registry format.",
+    "zh": "Pin UI 是由 Rachit Thakur 发起的开源 React 组件库，专注于将 Pinterest 与设计社区中的静态概念设计转化为真正可落地的生产级前端代码。库中组件深度融合了弹簧物理动力学、Karplus-Strong 弦乐微交互音效以及 shadcn registry 格式支持，帮助开发者快速将前沿视觉效果搬进实际项目。"
+  },
+  "components": [
+    "Selection List",
+    "Balance Card",
+    "Add To Cart",
+    "Pinterest Peek"
+  ]
+}
