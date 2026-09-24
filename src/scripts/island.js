@@ -293,28 +293,6 @@ function activeFiltersSync() {
   listEl.replaceChildren();
   let count = 0;
 
-  if (state.q) {
-    const pill = el("span", "active-filter-pill");
-    pill.appendChild(
-      document.createTextNode(`${S.filterQuery || "Search"}: "${state.q}"`),
-    );
-    const del = el("button", "pill-del", "×");
-    del.type = "button";
-    del.setAttribute("aria-label", "Remove filter");
-    del.addEventListener("click", () => {
-      state.q = "";
-      const input = $(SEL.search);
-      if (input) {
-        input.value = "";
-        $(SEL.searchBox).classList.remove("has-value");
-      }
-      refresh();
-    });
-    pill.appendChild(del);
-    listEl.appendChild(pill);
-    count++;
-  }
-
   for (const facet in state.sel) {
     for (const tag of state.sel[facet]) {
       const meta = U.tags[tag];
