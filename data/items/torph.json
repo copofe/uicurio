@@ -1,0 +1,38 @@
+{
+  "slug": "torph",
+  "name": {
+    "en": "Torph",
+    "zh": "Torph"
+  },
+  "description": {
+    "en": "Dependency-free animated text and numeric morphing component across web frameworks.",
+    "zh": "零依赖的高性能文本与数字变形动画组件，支持 React、Vue 与 Svelte。"
+  },
+  "url": "https://torph.lochie.me/",
+  "repo": "https://github.com/lochie/torph",
+  "category": "text-typography",
+  "tags": [
+    "function:text-animation",
+    "function:animation",
+    "stack:zero-dependency",
+    "stack:react",
+    "stack:vue",
+    "stack:svelte",
+    "stack:typescript",
+    "stack:vanilla-js",
+    "style:design-engineer"
+  ],
+  "screenshot": "torph.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-24",
+  "content": {
+    "en": "Torph is an open-source, dependency-free text morphing animation library created by Lochie Axon. Built around physics-based springs and character position matching, Torph enables smooth continuous transitions between arbitrary strings, labels, and numeric values without requiring heavy animation runtimes like Framer Motion. Available with native bindings for React, Vue, Svelte, and vanilla TypeScript.",
+    "zh": "Torph 是由 Lochie Axon 打造的开源零依赖文本变形动效库。它通过字符位置对齐与内置弹簧物理曲线，在任意文本、数字以及输入光标切换时提供丝滑连续的形变过渡（Morphing），无需引入 Framer Motion 等沉重的外部动效引擎。全面支持 React、Vue、Svelte 以及原生 TypeScript/JavaScript。"
+  },
+  "components": [
+    "TextMorph",
+    "NumberMorph",
+    "CaretMorph"
+  ]
+}

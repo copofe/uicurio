@@ -1,0 +1,45 @@
+{
+  "slug": "aicss",
+  "name": {
+    "en": "AICSS",
+    "zh": "AICSS"
+  },
+  "description": {
+    "en": "Crafted UI components for AI agents: thinking states, tool calls, and streaming text.",
+    "zh": "专为 AI Agent 对话界面量身定制的组件库，覆盖思考推理、工具调用与流式文本输出。"
+  },
+  "url": "https://www.aicss.dev/",
+  "repo": "https://github.com/kvnkld/aicss",
+  "category": "collections",
+  "tags": [
+    "function:loading-indicator",
+    "function:text-animation",
+    "scenario:ai-native",
+    "stack:react",
+    "stack:vue",
+    "stack:svelte",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "aicss.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-24",
+  "content": {
+    "en": "AICSS is a modern component suite created by Kevin Kalde, engineered specifically for building AI agent and LLM conversation interfaces. It provides copy-paste ready UI blocks for the entire agent lifecycle—including multi-step thinking and reasoning states, real-time tool calls, streaming text tokens, inline citations, audio waveform visualizers, and structured human-in-the-loop approval cards. Ready for React, Vue, and Svelte with shadcn registry compatibility.",
+    "zh": "AICSS 是由 Kevin Kalde 打造的现代前端组件套件，专注于解决 AI Agent 与大模型交互界面的视觉与交互规范。全套组件覆盖 Agent 完整工作流：包含多阶段思考与推理折叠展开、实时工具调用（Tool Calls）、打字机流式输出、行内文献引用、声波可视化、文件代码 Diff 对比以及人机协作审批卡片（Human-in-the-loop Approval）。原生支持 React、Vue 与 Svelte，并完美兼容 shadcn CLI 分发规范。"
+  },
+  "components": [
+    "Thinking State",
+    "Thinking + Reasoning",
+    "Orbs",
+    "Streaming Text",
+    "Code Block",
+    "Inline Citations",
+    "Audio Waves",
+    "File Diff",
+    "AI Agent Input",
+    "Approval Card"
+  ]
+}

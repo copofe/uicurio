@@ -1,0 +1,41 @@
+{
+  "slug": "microkit",
+  "name": {
+    "en": "MicroKit UI",
+    "zh": "MicroKit UI"
+  },
+  "description": {
+    "en": "Copy-paste microinteractions and subtle UI animations for React and Tailwind.",
+    "zh": "开箱即用的 React 与 CSS 精致微交互组件库，支持 shadcn CLI 快速安装与源码自由定制。"
+  },
+  "url": "https://microkit.co/",
+  "repo": "https://github.com/henriquegpb/microkit",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:typescript",
+    "stack:motion",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "microkit.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-24",
+  "content": {
+    "en": "MicroKit UI is a developer-focused collection of copy-paste microinteractions and subtle animation details for modern web apps. Created by Henrique Barone, it emphasizes craft in button hovers, fluid tab sliders, cursor tracking effects, and scrub fields. It provides both React and CSS variants and integrates with shadcn CLI registry for rapid adoption.",
+    "zh": "MicroKit UI 是由 Henrique Barone 开发的专注于界面细节的微交互组件库。全库聚焦于提升产品质感的细微动态反馈，包含边缘光晕按钮、光标跟随、数字拖拽微调、平滑折叠菜单与毛玻璃选项卡等。支持原生 CSS 与 React/Tailwind 双版本，并作为官方 shadcn 注册表支持一键安装与源码直接改造。"
+  },
+  "components": [
+    "Cursor Edge Glow Button",
+    "Cursor Follow Share Button",
+    "Scrub Number Field",
+    "Blur Glide Menu",
+    "Social Highlight Cards",
+    "Expanding Icon Tabs",
+    "Sliding Underline Tabs",
+    "Aurora Download Button"
+  ]
+}

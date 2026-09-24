@@ -1,0 +1,36 @@
+{
+  "slug": "typehug",
+  "name": {
+    "en": "Typehug",
+    "zh": "Typehug"
+  },
+  "description": {
+    "en": "Keeps words, numbers, and units together with nonbreaking spaces for web typography.",
+    "zh": "智能注入不换行空格（NBSP），自动消除网页孤字折行、保护单位与引用格式的排版引擎。"
+  },
+  "url": "https://typehug.aliszu.com/",
+  "repo": "https://github.com/alexszczurek/typehug",
+  "category": "text-typography",
+  "tags": [
+    "function:text-animation",
+    "stack:zero-dependency",
+    "stack:typescript",
+    "stack:vanilla-js",
+    "style:design-engineer"
+  ],
+  "screenshot": "typehug.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-24",
+  "content": {
+    "en": "Typehug is a lightweight, dependency-free typography engine created by Aleksander Szczurek designed to prevent orphaned words, awkward line breaks, and broken units in web content. By automatically detecting short words, numeric unit pairings (such as 30 min), abbreviations, and paragraph endings, it injects Unicode nonbreaking spaces across plain text, HTML strings, and formatted text runs.",
+    "zh": "Typehug 是由 Aleksander Szczurek 开发的零依赖网页排版优化引擎，专门用于解决文本排版中常见的末行孤字（Widows）、生硬折行以及单位与数字被拆分的问题。它能够智能识别短词、数字与度量单位（如 30 min）、缩写与段落收尾，在纯文本、HTML 与富文本格式中自动注入 Unicode 不换行空格（&nbsp;），全面提升长文与界面的阅读质感。"
+  },
+  "components": [
+    "glue (Plain Text)",
+    "glueHtml (HTML Parser)",
+    "glueRuns (Formatted Runs)",
+    "Text Inspector",
+    "Language Dictionary (en, pl)"
+  ]
+}
