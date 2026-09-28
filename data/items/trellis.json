@@ -1,0 +1,38 @@
+{
+  "slug": "trellis",
+  "name": {
+    "en": "Trellis",
+    "zh": "Trellis"
+  },
+  "description": {
+    "en": "Fractal, dockable workspace layouts with deep panel nesting and infinite zoom.",
+    "zh": "支持无限层级分形嵌套、平滑缩放与持久挂载视图的高性能 Web 停靠工作区布局引擎。"
+  },
+  "url": "https://trellisui.com/",
+  "repo": "https://github.com/DanFessler/trellis",
+  "category": "input-controls",
+  "tags": [
+    "function:animation",
+    "stack:typescript",
+    "stack:react",
+    "stack:vanilla-js",
+    "style:design-engineer"
+  ],
+  "screenshot": "trellis.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-28",
+  "content": {
+    "en": "Trellis is a modern layout engine created by Dan Fessler for complex web tools, creative software, and IDEs. It introduces a fractal workspace model where tabbed panels can nest infinitely within other panels and users can zoom freely between high-level stages and granular sub-workspaces. Crucially, all views remain mounted through moves, splits, and floating transitions—preserving canvas state, WebGL contexts, form inputs, and audio playback.",
+    "zh": "Trellis 是由 Dan Fessler 专为复杂 Web 专业工具、创作软件与 IDE 打造的现代化工作区布局引擎。它创新性地采用了「分形嵌套」架构，面板内部可无限层级嵌套子工作区，并支持平滑缩放视图，让用户随时在全局概览与微观细节间自由穿梭。尤为关键的是，无论面板在标签页合并、分栏切分还是浮动窗口之间如何移动，视图的 DOM 节点与运行时状态都将始终保持挂载（Keep-Alive），完整保留 Canvas 画布、WebGL 绘图上下文、输入焦点与音频播放状态。"
+  },
+  "components": [
+    "Workspace Root",
+    "Fractal Panel",
+    "Split View",
+    "Stage & Canvas Zoom",
+    "Tabbed Docking",
+    "Floating Windows",
+    "Web Component Adapter"
+  ]
+}
