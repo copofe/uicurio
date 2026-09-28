@@ -1,0 +1,39 @@
+{
+  "slug": "motion-panels",
+  "name": {
+    "en": "motion-panels",
+    "zh": "motion-panels"
+  },
+  "description": {
+    "en": "Resizable split panels animated with Motion, featuring smooth folding and snapping.",
+    "zh": "基于 Motion 驱动的高性能可调节分栏面板，支持物理阻尼吸附与丝滑折叠动效。"
+  },
+  "url": "https://motion-panels.letstri.dev/",
+  "repo": "https://github.com/letstri/motion-panels",
+  "category": "input-controls",
+  "tags": [
+    "function:animation",
+    "stack:motion",
+    "stack:react",
+    "stack:typescript",
+    "stack:shadcn",
+    "stack:vanilla-js",
+    "style:design-engineer"
+  ],
+  "screenshot": "motion-panels.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-28",
+  "content": {
+    "en": "motion-panels is an unstyled, fluid resizable panel library powered by Motion. Acting as an animated successor to react-resizable-panels, it provides real spring-driven folding, collapsing, and snapping transitions without relying on any external layout engine. The core engine is framework-agnostic with a lightweight React adapter, and supports one-line installation into projects via the shadcn CLI.",
+    "zh": "motion-panels 是由 letstri 开发的纯粹、无预设样式的可调节分栏面板库。它以 Motion 为动效驱动核心，被称为自带真实物理折叠与吸附动效的现代化 react-resizable-panels 替代方案。底层引擎采用框架无关的原生 DOM 测量方案，上层提供极致轻量的 React 适配器与 shadcn 接入支持，折叠收起、跨级嵌套与拖拽分隔条均具备细腻的动画过渡。"
+  },
+  "components": [
+    "Group (Panel Group)",
+    "Panel (Resizable Panel)",
+    "Separator (Draggable Handle)",
+    "Collapsible Folds",
+    "Pin Mode",
+    "shadcn Registry Integration"
+  ]
+}

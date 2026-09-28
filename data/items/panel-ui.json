@@ -1,0 +1,39 @@
+{
+  "slug": "panel-ui",
+  "name": {
+    "en": "PanelUI",
+    "zh": "PanelUI"
+  },
+  "description": {
+    "en": "Accessible React Native and Expo component library styled with Tailwind CSS.",
+    "zh": "专为 Expo 与 React Native 打造的无障碍组件库，基于 Tailwind CSS 与 Reanimated 驱动。"
+  },
+  "url": "https://panelui.dev/",
+  "repo": "https://github.com/panel-ui/PanelUI",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react-native",
+    "stack:tailwind",
+    "stack:typescript",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "panel-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-28",
+  "content": {
+    "en": "PanelUI is an accessible, high-performance component library engineered specifically for React Native and Expo. Powered by Uniwind (Tailwind CSS v4 for native) and Reanimated, its components run smoothly on the UI thread and work out of the box in Expo Go with zero native code dependencies. It spans comprehensive primitives including bottom sheets, dialogs, forms, toasts, and charts with unified theme token switching.",
+    "zh": "PanelUI 是专为 React Native 与 Expo 生态量身打造的高性能无障碍移动端组件库。全库基于 Uniwind（面向原生环境的 Tailwind CSS v4 引擎）与 Reanimated 动效驱动，所有交互均在 UI 原生线程高帧率运行，且无需预构建原生模块，可在 Expo Go 中直接运行。提供底栏抽屉（Bottom Sheet）、对话框、表单控件、吐司通知与数据图表等完备移动端组件，并支持单属性全局切换设计主题规范。"
+  },
+  "components": [
+    "Bottom Sheet",
+    "Dialog & Popover",
+    "Form & Select",
+    "Toast & Notifications",
+    "Line Chart & Data Cards",
+    "File Attachments",
+    "Timeline"
+  ]
+}
