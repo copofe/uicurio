@@ -1,0 +1,40 @@
+{
+  "slug": "mapcn",
+  "name": {
+    "en": "mapcn",
+    "zh": "mapcn"
+  },
+  "description": {
+    "en": "Composable React map components built on MapLibre GL and styled with Tailwind CSS.",
+    "zh": "基于 MapLibre GL 与 Tailwind CSS 的现代化 React 地图组件库，开箱支持暗黑模式与 shadcn/ui。"
+  },
+  "url": "https://www.mapcn.dev/",
+  "repo": "https://github.com/AnmolSaini16/mapcn",
+  "category": "data-viz",
+  "tags": [
+    "function:chart",
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:typescript",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "mapcn.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-29",
+  "content": {
+    "en": "mapcn is a modern, open-source collection of declarative map components engineered for React and Next.js applications. Built on top of MapLibre GL and styled with Tailwind CSS, it seamlessly follows the shadcn/ui design language and CLI workflow. It provides zero-config dark/light basemap switching, rich interactive markers, animated fly-to transitions, route paths, and map control widgets for building location-aware dashboards and apps.",
+    "zh": "mapcn 是一套专为 React 与 Next.js 打造的现代化开源地图组件库。它构建于高性能的 MapLibre GL 之上，使用 Tailwind CSS 进行样式定制，并深度契合 shadcn/ui 的设计语言与组合范式。内置开箱即用的亮暗主题底图自适应、交互式标记锚点（Markers）、平滑飞跃镜头动效（Fly-to）、轨迹连线与全套地图控制部件，让地理位置与空间数据可视化变得前所未有的轻量简单。"
+  },
+  "components": [
+    "MapContainer (Basic Map)",
+    "Marker & Popup",
+    "FlyTo & Viewport Camera",
+    "Route Path & Arcs",
+    "Cluster & GeoJSON Layer",
+    "Map Controls (Zoom, Compass, Fullscreen)",
+    "Analytics Overlay Cards"
+  ]
+}

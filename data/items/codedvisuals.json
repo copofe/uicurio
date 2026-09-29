@@ -1,0 +1,39 @@
+{
+  "slug": "codedvisuals",
+  "name": {
+    "en": "CodedVisuals",
+    "zh": "CodedVisuals"
+  },
+  "description": {
+    "en": "Copy-paste animated illustrations and landing visuals for React and shadcn/ui.",
+    "zh": "专为营销落地页打造的代码化动效插画组件库，基于 Motion 与 shadcn/ui 规范。"
+  },
+  "url": "https://codedvisuals.com/",
+  "repo": "https://github.com/pixelcave/codedvisuals-free",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:motion",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "codedvisuals.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-29",
+  "content": {
+    "en": "CodedVisuals is a curated library of code-driven, animated visual compositions created by pixelcave (John Champ). Tailored specifically for modern SaaS landing pages and marketing websites, every visual is self-contained and implemented with React, Motion, and Tailwind CSS v4. From logo orbits and stacked document cards to floating browser mocks and interactive keyboards, they replace static SVG assets with responsive, theme-adaptive coded illustrations.",
+    "zh": "CodedVisuals 是由 pixelcave（John Champ）打造的代码化动态插画与视觉组件库。专为现代 SaaS 官网、营销落地页与 Hero 区域量身设计，所有组件均使用 React、Motion 与 Tailwind CSS v4 编写，完全基于代码渲染而非死板的静态切图。包含生态图标环绕轨道（Logo Orbit）、卡片层叠展开、浏览器窗口微缩模型与拟物键盘等丰富插画，完美融入 shadcn/ui 设计规范并原生支持深浅色主题自适应。"
+  },
+  "components": [
+    "Logo Orbit",
+    "Files Stacked",
+    "Browser Simple",
+    "Charts Sparkline",
+    "Notifications Bell",
+    "Interactive Keyboard",
+    "Pricing Visual Grid"
+  ]
+}
