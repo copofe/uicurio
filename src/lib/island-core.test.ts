@@ -6,8 +6,10 @@ import {
   emptySelection,
   encodeFilters,
   facetCount,
+  findMatchedComponents,
   hayMatches,
   hayVariants,
+  itemMatchesQuery,
   matches,
   queryTokens,
   sortItems,
@@ -220,5 +222,32 @@ describe("sortItems", () => {
     expect(sorted).toEqual(["Liveline", "Diffs", "crd-ui", "Animal Island"]);
     const old = sortItems(items, "old").map((x) => x.name);
     expect(old[0]).toBe("Animal Island");
+  });
+});
+
+describe("component search & synonyms", () => {
+  it("可以通过组件英文名称精准检索到条目", () => {
+    expect(itemMatchesQuery(items[2], "Card Preview")).toBe(true);
+    expect(itemMatchesQuery(items[2], "auto-flip")).toBe(true);
+    expect(itemMatchesQuery(items[0], "auto-flip")).toBe(false);
+  });
+
+  it("支持通过组件的中文同义词检索", () => {
+    const itemWithAccordion: ItemLike = {
+      name: "TestUI",
+      desc: "demo",
+      cat: "collections",
+      tags: [],
+      added: "2026-09-30",
+      components: ["Smooth Accordion", "Interactive Tabs"],
+    };
+    expect(itemMatchesQuery(itemWithAccordion, "手风琴")).toBe(true);
+    expect(itemMatchesQuery(itemWithAccordion, "折叠面板")).toBe(true);
+    expect(itemMatchesQuery(itemWithAccordion, "选项卡")).toBe(true);
+  });
+
+  it("findMatchedComponents 提取命中查询词的具体组件名称", () => {
+    const matched = findMatchedComponents(items[2], "Card");
+    expect(matched).toContain("Interactive 3D Card Preview");
   });
 });

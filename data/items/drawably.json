@@ -26,6 +26,10 @@
     "zh": "Drawably 将机械冰冷的数字界面转化为充满温度的手绘钢笔速写。所有控件均通过算法程序化随机生成独一无二的毛刺与笔触边缘，且线条带有如传统赛璐珞定格动画般的微摇「沸腾（Boil）」动效。整包体积仅约 9KB（Gzip），零依赖，不仅涵盖按钮、输入框、单选多选与下拉菜单，还提供随文字流自适应的手绘波浪下划线、荧光记号笔涂抹、荧光笔圈选及指向箭头。"
   },
   "components": [
+    "Drawably",
+    "Pick",
+    "Install",
+    "API",
     "DrawablyButton",
     "DrawablyCheckbox",
     "DrawablyRadio",

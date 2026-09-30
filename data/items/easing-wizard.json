@@ -24,6 +24,15 @@
     "zh": "Easing Wizard 是一款用于实时调试与生成纯 CSS linear() 弹簧物理缓动曲线的可视化神器。它通过数学插值将真实的质量块阻尼物理运动转化为现代 CSS 原生支持的时序关键点，让纯 CSS 动画也能具备令人赞叹的物理回弹质感，彻底省去 JS 运行时开销。"
   },
   "components": [
+    "API",
+    "MCP Server",
+    "Claude Plugin",
+    "Basis",
+    "Customize",
+    "Share",
+    "Use it anywhere",
+    "REST API",
+    "Claude Code Plugin",
     "Spring Parameter Sliders",
     "Interactive Motion Preview",
     "CSS linear() Code Exporter",

@@ -25,6 +25,12 @@
     "zh": "Componentry 是一套无障碍优先、设计令牌驱动的现代化 React 基础组件系统。它将无样式的底层交互逻辑与灵活的 Design Tokens 主题体系相结合，兼顾轻巧体积与强扩展能力，助力团队高效搭建统一品牌调性的前端产品。"
   },
   "components": [
+    "PreviousWheel Carousel",
+    "NextAurora Flow",
+    "Usage",
+    "API Reference",
+    "Animated",
+    "Gradient",
     "Theme System Provider",
     "Accessible Drawer",
     "Design Token Modal",

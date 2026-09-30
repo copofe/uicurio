@@ -24,6 +24,10 @@
     "zh": "Shadcn Labs 是一个追踪并聚合全球 shadcn/ui 开源生态前沿动向的创新实验室与索引平台。它系统性梳理了社区涌现的个性化 Registry、三方扩展库、自动化脚本与主题工具，是洞察现代化前端分发趋势的极佳窗口。"
   },
   "components": [
+    "press",
+    "PROJECTS",
+    "SPONSOR US",
+    "SOCIALS",
     "Registry Directory",
     "Experimental Sandbox",
     "Tooling Collection",

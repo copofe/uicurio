@@ -112,7 +112,92 @@ export function hayMatches(hay: HayVariants, token: string): boolean {
   );
 }
 
-/** 构造条目的全文本检索索引（双语名/描述/正文、Slug、Repo、组件列表；不检索 tag） */
+/** 常见前端组件中英文同义词/翻译表（支持中英双向穿透与组件别名匹配） */
+export const COMPONENT_SYNONYMS: Record<string, string[]> = {
+  button: ["按钮"],
+  tabs: ["选项卡", "标签页", "tab"],
+  tab: ["选项卡", "标签页"],
+  dialog: ["对话框", "模态框", "弹窗", "modal"],
+  modal: ["对话框", "模态框", "弹窗", "dialog"],
+  drawer: ["抽屉", "侧边栏", "底栏", "sheet"],
+  sheet: ["抽屉", "底栏"],
+  accordion: ["手风琴", "折叠面板", "collapse"],
+  collapse: ["手风琴", "折叠面板", "accordion"],
+  slider: ["滑块", "滑动条"],
+  carousel: ["轮播", "走马灯", "swiper"],
+  dropdown: ["下拉菜单", "下拉", "select"],
+  select: ["选择器", "下拉", "dropdown"],
+  popover: ["气泡卡片", "气泡", "浮层"],
+  tooltip: ["文字提示", "提示气泡", "提示"],
+  table: ["表格", "数据表格"],
+  input: ["输入框", "文本框", "表单"],
+  switch: ["开关", "切换"],
+  checkbox: ["复选框", "多选框"],
+  radio: ["单选框", "单选"],
+  avatar: ["头像"],
+  badge: ["徽章", "角标"],
+  breadcrumb: ["面包屑", "导航路径"],
+  calendar: ["日历", "日期", "date picker"],
+  progress: ["进度条", "进度"],
+  skeleton: ["骨架屏", "加载占位"],
+  spinner: ["加载中", "微调器", "loading"],
+  toast: ["通知提示", "轻提示", "吐司", "message"],
+  dock: ["程序坞", "浮动底栏", "快捷栏"],
+  chart: ["图表", "可视化"],
+  shader: ["着色器", "着色"],
+  marquee: ["跑马灯", "走马灯"],
+  bento: ["便当盒", "格子布局"],
+  diff: ["差异比对", "代码比对"],
+  tree: ["树形控件", "目录树", "文件树"],
+  navbar: ["导航栏", "导航条", "顶部栏"],
+  nav: ["导航栏", "导航"],
+  sidebar: ["侧边栏", "侧栏"],
+  pagination: ["分页", "翻页"],
+  segmented: ["分段器", "分段控制器"],
+  otp: ["验证码", "一次性密码"],
+  timeline: ["时间线", "时间轴"],
+};
+
+// 反向中文 -> 英文同义词索引
+const REVERSE_SYNONYMS: Record<string, string[]> = {};
+for (const [enKey, zhList] of Object.entries(COMPONENT_SYNONYMS)) {
+  for (const zh of zhList) {
+    if (!REVERSE_SYNONYMS[zh]) REVERSE_SYNONYMS[zh] = [];
+    REVERSE_SYNONYMS[zh].push(enKey);
+  }
+}
+
+/** 获取组件对应的中英文同义词 */
+export function getComponentSynonyms(compName: string): string[] {
+  if (!compName) return [];
+  const words = compName
+    .toLowerCase()
+    .split(/[-_\s/]+/)
+    .filter(Boolean);
+  const result = new Set<string>();
+
+  // 整词查找
+  const rawLower = compName.toLowerCase();
+  if (COMPONENT_SYNONYMS[rawLower]) {
+    for (const s of COMPONENT_SYNONYMS[rawLower]) result.add(s);
+  }
+  if (REVERSE_SYNONYMS[rawLower]) {
+    for (const s of REVERSE_SYNONYMS[rawLower]) result.add(s);
+  }
+
+  // 分词查找
+  for (const w of words) {
+    if (COMPONENT_SYNONYMS[w]) {
+      for (const s of COMPONENT_SYNONYMS[w]) result.add(s);
+    }
+    if (REVERSE_SYNONYMS[w]) {
+      for (const s of REVERSE_SYNONYMS[w]) result.add(s);
+    }
+  }
+  return Array.from(result);
+}
+
+/** 构造条目的全文本检索索引（双语名/描述/正文、Slug、Repo、组件列表及其中英同义词；不检索 tag） */
 function buildHaystack(item: ItemLike): HayVariants {
   const parts: string[] = [
     item.name || "",
@@ -125,7 +210,11 @@ function buildHaystack(item: ItemLike): HayVariants {
   ];
 
   if (Array.isArray(item.components)) {
-    for (const c of item.components) parts.push(c);
+    for (const c of item.components) {
+      parts.push(c);
+      const syns = getComponentSynonyms(c);
+      if (syns.length) parts.push(...syns);
+    }
   }
 
   return hayVariants(parts.join(" "));
@@ -137,6 +226,52 @@ export function itemMatchesQuery(item: ItemLike, q: string): boolean {
   if (!tokens.length) return true;
   const hay = buildHaystack(item);
   return tokens.every((token) => hayMatches(hay, token));
+}
+
+/** 查找条目中命中查询词的组件列表（用于在卡片和搜索面板高亮展示） */
+export function findMatchedComponents(
+  item: ItemLike,
+  q: string,
+  limit = 5,
+): string[] {
+  if (
+    !q ||
+    !q.trim() ||
+    !Array.isArray(item.components) ||
+    !item.components.length
+  )
+    return [];
+  const qClean = q.trim().toLowerCase();
+  const tokens = queryTokens(q);
+  const matched: { name: string; score: number }[] = [];
+  const seen = new Set<string>();
+
+  for (const c of item.components) {
+    const cl = c.toLowerCase();
+    const syns = getComponentSynonyms(c).map((s) => s.toLowerCase());
+    let score = 0;
+    if (cl === qClean || syns.includes(qClean)) score = 100;
+    else if (cl.startsWith(qClean) || syns.some((s) => s.startsWith(qClean)))
+      score = 60;
+    else if (cl.includes(qClean) || syns.some((s) => s.includes(qClean)))
+      score = 40;
+    else {
+      for (const t of tokens) {
+        if (cl === t || syns.includes(t)) score += 30;
+        else if (cl.startsWith(t) || syns.some((s) => s.startsWith(t)))
+          score += 20;
+        else if (cl.includes(t) || syns.some((s) => s.includes(t))) score += 10;
+      }
+    }
+
+    if (score > 0 && !seen.has(c.toLowerCase())) {
+      seen.add(c.toLowerCase());
+      matched.push({ name: c, score });
+    }
+  }
+
+  matched.sort((a, b) => b.score - a.score);
+  return matched.slice(0, limit).map((m) => m.name);
 }
 
 /** 频道内过滤：跨分面 AND；q 命中名称/描述/双语/组件/仓库（不搜 tag）；skipFacet 排除自身 facet 约束 */
@@ -180,9 +315,10 @@ export function facetCount(
 }
 
 /** 检索相关度评分（用于搜索时的排序优化；不评分 tag） */
-function scoreItem(item: ItemLike, q: string): number {
+export function scoreItem(item: ItemLike, q: string): number {
   if (!q || !q.trim()) return 0;
-  const tokens = q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const qClean = q.trim().toLowerCase();
+  const tokens = queryTokens(q);
   let total = 0;
   const slug = (item.slug || "").toLowerCase();
   const name = (item.name || "").toLowerCase();
@@ -190,6 +326,24 @@ function scoreItem(item: ItemLike, q: string): number {
   const desc = (item.desc || "").toLowerCase();
   const altDesc = (item.altDesc || "").toLowerCase();
   const content = (item.content || "").toLowerCase();
+
+  // 组件精准命中与同义词高权重加分
+  if (Array.isArray(item.components)) {
+    for (const c of item.components) {
+      const cl = c.toLowerCase();
+      const syns = getComponentSynonyms(c).map((s) => s.toLowerCase());
+      if (cl === qClean || syns.includes(qClean)) {
+        total += 80;
+      } else if (
+        cl.startsWith(qClean) ||
+        syns.some((s) => s.startsWith(qClean))
+      ) {
+        total += 50;
+      } else if (cl.includes(qClean) || syns.some((s) => s.includes(qClean))) {
+        total += 30;
+      }
+    }
+  }
 
   for (const t of tokens) {
     // 1. Slug & Name 精准 / 前缀 / 包含匹配
@@ -202,9 +356,16 @@ function scoreItem(item: ItemLike, q: string): number {
     // 2. 描述匹配
     if (desc.includes(t) || altDesc.includes(t)) total += 15;
 
-    // 3. 组件名称匹配
+    // 3. 组件分词匹配
     if (Array.isArray(item.components)) {
-      if (item.components.some((c) => c.toLowerCase().includes(t))) total += 8;
+      for (const c of item.components) {
+        const cl = c.toLowerCase();
+        const syns = getComponentSynonyms(c).map((s) => s.toLowerCase());
+        if (cl === t || syns.includes(t)) total += 30;
+        else if (cl.startsWith(t) || syns.some((s) => s.startsWith(t)))
+          total += 18;
+        else if (cl.includes(t) || syns.some((s) => s.includes(t))) total += 10;
+      }
     }
 
     // 4. 详情正文匹配（权重最低，仅作兜底召回）

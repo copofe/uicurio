@@ -35,6 +35,7 @@
     "Momentum Dragging",
     "Real-time Value Overlay",
     "Stepped Line Interpolation",
-    "Dynamic Time Windows"
+    "Dynamic Time Windows",
+    "Index"
   ]
 }

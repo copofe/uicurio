@@ -26,6 +26,14 @@
     "zh": "textmotion 是一套专注于纯粹动力学文字翻滚与入场动效的零依赖轻量原语。无论是单字符阶梯滚动、行间错落显现还是乱码解密，它均以极简的原生 DOM 和微小 CSS 变量运作，无任何第三方包依赖，极速即插即用。"
   },
   "components": [
+    "How it works",
+    "Demos",
+    "Get started",
+    "Slot Text",
+    "Every segment is its own slot.",
+    "Four places it belongs.",
+    "Small enough to forget it is there.",
+    "Three lines from static to rolling.",
     "Kinetic Text Scroller",
     "Character Decipher Roll",
     "Staggered Line Opener",

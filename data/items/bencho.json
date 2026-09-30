@@ -24,6 +24,10 @@
     "zh": "Bencho 是一个由设计工程师主导的交互式组件实验场，基于 Framer Motion 与 Tailwind CSS 构建。页面上的每一个组件块都处于完全存活的可交互状态——支持即时调节弹簧阻尼、拖拽拉伸、吸附触发并复制代码。核心包含磁吸选择器、滑动确认条、果冻液体拉伸球、折叠透视卡片与磨砂玻璃风格 Dock 栏等突破常规的先锋交互构件。"
   },
   "components": [
+    "Sounds",
+    "Finds",
+    "Bench",
+    "Become a sponsor",
     "MagneticSelect",
     "SlideConfirm",
     "ColorPicker",

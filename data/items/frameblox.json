@@ -23,6 +23,16 @@
     "zh": "Frameblox 是专为数字产品设计师与创意工程师打造的模块化 Framer 区块库。全库收录数十款带有精心调校动效与自适应排版的现代 Hero、功能网格与交互导航，让无代码或低代码构建高水准展示站点变得极其敏捷。"
   },
   "components": [
+    "Styles",
+    "Code Components",
+    "Sections",
+    "Styles100+ styles",
+    "Components400+ variants",
+    "Code Components10+ variants",
+    "Sections900+ prebuilt sections",
+    "CMS6 CMS collections",
+    "CMS",
+    "Framer Component Library and Design System",
     "Framer Bento Hero",
     "Smart Interactive Slider",
     "Morphing Navigation Bar",

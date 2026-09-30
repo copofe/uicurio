@@ -22,22 +22,31 @@
     "zh": "Beautiful UI 专为 AI Agent 及生成式界面打造，聚焦解决现代 AI 产品的独特交互诉求。区别于通用组件库，它集中提供了流式打字输出、思维链思考等待指示器、人机闭环审批卡片、工具调用执行气泡、可交互 Diff 对比表格以及带上下文附件的 Prompt 输入栏等深度定制组件，支持即拷即用。"
   },
   "components": [
-    "Thinking Indicator",
+    "Loading State",
+    "Thinking",
     "Streaming Text",
-    "Approval Card (Human-in-the-loop)",
+    "Approval Card",
     "Tool Chips",
-    "Prompt Bar",
-    "Chat Stream",
     "Task Rows",
+    "Chat",
+    "Prompt Bar",
     "Recommendation Card",
     "Context Cards",
     "Diff Table",
     "Records Table",
     "Filter Table",
+    "Sidebar Nav",
     "Flowchart",
     "Insight Cards",
-    "Code Block with Copy",
+    "Code Block",
     "Fine-tune Card",
-    "Selection Actions"
+    "Selection Actions",
+    "Agent Screen",
+    "Book a call",
+    "New components, in your inbox.",
+    "Thinking Indicator",
+    "Approval Card (Human-in-the-loop)",
+    "Chat Stream",
+    "Code Block with Copy"
   ]
 }

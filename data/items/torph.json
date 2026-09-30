@@ -33,6 +33,8 @@
   "components": [
     "TextMorph",
     "NumberMorph",
-    "CaretMorph"
+    "CaretMorph",
+    "Install",
+    "Usage"
   ]
 }

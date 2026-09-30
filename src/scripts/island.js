@@ -4,6 +4,7 @@ import {
   decodeFilters,
   encodeFilters,
   facetCount,
+  findMatchedComponents,
   hayMatches,
   hayVariants,
   itemMatchesQuery,
@@ -337,10 +338,38 @@ function gridSync(list) {
     if (n) {
       n.classList.remove("hidden");
       grid.appendChild(n);
+
+      const info = n.querySelector(".card-info");
+      if (info) {
+        let compBar = info.querySelector(".card-matched-comps");
+        if (state.q && state.q.trim()) {
+          const matched = findMatchedComponents(item, state.q, 3);
+          if (matched.length > 0) {
+            if (!compBar) {
+              compBar = el("div", "card-matched-comps");
+              info.appendChild(compBar);
+            }
+            compBar.replaceChildren();
+            for (const c of matched) {
+              const pill = el("span", "card-matched-pill");
+              pill.appendChild(hi(c, state.q));
+              compBar.appendChild(pill);
+            }
+          } else if (compBar) {
+            compBar.remove();
+          }
+        } else if (compBar) {
+          compBar.remove();
+        }
+      }
     }
   }
   for (const [slug, n] of cardNodes) {
-    if (!visible.has(slug)) n.classList.add("hidden");
+    if (!visible.has(slug)) {
+      n.classList.add("hidden");
+      const compBar = n.querySelector(".card-matched-comps");
+      if (compBar) compBar.remove();
+    }
   }
   if (!REDUCED) {
     requestAnimationFrame(() => {
@@ -1046,23 +1075,60 @@ function paletteData(q) {
   }
 
   // 藏品 Items（不搜 tag，搜名称/描述/双语/组件/仓库）
-  const items = sortItems(
+  const matchedItems = sortItems(
     U.items.filter((it) => itemMatchesQuery(it, q)),
     "new",
     q,
-  ).slice(0, 8);
+  );
+  const items = matchedItems.slice(0, 8);
   if (items.length) {
     const g = { label: S.pgItems, rows: [] };
-    for (const it of items)
+    for (const it of items) {
+      const matchedComps = ql ? findMatchedComponents(it, ql, 2) : [];
+      const meta =
+        matchedComps.length > 0
+          ? `${catName(it.cat)} · ${matchedComps.join(", ")}`
+          : catName(it.cat);
       g.rows.push({
         kind: "item",
         slug: it.slug,
         name: it.name,
-        meta: catName(it.cat),
+        meta,
         cover: it.shot,
         q: ql,
       });
+    }
     rows.push(g);
+  }
+
+  // 组件 Components（搜到匹配组件时聚合展示）
+  if (ql) {
+    const compRows = [];
+    const seenPairs = new Set();
+    for (const it of matchedItems) {
+      const matched = findMatchedComponents(it, ql, 3);
+      for (const compName of matched) {
+        const key = `${compName}::${it.slug}`;
+        if (!seenPairs.has(key)) {
+          seenPairs.add(key);
+          compRows.push({
+            kind: "component",
+            itemSlug: it.slug,
+            name: compName,
+            meta: it.name,
+            cover: it.shot,
+            q: ql,
+          });
+        }
+      }
+      if (compRows.length >= 8) break;
+    }
+    if (compRows.length) {
+      rows.push({
+        label: S.pgComponents || (LOCALE === "zh" ? "包含组件" : "Components"),
+        rows: compRows.slice(0, 8),
+      });
+    }
   }
 
   // 频道 Channels（与主检索同一套归一化：分隔符/中英混排空格互通）
@@ -1123,7 +1189,7 @@ function renderPalette() {
       row.type = "button";
       row.setAttribute("role", "option");
       row.setAttribute("aria-selected", "false");
-      if (r.kind === "item") {
+      if (r.kind === "item" || r.kind === "component") {
         const thumb = el("span", "thumb");
         const img = el("img");
         img.src = `/assets/shots/${r.cover}`;
@@ -1226,12 +1292,13 @@ function runRowAt(r) {
     } else if (r.act === "clear") {
       clearFiltersAndRefresh();
     }
-  } else if (r.kind === "item") {
+  } else if (r.kind === "item" || r.kind === "component") {
+    const targetSlug = r.kind === "component" ? r.itemSlug : r.slug;
     if (PAGE === "gallery") {
       closeAll();
-      openSheet(r.slug);
+      openSheet(targetSlug);
     } else {
-      go(itemURL(r.slug));
+      go(itemURL(targetSlug));
     }
   } else if (r.kind === "channel") {
     go(catURL(r.slug));

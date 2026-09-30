@@ -25,6 +25,10 @@
     "zh": "Ninja UI 是一套专注于极致精简与高响应性能的 React 组件库。为满足对页面加载速度有严苛要求的现代应用而设计，它剔除冗余依赖，提供纯粹干净的表单输入、浮层提示与模态卡片，保持瞬时响应与高渲染帧率。"
   },
   "components": [
+    "Compare",
+    "Product",
+    "Resources",
+    "Frameworks",
     "Agile Button",
     "Minimal Modal",
     "Performance Input",

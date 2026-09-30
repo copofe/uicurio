@@ -26,6 +26,16 @@
     "zh": "Base UI 是由 Material UI 与 Radix 核心作者联袂打造的下一代 React 无样式底层组件库。它专为构建企业级设计系统与前沿交互界面而生，内置严谨完善的 WAI-ARIA 无障碍规范与稳健的状态机逻辑，剥离了任何固化的 CSS 样式，赋予开发者对排版、动画与视觉表现无拘无束的定制空间。"
   },
   "components": [
+    "Bluesky",
+    "Made for the makers",
+    "So you know who to blame",
+    "The fine print",
+    "What is Base UI?",
+    "Does Base UI work with any styling library?",
+    "How does Base UI differ from Radix UI?",
+    "Can I use Base UI without React?",
+    "Is Base UI free for commercial use?",
+    "Do you offer enterprise SLAs?",
     "Accordion",
     "AlertDialog",
     "Checkbox",

@@ -29,6 +29,12 @@
     "zh": "MicroKit UI 是由 Henrique Barone 开发的专注于界面细节的微交互组件库。全库聚焦于提升产品质感的细微动态反馈，包含边缘光晕按钮、光标跟随、数字拖拽微调、平滑折叠菜单与毛玻璃选项卡等。支持原生 CSS 与 React/Tailwind 双版本，并作为官方 shadcn 注册表支持一键安装与源码直接改造。"
   },
   "components": [
+    "Submit",
+    "React microinteractions",
+    "CSS microinteractions",
+    "Click feedback 38",
+    "Inputs 2",
+    "Navigation 9",
     "Cursor Edge Glow Button",
     "Cursor Follow Share Button",
     "Scrub Number Field",

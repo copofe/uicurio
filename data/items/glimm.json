@@ -27,6 +27,15 @@
     "zh": "glimm 将底层 WebGL 片元着色器（Fragment Shader）引入了 Next.js 路由过渡生态。它在页面切换瞬间捕获 DOM 视图纹理快照，并通过着色器实时计算流体融解、波纹扭曲与色散位移动画，呈现出如同原生顶级客户端应用般的非凡转场质感。"
   },
   "components": [
+    "Demos",
+    "Triggers",
+    "Presets",
+    "Easing",
+    "Band width",
+    "Custom palette",
+    "Props",
+    "Best practices",
+    "Noman",
     "Liquid Route Transition",
     "Chromatic Aberration Warp",
     "Ripple Page Switcher",

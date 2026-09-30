@@ -27,6 +27,18 @@
     "zh": "Painterly 是一组跳脱出传统几何旋转 Loader 的艺术级 Canvas / WebGL 动态加载指示器。它运用柔和的水彩笔触晕染、生成式流体扩散与动态光影，让页面等待过程化身为富有美学观赏性的视觉体验。"
   },
   "components": [
+    "Garden",
+    "Dawn",
+    "Willow",
+    "Wisteria",
+    "Orchard",
+    "Irises",
+    "Poppies",
+    "Koi",
+    "Roses",
+    "Oranges",
+    "Sail",
+    "Dusk",
     "Watercolor Bleed Loader",
     "Brushstroke Orbit",
     "Pigment Wave Spinner",

@@ -34,12 +34,23 @@
     "Thinking State",
     "Thinking + Reasoning",
     "Orbs",
+    "Audio Waves",
+    "File Diff",
+    "Image Processing",
+    "Text Response",
     "Streaming Text",
     "Code Block",
     "Inline Citations",
-    "Audio Waves",
-    "File Diff",
+    "To-do List",
+    "Data Table",
+    "Comparison Table",
+    "Message Actions",
+    "Reasoning Effort",
+    "Secure Input",
     "AI Agent Input",
-    "Approval Card"
+    "Approval Card",
+    "Terms",
+    "Privacy",
+    "Install"
   ]
 }
