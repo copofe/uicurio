@@ -1,0 +1,36 @@
+{
+  "slug": "ely-gpui",
+  "name": {
+    "en": "Ely",
+    "zh": "Ely"
+  },
+  "description": {
+    "en": "A warm, minimal GPUI component library in Rust, compiled live to WebAssembly.",
+    "zh": "面向 GPUI 与 Rust 桌面应用的全套质感组件库，支持深浅双色并编译为 Wasm 在线运行。"
+  },
+  "url": "https://ely-gpui.zacharyzhang.com/",
+  "repo": "https://github.com/ZacharyZhang-NY/Ely-GPUI-Components",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "style:design-engineer"
+  ],
+  "screenshot": "ely-gpui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-30",
+  "content": {
+    "en": "Ely is a comprehensive Rust component library engineered for GPUI, the GPU-accelerated UI framework powering the Zed editor. Built by Zachary Zhang, Ely embraces a warm, quiet aesthetic where color communicates meaning rather than decoration. Spanning primitives, typography, forms, menus, overlays, and window chrome, every component runs live in the browser compiled directly from Rust to WebAssembly.",
+    "zh": "Ely 是由 Zachary Zhang 为 GPUI（Zed 编辑器底层的 GPU 加速 Rust UI 框架）打造的全套质感桌面组件库。其视觉风格克制温润，倡导色彩用于传达语义而非多余装饰。全套体系涵盖基础图元、排版排版、表单控件、导航菜单、浮层弹窗与原生窗口外壳，不仅可用于构建极速的 Rust 本地桌面应用，更能通过 WebAssembly 直接在浏览器中高帧率实时预览运行。"
+  },
+  "components": [
+    "Button & Action Groups",
+    "Forms & Text Inputs",
+    "Selection & Date/Time",
+    "Window Chrome & Shell",
+    "Tabs & Breadcrumbs",
+    "Popovers & Dialogs",
+    "Menus & Command Palette",
+    "Feedback & Toast States"
+  ]
+}
