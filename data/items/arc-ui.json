@@ -1,0 +1,39 @@
+{
+  "slug": "arc-ui",
+  "name": {
+    "en": "Arc UI",
+    "zh": "Arc UI"
+  },
+  "description": {
+    "en": "Open-source React components and blocks with calm, polished built-in motion.",
+    "zh": "自带克制而优雅内置动效的开源 React 与 shadcn 组件库，让产品界面更显完工质感。"
+  },
+  "url": "https://uiarc.dev/",
+  "repo": "https://github.com/kuratlielia/arc-library",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:motion",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "arc-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-30",
+  "content": {
+    "en": "Arc UI is a library of React components and dashboard blocks with built-in calm motion, designed by Elia Kuratli. Built directly on Radix UI and Motion, it bridges functional interface primitives with fluid layout animations. Components can be added via the shadcn CLI or referenced seamlessly by AI coding agents via its dedicated MCP server.",
+    "zh": "Arc UI 是由 Elia Kuratli 设计的高品质 React 组件与区块库，以克制、温润的内置微动效为特色。其底层基于 Radix UI 与 Motion 构建，在保证无障碍规范的前提下带来流畅的形变过渡与手感反馈。支持通过 shadcn CLI 一键安装，并配备专属 MCP 服务方便 AI 编程助手直接调度。"
+  },
+  "components": [
+    "Morph Select",
+    "Metrics Dashboard Block",
+    "Sparkline Slider",
+    "Voice Orb",
+    "Lightbox Gallery",
+    "Interactive Dock",
+    "Confirm Morph Button"
+  ]
+}

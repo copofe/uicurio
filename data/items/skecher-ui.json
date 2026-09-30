@@ -1,0 +1,37 @@
+{
+  "slug": "skecher-ui",
+  "name": {
+    "en": "Skecher UI",
+    "zh": "Skecher UI"
+  },
+  "description": {
+    "en": "Polished React motion components and micro-interactions built for the shadcn CLI.",
+    "zh": "针对 shadcn CLI 优化的 React 交互动效组件库，聚焦细腻微交互与生动视觉表达。"
+  },
+  "url": "https://skecher-ui.com/",
+  "repo": "https://github.com/CoDesign-Spa27/skecher-ui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer"
+  ],
+  "screenshot": "skecher-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-30",
+  "content": {
+    "en": "Skecher UI is a motion-focused React component library distributed via the shadcn registry CLI. It turns subtle UI states into lively micro-interactions, providing animated tabs, fluid cards, physics-based dialogs, and interactive buttons built on Motion and Tailwind CSS with zero runtime friction.",
+    "zh": "Skecher UI 是一套通过 shadcn 官方 CLI 分发的高品质 React 动效组件库。项目倡导为界面赋予灵动生机，精选了包括拟物弹簧选项卡、流体渐变卡片、带物理动量回弹的模态框与微交互按钮等一系列即拷即用的设计工程组件。"
+  },
+  "components": [
+    "Apple Mail Tabs",
+    "Kinetic Orbit Showcase",
+    "Interactive Glow Cards",
+    "Spring Drawer & Dialog",
+    "Fluid Motion Buttons",
+    "Morphing Badges"
+  ]
+}

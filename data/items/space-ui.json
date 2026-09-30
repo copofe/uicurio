@@ -1,0 +1,38 @@
+{
+  "slug": "space-ui",
+  "name": {
+    "en": "Space UI",
+    "zh": "Space UI"
+  },
+  "description": {
+    "en": "Interactive React components, WebGL shaders, and high-conversion landing blocks.",
+    "zh": "集成 WebGL 空间着色器、流畅动效与落地页高转化区块的现代化 React 组件库。"
+  },
+  "url": "https://www.spaceui.one/",
+  "repo": "https://github.com/usespaceui/ui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer",
+    "scenario:ai-native"
+  ],
+  "screenshot": "space-ui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-30",
+  "content": {
+    "en": "Space UI is an open-source React component library and shadcn registry engineered for fast-moving product builders and AI workflows. It brings together interactive motion primitives, WebGL/OGL background shaders, interactive 3D squircle avatars, and high-conversion marketing blocks designed to ship standout interfaces.",
+    "zh": "Space UI 是一套面向现代产品构建者与 AI 辅助开发流的开源 React 组件库与 shadcn 注册表。项目融合了细腻的交互微动效、WebGL/OGL 着色器画布、3D 超椭圆头像与高转化营销区块，旨在帮助开发者快速拼装兼具视觉冲击力与工程品质的现代化数字产品。"
+  },
+  "components": [
+    "WebGL Shader Canvas",
+    "Squircle 3D Avatar",
+    "AI Chat Interface",
+    "Squishmoji Sound Reactions",
+    "Floating Navigation Menu",
+    "Landing Hero Showcase"
+  ]
+}

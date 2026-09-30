@@ -1,0 +1,38 @@
+{
+  "slug": "planes",
+  "name": {
+    "en": "Planes",
+    "zh": "Planes"
+  },
+  "description": {
+    "en": "A high-craft React interaction and motion layer tailored for modern design workflows.",
+    "zh": "面向现代前端与 AI 辅助流打造的高质感 React 动效层，提供大量精细打磨的交互组件。"
+  },
+  "url": "https://useplanes.com/",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "stack:react",
+    "stack:tailwind",
+    "stack:shadcn",
+    "style:design-engineer",
+    "scenario:ai-native"
+  ],
+  "screenshot": "planes.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-09-30",
+  "content": {
+    "en": "Planes is a premium interaction layer for React featuring 100+ production-grade motion components and landing templates. Crafted by Ashish Gogula, every component ships as clean React, Tailwind CSS v4, and Motion source code distributed seamlessly through the shadcn registry for effortless agent-assisted coding.",
+    "zh": "Planes 是由 Ashish Gogula 打造的专业级 React 前沿交互与动效层，包含超百款深度打磨的高质感动效组件与营销模板。组件基于 React、Tailwind CSS v4 与 Motion 架构，通过私有 shadcn 注册表以干净源码形式导入代码库，天然适配 Claude、Cursor 等 AI 协同开发场景。"
+  },
+  "components": [
+    "Interactive Knob & Dial",
+    "Swipe Card Deck",
+    "Caustics & Thin Film Shaders",
+    "Split-Flap Board",
+    "Focus Scale Carousel",
+    "Retro Music Player",
+    "Command Palette Overlay"
+  ]
+}
