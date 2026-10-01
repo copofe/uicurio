@@ -4,7 +4,7 @@
 //   弹窗独有  —— 悬浮关闭 X、跟随当前筛选的动态翻页（经 bodySuffix / 运行时追加挂进 .sheet-body）。
 // 行为分层靠渐进增强：标签芯片与相关卡在详情页是普通链接，在弹窗里被事件委托拦截转为筛选/换片。
 
-export interface ItemTagView {
+interface ItemTagView {
     id: string;
     name: string;
     href: string;
@@ -44,7 +44,7 @@ export function esc(s: string): string {
     return String(s ?? "").replace(/[&<>"']/g, (c) => ENTITIES[c]);
 }
 
-export function hostOf(url: string): string {
+function hostOf(url: string): string {
     try {
         return new URL(url).hostname.replace(/^www\./, "");
     } catch {
