@@ -12,8 +12,11 @@ export function getStaticPaths() {
 const { locale, slug } = Astro.params;
 const cat = Astro.props.cat as any;
 const list = items.filter((i: any) => i.category === slug);
-const title = locale === "zh" ? `${cat.name.zh} — 精选 UI 库 · Uicurio` : `${cat.name.en} — curated UI libraries · Uicurio`;
+const title = locale === "zh"
+  ? `${cat.name.zh} — 精选开源 UI 组件库 · Uicurio`
+  : `${cat.name.en} — Curated Open Source UI Libraries · Uicurio`;
 const description = cat.description[locale] ?? cat.description.en;
+
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -32,7 +35,28 @@ const breadcrumbSchema = {
     }
   ]
 };
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": title,
+  "description": description,
+  "url": `https://uicurio.shinji.me/${locale}/collections/${slug}/`,
+  "inLanguage": locale === "zh" ? "zh-CN" : "en-US",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": list.length,
+    "itemListElement": list.slice(0, 24).map((it: any, idx: number) => ({
+      "@type": "ListItem",
+      "position": idx + 1,
+      "name": it.name[locale] ?? it.name.en,
+      "url": `https://uicurio.shinji.me/${locale}/item/${it.slug}/`,
+      "image": `https://uicurio.shinji.me/assets/shots/${it.screenshot}`
+    }))
+  }
+};
 ---
 <GalleryShell locale={locale} currentCat={slug} title={title} description={description} ogImage={`/assets/shots/${list[0]?.screenshot}`} items={list}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
 </GalleryShell>

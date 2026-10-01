@@ -18,8 +18,12 @@ const { locale, slug } = Astro.params;
 const tag = Astro.props.tag as any;
 const t = ui[locale as keyof typeof ui];
 const list = itemsWithTag(tag.id);
-const title = locale === "zh" ? `${tag.name.zh} · 精选 ${list.length} 个库 — Uicurio` : `${tag.name.en} – ${list.length} curated libraries · Uicurio`;
-const description = locale === "zh" ? `手工严选的 ${list.length} 个${tag.name.zh}相关的 UI 库。` : `${list.length} hand-picked UI libraries for ${tag.name.en}.`;
+const title = locale === "zh"
+  ? `${tag.name.zh} 开源 UI 组件库 · 精选 ${list.length} 个项目 — Uicurio`
+  : `${tag.name.en} Open Source UI Libraries & Components (${list.length} Curated) · Uicurio`;
+const description = locale === "zh"
+  ? `手工严选收录的 ${list.length} 个 ${tag.name.zh} 相关开源 UI 库、交互组件与设计工程实践，支持完整组件清单预览与代码检索。`
+  : `Curated collection of ${list.length} open source UI libraries and design engineering components for ${tag.name.en}. Explore component lists, live previews and code repos.`;
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -39,9 +43,30 @@ const breadcrumbSchema = {
     }
   ]
 };
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": title,
+  "description": description,
+  "url": `https://uicurio.shinji.me/${locale}/tags/${tag.slug}/`,
+  "inLanguage": locale === "zh" ? "zh-CN" : "en-US",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": list.length,
+    "itemListElement": list.slice(0, 24).map((item: any, idx: number) => ({
+      "@type": "ListItem",
+      "position": idx + 1,
+      "name": item.name[locale] ?? item.name.en,
+      "url": `https://uicurio.shinji.me/${locale}/item/${item.slug}/`,
+      "image": `https://uicurio.shinji.me/assets/shots/${item.screenshot}`
+    }))
+  }
+};
 ---
 <Base locale={locale as any} title={title} description={description} ogImage={`/assets/shots/${list[0]?.screenshot}`}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
   <div class="shell">
     <Sidebar locale={locale} showFacets={false} total={items.length} categories={[]} />
     <main class="main">

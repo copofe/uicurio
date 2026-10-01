@@ -10,11 +10,11 @@ const other: Locale = locale === "en" ? "zh" : "en";
 const swap = (loc: Locale) => url.replace(`/${locale}/`, `/${loc}/`);
 const abs = (p: string) => new URL(p, Astro.site);
 const enUrl = locale === "en" ? url : swap("en");
-const effectiveOgImage = ogImage || "/assets/shots/dither-kit.webp";
+const effectiveOgImage = ogImage || "/og.png";
 const canonicalUrl = abs(url);
 ---
 <!doctype html>
-<html lang={locale}>
+<html lang={locale === "zh" ? "zh-CN" : "en"}>
 <head>
   <script is:inline>
     (function () {

@@ -84,6 +84,18 @@ button {
 .hidden {
  display: none !important;
 }
+/* 屏幕阅读器与 SEO 语义专用样式：视觉隐藏但爬虫与辅助设备完全可读 */
+.sr-only {
+ position: absolute;
+ width: 1px;
+ height: 1px;
+ padding: 0;
+ margin: -1px;
+ overflow: hidden;
+ clip: rect(0, 0, 0, 0);
+ white-space: nowrap;
+ border-width: 0;
+}
 ::selection {
  background: var(--ink);
  color: var(--on-ink);
@@ -721,6 +733,48 @@ button.chip[aria-disabled="true"]:hover {
  color: var(--text-1);
  font-weight: 600;
  padding: 0;
+}
+/* 频道页底部细分专题导航（打通内链拓扑与 SEO 孤岛） */
+.channel-topics {
+ margin-top: 48px;
+ padding: 24px 0 12px;
+ border-top: 1px solid var(--border);
+}
+.channel-topics-title {
+ font-size: 13px;
+ font-weight: 600;
+ text-transform: uppercase;
+ letter-spacing: 0.05em;
+ color: var(--text-2);
+ margin: 0 0 14px;
+ font-family: var(--font-mono);
+}
+.channel-topics-chips {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 8px;
+}
+.channel-topic-chip {
+ display: inline-flex;
+ align-items: center;
+ gap: 6px;
+ font-size: 12.5px;
+ padding: 5px 12px;
+ border-radius: 999px;
+ background: var(--surface-2);
+ border: 1px solid var(--border);
+ color: var(--text-1);
+ text-decoration: none;
+ transition: background var(--dur-fast) ease, border-color var(--dur-fast) ease;
+}
+.channel-topic-chip:hover {
+ background: var(--surface-3);
+ border-color: var(--text-2);
+}
+.channel-topic-chip .n {
+ font-family: var(--font-mono);
+ font-size: 11px;
+ color: var(--text-2);
 }
 .card-link.enter {
  animation: card-in var(--dur-panel) var(--ease) both;

@@ -152,7 +152,7 @@ export function renderItemContent(
     </div>
     <div class="sheet-cover">
       <a href="${esc(view.url)}" target="_blank" rel="noopener" title="${esc(view.url)} · ${name}">
-        <img src="/assets/shots/${esc(view.shot)}" alt="${name}" width="1600" height="1000" />
+        <img src="/assets/shots/${esc(view.shot)}" alt="${name} — ${esc(view.desc)}" loading="eager" fetchpriority="high" decoding="async" width="1600" height="1000" />
       </a>
     </div>
     <div class="sheet-body">

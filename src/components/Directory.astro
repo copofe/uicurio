@@ -2,6 +2,7 @@
 // 画廊主列：工具行（搜索/排序/视图/帮助）+ 已选条件栏 + 卡片网格（SSR 全量渲染，岛做节点复用）+ 空态
 import { ui } from "../i18n";
 import { buildPayload } from "../lib/payload";
+import { categories, tags, itemsWithTag, COMBO_MIN } from "../lib/data";
 import CardV2 from "./CardV2.astro";
 interface Props { locale: string; items: any[]; catSlug: string | null; }
 const { locale, items, catSlug } = Astro.props;
@@ -10,9 +11,35 @@ const sorted = [...items].sort((a: any, b: any) => {
   if (a.added !== b.added) return a.added < b.added ? 1 : -1;
   return (a.slug || "").localeCompare(b.slug || "");
 });
+const currentCatObj = catSlug ? categories.find((c: any) => c.slug === catSlug) : null;
+const h1Text = currentCatObj
+  ? (locale === "zh"
+      ? `${currentCatObj.name.zh} — 精选开源 UI 库与组件`
+      : `${currentCatObj.name.en} — Curated Open Source UI Libraries`)
+  : (locale === "zh"
+      ? "Uicurio — 精选高质感开源 UI 库与动效设计工程藏品"
+      : "Uicurio — Hand-picked UI Libraries & Design Engineering Gems");
+
+const catItems = catSlug ? items.filter((i: any) => i.category === catSlug) : [];
+const catTagIds = catSlug
+  ? [...new Set(catItems.flatMap((i: any) => i.tags || []))]
+  : [];
+const comboTags = catSlug
+  ? catTagIds
+      .filter((id) => itemsWithTag(id).length >= COMBO_MIN)
+      .map((id) => {
+        const tg = tags.find((x: any) => x.id === id);
+        const count = catItems.filter((i: any) => i.tags.includes(id)).length;
+        return tg ? { ...tg, slug: id.split(":")[1], count } : null;
+      })
+      .filter((x: any) => x && x.count >= COMBO_MIN)
+      .sort((a: any, b: any) => b.count - a.count)
+  : [];
+
 const payload = buildPayload(locale as any, "gallery", catSlug);
 ---
 <main class="main">
+  <h1 class="sr-only">{h1Text}</h1>
   <div class="toolbar">
     <button class="iconbtn filterbtn" type="button" aria-label={t.openNav}>
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18l-7 8.5V19l-4 2v-7.5L3 5Z"></path></svg>
@@ -40,6 +67,22 @@ const payload = buildPayload(locale as any, "gallery", catSlug);
   <section class="grid" id="dir-grid" aria-label="grid">
     {sorted.map((i: any, idx: number) => <CardV2 item={i} locale={locale} index={idx} />)}
   </section>
+
+  {catSlug && comboTags.length > 0 && (
+    <nav class="channel-topics" aria-label={locale === "zh" ? "细分专题" : "Subtopics"}>
+      <h2 class="channel-topics-title">
+        {locale === "zh" ? `探索「${currentCatObj?.name.zh}」细分专题` : `Explore ${currentCatObj?.name.en} Topics`}
+      </h2>
+      <div class="channel-topics-chips">
+        {comboTags.map((t: any) => (
+          <a class="channel-topic-chip" href={`/${locale}/collections/${catSlug}/tag/${t.slug}/`}>
+            <span class="t">{t.name[locale]}</span>
+            <span class="n">{t.count}</span>
+          </a>
+        ))}
+      </div>
+    </nav>
+  )}
 
   <div class="empty" id="dir-empty" hidden>
     <div class="zero" aria-hidden="true">0</div>

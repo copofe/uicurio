@@ -62,7 +62,27 @@ const bodySuffix = `<nav class="sheet-pager" aria-label="Prev / Next">${
     : `<button class="sheet-pager-btn" disabled type="button"><span>${t.pagerNext || "Next"}</span>${pagerSvgNext}</button>`
 }</nav>`;
 const itemContentHtml = renderItemContent(view, related, locale, bodySuffix);
-const title = `${name} — ${view.catName} · Uicurio`;
+// 提取技术栈与功能性标签，构建具备高相关搜索意图的 Title
+const stackTag = (item.tags || []).find((t: string) => t.startsWith("stack:"));
+const stackName = stackTag ? (tagById.get(stackTag)?.name[locale] || "") : "";
+const fnTag = (item.tags || []).find((t: string) => t.startsWith("function:"));
+const fnName = fnTag ? (tagById.get(fnTag)?.name[locale] || "") : "";
+
+let titleContext = "";
+if (item.category === "collections") {
+  titleContext = stackName
+    ? (locale === "zh" ? `${stackName} 开源组件库` : `${stackName} UI Component Library`)
+    : (locale === "zh" ? "开源 UI 组件库" : "Open Source UI Library");
+} else if (stackName && fnName) {
+  titleContext = locale === "zh" ? `${stackName} ${fnName} 库` : `${stackName} ${fnName} Library`;
+} else if (stackName) {
+  titleContext = locale === "zh" ? `${stackName} ${view.catName} 库` : `${stackName} ${view.catName} Library`;
+} else if (fnName) {
+  titleContext = locale === "zh" ? `${fnName} 库` : `${fnName} Library`;
+} else {
+  titleContext = locale === "zh" ? `${view.catName} 库` : `${view.catName} Library`;
+}
+const title = `${name} — ${titleContext} · Uicurio`;
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -89,6 +109,10 @@ const breadcrumbSchema = {
   ]
 };
 
+const compFeatures = Array.isArray(item.components) && item.components.length > 0
+  ? item.components.slice(0, 40).join(", ")
+  : undefined;
+
 const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -98,6 +122,8 @@ const softwareSchema = {
   "operatingSystem": "Web",
   "url": item.url,
   "image": `https://uicurio.shinji.me/assets/shots/${item.screenshot}`,
+  ...(compFeatures ? { "featureList": compFeatures } : {}),
+  ...(item.repo ? { "codeRepository": item.repo } : {}),
   "offers": {
     "@type": "Offer",
     "price": "0",

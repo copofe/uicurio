@@ -13,7 +13,7 @@ const desc = item.description[locale] ?? item.description.en;
   <div class="media-wrap">
     <a class="card-link enter" href={`/${locale}/item/${item.slug}/`} aria-label={`${name} · 详情`}>
       <div class="card-media">
-        <div class="cover"><img src={`/assets/shots/${item.screenshot}`} alt={name} loading="lazy" decoding="async" width="1600" height="1000" /></div>
+        <div class="cover"><img src={`/assets/shots/${item.screenshot}`} alt={`${name} — ${desc}`} loading="lazy" decoding="async" width="1600" height="1000" /></div>
       </div>
     </a>
     <div class="card-actions">
