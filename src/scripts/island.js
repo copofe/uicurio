@@ -127,10 +127,27 @@ function hi(text, q) {
 
 const debounce = (fn, ms) => {
   let t;
-  return function (...a) {
+  const debounced = function (...a) {
     clearTimeout(t);
-    t = setTimeout(() => fn.apply(this, a), ms);
+    t = setTimeout(() => {
+      t = null;
+      fn.apply(this, a);
+    }, ms);
   };
+  debounced.cancel = () => {
+    if (t) {
+      clearTimeout(t);
+      t = null;
+    }
+  };
+  debounced.flush = function (...a) {
+    if (t) {
+      clearTimeout(t);
+      t = null;
+      fn.apply(this, a);
+    }
+  };
+  return debounced;
 };
 
 /* ── 载荷（岛 ↔ 构建期契约）── */
@@ -947,6 +964,7 @@ let pList;
 let pRows = [];
 let pIndex = 0;
 let pOpener = null;
+let debouncedRenderPalette = null;
 
 function buildPalette() {
   palette = el("div", "palette");
@@ -963,13 +981,13 @@ function buildPalette() {
   pInput.setAttribute("role", "combobox");
   pInput.setAttribute("aria-expanded", "false");
   let pComposing = false;
-  const debouncedRenderPalette = debounce(renderPalette, 80);
+  debouncedRenderPalette = debounce(renderPalette, 180);
   pInput.addEventListener("compositionstart", () => {
     pComposing = true;
   });
   pInput.addEventListener("compositionend", () => {
     pComposing = false;
-    renderPalette();
+    debouncedRenderPalette();
   });
   pInput.addEventListener("input", (e) => {
     if (pComposing || e.isComposing) return;
@@ -1007,6 +1025,7 @@ function buildPalette() {
       moveP(-1);
     } else if (e.key === "Enter") {
       e.preventDefault();
+      if (debouncedRenderPalette) debouncedRenderPalette.cancel();
       runP();
     } else if (e.key === "Escape") {
       e.preventDefault();
@@ -1026,6 +1045,7 @@ function openPalette(opener) {
 }
 
 function closePalette() {
+  if (debouncedRenderPalette) debouncedRenderPalette.cancel();
   palette.classList.remove("open");
   pInput.setAttribute("aria-expanded", "false");
   if (pOpener && pOpener.focus) pOpener.focus();
@@ -1406,22 +1426,31 @@ function buildToolbar() {
       state.q = nextQ;
       refresh();
     };
-    const debouncedSearch = debounce(doSearch, 120);
+    const debouncedSearch = debounce(doSearch, 220);
 
     input.addEventListener("compositionstart", () => {
       isComposing = true;
     });
     input.addEventListener("compositionend", () => {
       isComposing = false;
-      doSearch();
+      $(SEL.searchBox).classList.toggle("has-value", !!input.value);
+      debouncedSearch();
     });
     input.addEventListener("input", (e) => {
+      $(SEL.searchBox).classList.toggle("has-value", !!input.value);
       if (isComposing || e.isComposing) return;
       debouncedSearch();
+    });
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        debouncedSearch.cancel();
+        doSearch();
+      }
     });
     const clear = $(SEL.searchClear);
     if (clear)
       clear.addEventListener("click", () => {
+        debouncedSearch.cancel();
         input.value = "";
         state.q = "";
         $(SEL.searchBox).classList.remove("has-value");
@@ -1530,14 +1559,14 @@ function buildSidebarAccordions() {
         }
       }
     };
-    const debouncedFilterTags = debounce(filterTags, 70);
+    const debouncedFilterTags = debounce(filterTags, 150);
 
     input.addEventListener("compositionstart", () => {
       tagComposing = true;
     });
     input.addEventListener("compositionend", () => {
       tagComposing = false;
-      filterTags();
+      debouncedFilterTags();
     });
     input.addEventListener("input", (e) => {
       if (tagComposing || e.isComposing) return;

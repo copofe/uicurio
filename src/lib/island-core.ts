@@ -167,9 +167,23 @@ for (const [enKey, zhList] of Object.entries(COMPONENT_SYNONYMS)) {
   }
 }
 
-/** 获取组件对应的中英文同义词 */
+// 缓存：同义词、Haystack 与组件归一化数据（全局/会话单例，极大减少重复分词与正则开销）
+const SYNONYMS_CACHE = new Map<string, string[]>();
+const HAYSTACK_CACHE = new WeakMap<ItemLike, HayVariants>();
+
+interface NormalizedComponent {
+  raw: string;
+  lower: string;
+  syns: string[];
+}
+const NORMALIZED_COMPS_CACHE = new WeakMap<ItemLike, NormalizedComponent[]>();
+
+/** 获取组件对应的中英文同义词（带 Map 缓存） */
 export function getComponentSynonyms(compName: string): string[] {
   if (!compName) return [];
+  const cached = SYNONYMS_CACHE.get(compName);
+  if (cached) return cached;
+
   const words = compName
     .toLowerCase()
     .split(/[-_\s/]+/)
@@ -194,11 +208,33 @@ export function getComponentSynonyms(compName: string): string[] {
       for (const s of REVERSE_SYNONYMS[w]) result.add(s);
     }
   }
-  return Array.from(result);
+  const res = Array.from(result);
+  SYNONYMS_CACHE.set(compName, res);
+  return res;
 }
 
-/** 构造条目的全文本检索索引（双语名/描述/正文、Slug、Repo、组件列表及其中英同义词；不检索 tag） */
+/** 获取条目组件的归一化小写及小写同义词结构（WeakMap 缓存，避免反复创建正则与数组） */
+function getNormalizedComponents(item: ItemLike): NormalizedComponent[] {
+  let cached = NORMALIZED_COMPS_CACHE.get(item);
+  if (cached) return cached;
+  if (!Array.isArray(item.components) || !item.components.length) {
+    cached = [];
+  } else {
+    cached = item.components.map((c) => ({
+      raw: c,
+      lower: c.toLowerCase(),
+      syns: getComponentSynonyms(c).map((s) => s.toLowerCase()),
+    }));
+  }
+  NORMALIZED_COMPS_CACHE.set(item, cached);
+  return cached;
+}
+
+/** 构造条目的全文本检索索引（双语名/描述/正文、Slug、Repo、组件列表及其中英同义词；不检索 tag，WeakMap 缓存） */
 function buildHaystack(item: ItemLike): HayVariants {
+  const cached = HAYSTACK_CACHE.get(item);
+  if (cached) return cached;
+
   const parts: string[] = [
     item.name || "",
     item.altName || "",
@@ -217,7 +253,9 @@ function buildHaystack(item: ItemLike): HayVariants {
     }
   }
 
-  return hayVariants(parts.join(" "));
+  const res = hayVariants(parts.join(" "));
+  HAYSTACK_CACHE.set(item, res);
+  return res;
 }
 
 /** 查询词匹配判断：支持多词 AND 分词、标点归一化（crd-ui 与 crd ui 互通）、中英混排去空格互通与双语穿透；不搜 tag */
@@ -246,9 +284,8 @@ export function findMatchedComponents(
   const matched: { name: string; score: number }[] = [];
   const seen = new Set<string>();
 
-  for (const c of item.components) {
-    const cl = c.toLowerCase();
-    const syns = getComponentSynonyms(c).map((s) => s.toLowerCase());
+  const comps = getNormalizedComponents(item);
+  for (const { raw, lower: cl, syns } of comps) {
     let score = 0;
     if (cl === qClean || syns.includes(qClean)) score = 100;
     else if (cl.startsWith(qClean) || syns.some((s) => s.startsWith(qClean)))
@@ -264,9 +301,9 @@ export function findMatchedComponents(
       }
     }
 
-    if (score > 0 && !seen.has(c.toLowerCase())) {
-      seen.add(c.toLowerCase());
-      matched.push({ name: c, score });
+    if (score > 0 && !seen.has(cl)) {
+      seen.add(cl);
+      matched.push({ name: raw, score });
     }
   }
 
@@ -327,11 +364,11 @@ export function scoreItem(item: ItemLike, q: string): number {
   const altDesc = (item.altDesc || "").toLowerCase();
   const content = (item.content || "").toLowerCase();
 
+  const comps = getNormalizedComponents(item);
+
   // 组件精准命中与同义词高权重加分
-  if (Array.isArray(item.components)) {
-    for (const c of item.components) {
-      const cl = c.toLowerCase();
-      const syns = getComponentSynonyms(c).map((s) => s.toLowerCase());
+  if (comps.length > 0) {
+    for (const { lower: cl, syns } of comps) {
       if (cl === qClean || syns.includes(qClean)) {
         total += 80;
       } else if (
@@ -357,10 +394,8 @@ export function scoreItem(item: ItemLike, q: string): number {
     if (desc.includes(t) || altDesc.includes(t)) total += 15;
 
     // 3. 组件分词匹配
-    if (Array.isArray(item.components)) {
-      for (const c of item.components) {
-        const cl = c.toLowerCase();
-        const syns = getComponentSynonyms(c).map((s) => s.toLowerCase());
+    if (comps.length > 0) {
+      for (const { lower: cl, syns } of comps) {
         if (cl === t || syns.includes(t)) total += 30;
         else if (cl.startsWith(t) || syns.some((s) => s.startsWith(t)))
           total += 18;
@@ -387,12 +422,25 @@ export function sortItems<
     components?: string[];
   },
 >(items: T[], sort: SortKey, q = ""): T[] {
-  return [...items].sort((a, b) => {
-    if (q && q.trim()) {
-      const scoreA = scoreItem(a as any, q);
-      const scoreB = scoreItem(b as any, q);
-      if (scoreA !== scoreB) return scoreB - scoreA;
+  if (q && q.trim()) {
+    const scoreMap = new Map<T, number>();
+    for (const it of items) {
+      scoreMap.set(it, scoreItem(it as any, q));
     }
+    return [...items].sort((a, b) => {
+      const scoreA = scoreMap.get(a) || 0;
+      const scoreB = scoreMap.get(b) || 0;
+      if (scoreA !== scoreB) return scoreB - scoreA;
+      if (a.added !== b.added) {
+        const d = a.added < b.added ? 1 : -1;
+        return sort === "new" ? d : -d;
+      }
+      const s = (a.slug || "").localeCompare(b.slug || "");
+      return sort === "new" ? s : -s;
+    });
+  }
+
+  return [...items].sort((a, b) => {
     if (a.added !== b.added) {
       const d = a.added < b.added ? 1 : -1;
       return sort === "new" ? d : -d;
