@@ -1,0 +1,69 @@
+{
+  "slug": "affectui",
+  "name": {
+    "en": "affectUI",
+    "zh": "affectUI"
+  },
+  "description": {
+    "en": "Handcrafted React UI components and calm motion for AI apps with zero CSS dependencies.",
+    "zh": "面向 AI 产品与 SaaS 的纯手工 React 动效组件库，单文件自包含样式，零额外 CSS 依赖。"
+  },
+  "url": "https://www.affectui.com/",
+  "repo": "https://github.com/flohoeller/affectui",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "scenario:ai-native",
+    "stack:react",
+    "stack:typescript",
+    "stack:shadcn",
+    "stack:zero-dependency",
+    "style:design-engineer"
+  ],
+  "screenshot": "affectui.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-10-09",
+  "content": {
+    "en": "affectUI is a handcrafted library of polished React components, illustrations, and calm motion effects tailored for AI applications and modern SaaS. Every component is delivered as a single self-contained TSX file with embedded styling, requiring no Tailwind, external CSS setup, or third-party animation libraries. It supports installation via the shadcn CLI or direct copy-paste, offering native dark mode, WCAG accessibility, and container query responsiveness out of the box.",
+    "zh": "affectUI 是一套专为 AI 原生产品与现代 SaaS 打造的高水准 React 组件、插画与动效合集。所有组件均以单文件形式交付且内置样式，完全不依赖 Tailwind、外部 CSS 配置或第三方动画引擎。支持通过 shadcn CLI 一键引入或直接复制源码，原生支持暗色模式、无障碍键盘交互与容器查询自适应布局。"
+  },
+  "components": [
+    "Agent Team",
+    "Button",
+    "Change Summary",
+    "Comment Thread",
+    "Decision Inbox",
+    "Email Draft",
+    "Empty Calendar",
+    "Enrichment Orbit",
+    "Filter Menu",
+    "Frost Cloud",
+    "Ghosted Chat",
+    "Glow Cloud",
+    "Grid Background",
+    "Integration Beam",
+    "Integration Grid",
+    "Layer Stack",
+    "Lead Sourcing",
+    "Logo Cluster",
+    "Logo Marquee",
+    "Model Wheel",
+    "Notification Stack",
+    "Number Ticker",
+    "OTP Input",
+    "Profile Menu",
+    "Progress Tracker",
+    "Reaction Bar",
+    "Region DACH",
+    "Segmented Control",
+    "Shimmer Loader",
+    "Side Folder",
+    "Smart Recommendation",
+    "Tab Overload",
+    "Team Invite",
+    "Testimonial Wall",
+    "Text Reveal",
+    "Tips Panel"
+  ]
+}
