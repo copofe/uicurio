@@ -18,6 +18,7 @@ import { pickRelated, renderItemContent } from "../lib/item-view.ts";
 const SEL = {
   data: "#dir-data",
   grid: "#dir-grid",
+  sentinel: "#dir-sentinel",
   search: "#dir-search",
   searchBox: ".searchbox",
   searchClear: ".searchbox .clear",
@@ -204,14 +205,102 @@ const state = {
   activePreviewSlug: null,
   sheetReturnURL: null,
 };
-const cardNodes = new Map(); // slug → SSR 卡片节点
+const cardNodes = new Map(); // slug → 卡片 DOM 节点（SSR 预渲染节点或滚动按需生成节点）
+const PAGE_SIZE = 24;
+let visibleCount = PAGE_SIZE;
 
 function initCardNodes() {
   const grid = $(SEL.grid);
   if (!grid) return;
   for (const n of $$(`${SEL.grid} .card`)) {
-    cardNodes.set(n.dataset.slug, n);
+    if (n.dataset.slug) cardNodes.set(n.dataset.slug, n);
+    const link = n.querySelector(".card-link");
+    if (link) {
+      link.addEventListener(
+        "animationend",
+        () => link.classList.remove("enter"),
+        { once: true },
+      );
+      setTimeout(() => link.classList.remove("enter"), 400);
+    }
   }
+}
+
+function createCardNode(item, index) {
+  const article = el("article", "card");
+  article.dataset.slug = item.slug;
+  article.dataset.url = item.url;
+  article.dataset.name = item.name;
+  article.style.setProperty("--stagger", String((index ?? 0) % 9));
+
+  const catObj = U.categories?.find((c) => c.slug === item.cat);
+  const catName = catObj ? catObj.name : "";
+  const detailsLabel = LOCALE === "zh" ? "详情" : "Details";
+
+  const mediaWrap = el("div", "media-wrap");
+
+  const cardLink = el("a", "card-link enter");
+  cardLink.href = `/${LOCALE}/item/${encodeURIComponent(item.slug)}/`;
+  cardLink.setAttribute("aria-label", `${item.name} · ${detailsLabel}`);
+  cardLink.addEventListener(
+    "animationend",
+    () => cardLink.classList.remove("enter"),
+    { once: true },
+  );
+  setTimeout(() => cardLink.classList.remove("enter"), 400);
+
+  const cardMedia = el("div", "card-media");
+  const cover = el("div", "cover");
+  const img = document.createElement("img");
+  img.src = item.shot ? `/assets/shots/${item.shot}` : "";
+  img.alt = `${item.name} — ${item.desc || ""}`;
+  img.loading = "lazy";
+  img.decoding = "async";
+  img.width = 1600;
+  img.height = 1000;
+  cover.appendChild(img);
+  cardMedia.appendChild(cover);
+  cardLink.appendChild(cardMedia);
+  mediaWrap.appendChild(cardLink);
+
+  const cardActions = el("div", "card-actions");
+  const goLink = el("a", "go");
+  goLink.href = item.url;
+  goLink.target = "_blank";
+  goLink.rel = "noopener";
+  goLink.setAttribute("aria-label", `Visit ${item.name}`);
+  goLink.title = S.visitSite || (LOCALE === "zh" ? "访问官网" : "Visit site");
+  goLink.appendChild(icon("aur", 14));
+  cardActions.appendChild(goLink);
+  mediaWrap.appendChild(cardActions);
+
+  article.appendChild(mediaWrap);
+
+  const cardInfo = el("div", "card-info");
+  const h3 = el("h3", "card-title");
+  const titleLink = el("a", "card-titlelink", item.name);
+  titleLink.href = `/${LOCALE}/item/${encodeURIComponent(item.slug)}/`;
+  h3.appendChild(titleLink);
+  if (catName) {
+    const spanCat = el("span", "cat", catName);
+    h3.appendChild(spanCat);
+  }
+  cardInfo.appendChild(h3);
+
+  const pDesc = el("p", "card-desc", item.desc || "");
+  cardInfo.appendChild(pDesc);
+
+  article.appendChild(cardInfo);
+  return article;
+}
+
+function getOrCreateCardNode(item, index) {
+  let n = cardNodes.get(item.slug);
+  if (!n) {
+    n = createCardNode(item, index);
+    cardNodes.set(item.slug, n);
+  }
+  return n;
 }
 
 const selPairs = () => {
@@ -342,45 +431,50 @@ function currentActiveList() {
 function gridSync(list) {
   const grid = $(SEL.grid);
   const empty = $(SEL.empty);
+  const sentinel = $(SEL.sentinel);
   if (!grid || !empty) return;
-  const visible = new Set(list.map((i) => i.slug));
+  const pageItems = list.slice(0, visibleCount);
+  const visible = new Set(pageItems.map((i) => i.slug));
 
   const before = new Map();
   for (const n of cardNodes.values()) {
     if (!n.classList.contains("hidden"))
       before.set(n.dataset.slug, n.getBoundingClientRect().top);
   }
-  for (const item of list) {
-    const n = cardNodes.get(item.slug);
-    if (n) {
-      n.classList.remove("hidden");
-      grid.appendChild(n);
 
-      const info = n.querySelector(".card-info");
-      if (info) {
-        let compBar = info.querySelector(".card-matched-comps");
-        if (state.q && state.q.trim()) {
-          const matched = findMatchedComponents(item, state.q, 3);
-          if (matched.length > 0) {
-            if (!compBar) {
-              compBar = el("div", "card-matched-comps");
-              info.appendChild(compBar);
-            }
-            compBar.replaceChildren();
-            for (const c of matched) {
-              const pill = el("span", "card-matched-pill");
-              pill.appendChild(hi(c, state.q));
-              compBar.appendChild(pill);
-            }
-          } else if (compBar) {
-            compBar.remove();
+  const frag = document.createDocumentFragment();
+  for (let idx = 0; idx < pageItems.length; idx++) {
+    const item = pageItems[idx];
+    const n = getOrCreateCardNode(item, idx);
+    n.classList.remove("hidden");
+    frag.appendChild(n);
+
+    const info = n.querySelector(".card-info");
+    if (info) {
+      let compBar = info.querySelector(".card-matched-comps");
+      if (state.q && state.q.trim()) {
+        const matched = findMatchedComponents(item, state.q, 3);
+        if (matched.length > 0) {
+          if (!compBar) {
+            compBar = el("div", "card-matched-comps");
+            info.appendChild(compBar);
+          }
+          compBar.replaceChildren();
+          for (const c of matched) {
+            const pill = el("span", "card-matched-pill");
+            pill.appendChild(hi(c, state.q));
+            compBar.appendChild(pill);
           }
         } else if (compBar) {
           compBar.remove();
         }
+      } else if (compBar) {
+        compBar.remove();
       }
     }
   }
+  grid.appendChild(frag);
+
   for (const [slug, n] of cardNodes) {
     if (!visible.has(slug)) {
       n.classList.add("hidden");
@@ -412,6 +506,10 @@ function gridSync(list) {
   }
   grid.toggleAttribute("hidden", list.length === 0);
   empty.hidden = list.length > 0;
+  if (sentinel) {
+    const hasMore = visibleCount < list.length;
+    sentinel.hidden = !hasMore || list.length === 0;
+  }
   if (list.length === 0) {
     const emptyHint = empty.querySelector(".empty-cross-channel");
     if (state.q && U.channel) {
@@ -517,10 +615,117 @@ function clearFiltersAndRefresh() {
   refresh();
 }
 
+let isLoadingMore = false;
+
+function appendMoreItems(list, fromIdx, toIdx) {
+  const grid = $(SEL.grid);
+  const sentinel = $(SEL.sentinel);
+  if (!grid) return;
+
+  const newItems = list.slice(fromIdx, toIdx);
+  const frag = document.createDocumentFragment();
+
+  for (let i = 0; i < newItems.length; i++) {
+    const idx = fromIdx + i;
+    const item = newItems[i];
+    const n = getOrCreateCardNode(item, idx);
+    n.classList.remove("hidden");
+
+    const info = n.querySelector(".card-info");
+    if (info) {
+      let compBar = info.querySelector(".card-matched-comps");
+      if (state.q && state.q.trim()) {
+        const matched = findMatchedComponents(item, state.q, 3);
+        if (matched.length > 0) {
+          if (!compBar) {
+            compBar = el("div", "card-matched-comps");
+            info.appendChild(compBar);
+          }
+          compBar.replaceChildren();
+          for (const c of matched) {
+            const pill = el("span", "card-matched-pill");
+            pill.appendChild(hi(c, state.q));
+            compBar.appendChild(pill);
+          }
+        } else if (compBar) {
+          compBar.remove();
+        }
+      } else if (compBar) {
+        compBar.remove();
+      }
+    }
+
+    frag.appendChild(n);
+  }
+
+  // 仅将新增卡片原子性追加到底部，绝对不触碰、不重排已渲染的既有卡片
+  grid.appendChild(frag);
+
+  if (sentinel) {
+    const hasMore = toIdx < list.length;
+    sentinel.hidden = !hasMore;
+  }
+}
+
+function loadMore() {
+  if (isLoadingMore) return;
+  const list = currentActiveList();
+  if (visibleCount >= list.length) {
+    const sentinel = $(SEL.sentinel);
+    if (sentinel) sentinel.hidden = true;
+    return;
+  }
+  isLoadingMore = true;
+  const fromIdx = visibleCount;
+  visibleCount = Math.min(visibleCount + PAGE_SIZE, list.length);
+  appendMoreItems(list, fromIdx, visibleCount);
+  requestAnimationFrame(() => {
+    isLoadingMore = false;
+  });
+}
+
+let sentinelObserver = null;
+
+function setupSentinelObserver() {
+  const sentinel = $(SEL.sentinel);
+  if (!sentinel) return;
+
+  if (sentinelObserver) {
+    sentinelObserver.disconnect();
+  }
+
+  if ("IntersectionObserver" in window) {
+    sentinelObserver = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry && entry.isIntersecting) {
+          loadMore();
+        }
+      },
+      {
+        rootMargin: "350px 0px",
+      },
+    );
+    sentinelObserver.observe(sentinel);
+  } else {
+    const onScroll = debounce(() => {
+      const s = $(SEL.sentinel);
+      if (!s || s.hidden) return;
+      const rect = s.getBoundingClientRect();
+      if (rect.top <= window.innerHeight + 350) {
+        loadMore();
+      }
+    }, 80);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+  }
+}
+
 function refresh() {
+  visibleCount = PAGE_SIZE;
   const list = currentActiveList();
   chipSync();
-  gridSync(list);
+  gridSync(list, false);
   activeFiltersSync();
   drawerCountSync(list);
   writeURL();
@@ -1680,5 +1885,6 @@ if (!U || !payloadOk(U)) {
     state.sort = f.sort === "old" ? "old" : "new";
     buildToolbar();
     refresh();
+    setupSentinelObserver();
   }
 }

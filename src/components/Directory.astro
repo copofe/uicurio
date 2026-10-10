@@ -37,6 +37,9 @@ const comboTags = catSlug
   : [];
 
 const payload = buildPayload(locale as any, "gallery", catSlug);
+const PAGE_SIZE = 24;
+const initialItems = sorted.slice(0, PAGE_SIZE);
+const hasMoreInitial = sorted.length > PAGE_SIZE;
 ---
 <main class="main">
   <h1 class="sr-only">{h1Text}</h1>
@@ -65,8 +68,19 @@ const payload = buildPayload(locale as any, "gallery", catSlug);
   </div>
 
   <section class="grid" id="dir-grid" aria-label="grid">
-    {sorted.map((i: any, idx: number) => <CardV2 item={i} locale={locale} index={idx} />)}
+    {initialItems.map((i: any, idx: number) => <CardV2 item={i} locale={locale} index={idx} />)}
   </section>
+
+  <div class="sentinel" id="dir-sentinel" aria-live="polite" hidden={!hasMoreInitial}>
+    <div class="loader" aria-label={t.loadingMore}>
+      <span class="loader-dots" aria-hidden="true">
+        <span class="loader-dot"></span>
+        <span class="loader-dot"></span>
+        <span class="loader-dot"></span>
+      </span>
+      <span class="loader-text">{t.loadingMore}</span>
+    </div>
+  </div>
 
   {catSlug && comboTags.length > 0 && (
     <nav class="channel-topics" aria-label={locale === "zh" ? "细分专题" : "Subtopics"}>
@@ -89,6 +103,23 @@ const payload = buildPayload(locale as any, "gallery", catSlug);
     <p>{t.emptyText}</p>
     <button class="btn btn-ghost" id="dir-empty-clear" type="button">{t.emptyClear}</button>
   </div>
+
+  <noscript>
+    <nav class="seo-sitemap-fallback" aria-label={locale === "zh" ? "全量藏品快速索引" : "All Curated Libraries"}>
+      <h2 class="seo-sitemap-fallback-title">
+        {locale === "zh" ? "全量藏品快速索引" : "All Curated Libraries"}
+      </h2>
+      <ul class="seo-sitemap-fallback-list">
+        {sorted.map((i: any) => (
+          <li>
+            <a href={`/${locale}/item/${i.slug}/`}>
+              {i.name[locale] ?? i.name.en}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </noscript>
 </main>
 <script type="application/json" id="dir-data" set:html={JSON.stringify(payload)} />
 <script>import "../scripts/island.js";</script>

@@ -60,6 +60,7 @@ export const ui = {
     showMoreTags: "more",
     showLessTags: "Less",
     close: "Close",
+    loadingMore: "Loading more…",
   },
   zh: {
     homeIntro: "每一件都亲手试过，没有凑数。发现新宝随时收录。",
@@ -120,6 +121,7 @@ export const ui = {
     showMoreTags: "展开",
     showLessTags: "收起",
     close: "关闭",
+    loadingMore: "加载更多…",
   },
 } as const;
 export type Locale = keyof typeof ui;

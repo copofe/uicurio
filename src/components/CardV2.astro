@@ -8,10 +8,11 @@ const t = ui[locale as keyof typeof ui];
 const cat = categories.find((c: any) => c.slug === item.category);
 const name = item.name[locale] ?? item.name.en;
 const desc = item.description[locale] ?? item.description.en;
+const detailsLabel = locale === "zh" ? "详情" : "Details";
 ---
 <article class="card" data-slug={item.slug} data-url={item.url} data-name={name} style={`--stagger:${index % 9}`}>
   <div class="media-wrap">
-    <a class="card-link enter" href={`/${locale}/item/${item.slug}/`} aria-label={`${name} · 详情`}>
+    <a class="card-link enter" href={`/${locale}/item/${item.slug}/`} aria-label={`${name} · ${detailsLabel}`}>
       <div class="card-media">
         <div class="cover"><img src={`/assets/shots/${item.screenshot}`} alt={`${name} — ${desc}`} loading="lazy" decoding="async" width="1600" height="1000" /></div>
       </div>

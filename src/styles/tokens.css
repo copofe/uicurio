@@ -734,6 +734,56 @@ button.chip[aria-disabled="true"]:hover {
  font-weight: 600;
  padding: 0;
 }
+/* 滚动加载哨兵与微动画 */
+.sentinel {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ padding: 36px 0 20px;
+ min-height: 72px;
+}
+.sentinel[hidden] {
+ display: none !important;
+}
+.sentinel .loader {
+ display: inline-flex;
+ align-items: center;
+ gap: 8px;
+ padding: 7px 16px;
+ border-radius: 999px;
+ background: var(--surface-2);
+ border: 1px solid var(--border);
+ color: var(--text-2);
+ font-size: 12.5px;
+ letter-spacing: 0.02em;
+}
+.sentinel .loader-dots {
+ display: inline-flex;
+ align-items: center;
+ gap: 4px;
+}
+.sentinel .loader-dot {
+ width: 5px;
+ height: 5px;
+ border-radius: 50%;
+ background: var(--text-2);
+ opacity: 0.3;
+ animation: sentinel-pulse 1.2s infinite ease-in-out both;
+}
+.sentinel .loader-dot:nth-child(1) { animation-delay: -0.32s; }
+.sentinel .loader-dot:nth-child(2) { animation-delay: -0.16s; }
+.sentinel .loader-dot:nth-child(3) { animation-delay: 0s; }
+
+@keyframes sentinel-pulse {
+ 0%, 80%, 100% {
+  transform: scale(0.6);
+  opacity: 0.3;
+ }
+ 40% {
+  transform: scale(1.1);
+  opacity: 0.9;
+ }
+}
 /* 频道页底部细分专题导航（打通内链拓扑与 SEO 孤岛） */
 .channel-topics {
  margin-top: 48px;
@@ -775,6 +825,38 @@ button.chip[aria-disabled="true"]:hover {
  font-family: var(--font-mono);
  font-size: 11px;
  color: var(--text-2);
+}
+/* 无 JS / 爬虫全量索引兜底 */
+.seo-sitemap-fallback {
+ margin-top: 48px;
+ padding: 24px 0 12px;
+ border-top: 1px solid var(--border);
+}
+.seo-sitemap-fallback-title {
+ font-size: 13px;
+ font-weight: 600;
+ text-transform: uppercase;
+ letter-spacing: 0.05em;
+ color: var(--text-2);
+ margin: 0 0 14px;
+ font-family: var(--font-mono);
+}
+.seo-sitemap-fallback-list {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 8px 12px;
+ padding: 0;
+ margin: 0;
+ list-style: none;
+}
+.seo-sitemap-fallback-list a {
+ font-size: 13px;
+ color: var(--text-1);
+ text-decoration: underline;
+ text-underline-offset: 3px;
+}
+.seo-sitemap-fallback-list a:hover {
+ color: var(--ink);
 }
 .card-link.enter {
  animation: card-in var(--dur-panel) var(--ease) both;
