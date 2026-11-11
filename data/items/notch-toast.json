@@ -1,0 +1,45 @@
+{
+  "slug": "notch-toast",
+  "name": {
+    "en": "Notch Toast",
+    "zh": "Notch Toast"
+  },
+  "description": {
+    "en": "Smooth morphing notch and floating toast notifications for React powered by Motion.",
+    "zh": "基于 Motion 打造的 React 动效通知库，支持灵动岛顶栏贴合与浮动卡片形态的原位形变。"
+  },
+  "url": "https://notch.devsethi.me/",
+  "repo": "https://github.com/Devsethi3/notch-toast",
+  "category": "loading-feedback",
+  "tags": [
+    "function:animation",
+    "function:loading-indicator",
+    "stack:motion",
+    "stack:react",
+    "stack:shadcn",
+    "stack:typescript",
+    "style:design-engineer"
+  ],
+  "screenshot": "notch-toast.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-11-11",
+  "content": {
+    "en": "Notch Toast is a focused React notification library designed for deliberate feedback without stacking chaos. Powered by Motion, it renders a single active notification that smoothly morphs in place—supporting both an edge-attached notch mode and floating surface layouts across top and bottom screen alignments. It includes promise lifecycle states, accessible live-region announcements, and drop-in shadcn registry integration.",
+    "zh": "Notch Toast 是一款专为克制且精致的交互反馈打造的 React 通知组件库。底层基于 Motion 构建，它改变了传统多条通知堆叠拥挤的模式，始终保持单条通知在视口原位进行丝滑的平滑形变（Morphing）；不仅原生支持类似手机「灵动岛」的屏幕边缘贴合切角模式与悬浮气泡形态，还完整覆盖了 Promise 异步生命周期、无障碍无干扰读屏播报与 shadcn CLI 快速安装机制。"
+  },
+  "components": [
+    "NotchToaster",
+    "Default Toast",
+    "Success Toast",
+    "Error Toast",
+    "Warning Toast",
+    "Info Toast",
+    "Loading Toast",
+    "Promise Toast",
+    "Action Button Toast",
+    "Attached Notch Mode",
+    "Floating Surface Mode",
+    "Morphing Transition"
+  ]
+}
