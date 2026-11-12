@@ -1,0 +1,48 @@
+{
+  "slug": "skullet",
+  "name": {
+    "en": "Skullet",
+    "zh": "Skullet"
+  },
+  "description": {
+    "en": "Zero-shift skeleton loading states measured directly from your real components.",
+    "zh": "基于真实组件自动测算与绘制骨架屏的零依赖加载库，彻底终结排版抖动。"
+  },
+  "url": "https://skullet.lochie.me/",
+  "repo": "https://github.com/lochie/skullet",
+  "category": "loading-feedback",
+  "tags": [
+    "function:loading-indicator",
+    "function:animation",
+    "stack:zero-dependency",
+    "stack:react",
+    "stack:vue",
+    "stack:svelte",
+    "stack:typescript",
+    "stack:vanilla-js",
+    "style:design-engineer"
+  ],
+  "screenshot": "skullet.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-11-12",
+  "content": {
+    "en": "Skullet is a zero-dependency skeleton loading library created by Lochie Axon that eliminates layout shifts by measuring real components instead of hand-drawn placeholders. By rendering unseen components against sample data, Skullet captures exact browser line boxes via DOM Ranges and trims them to canvas-measured font metrics, ensuring incoming content aligns pixel-for-pixel. All skeletons synchronize to a unified shimmer phase inside a CSS-isolated shadow root, while intelligent reveal modes—including sequences, crossfades, and sweeps—bring content to life. Features persistent shape caching, SSR zero-CLS streaming, and first-class bindings for React, Vue, Svelte, and vanilla JavaScript.",
+    "zh": "Skullet 是由 Lochie Axon 打造的零依赖智能骨架屏库，旨在彻底解决手动绘制占位图繁琐与数据加载后的排版抖动（CLS）。它摒弃了粗糙估算尺寸的传统做法，通过以样本数据隐式渲染真实组件，由浏览器自行计算排版折行，并结合 Canvas 字体度量精确裁剪占位条高度，让骨架与真实内容像素级严丝合缝。全页骨架在 Shadow DOM 中严格同步单条 Shimmer 光效相位，并内置平滑形变、顺序淡入与遮罩扫描等多种智能过渡模式。具备 localStorage 布局记忆、SSR 零闪烁内联测量机制，原生支持 React、Vue、Svelte 及 Web Component。"
+  },
+  "components": [
+    "Skeleton",
+    "SkeletonSuspense",
+    "SkulletProvider",
+    "SkeletonBox",
+    "Reveal",
+    "skullet-reveal",
+    "useReveal",
+    "forgetShapes",
+    "createSkeletonBox",
+    "applyTheme",
+    "themeVariables",
+    "skulletCSS",
+    "setDebug"
+  ]
+}
