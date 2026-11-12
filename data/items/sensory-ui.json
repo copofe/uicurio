@@ -1,21 +1,22 @@
 {
   "slug": "sensory-ui",
   "name": {
-    "en": "sensory-ui",
-    "zh": "sensory-ui"
+    "en": "Sensory UI",
+    "zh": "Sensory UI"
   },
   "description": {
-    "en": "Sound design system and acoustic tactile feedback for shadcn/ui components.",
-    "zh": "专为 shadcn/ui 组件量身定做的声音设计系统与声学触觉反馈工具包。"
+    "en": "Semantic Web Audio sound layer and acoustic tactile feedback for shadcn/ui.",
+    "zh": "为 shadcn/ui 打造的语义化 Web Audio 声音系统与交互触觉声学反馈。"
   },
   "url": "https://www.sensory-ui.com/",
-  "repo": "https://github.com/sensory-ui/sensory-ui",
+  "repo": "https://github.com/shadcn-labs/sensory-ui",
   "category": "loading-feedback",
   "tags": [
     "function:sound-effects",
     "stack:web-audio",
     "stack:shadcn",
     "stack:react",
+    "stack:typescript",
     "style:design-engineer"
   ],
   "screenshot": "sensory-ui.webp",
@@ -23,15 +24,38 @@
   "status": "published",
   "added": "2026-09-23",
   "content": {
-    "en": "sensory-ui bridges sound design and frontend architecture by providing a unified acoustic design system for shadcn/ui. Featuring expertly engineered Web Audio synth patches, mechanical clicks, and spatial chimes, it transforms ordinary web interactions into multi-sensory experiences.",
-    "zh": "sensory-ui 将专业声音设计系统与现代前端组件工程融为一体。专为 shadcn/ui 打造，它内置了通过 Web Audio API 合成的物理拟真按键微音、精密齿轮滚动手感音与空间立体感提示音，以零外部音频文件的纯合成方式，实现多维感官沉浸。"
+    "en": "Sensory UI is an open-source semantic sound layer and acoustic interaction toolkit engineered by Satyam Vyas for the shadcn/ui ecosystem. Powered natively by the browser's Web Audio API, it synthesizes real-time soundscapes entirely in code—requiring zero external audio assets, network requests, or bundle bloat. It provides 17 semantic sound roles, 9 curated sound packs, and drop-in acoustic wrappers across 24 standard UI components, enabling developers to inject subtle, tactile auditory feedback into clicks, toggles, menus, and drawer actions with a single declarative prop.",
+    "zh": "Sensory UI 是由 Satyam Vyas 为 shadcn/ui 生态打造的开源语义化声音层与交互触觉声学工具库。底层直接基于浏览器原生的 Web Audio API 实时代码合成，无需加载任何外部音频文件或产生额外网络请求，彻底告别体积臃肿。全库定义了 17 种语义化声音角色与 9 种风格化音效包，并为按钮、开关、抽屉及菜单等 24 个常见 UI 组件提供了即插即用的声学包装，开发者仅需一行声明式属性即可为网页微交互注入精致自然的听觉触感。"
   },
   "components": [
-    "Acoustic Button Wrapper",
-    "Mechanical Toggle Audio",
-    "Spatial Chime Notification",
-    "Synthesized Haptic Feedback",
-    "Audio Volume Controller",
-    "This page could not be found."
+    "Accordion",
+    "Alert Dialog",
+    "Button",
+    "Carousel",
+    "Checkbox",
+    "Collapsible",
+    "Command",
+    "Context Menu",
+    "Dialog",
+    "Drawer",
+    "Dropdown Menu",
+    "Menubar",
+    "Navigation Menu",
+    "Pagination",
+    "Popover",
+    "Radio Group",
+    "Select",
+    "Sheet",
+    "Sidebar",
+    "Slider",
+    "Switch",
+    "Tabs",
+    "Toggle",
+    "Toggle Group",
+    "Sound Provider",
+    "Copy Installation Block",
+    "CTA Clicks Block",
+    "Menu Bars Block",
+    "Timer Confetti Block"
   ]
 }
