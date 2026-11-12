@@ -1,0 +1,21 @@
+{
+  "slug": "markstream",
+  "name": { "en": "Markstream", "zh": "Markstream" },
+  "description": {
+    "en": "Streaming Markdown renderers for AI chat across modern frontend frameworks.",
+    "zh": "面向 AI 对话的多框架流式 Markdown 渲染组件。"
+  },
+  "url": "https://markstream.simonhe.me/",
+  "repo": "https://github.com/Simon-He95/markstream-vue",
+  "category": "files-code",
+  "tags": ["function:diff", "scenario:ai-native", "stack:vue", "stack:react", "stack:solid", "stack:svelte"],
+  "screenshot": "markstream.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-11-11",
+  "content": {
+    "en": "Markstream renders partial Markdown as it arrives in AI chat interfaces. Framework packages support Vue, React, Solid, Svelte and Angular, with optional Mermaid, KaTeX and streaming code diff integrations.",
+    "zh": "Markstream 为 AI 对话界面逐步渲染流式 Markdown，提供 Vue、React、Solid、Svelte 和 Angular 组件，并可选集成 Mermaid、KaTeX 与流式代码差异展示。"
+  },
+  "components": ["Markdown Renderer", "Code Block", "Diff Code Block", "Mermaid Diagram", "Math Block", "Virtual Timeline"]
+}
