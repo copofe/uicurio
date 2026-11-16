@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>A curated cabinet of remarkable UI libraries, component sets, and creative interactions.</strong><br>
-  每一件都亲手试过，没有凑数。现代 Web 界面与动效组件精选展馆。
+  现代 Web 界面与动效组件精选展馆。
 </p>
 
 <p align="center">
@@ -35,7 +35,7 @@
 
 **UIcurio** is an open-source, lightning-fast curated catalog dedicated to high-craft UI component libraries, micro-interactions, animation primitives, and design engineering gems for modern developers and designers.
 
-Unlike generic link aggregators, every item in UIcurio is manually tested, reviewed, tagged, and given genuine bilingual descriptions — no marketing fluff, no perishable metric hype.
+Unlike generic link aggregators, every item in UIcurio is carefully reviewed, tagged, and given genuine bilingual descriptions — no marketing fluff, no perishable metric hype.
 
 ### 🌟 Key Features
 
@@ -167,7 +167,7 @@ We warmly welcome submissions from authors and community creators! To recommend 
 
 **UIcurio** 是一个专注于收录高品质现代 Web UI 组件库、动效微交互、前沿设计工程资产与交互灵感的开源静态展馆。
 
-不同于普通的资源导航，UIcurio 坚持「每一件都亲手试过，没有凑数」，所有收录条目均经过实测与人工提炼，配备中英双语介绍与纯正设计标签。
+不同于普通的资源导航，UIcurio 坚持精选与深度整理，所有收录条目均经过人工审核与提炼，配备中英双语介绍与纯正设计标签。
 
 ### 🌟 核心特性
 

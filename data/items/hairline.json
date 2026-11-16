@@ -1,0 +1,70 @@
+{
+  "slug": "hairline",
+  "name": {
+    "en": "Hairline",
+    "zh": "Hairline"
+  },
+  "description": {
+    "en": "Pointer-responsive isometric line figures and interactive visuals for React and DOM.",
+    "zh": "响应鼠标指针的零依赖等轴测线框插画库，以细腻的微交互呈现 33 款纯矢量图形。"
+  },
+  "url": "https://hairline.lucasmarkes.com/",
+  "repo": "https://github.com/lucasmarkes/hairline",
+  "category": "collections",
+  "tags": [
+    "function:animation",
+    "function:3d",
+    "stack:react",
+    "stack:vanilla-js",
+    "stack:zero-dependency",
+    "stack:shadcn",
+    "stack:typescript",
+    "style:design-engineer",
+    "scenario:ai-native"
+  ],
+  "screenshot": "hairline.webp",
+  "featured": false,
+  "status": "published",
+  "added": "2026-11-16",
+  "content": {
+    "en": "Hairline is an open-source collection of 33 pointer-responsive isometric line figures created by Lucas Marques. Built with zero runtime dependencies for React and plain DOM environments, each figure—ranging from keyboards and layered windows to elevator shafts and terrain—smoothly reacts to mouse hover, dragging, and keyboard navigation on a single shared requestAnimationFrame loop. It includes customizable stroke and theme tokens, dark mode detection, reduced-motion accessibility, and dedicated AI coding skills (hairline-create, hairline-adopt) for generating custom figures adhering to strict drafting rules.",
+    "zh": "Hairline 是由 Lucas Marques 打造的开源交互式等轴测线框图形库。全库零运行时依赖，可直接运行在纯 DOM 或 React 环境中，包含键盘、分层视窗、电梯井、地形起伏等 33 款富有机械与空间美感的等轴测矢量插图。所有图形通过单个共享 requestAnimationFrame 循环实现细腻流畅的指针与按键物理反馈，支持自定义线条粗细与主题配色、自适应暗色模式及减少动态效果降级，并内置了面向 Claude Code 与 Cursor 等 AI 编程智能体的生成技能，可依据既定工程制图规则快速定制专属交互图形。"
+  },
+  "components": [
+    "Riffle",
+    "Terrain",
+    "Exploded",
+    "Phosphor",
+    "Slow",
+    "Turntable",
+    "Keyboard",
+    "Elevator",
+    "Phone",
+    "Laptop",
+    "Terminal",
+    "Cabinet",
+    "Branches",
+    "Vault",
+    "Lockers",
+    "Padlock",
+    "Patch",
+    "Dish",
+    "Router",
+    "Loupe",
+    "Sieve",
+    "Rail",
+    "Plug",
+    "Query",
+    "Drawer",
+    "Basket",
+    "Plot",
+    "Hub",
+    "Relay",
+    "Settle",
+    "Format",
+    "Rebuild",
+    "Stack",
+    "Hairline Create Skill",
+    "Hairline Adopt Skill"
+  ]
+}
